@@ -4,6 +4,8 @@
   "homepage": "/dmwhisper",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.22.10",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.3",

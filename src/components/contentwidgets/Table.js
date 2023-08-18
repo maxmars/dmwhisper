@@ -14,7 +14,9 @@ import { format } from 'date-fns';
 const Table = (props) => {
 
   const content = useSelector((st) => st.content);
-  const [currentThrow, setCurrentThrow] = useState(diceThrow(content, props.content.data.table));
+  const prefix = props.content.data.prefix ? props.content.data.prefix + " " : "";
+  const postfix = props.content.data.postfix ? " " + props.content.data.postfix : "";
+  const [currentThrow, setCurrentThrow] = useState(prefix + diceThrow(content, props.content.data.table) + postfix);
   const dispatch = useDispatch();
 
   const saveRoll = () => {
@@ -23,7 +25,9 @@ const Table = (props) => {
 
 
   const diceRoll = () => {
-    setCurrentThrow(diceThrow(content, props.content.data.table));
+    const prefix = props.content.data.prefix ? props.content.data.prefix + " " : "";
+    const postfix = props.content.data.postfix ? " " + props.content.data.postfix : "";  
+    setCurrentThrow(prefix + diceThrow(content, props.content.data.table) + postfix);
   };
 
   return (

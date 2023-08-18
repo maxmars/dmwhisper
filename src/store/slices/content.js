@@ -40,7 +40,8 @@ export const initialState = {
                     type: "table",
                     data: {
                         textContent: "This is a value based table",
-                        table: "weathersummer"
+                        prefix: "This is a prefix",
+                        table: "weathersummer weathersummer"
                     }
                 }
             ]
@@ -59,7 +60,8 @@ export const initialState = {
         type: "table",
         data: {
             textContent: "This is a value based table",
-            table: "weathersummer"
+            prefix: "This is a prefix",
+            table: "weathersummer weathersummer"
         }
     }],
     tables: [
@@ -210,6 +212,19 @@ export const getContentName = (state, path) => {
 }
 
 export const diceThrow = (state, idTabella) => {
+
+    if (idTabella.indexOf(" ") > -1) {
+        let tables = idTabella.split(" ");
+
+        tables = tables.map((table) => {
+            return diceThrow(state, table);
+        });
+
+        tables = tables.join(" ");
+
+        return tables;
+    }    
+
     const tabella = state.tables.find((tabella) => tabella.id === idTabella);
     let min = 1000;
     let max = 0;
