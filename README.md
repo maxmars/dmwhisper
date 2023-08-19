@@ -1,7 +1,7 @@
 # What's this
 
 DMWhisper is an app that helps Dungeon Masters run Role Playing Games sessions,  
-by rolling dices and instantly looking up table items.  
+by rolling dice and instantly looking up table items.  
 
 # First installation
 
@@ -86,7 +86,7 @@ Inside the data object you can store the following properties:
 ## The "tables" object
 
 Tables are the reason this app was created.  
-They are used to roll dices and fetch random values, such as what is the current weather,  
+They are used to roll dice and fetch random values, such as what is the current weather,  
 what NPC is the party encountering, etc.  
 
 The tables object is an array of tables, made of the following properties:  

@@ -18,7 +18,7 @@ const Info = () => {
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
         <Typography m={2} variant="h6">An app that helps Dungeon Masters run Role Playing Games sessions,
-          by rolling dices and instantly looking up table items, with a few twists.</Typography>
+          by rolling dice and instantly looking up table items, with a few twists.</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
