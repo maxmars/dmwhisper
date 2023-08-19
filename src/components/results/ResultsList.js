@@ -13,7 +13,7 @@ const ResultsList = () => {
   };
 
   return (
-    <Grid container>
+    <Grid container sx={{ overflow: 'scroll' }}>
       <Grid item xs={12}>
         <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
           {throws.sequence.map((throwResult, index) => {

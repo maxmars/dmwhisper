@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import HomeIcon from '@mui/icons-material/Home';
 import Typography from '@mui/material/Typography';
+import './style.css'
 
 const columns = [
     { field: 'label', headerName: 'Content', flex: 1 },
@@ -49,7 +50,7 @@ const ContentTree = () => {
     };
 
     return (
-        <div style={{ height: '100%', width: '100%' }}>
+        <div style={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center', verticalAlign: 'center' }}>
             {selectedContent === null ?
 
                 <div style={{ height: '90%', width: '100%' }}>

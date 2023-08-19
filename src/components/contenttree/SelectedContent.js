@@ -43,21 +43,14 @@ const SelectedContent = (props) => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            paddingTop: '20px',
+            paddingTop: '15px',
             paddingBottom: '20px',
             backgroundColor: '#1976d2',
             color: 'white',
             width: '100%',
           }}
         >
-          <Typography
-            variant="h6"
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <Typography variant="body">
             {props.selectedContent.label}
           </Typography>
         </Grid>
