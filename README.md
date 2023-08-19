@@ -129,18 +129,18 @@ Here are a few examples that implement what was described in the previous chapte
 ### `tree object - a typical menu`
 
     {
-        id: "farm",
-        label: "A farm just out of the town",
-        type: "menu",
-        data: {
-            textContent: "The farm just out of the town",
-            children: [
+        "id": "farm",
+        "label": "A farm just out of the town",
+        "type": "menu",
+        "data": {
+            "textContent": "The farm just out of the town",
+            "children": [
                     {
-                        id: "farm-description",
-                        label: "A description of the farm",
-                        type: "information",
-                        data: {
-                            textContent: "The farm is located between the city gates, the forest and the wizard's castle, which is located on the hill. The farm is run by an old farmer and his wife, who have a 10 year old son. The farm is surrounded by a stone wall, with a wooden gate. The house is a wooden construction with a thatched roof. The farm has a small vegetable garden, a chicken coop, a sheep pen and a pig pen. The farm also has a water well."
+                        "id": "farm-description",
+                        "label": "A description of the farm",
+                        "type": "information",
+                        "data": {
+                            "textContent": "The farm is located between the city gates, the forest and the wizard's castle, which is located on the hill. The farm is run by an old farmer and his wife, who have a 10 year old son. The farm is surrounded by a stone wall, with a wooden gate. The house is a wooden construction with a thatched roof. The farm has a small vegetable garden, a chicken coop, a sheep pen and a pig pen. The farm also has a water well."
                         }
                     },
 
@@ -152,62 +152,62 @@ Here are a few examples that implement what was described in the previous chapte
 ### `tree object - a typical description`
 
     {
-        id: "farm-description",
-        label: "A description of the farm",
-        type: "information",
-        data: {
-            textContent: "The farm is located between the city gates, the forest and the wizard's castle, which is located on the hill. The farm is run by an old farmer and his wife, who have a 10 year old son. The farm is surrounded by a stone wall, with a wooden gate. The house is a wooden construction with a thatched roof. The farm has a small vegetable garden, a chicken coop, a sheep pen and a pig pen. The farm also has a water well."
+        "id": "farm-description",
+        "label": "A description of the farm",
+        "type": "information",
+        "data": {
+            "textContent": "The farm is located between the city gates, the forest and the wizard's castle, which is located on the hill. The farm is run by an old farmer and his wife, who have a 10 year old son. The farm is surrounded by a stone wall, with a wooden gate. The house is a wooden construction with a thatched roof. The farm has a small vegetable garden, a chicken coop, a sheep pen and a pig pen. The farm also has a water well."
         }
     }
 
 ### `tree object - a typical table`
 
     {
-        id: "events-farm",
-        label: "The events around the farm",
-        type: "table",
-        data: {
-            textContent: "Events around the farm",
-            table: "farm-events"
+        "id": "events-farm",
+        "label": "The events around the farm",
+        "type": "table",
+        "data": {
+            "textContent": "Events around the farm",
+            "table": "farm-events"
         },
     }
 
 ### `table object - a typical values-only table`
 
         {
-            id: "farm-weather",
-            description: "Weather around the farm",
-            tags: ["weather", "farm"],
-            rng: [
+            "id": "farm-weather",
+            "description": "Weather around the farm",
+            "tags": ["weather", "farm"],
+            "rng": [
                 {
-                    min: 1,
-                    max: 1,
-                    result: "Cold and foggy",
+                    "min": 1,
+                    "max": 1,
+                    "result": "Cold and foggy",
                 },
                 {
-                    min: 2,
-                    max: 4,
-                    result: "Cool",
+                    "min": 2,
+                    "max": 4,
+                    "result": "Cool",
                 },
                 {
-                    min: 5,
-                    max: 8,
-                    result: "Wind and rain",
+                    "min": 5,
+                    "max": 8,
+                    "result": "Wind and rain",
                 },
                 {
-                    min: 9,
-                    max: 11,
-                    result: "Warm and sunny",
+                    "min": 9,
+                    "max": 11,
+                    "result": "Warm and sunny",
                 },
                 {
-                    min: 12,
-                    max: 18,
-                    result: "Temperate and variable",
+                    "min": 12,
+                    "max": 18,
+                    "result": "Temperate and variable",
                 },
                 {
-                    min: 19,
-                    max: 20,
-                    result: "Unbearable heat",
+                    "min": 19,
+                    "max": 20,
+                    "result": "Unbearable heat",
                 },
             ]
         }
@@ -217,115 +217,115 @@ Here are a few examples that implement what was described in the previous chapte
 The first table here contains references to the two tables next to it.
 
     {
-        id: "farm-npc",
-        description: "NPCs around the farm",
-        tags: ["npc", "farm"],
-        rng: [
+        "id": "farm-npc",
+        "description": "NPCs around the farm",
+        "tags": ["npc", "farm"],
+        "rng": [
             {
-                min: 1,
-                max: 1,
-                result: "Marius the farmer, leaning on his shovel",
+                "min": 1,
+                "max": 1,
+                "result": "Marius the farmer, leaning on his shovel",
             },
             {
-                min: 2,
-                max: 4,
-                prefix: "From the castle.. ",
-                table: "castle-npc",
+                "min": 2,
+                "max": 4,
+                "prefix": "From the castle.. ",
+                "table": "castle-npc",
             },
             {
-                min: 5,
-                max: 8,
-                result: "Marius the farmer, harvesting potatoes",
+                "min": 5,
+                "max": 8,
+                "result": "Marius the farmer, harvesting potatoes",
             },
             {
-                min: 9,
-                max: 11,
-                result: "Evelina the peasant woman who cleans the farmyard",
+                "min": 9,
+                "max": 11,
+                "result": "Evelina the peasant woman who cleans the farmyard",
             },
             {
-                min: 12,
-                max: 16,
-                result: "Raimondo the little rascal, who makes faces",
+                "min": 12,
+                "max": 16,
+                "result": "Raimondo the little rascal, who makes faces",
             },
             {
-                min: 17,
-                max: 20,
-                prefix: "From the city.. ",
-                table: "city-npc",
+                "min": 17,
+                "max": 20,
+                "prefix": "From the city.. ",
+                "table": "city-npc",
             },
         ]
     },        
     {
-        id: "castle-npc",
-        description: "NPCs around the castle",
-        tags: ["npc", "castle"],
-        rng: [
+        "id": "castle-npc",
+        "description": "NPCs around the castle",
+        "tags": ["npc", "castle"],
+        "rng": [
             {
-                min: 1,
-                max: 1,
-                result: "The wizard, who looks at you curiously",
+                "min": 1,
+                "max": 1,
+                "result": "The wizard, who looks at you curiously",
             },
             {
-                min: 2,
-                max: 4,
-                result: "Battista the butler, who looks at you suspiciously",
+                "min": 2,
+                "max": 4,
+                "result": "Battista the butler, who looks at you suspiciously",
             },
             {
-                min: 5,
-                max: 8,
-                result: "Maria the cook, who looks at you distractedly",
+                "min": 5,
+                "max": 8,
+                "result": "Maria the cook, who looks at you distractedly",
             },
             {
-                min: 9,
-                max: 11,
-                result: "The castle gamekeeper",
+                "min": 9,
+                "max": 11,
+                "result": "The castle gamekeeper",
             },
             {
-                min: 12,
-                max: 18,
-                result: "Two students of magic, disciples of the castle wizard",
+                "min": 12,
+                "max": 18,
+                "result": "Two students of magic, disciples of the castle wizard",
             },
             {
-                min: 19,
-                max: 20,
-                result: "The wizard of the castle looking out of breath",
+                "min": 19,
+                "max": 20,
+                "result": "The wizard of the castle looking out of breath",
             },
         ]
     },    
     {
-        id: "city-npc",
-        description: "NPCs around the city",
-        tags: ["npc", "city"],
-        rng: [
+        "id": "city-npc",
+        "description": "NPCs around the city",
+        "tags": ["npc", "city"],
+        "rng": [
             {
-                min: 1,
-                max: 1,
-                result: "The mayor's wife",
+                "min": 1,
+                "max": 1,
+                "result": "The mayor's wife",
             },
             {
-                min: 2,
-                max: 4,
-                result: "The mayor",
+                "min": 2,
+                "max": 4,
+                "result": "The mayor",
             },
             {
-                min: 5,
-                max: 8,
-                result: "A market trader",
+                "min": 5,
+                "max": 8,
+                "result": "A market trader",
             },
             {
-                min: 9,
-                max: 11,
-                result: "Two city guards",
+                "min": 9,
+                "max": 11,
+                "result": "Two city guards",
             },
             {
-                min: 12,
-                max: 18,
-                result: "A citizen who looks at you with curiosity",
+                "min": 12,
+                "max": 18,
+                "result": "A citizen who looks at you with curiosity",
             },
             {
-                min: 19,
-                max: 20,
-                result: "A schoolgirl from the city",
+                "min": 19,
+                "max": 20,
+                "result": "A schoolgirl from the city",
             },
         ]
     }
