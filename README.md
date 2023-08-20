@@ -332,6 +332,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    20 Aug 2023
+    -----------
+    - 1.0.4 Error handling for user provided JSON content
+  
     19 Aug 2023
     -----------
     - 1.0.3 a new set of example data, plus an update to the docs
