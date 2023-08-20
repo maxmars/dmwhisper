@@ -334,6 +334,7 @@ The first table here contains references to the two tables next to it.
 
     20 Aug 2023
     -----------
+    - 1.0.5 Four seconds auto update on tables, as an option
     - 1.0.4 Error handling for user provided JSON content
   
     19 Aug 2023
