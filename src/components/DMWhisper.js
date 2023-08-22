@@ -11,6 +11,7 @@ import TableChartIcon from '@mui/icons-material/TableChart';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import InfoIcon from '@mui/icons-material/Info';
 import Info from './info/Info';
+import React from 'react';
 
 const DMWhisper = () => {
 
