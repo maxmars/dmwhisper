@@ -356,10 +356,10 @@ export const getContentName = (state, path) => {
     return contentName;
 }
 
-export const diceThrow = (state, idTabella) => {
+export const diceThrow = (state, idTable) => {
 
-    if (idTabella.indexOf(" ") > -1) {
-        let tables = idTabella.split(" ");
+    if (idTable.indexOf(" ") > -1) {
+        let tables = idTable.split(" ");
 
         tables = tables.map((table) => {
             return diceThrow(state, table);
@@ -370,11 +370,11 @@ export const diceThrow = (state, idTabella) => {
         return tables;
     }    
 
-    const tabella = state.tables.find((tabella) => tabella.id === idTabella);
+    const table = state.tables.find((table) => table.id === idTable);
     let min = 1000;
     let max = 0;
 
-    tabella.rng.forEach((rng) => {
+    table.rng.forEach((rng) => {
         if (rng.min < min) {
             min = rng.min;
         }
@@ -385,7 +385,7 @@ export const diceThrow = (state, idTabella) => {
     });
 
     const result = Math.floor(Math.random() * (max - min + 1)) + min;
-    const rng = tabella.rng.find((rng) => result >= rng.min && result <= rng.max);
+    const rng = table.rng.find((rng) => result >= rng.min && result <= rng.max);
 
     const prefix = rng.prefix ? rng.prefix + " " : "";
     const postfix = rng.postfix ? " " + rng.postfix : "";
@@ -402,6 +402,22 @@ export const diceThrow = (state, idTabella) => {
         return prefix + tables + postfix;
     } else {
         return prefix + rng.result + postfix;
+    }
+}
+
+
+export const getTable = (state, idTable) => {
+
+    if (idTable.indexOf(" ") > -1) {
+        return "Multiple tables aren't supported for consultation (" + idTable + ").";
+    }    
+
+    const table = state.tables.find((table) => table.id === idTable);
+
+    if (table) {
+        return table;
+    } else {
+        return "No such table: " + idTable;
     }
 }
 
