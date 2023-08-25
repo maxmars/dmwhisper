@@ -14,6 +14,7 @@ import { format } from 'date-fns';
 import ErrorIcon from '@mui/icons-material/Error';
 import CasinoIcon from '@mui/icons-material/Casino';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import useTheme from '@mui/private-theming/useTheme';
 
 const Table = (props) => {
 
@@ -23,6 +24,7 @@ const Table = (props) => {
   const [error, setError] = useState(null);
   const [autoUpdate, setAutoUpdate] = useState(false);
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   const saveRoll = () => {
     dispatch(addThrow({ result: currentThrow, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
@@ -89,7 +91,7 @@ const Table = (props) => {
                 <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>Save</Button>
               </div>
               <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-                <Button onClick={() => setMode("consult")} startIcon={<MenuBookIcon />} variant='contained'>Consult</Button>
+                <Button onClick={() => setMode("consult")} startIcon={<MenuBookIcon />} variant='contained'>Browse</Button>
                 {
                   autoUpdate ?
                     <Button onClick={() => setAutoUpdate(false)} startIcon={<UpdateDisabledIcon />} variant='contained'>Stop auto update</Button>
@@ -106,8 +108,8 @@ const Table = (props) => {
     const table = getTable(content, props.content.data.table);
     const items = table.rng.map(item => {
       return <>
-        <Grid item xs={3}>
-          <div>{item.min}-{item.max}</div>
+        <Grid item xs={3} style={{display: "flex", justifyContent: "flex-end"}} >
+          <div style={{marginRight: "1em"}}>{item.min}-{item.max}</div>
         </Grid>
         <Grid item xs={9}>
           <div>{item.result ? item.result : item.table}</div>
@@ -115,20 +117,23 @@ const Table = (props) => {
       </>
     });
 
+    console.log(theme.palette);
+
     return <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={3}>
-          <div>Die</div>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={3} style={{display: "flex", justifyContent: "flex-end"}} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText}>
+          <div style={{marginRight: "1em"}}>Die</div>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={9} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText}>
           <div>Description</div>
         </Grid>
         {items}
-        <Grid item xs={12}>&nbsp;
-        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
           <Button onClick={() => setMode("rockandroll")} startIcon={<CasinoIcon />} variant='contained'>Return to rolling mode</Button>
         </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
       </Grid>
     </>;
   }

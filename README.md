@@ -332,6 +332,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    25 Aug 2023
+    -----------
+    - 1.0.7 Small UI fixes
+
     23 Aug 2023
     -----------
     - 1.0.6 Added consulting mode to tables

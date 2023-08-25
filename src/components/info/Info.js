@@ -9,7 +9,7 @@ const Info = () => {
         <Typography variant="h4">DM Whisper</Typography>
       </Grid>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Typography m={2} variant='body'>v. 1.0.6</Typography>
+        <Typography m={2} variant='body'>v. 1.0.7</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
