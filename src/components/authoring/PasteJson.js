@@ -1,8 +1,9 @@
 import { Grid, Button, TextField } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { setContent, initialState } from '../../store/slices/content';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-const Settings = () => {
+const EditTables = (props) => {
 
   const dispatch = useDispatch();
 
@@ -26,6 +27,10 @@ const Settings = () => {
   return (
     <Grid container >
       <Grid item xs={12}>
+        <Button startIcon={<ArrowBackIosNewIcon />} onClick={props.returnToMenu} style={{ width: '100%' }} variant="contained" color="primary">Back</Button>
+      </Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>
         <TextField fullWidth
           id="new-tables"
           label="Paste here a JSON string in DMWhisper format"
@@ -43,4 +48,4 @@ const Settings = () => {
 };
 
 
-export default Settings;
+export default EditTables;

@@ -1,12 +1,12 @@
 import { Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
-import ResultsList from './results/ResultsList';
+import ResultsList from './results/SavedRolls';
 import ContentTree from './contenttree/ContentTree';
-import Settings from './settings/Settings';
+import AuthoringMenu from './authoring/AuthoringMenu';
 import { useSelector } from 'react-redux';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import SettingsIcon from '@mui/icons-material/Settings';
+import DataObjectIcon from '@mui/icons-material/DataObject';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import InfoIcon from '@mui/icons-material/Info';
@@ -42,14 +42,14 @@ const DMWhisper = () => {
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', height: '15vh' }}>
         <Tabs value={tab} onChange={handleChange} variant="scrollable">
           <Tab icon={<InfoIcon />} label="Info" iconPosition="start" />
-          <Tab icon={<SettingsIcon />} label="Settings" iconPosition="start" />
-          <Tab icon={<TableChartIcon />} label="Tables" iconPosition="start" />
-          <Tab icon={<BookmarksIcon />} label={"Results (" + throws.sequence.length + ")"} iconPosition="start" />
+          <Tab icon={<DataObjectIcon />} label="Edit" iconPosition="start" />
+          <Tab icon={<TableChartIcon />} label="Browse" iconPosition="start" />
+          <Tab icon={<BookmarksIcon />} label={"Saved (" + throws.sequence.length + ")"} iconPosition="start" />
         </Tabs>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'scroll', height: '85vh', width: '100%' }}>
         {tab === 0 && <Info />}
-        {tab === 1 && <Settings />}
+        {tab === 1 && <AuthoringMenu />}
         {tab === 2 && <ContentTree />}
         {tab === 3 && <ResultsList />}
       </div>
