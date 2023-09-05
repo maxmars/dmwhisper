@@ -20,15 +20,12 @@ export default function TablesList() {
     {
       field: 'id',
       headerName: 'ID',
-      width: 150
+      width: window.innerWidth * 0.3,
     },
     {
       field: 'description',
       headerName: 'Description',
-      minWidth: 300,
-      flex: 1,
-      align: 'left',
-      headerAlign: 'left',
+      width: window.innerWidth * 0.66,
     }
   ];
 
