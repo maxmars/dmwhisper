@@ -4,8 +4,10 @@ import { Grid, Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import EditIcon from '@mui/icons-material/Edit';
 import PasteJson from './PasteJson';
+import TablesEdit from './TablesEdit';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import TableChartIcon from '@mui/icons-material/TableChart';
 
 
 const AuthoringMenu = () => {
@@ -27,7 +29,11 @@ const AuthoringMenu = () => {
       return (
         <Grid container>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button startIcon={<EditIcon />} onClick={() => true} variant="contained" color="primary">Edit current content</Button>
+            <Button startIcon={<AccountTreeIcon />} onClick={() => true} variant="contained" color="primary">Edit content tree</Button>
+          </Grid>
+          <Grid item xs={12}>&nbsp;</Grid>
+          <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Button startIcon={<TableChartIcon />} onClick={() => setPageMode('tablesedit')} variant="contained" color="primary">Edit content tables</Button>
           </Grid>
           <Grid item xs={12}>&nbsp;</Grid>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
@@ -35,14 +41,17 @@ const AuthoringMenu = () => {
           </Grid>
           <Grid item xs={12}>&nbsp;</Grid>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button startIcon={<ContentPasteIcon />} onClick={() => setPageMode('parse')} variant="contained" color="primary">Paste and parse JSON as content</Button>
+            <Button startIcon={<ContentPasteIcon />} onClick={() => setPageMode('parse')} variant="contained" color="primary">Paste JSON and parse as content</Button>
           </Grid>
         </Grid>
       );
 
     case 'parse':
-    default:
       return <PasteJson returnToMenu={returnToMenu} />;
+
+    case 'tablesedit':
+    default:
+      return <TablesEdit returnToMenu={returnToMenu} />;
   }
 };
 

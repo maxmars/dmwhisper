@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setContent, initialState } from '../../store/slices/content';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
-const EditTables = (props) => {
+const PasteJson = (props) => {
 
   const dispatch = useDispatch();
 
@@ -48,4 +48,4 @@ const EditTables = (props) => {
 };
 
 
-export default EditTables;
+export default PasteJson;

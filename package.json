@@ -1,6 +1,6 @@
 {
   "name": "dmwhisper",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "homepage": "/dmwhisper",
   "private": true,
   "dependencies": {
@@ -12,6 +12,7 @@
     "@mui/material": "^5.14.5",
     "@mui/system": "^5.14.5",
     "@mui/x-data-grid": "^5.17.10",
+    "@mui/x-data-grid-generator": "^6.12.1",
     "@mui/x-date-pickers": "^5.0.7",
     "@reduxjs/toolkit": "^1.9.0",
     "@testing-library/jest-dom": "^5.14.1",
