@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Grid, Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import TablesList from './TablesList';
+import TableEdit from './TableEdit';
 
 const TablesEdit = (props) => {
 
@@ -27,7 +28,7 @@ const TablesEdit = (props) => {
           pageMode === tablesListPageMode ?
           <TablesList selectTable={selectTable} />
           :
-          <TablesList />
+          <TableEdit tableId={pageMode} endEditing={setTablesListMode} />
         }
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>

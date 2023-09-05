@@ -11,7 +11,9 @@ import Alert from '@mui/material/Alert';
 import { useDispatch } from 'react-redux';
 import { addTable } from '../../store/slices/content';
 
-export default function TablesList(props) {
+export default function TableEdit(props) {
+
+  console.log(props.tableId);
 
   const [alert, setAlert] = useState(null);
 
@@ -72,7 +74,6 @@ export default function TablesList(props) {
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} sx={{ height: "400px" }}>
         <DataGrid
-          onRowClick={(params, event, details) => props.selectTable(params.row.id)}
           rows={rows}
           columns={columns}
           hideFooterPagination={true}
