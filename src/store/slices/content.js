@@ -319,6 +319,11 @@ const content = createSlice({
             state.tree = initialState.tree;
             state.tables = initialState.tables;
         },
+        addTable(state, action) {
+            const newTable = action.payload;
+
+            state.tables.push(newTable);
+        },
     }
 });
 
@@ -425,4 +430,4 @@ export const getTable = (state, idTable) => {
 
 export default content.reducer;
 
-export const { setContent, clearContent } = content.actions;
+export const { setContent, clearContent, addTable } = content.actions;
