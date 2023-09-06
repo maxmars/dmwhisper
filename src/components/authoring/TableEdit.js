@@ -28,10 +28,25 @@ export default function TableEdit(props) {
   const theme = useTheme();
   const [alert, setAlert] = useState(null);
   const [rngAlert, setRngAlert] = useState(null);
+
+  const [newMin, setNewMin] = useState(null);
+  const [newMax, setNewMax] = useState(null);
+  const [newResult, setNewResult] = useState(null);
+  const [newPrefix, setNewPrefix] = useState(null);
+  const [newTable, setNewTable] = useState(null);
+  const [newPostfix, setNewPostfix] = useState(null);
+
   const rows = table.rng.map((rng) => {
+    let description = rng.result;
+    if (!rng.result) {
+      const prefix = rng.prefix ? rng.prefix : '';
+      const postfix = rng.postfix ? rng.postfix : '';
+      description = prefix + ' ' + rng.table + ' ' + postfix;
+    }
+
     return {
       id: rng.min + '-' + rng.max,
-      description: rng.result,
+      description: description,
     }
   });
 
@@ -99,8 +114,9 @@ export default function TableEdit(props) {
       return;
     }
 
-    if (document.getElementById('new-result').value === '') {
-      setRngAlert('Result cannot be blank');
+    if (document.getElementById('new-result').value === '' &&
+      document.getElementById('new-table').value === '') {
+      setRngAlert('Either Fixed result or Table must have a value');
       return;
     }
 
@@ -117,6 +133,9 @@ export default function TableEdit(props) {
     const newRng = {
       min: parseInt(document.getElementById('new-min').value),
       max: parseInt(document.getElementById('new-max').value),
+      prefix: document.getElementById('new-prefix').value,
+      table: document.getElementById('new-table').value,
+      postfix: document.getElementById('new-postfix').value,
       result: document.getElementById('new-result').value,
     }
 
@@ -130,6 +149,9 @@ export default function TableEdit(props) {
     document.getElementById('new-min').value = '';
     document.getElementById('new-max').value = '';
     document.getElementById('new-result').value = '';
+    document.getElementById('new-prefix').value = '';
+    document.getElementById('new-table').value = '';
+    document.getElementById('new-postfix').value = '';
   }
 
   const deleteRng = (rngToDelete) => {
@@ -140,6 +162,37 @@ export default function TableEdit(props) {
     }));
 
     setRNGToDelete(null);
+  }
+
+  const editRNGValues = (rngId) => {
+    //document.getElementById('new-min').value = rngId.split('-')[0];
+    //document.getElementById('new-max').value = rngId.split('-')[1];
+    setNewMin(rngId.split('-')[0]);
+    setNewMax(rngId.split('-')[1]);
+
+    const result = table.rng.find((rng) => rng.min + '-' + rng.max === rngId).result;
+    if (result) {
+      //document.getElementById('new-result').value = result;
+      setNewResult(result);
+    }
+
+    const prefix = table.rng.find((rng) => rng.min + '-' + rng.max === rngId).prefix;
+    if (prefix) {
+      //document.getElementById('new-prefix').value = prefix;
+      setNewPrefix(prefix);
+    }
+
+    const postfix = table.rng.find((rng) => rng.min + '-' + rng.max === rngId).postfix;
+    if (postfix) {
+      //document.getElementById('new-postfix').value = postfix;
+      setNewPostfix(postfix);
+    }
+
+    const tableName = table.rng.find((rng) => rng.min + '-' + rng.max === rngId).table;
+    if (tableName) {
+      //document.getElementById('new-table').value = tableName;
+      setNewTable(tableName);
+    }
   }
 
   if (rngToDelete === null) {
@@ -197,6 +250,7 @@ export default function TableEdit(props) {
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} sx={{ height: "400px" }}>
           <DataGrid
+            onRowClick={(params) => editRNGValues(params.row.id)}
             rows={rows}
             columns={columns}
             hideFooterPagination={true}
@@ -210,13 +264,66 @@ export default function TableEdit(props) {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <TextField id="new-min" label="Min value" type='number' variant="outlined" sx={{ width: "100%" }} />
+          <TextField 
+            onChange={(event) => setNewMin(event.target.value)} 
+            value={newMin} 
+            id="new-min" 
+            label={newMin? "" : "Min value"} 
+            type='number' 
+            variant="outlined" 
+            sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>
-          <TextField id="new-max" label="Max value" type='number' variant="outlined" sx={{ width: "100%" }} />
+          <TextField 
+            onChange={(event) => setNewMax(event.target.value)}
+            value={newMax} 
+            id="new-max" 
+            label={newMax? "" : "Max value"}
+            type='number' 
+            variant="outlined" 
+            sx={{ width: "100%" }} />
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>
+          <Typography>Either specify a fixed result:</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>
+          <TextField 
+            value={newResult} 
+            id="new-result" 
+            label={newResult? "" : "Fixed result"}
+            variant="outlined" 
+            sx={{ width: "100%" }} />
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>
+          <Typography>Or specfiy one or more (space separated) tables to roll on, plus optional prefix and postfix:</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>
+          <TextField 
+            value={newPrefix} 
+            id="new-prefix" 
+            label={newPrefix? "" : "Prefix"}
+            variant="outlined" 
+            sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>
-          <TextField id="new-result" label="Result" variant="outlined" sx={{ width: "100%" }} />
+          <TextField 
+            value={newTable} 
+            id="new-table" 
+            label={newTable? "" : "Table (ID)"}
+            variant="outlined" 
+            sx={{ width: "100%" }} />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField 
+            value={newPostfix} 
+            id="new-postfix" 
+            label={newPostfix? "" : "Postfix"}
+            variant="outlined" 
+            sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         {rngAlert ?
