@@ -1,19 +1,25 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import { useSelector } from 'react-redux';
 import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Alert from '@mui/material/Alert';
 import { useDispatch } from 'react-redux';
-import { addTable } from '../../store/slices/content';
+import { addTable, removeTable } from '../../store/slices/content';
+import useTheme from '@mui/private-theming/useTheme';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function TablesList(props) {
 
+  const [tableIdToDelete, setTableIdToDelete] = useState(null);
   const [alert, setAlert] = useState(null);
+  const theme = useTheme();
 
   const dispatch = useDispatch();
 
@@ -28,13 +34,19 @@ export default function TablesList(props) {
     {
       field: 'id',
       headerName: 'ID',
-      width: window.innerWidth * 0.3,
+      width: window.innerWidth * 0.7,
     },
     {
-      field: 'description',
-      headerName: 'Description',
-      width: window.innerWidth * 0.66,
-    }
+      field: 'actions',
+      type: 'actions',
+      width: window.innerWidth * 0.28,
+      getActions: (params) => [
+        <GridActionsCellItem
+          icon={<DeleteIcon />}
+          label="Delete"
+          onClick={() => setTableIdToDelete(params.id)} />
+      ]
+    },
   ];
 
   const addNewTable = () => {
@@ -61,52 +73,82 @@ export default function TablesList(props) {
     document.getElementById('new-table-description').value = '';
   }
 
-  return (
-    <Grid container >
-      <Grid item xs={12}>
-        <Typography>List of Tables</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography>Click on a table to edit/delete it</Typography>
+  const deleteTable = (tableId) => {
+    dispatch(removeTable(tableId));
+    setTableIdToDelete(null);
+  }
+
+  if (tableIdToDelete === null) {
+    return (
+      <Grid container >
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{display: 'flex', justifyContent: 'center'}}>
+          <Typography>List of Tables</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>
+          <Typography>Click on a table to edit/delete it</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12} sx={{ height: "400px" }}>
+          <DataGrid
+            onRowClick={(params, event, details) => props.selectTable(params.row.id)}
+            rows={rows}
+            columns={columns}
+            hideFooterPagination={true}
+            paginationModel={{ page: 1, pageSize: 1000 }}
+          />
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{display: 'flex', justifyContent: 'center'}}>
+          <Typography>Add a new table:</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>
+          <TextField id="new-table-id" label="Table ID" variant="outlined" sx={{ width: "100%" }} />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField id="new-table-description" label="Table Description" variant="outlined" sx={{ width: "100%" }} />
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        {alert ?
+          <>
+            <Grid item xs={12}>
+              <Alert severity='error' onClose={() => setAlert(null)}>
+                {alert}
+              </Alert>
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+          </>
+          :
+          null}
+        <Grid item xs={12}>
+          <Button onClick={addNewTable} startIcon={<AddIcon />} style={{ width: '100%' }} variant="contained" color="primary">Add new table</Button>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+      </Grid >
+    );
+  } else {
+    return <Grid container >
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{display: 'flex', justifyContent: 'center'}}>
+        <Typography>Warning! Table is about to be deleted</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} sx={{ height: "400px" }}>
-        <DataGrid
-          onRowClick={(params, event, details) => props.selectTable(params.row.id)}
-          rows={rows}
-          columns={columns}
-          hideFooterPagination={true}
-          paginationModel={{ page: 1, pageSize: 1000 }}
-        />
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>
+        <Typography>Do you really want to delete table {tableIdToDelete}?</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>
-        <Typography>New Table:</Typography>
+      <Grid item xs={6} style={{display: 'flex', justifyContent: 'center'}}>
+        <Button onClick={() => deleteTable(tableIdToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">Yes</Button>
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>
-        <TextField id="new-table-id" label="Table ID" variant="outlined" sx={{ width: "100%" }} />
-      </Grid>
-      <Grid item xs={12}>
-        <TextField id="new-table-description" label="Table Description" variant="outlined" sx={{ width: "100%" }} />
-      </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      {alert ?
-        <>
-          <Grid item xs={12}>
-            <Alert severity='error' onClose={() => setAlert(null)}>
-              {alert}
-            </Alert>
-          </Grid>
-          <Grid item xs={12}>&nbsp;</Grid>
-        </>
-        :
-        null}
-      <Grid item xs={12}>
-        <Button onClick={addNewTable} startIcon={<AddIcon />} style={{ width: '100%' }} variant="contained" color="primary">Add new table</Button>
+      <Grid item xs={6} style={{display: 'flex', justifyContent: 'center'}}>
+        <Button onClick={() => setTableIdToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">No</Button>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
     </Grid >
-  );
+  }
 }
