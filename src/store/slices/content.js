@@ -341,6 +341,17 @@ const content = createSlice({
 
             state.tables = tables;
         },
+        updateTableRng(state, action) {
+            const { tableId, rng } = action.payload;
+
+            const table = state.tables.find((table) => table.id === tableId);
+            const tables = state.tables.filter((table) => table.id !== tableId);
+
+            table.rng = rng;
+            tables.push(table);
+
+            state.tables = tables;
+        }
     }
 });
 
@@ -447,4 +458,4 @@ export const getTable = (state, idTable) => {
 
 export default content.reducer;
 
-export const { setContent, clearContent, addTable, removeTable, updateTableHeader } = content.actions;
+export const { setContent, clearContent, addTable, removeTable, updateTableHeader, updateTableRng } = content.actions;
