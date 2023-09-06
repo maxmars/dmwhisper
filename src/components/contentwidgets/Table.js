@@ -108,10 +108,10 @@ const Table = (props) => {
     const table = getTable(content, props.content.data.table);
     const items = table.rng.map(item => {
       return <>
-        <Grid item xs={3} style={{display: "flex", justifyContent: "flex-end"}} >
+        <Grid item xs={3} key={"dice" + item.min + "-" + item.max} style={{display: "flex", justifyContent: "flex-end"}} >
           <div style={{marginRight: "1em"}}>{item.min}-{item.max}</div>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={9} key={"result" + item.min + "-" + item.max}>
           <div>{item.result ? item.result : item.table}</div>
         </Grid>
       </>
