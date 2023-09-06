@@ -11,18 +11,23 @@ import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { updateTableHeader } from '../../store/slices/content';
 
 
 export default function TableEdit(props) {
 
   const [editedTableId, setEditedTableId] = useState(props.tableId);
-  const [editedTableDescription, setEditedTableDescription] = useState(props.tableDescription);
   const tables = useSelector((st) => st.content.tables);
+  const table = tables.find((table) => table.id === props.tableId);
+  const [editedTableDescription, setEditedTableDescription] = useState(table.description);
 
   const theme = useTheme();
   const [alert, setAlert] = useState(null);
 
-  const updateTableHeader = () => {
+  const dispatch = useDispatch();
+
+  const updateHeader = () => {
 
     if (tables.find((table) => table.id === editedTableId) && editedTableId !== props.tableId) {
       setAlert('Table ID already exists');
@@ -38,7 +43,14 @@ export default function TableEdit(props) {
       setAlert('No changes to save');
       return;
     }
-    
+
+    dispatch(updateTableHeader({
+      originalTableId: props.tableId,
+      tableId: editedTableId,
+      tableDescription: editedTableDescription,
+    }));
+
+    props.endEditing();
   }
 
   return (
@@ -49,22 +61,23 @@ export default function TableEdit(props) {
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>
-        <TextField id="table-id" 
-                   label="Table ID" 
-                   variant="outlined" 
-                   sx={{ width: "100%" }} 
-                   defaultValue={props.tableId} 
-                   value={editedTableId}
-                   onChange={(event) => setEditedTableId(event.target.value)}
-                   />
+        <TextField id="table-id"
+          label="Table ID"
+          variant="outlined"
+          sx={{ width: "100%" }}
+          defaultValue={props.tableId}
+          value={editedTableId}
+          onChange={(event) => setEditedTableId(event.target.value)}
+        />
       </Grid>
       <Grid item xs={12}>
-        <TextField id="table-description" 
-                   label="Table Description" 
-                   variant="outlined" 
-                   sx={{ width: "100%" }} 
-                   defaultValue={props.tableDescription} 
-                   value={editedTableDescription} />
+        <TextField id="table-description"
+          label="Table Description"
+          variant="outlined"
+          sx={{ width: "100%" }}
+          defaultValue={props.tableDescription}
+          value={editedTableDescription}
+          onChange={(event) => setEditedTableDescription(event.target.value)} />
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       {alert ?
@@ -79,7 +92,7 @@ export default function TableEdit(props) {
         :
         null}
       <Grid item xs={12}>
-        <Button onClick={updateTableHeader} startIcon={<SaveAltIcon />} style={{ width: '100%' }} variant="contained" color="primary">Update header info</Button>
+        <Button onClick={updateHeader} startIcon={<SaveAltIcon />} style={{ width: '100%' }} variant="contained" color="primary">Update header info</Button>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
