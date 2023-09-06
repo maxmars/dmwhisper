@@ -8,7 +8,7 @@ import UpdateDisabledIcon from '@mui/icons-material/UpdateDisabled';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { diceThrow, clearContent, getTable } from '../../store/slices/content';
+import { diceThrow, getTable } from '../../store/slices/content';
 import { addThrow } from '../../store/slices/throws';
 import { format } from 'date-fns';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -31,7 +31,6 @@ const Table = (props) => {
   };
 
   const resetError = () => {
-    dispatch(clearContent());
     setError(null);
   };
 
@@ -73,7 +72,7 @@ const Table = (props) => {
           <Stack spacing={2} direction="column"
             justifyContent="space-evenly"
             alignItems="center">
-            <div>Content Error: {error}. Resetting content to the default one.</div>
+            <div>Content Error: {error}. Please check content for errors.</div>
             <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
               <Button onClick={resetError} startIcon={<ErrorIcon />} variant='contained'>Dismiss</Button>
             </div>

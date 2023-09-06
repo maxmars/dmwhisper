@@ -126,6 +126,10 @@ export default function TableEdit(props) {
       tableId: props.tableId,
       rng: newRngs,
     }));
+
+    document.getElementById('new-min').value = '';
+    document.getElementById('new-max').value = '';
+    document.getElementById('new-result').value = '';
   }
 
   const deleteRng = (rngToDelete) => {

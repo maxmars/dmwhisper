@@ -1,6 +1,10 @@
 # Changelog Template progetto DM Whisper
 
 
+    06 Sep 2023
+    -----------
+    - 1.0.9 Table editing completed.
+
     05 Sep 2023
     -----------
     - 1.0.8 Work started on content authoring; copy content to clipboard added. Refactoring.
