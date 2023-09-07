@@ -371,6 +371,22 @@ export const getContent = (state, path) => {
     return content;
 }
 
+export const getContentMetaData = (state, path) => {
+
+    if (path === undefined || path === null || path === "") {
+        return state;
+    }
+
+    const pathArray = path.split(".");
+
+    let content = state;
+    for (let i = 0; i < pathArray.length - 1; i++) {
+        content = content.find(item => item.id === pathArray[i]).data.children;
+    }
+    content = content.find(item => item.id === pathArray[pathArray.length - 1])
+    return content;
+}
+
 export const getContentName = (state, path) => {
 
     if (path === undefined || path === null || path === "") {
