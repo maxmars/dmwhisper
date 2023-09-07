@@ -31,7 +31,11 @@ const MenuEdit = (props) => {
     const backOneLevel = () => {
         // If there's a dot in the path, remove the last part
         if (path.indexOf(".") > -1) {
-            setPath(path.substring(0, path.lastIndexOf(".")));
+            const newPath = path.substring(0, path.lastIndexOf("."));
+            const newContentMetaData = getContentMetaData(tree, newPath);
+            const newCtyp = newContentMetaData.type ? newContentMetaData.type : "menu";
+            setContentType(newCtyp);
+            setPath(newPath);
             return;
         }
         // Otherwise, set the path to empty
@@ -69,6 +73,7 @@ const MenuEdit = (props) => {
             </Grid>
 
             <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}><Typography>Content ID</Typography></Grid>
             <Grid item xs={12}>
                 {
                     path.length > 0 ?
@@ -88,6 +93,8 @@ const MenuEdit = (props) => {
                             sx={{ width: "100%" }} />
                 }
             </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}><Typography>Content Label</Typography></Grid>
             <Grid item xs={12}>
                 {
                     path.length > 0 ?
