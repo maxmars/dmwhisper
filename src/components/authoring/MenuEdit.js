@@ -9,8 +9,6 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import HomeIcon from '@mui/icons-material/Home';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
@@ -23,7 +21,6 @@ const columns = [
 const MenuEdit = (props) => {
 
     const [path, setPath] = useState("");
-    const [selectedContent, setSelectedContent] = useState(null);
     const tree = useSelector((st) => st.content).tree;
     const content = getContent(tree, path);
     const contentMetaData = getContentMetaData(tree, path);
