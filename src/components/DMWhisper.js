@@ -39,7 +39,7 @@ const DMWhisper = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', height: '15vh' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', height: '12vh' }}>
         <Tabs value={tab} onChange={handleChange} variant="scrollable">
           <Tab icon={<InfoIcon />} label="Info" iconPosition="start" />
           <Tab icon={<DataObjectIcon />} label="Edit" iconPosition="start" />
@@ -47,7 +47,7 @@ const DMWhisper = () => {
           <Tab icon={<BookmarksIcon />} label={"Saved (" + throws.sequence.length + ")"} iconPosition="start" />
         </Tabs>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'scroll', height: '85vh', width: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'scroll', height: '88vh', width: '100%' }}>
         {tab === 0 && <Info />}
         {tab === 1 && <AuthoringMenu />}
         {tab === 2 && <ContentTree />}
