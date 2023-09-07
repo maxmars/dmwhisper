@@ -8,6 +8,7 @@ import PasteJson from './PasteJson';
 import TablesEdit from './TablesEdit';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import TableChartIcon from '@mui/icons-material/TableChart';
+import MenuEdit from './MenuEdit';
 
 
 const AuthoringMenu = () => {
@@ -29,7 +30,7 @@ const AuthoringMenu = () => {
       return (
         <Grid container>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button startIcon={<AccountTreeIcon />} onClick={() => true} variant="contained" color="primary">Edit content tree</Button>
+            <Button startIcon={<AccountTreeIcon />} onClick={() => setPageMode('menuedit')} variant="contained" color="primary">Edit content tree</Button>
           </Grid>
           <Grid item xs={12}>&nbsp;</Grid>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
@@ -50,8 +51,11 @@ const AuthoringMenu = () => {
       return <PasteJson returnToMenu={returnToMenu} />;
 
     case 'tablesedit':
-    default:
       return <TablesEdit returnToMenu={returnToMenu} />;
+
+    case 'menuedit':
+    default:
+      return <MenuEdit returnToMenu={returnToMenu} />;
   }
 };
 
