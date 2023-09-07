@@ -28,10 +28,6 @@ const MenuEdit = (props) => {
     const ctyp = contentMetaData.type ? contentMetaData.type : "menu";
     const [contentType, setContentType] = useState(ctyp);
 
-    if (contentMetaData.type !== contentType) {
-        setContentType(contentMetaData.type);
-    }
-
     const backOneLevel = () => {
         // If there's a dot in the path, remove the last part
         if (path.indexOf(".") > -1) {
@@ -44,18 +40,20 @@ const MenuEdit = (props) => {
 
 
     const onClick = (rowId) => {
-        setPath(path.length > 0 ? path + "." + rowId : rowId);
+        const newPath = path.length > 0 ? path + "." + rowId : rowId;
+        const newContentMetaData = getContentMetaData(tree, newPath);
+        const newCtyp = newContentMetaData.type ? newContentMetaData.type : "menu";
+        setContentType(newCtyp);
+        setPath(newPath);
     };
-
-    // const clearSelectedContent = () => {
-    //     setSelectedContent(null);
-    // };
 
     const handleContentTypeChange = (event) => {
         if (event.target.value !== contentType) {
             setContentType(event.target.value);
         }
     }
+
+
 
     return (
         <Grid container>
