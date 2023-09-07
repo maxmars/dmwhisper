@@ -38,7 +38,6 @@ const MenuEdit = (props) => {
         setPath("");
     }
 
-
     const onClick = (rowId) => {
         const newPath = path.length > 0 ? path + "." + rowId : rowId;
         const newContentMetaData = getContentMetaData(tree, newPath);
@@ -52,8 +51,6 @@ const MenuEdit = (props) => {
             setContentType(event.target.value);
         }
     }
-
-
 
     return (
         <Grid container>
