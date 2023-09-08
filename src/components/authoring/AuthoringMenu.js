@@ -28,7 +28,7 @@ const AuthoringMenu = () => {
   switch (pageMode) {
     case 'menu':
       return (
-        <Grid container>
+        <Grid container sx={{ overflow: 'scroll' }}>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
             <Button startIcon={<AccountTreeIcon />} onClick={() => setPageMode('menuedit')} variant="contained" color="primary">Edit content tree</Button>
           </Grid>
