@@ -95,7 +95,7 @@ const MenuEdit = (props) => {
     }
 
     if (menuToDelete) {
-        return <Grid container >
+        return <Grid container sx={{height: "100%"}} >
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
                 <Typography>Warning! Menu is about to be deleted</Typography>
@@ -118,7 +118,7 @@ const MenuEdit = (props) => {
     }
 
     return (
-        <Grid container sx={{ overflow: 'scroll' }}>
+        <Grid container sx={{height: "100%"}} >
             <Grid item xs={12}>
                 <Button startIcon={<ArrowBackIosNewIcon />} sx={{ margin: "5px", width: "95%" }} variant="contained" color="primary" onClick={props.returnToMenu}>Main menu</Button>
             </Grid>
@@ -235,7 +235,7 @@ const MenuEdit = (props) => {
                 contentMetaData.type === "menu" || !contentMetaData.type ?
                     <>
                         <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12}><Typography>Sub-menu</Typography></Grid>
+                        <Grid item xs={12}><Typography>Sub-menus</Typography></Grid>
                         <Grid item xs={12} style={{ height: "100%" }}>
                             <DataGrid
                                 rows={content}
