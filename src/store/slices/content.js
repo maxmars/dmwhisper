@@ -351,7 +351,26 @@ const content = createSlice({
             tables.push(table);
 
             state.tables = tables;
+        },
+        updateContent(state, action) {
+            const { updatedContent, path } = action.payload;
+
+            if (path === undefined || path === null || path === "") {
+                state.tree = updatedContent;
+                return;
+            }
+
+            const pathArray = path.split(".");
+
+            let content = state.tree;
+            for (let i = 0; i < pathArray.length - 1; i++) {
+                content = content.find(item => item.id === pathArray[i]).data.children;
+            }
+
+            content = content.find(item => item.id === pathArray[pathArray.length - 1]).data;
+            content.children = updatedContent;
         }
+
     }
 });
 
@@ -474,4 +493,4 @@ export const getTable = (state, idTable) => {
 
 export default content.reducer;
 
-export const { setContent, clearContent, addTable, removeTable, updateTableHeader, updateTableRng } = content.actions;
+export const { setContent, clearContent, addTable, removeTable, updateTableHeader, updateTableRng, updateContent } = content.actions;

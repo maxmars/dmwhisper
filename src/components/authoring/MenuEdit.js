@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { getContent, getContentMetaData, getContentName } from '../../store/slices/content';
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
+import { getContent, getContentMetaData, getContentName, updateContent } from '../../store/slices/content';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 //import SelectedContent from './SelectedContent';
@@ -13,14 +13,16 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import { useDispatch } from 'react-redux';
+import useTheme from '@mui/private-theming/useTheme';
 import './style.css'
-
-const columns = [
-    { field: 'label', headerName: 'Content', flex: 1 },
-];
 
 const MenuEdit = (props) => {
 
+    const [menuToDelete, setMenuToDelete] = useState(null);
     const [path, setPath] = useState("");
     const tree = useSelector((st) => st.content).tree;
     const content = getContent(tree, path);
@@ -28,6 +30,31 @@ const MenuEdit = (props) => {
     const contentName = getContentName(tree, path);
     const ctyp = contentMetaData.type ? contentMetaData.type : "menu";
     const [contentType, setContentType] = useState(ctyp);
+    const theme = useTheme();
+
+    const dispatch = useDispatch();
+
+    const columns = [
+        {
+            field: 'label',
+            headerName: 'Content',
+            flex: 1
+        },
+        {
+            field: 'actions',
+            type: 'actions',
+            width: window.innerWidth * 0.15,
+            getActions: (params) => [
+                <GridActionsCellItem
+                    icon={<DeleteIcon />}
+                    label="Delete"
+                    onClick={() => {
+                        setMenuToDelete(params.id);
+                    }
+                    } />
+            ]
+        },
+    ];
 
     const backOneLevel = () => {
         // If there's a dot in the path, remove the last part
@@ -55,6 +82,39 @@ const MenuEdit = (props) => {
         if (event.target.value !== contentType) {
             setContentType(event.target.value);
         }
+    }
+
+    const deleteMenu = (menuToDelete) => {
+        const newContent = content.filter((item) => item.id !== menuToDelete);
+        dispatch(updateContent({
+            updatedContent: newContent,
+            path: path,
+        }));
+
+        setMenuToDelete(null);
+    }
+
+    if (menuToDelete) {
+        return <Grid container >
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+                <Typography>Warning! Menu is about to be deleted</Typography>
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}>
+                <Typography>Do you really want to delete RNG {menuToDelete} ({menuToDelete})?</Typography>
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center' }}>
+                <Button onClick={() => deleteMenu(menuToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">Yes</Button>
+            </Grid>
+            <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center' }}>
+                <Button onClick={() => setMenuToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">No</Button>
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+        </Grid >
     }
 
     return (

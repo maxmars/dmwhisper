@@ -354,7 +354,7 @@ export default function TableEdit(props) {
     return <Grid container >
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-        <Typography>Warning! Table is about to be deleted</Typography>
+        <Typography>Warning! RNG is about to be deleted</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
