@@ -352,6 +352,24 @@ const content = createSlice({
 
             state.tables = tables;
         },
+        addMenuItem(state, action) {
+            const { newMenuItem, path } = action.payload;
+
+            if (path === undefined || path === null || path === "") {
+                state.tree.push(newMenuItem);
+                return;
+            }
+
+            const pathArray = path.split(".");
+
+            let content = state.tree;
+            for (let i = 0; i < pathArray.length - 1; i++) {
+                content = content.find(item => item.id === pathArray[i]).data.children;
+            }
+
+            content = content.find(item => item.id === pathArray[pathArray.length - 1]).data;
+            content.children.push(newMenuItem);
+        },
         updateContent(state, action) {
             const { updatedContent, path } = action.payload;
 
@@ -369,8 +387,33 @@ const content = createSlice({
 
             content = content.find(item => item.id === pathArray[pathArray.length - 1]).data;
             content.children = updatedContent;
-        }
+        },        
+        updateContentHeader(state, action) {
+            const { updatedContentHeader, path } = action.payload;
 
+            if (path === undefined || path === null || path === "") {
+                return;
+            }
+
+            const pathArray = path.split(".");
+
+            let content = state.tree;
+            for (let i = 0; i < pathArray.length - 1; i++) {
+                content = content.find(item => item.id === pathArray[i]).data.children;
+            }
+
+            content = content.find(item => item.id === pathArray[pathArray.length - 1]);
+            content.id = updatedContentHeader.id;
+            content.label = updatedContentHeader.label;
+            content.type = updatedContentHeader.type;
+            if (content.type === "menu") {
+                if (!(content.data.children)) {
+                    content.data.children = [];
+                }
+            } else {
+                delete content.data.children;
+            }
+        }
     }
 });
 
@@ -493,4 +536,4 @@ export const getTable = (state, idTable) => {
 
 export default content.reducer;
 
-export const { setContent, clearContent, addTable, removeTable, updateTableHeader, updateTableRng, updateContent } = content.actions;
+export const { setContent, clearContent, addTable, removeTable, updateTableHeader, updateTableRng, updateContent, updateContentHeader, addMenuItem } = content.actions;

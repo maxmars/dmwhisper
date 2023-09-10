@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
-import { getContent, getContentMetaData, getContentName, updateContent } from '../../store/slices/content';
+import { getContent, getContentMetaData, getContentName, updateContent, addMenuItem, updateContentHeader } from '../../store/slices/content';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 //import SelectedContent from './SelectedContent';
@@ -22,14 +22,19 @@ import './style.css'
 
 const MenuEdit = (props) => {
 
+    const [newContentId, setNewContentId] = useState("");
+    const [newContentLabel, setNewContentLabel] = useState("");
+    const [newContentType, setNewContentType] = useState("menu");
     const [menuToDelete, setMenuToDelete] = useState(null);
     const [path, setPath] = useState("");
     const tree = useSelector((st) => st.content).tree;
     const content = getContent(tree, path);
     const contentMetaData = getContentMetaData(tree, path);
+    const [currentMenuId, setCurrentMenuId] = useState(contentMetaData.id);
+    const [currentMenuLabel, setCurrentMenuLabel] = useState(contentMetaData.label);
     const contentName = getContentName(tree, path);
     const ctyp = contentMetaData.type ? contentMetaData.type : "menu";
-    const [contentType, setContentType] = useState(ctyp);
+    const [currentContentType, setCurrentContentType] = useState(ctyp);
     const theme = useTheme();
 
     const dispatch = useDispatch();
@@ -62,7 +67,9 @@ const MenuEdit = (props) => {
             const newPath = path.substring(0, path.lastIndexOf("."));
             const newContentMetaData = getContentMetaData(tree, newPath);
             const newCtyp = newContentMetaData.type ? newContentMetaData.type : "menu";
-            setContentType(newCtyp);
+            setCurrentMenuId(newContentMetaData.id);
+            setCurrentMenuLabel(newContentMetaData.label);
+            setCurrentContentType(newCtyp);
             setPath(newPath);
             return;
         }
@@ -74,14 +81,63 @@ const MenuEdit = (props) => {
         const newPath = path.length > 0 ? path + "." + rowId : rowId;
         const newContentMetaData = getContentMetaData(tree, newPath);
         const newCtyp = newContentMetaData.type ? newContentMetaData.type : "menu";
-        setContentType(newCtyp);
+        setCurrentMenuId(newContentMetaData.id);
+        setCurrentMenuLabel(newContentMetaData.label);
+        setCurrentContentType(newCtyp);
         setPath(newPath);
     };
 
     const handleContentTypeChange = (event) => {
-        if (event.target.value !== contentType) {
-            setContentType(event.target.value);
+        if (event.target.value !== currentContentType) {
+            setCurrentContentType(event.target.value);
         }
+    }
+
+    const handleNewContentTypeChange = (event) => {
+        if (event.target.value !== newContentType) {
+            setNewContentType(event.target.value);
+        }
+    }
+
+    const addNewSubmenu = () => {
+        const newContent = {
+            id: newContentId,
+            label: newContentLabel,
+            type: newContentType,
+            data: {
+                textContent: ""
+            }
+        };
+
+        if (newContentType === "menu") {
+            newContent.data.children = {};
+        }
+
+        dispatch(addMenuItem({
+            newMenuItem: newContent,
+            path: path,
+        }));
+
+        setNewContentId("");
+        setNewContentLabel("");
+        setNewContentType("menu");
+    }
+
+    const updateMenuHeader = () => {
+        const updatedContentHeader = {
+            id: currentMenuId,
+            label: currentMenuLabel,
+            type: currentContentType,
+        };
+
+        dispatch(updateContentHeader({
+            updatedContentHeader: updatedContentHeader,
+            path: path,
+        }));
+
+        setCurrentMenuId("");
+        setCurrentMenuLabel("");
+        setCurrentContentType("menu");
     }
 
     const deleteMenu = (menuToDelete) => {
@@ -143,9 +199,9 @@ const MenuEdit = (props) => {
                 {
                     path.length > 0 ?
                         <TextField
-                            value={contentMetaData.id}
+                            value={currentMenuId}
+                            onChange={(event) => setCurrentMenuId(event.target.value)}
                             id="content-id"
-                            label={contentMetaData.id ? "" : "Content ID"}
                             variant="outlined"
                             sx={{ width: "100%" }} />
                         :
@@ -164,9 +220,9 @@ const MenuEdit = (props) => {
                 {
                     path.length > 0 ?
                         <TextField
-                            value={contentMetaData.label}
+                            value={currentMenuLabel}
+                            onChange={(event) => setCurrentMenuLabel(event.target.value)}
                             id="content-label"
-                            label={contentMetaData.label ? "" : "Content Label"}
                             variant="outlined"
                             sx={{ width: "100%" }} />
                         :
@@ -183,9 +239,9 @@ const MenuEdit = (props) => {
             <Grid item xs={12}><Typography>Content Type</Typography></Grid>
             <Grid item xs={12}>
                 <Select
-                    labelId="content-type-select-label"
-                    id="content-type-select"
-                    value={contentType}
+                    labelId="current-content-type-select-label"
+                    id="current-content-type-select"
+                    value={currentContentType}
                     disabled={path.length === 0}
                     label="Content Type"
                     onChange={handleContentTypeChange}
@@ -229,7 +285,7 @@ const MenuEdit = (props) => {
                     </> : null
             }
             <Grid item xs={12}>&nbsp;</Grid>
-            <Button disabled={!contentMetaData.type} startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => setPath("")}>Save header data</Button>
+            <Button disabled={!contentMetaData.type} startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => updateMenuHeader()}>Save header data</Button>
             {
                 contentMetaData.type === "menu" || !contentMetaData.type ?
                     <>
@@ -257,9 +313,9 @@ const MenuEdit = (props) => {
             <Grid item xs={12}><Typography>Content ID</Typography></Grid>
             <Grid item xs={12}>
                 <TextField
-                    value=""
+                    value={newContentId}
+                    onChange={(event) => setNewContentId(event.target.value)}
                     id="new-content-id"
-                    label="Content ID"
                     variant="outlined"
                     sx={{ width: "100%" }} />
             </Grid>
@@ -267,9 +323,9 @@ const MenuEdit = (props) => {
             <Grid item xs={12}><Typography>Content Label</Typography></Grid>
             <Grid item xs={12}>
                 <TextField
-                    value=""
+                    value={newContentLabel}
+                    onChange={(event) => setNewContentLabel(event.target.value)}
                     id="new-content-label"
-                    label="Content Label"
                     variant="outlined"
                     sx={{ width: "100%" }} />
             </Grid>
@@ -279,10 +335,9 @@ const MenuEdit = (props) => {
                 <Select
                     labelId="new-content-type-select-label"
                     id="new-content-type-select"
-                    value={contentType}
-                    disabled={path.length === 0}
+                    value={newContentType}
                     label="Content Type"
-                    onChange={handleContentTypeChange}
+                    onChange={handleNewContentTypeChange}
                     sx={{ width: "100%" }}
                 >
                     <MenuItem value="menu">Menu</MenuItem>
@@ -291,7 +346,7 @@ const MenuEdit = (props) => {
                 </Select>
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
-            <Button startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => setPath("")}>Add Sub menu</Button>
+            <Button startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => addNewSubmenu()}>Add Sub menu</Button>
             <Grid item xs={12}>&nbsp;</Grid>
         </Grid >
     );
