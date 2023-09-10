@@ -1,6 +1,10 @@
 # Changelog Template progetto DM Whisper
 
 
+    10 Sep 2023
+    -----------
+    - 1.1.0 Menu editing completed.
+
     06 Sep 2023
     -----------
     - 1.0.9 Table editing completed.

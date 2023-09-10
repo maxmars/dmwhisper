@@ -224,7 +224,7 @@ export const initialState = {
                     table: "city-npc",
                 },
             ]
-        },        
+        },
         {
             id: "castle-npc",
             description: "NPCs around the castle",
@@ -261,7 +261,7 @@ export const initialState = {
                     result: "The wizard of the castle looking out of breath",
                 },
             ]
-        },    
+        },
         {
             id: "city-npc",
             description: "NPCs around the city",
@@ -368,7 +368,12 @@ const content = createSlice({
             }
 
             content = content.find(item => item.id === pathArray[pathArray.length - 1]).data;
-            content.children.push(newMenuItem);
+            if (content.children) {
+                content.children.push(newMenuItem);
+            } else {
+                content.children = [];
+                content.children.push(newMenuItem);
+            }
         },
         updateContent(state, action) {
             const { updatedContent, path } = action.payload;
@@ -387,7 +392,7 @@ const content = createSlice({
 
             content = content.find(item => item.id === pathArray[pathArray.length - 1]).data;
             content.children = updatedContent;
-        },        
+        },
         updateContentHeader(state, action) {
             const { updatedContentHeader, path } = action.payload;
 
@@ -420,7 +425,40 @@ const content = createSlice({
             } else {
                 delete content.data.children;
             }
+        },
+        updateContentType(state, action) {
+            const { updatedContentType, path } = action.payload;
+
+            if (path === undefined || path === null || path === "") {
+                return;
+            }
+
+            const pathArray = path.split(".");
+
+            let content = state.tree;
+            for (let i = 0; i < pathArray.length - 1; i++) {
+                content = content.find(item => item.id === pathArray[i]).data.children;
+            }
+
+            content = content.find(item => item.id === pathArray[pathArray.length - 1]);
+
+            content.type = updatedContentType;
+
+            if (content.type === "table") {
+                content.data.table = "";
+            } else {
+                delete content.data.table;
+            }
+
+            if (content.type === "menu") {
+                if (!(content.data.children)) {
+                    content.data.children = [];
+                }
+            } else {
+                delete content.data.children;
+            }
         }
+
     }
 });
 
@@ -486,7 +524,7 @@ export const diceThrow = (state, idTable) => {
         tables = tables.join(" ");
 
         return tables;
-    }    
+    }
 
     const table = state.tables.find((table) => table.id === idTable);
     let min = 1000;
@@ -528,7 +566,7 @@ export const getTable = (state, idTable) => {
 
     if (idTable.indexOf(" ") > -1) {
         return "Multiple tables aren't supported for consultation (" + idTable + ").";
-    }    
+    }
 
     const table = state.tables.find((table) => table.id === idTable);
 
@@ -543,4 +581,4 @@ export const getTable = (state, idTable) => {
 
 export default content.reducer;
 
-export const { setContent, clearContent, addTable, removeTable, updateTableHeader, updateTableRng, updateContent, updateContentHeader, addMenuItem } = content.actions;
+export const { setContent, clearContent, addTable, removeTable, updateTableHeader, updateTableRng, updateContent, updateContentHeader, addMenuItem, updateContentType } = content.actions;

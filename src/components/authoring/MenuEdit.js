@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
-import { getContent, getContentMetaData, getContentName, updateContent, addMenuItem, updateContentHeader } from '../../store/slices/content';
+import { getContent, getContentMetaData, getContentName, updateContent, addMenuItem, updateContentHeader, updateContentType } from '../../store/slices/content';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 //import SelectedContent from './SelectedContent';
@@ -28,8 +28,7 @@ const MenuEdit = (props) => {
     const [menuToDelete, setMenuToDelete] = useState(null);
     const [path, setPath] = useState("");
     const tree = useSelector((st) => st.content).tree;
-    const cntnt = getContent(tree, path);
-    const [content, setContent] = useState(cntnt ? cntnt : []);
+    const content = getContent(tree, path);
     const contentMetaData = getContentMetaData(tree, path);
     const [currentMenuId, setCurrentMenuId] = useState(contentMetaData.id);
     const [currentMenuLabel, setCurrentMenuLabel] = useState(contentMetaData.label);
@@ -99,10 +98,10 @@ const MenuEdit = (props) => {
     const handleContentTypeChange = (event) => {
         if (event.target.value !== currentContentType) {
 
-            if (event.target.value === "menu") {
-                setContent([]);
-            }
-
+            dispatch(updateContentType({
+                updatedContentType: event.target.value,
+                path: path
+            }));
             setCurrentContentType(event.target.value);
         }
     }
@@ -124,7 +123,7 @@ const MenuEdit = (props) => {
         };
 
         if (newContentType === "menu") {
-            newContent.data.children = {};
+            newContent.data.children = [];
         }
 
         dispatch(addMenuItem({
@@ -150,12 +149,6 @@ const MenuEdit = (props) => {
             updatedContentHeader: updatedContentHeader,
             path: path,
         }));
-
-        setCurrentMenuId("");
-        setCurrentMenuLabel("");
-        setCurrentContentType("menu");
-        setCurrentMenuContent("");
-        setCurrentMenuTable("");
     }
 
     const deleteMenu = (menuToDelete) => {
@@ -313,7 +306,7 @@ const MenuEdit = (props) => {
                             <Typography>Sub menus</Typography>
                         </Grid>
                         <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12} style={{ height: (content ? (content.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
+                        <Grid item xs={12} style={{ height: (content ? (content.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>
                             <DataGrid
                                 hideFooter
                                 rows={content}
