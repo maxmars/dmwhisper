@@ -142,10 +142,10 @@ export default function TablesList(props) {
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={6} style={{display: 'flex', justifyContent: 'center'}}>
+      <Grid item xs={6} style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <Button onClick={() => deleteTable(tableIdToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">Yes</Button>
       </Grid>
-      <Grid item xs={6} style={{display: 'flex', justifyContent: 'center'}}>
+      <Grid item xs={6} style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <Button onClick={() => setTableIdToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">No</Button>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>

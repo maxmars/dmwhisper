@@ -363,10 +363,10 @@ export default function TableEdit(props) {
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center' }}>
+      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Button onClick={() => deleteRng(rngToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">Yes</Button>
       </Grid>
-      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center' }}>
+      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Button onClick={() => setRNGToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">No</Button>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>

@@ -65,6 +65,15 @@ const MenuEdit = (props) => {
         },
     ];
 
+    const backToRootMenu = () => {
+        setCurrentMenuId(undefined);
+        setCurrentMenuLabel(undefined);
+        setCurrentContentType("menu");
+        setCurrentMenuContent([]);
+        setCurrentMenuTable(undefined);
+        setPath("");
+    }
+
     const backOneLevel = () => {
         // If there's a dot in the path, remove the last part
         if (path.indexOf(".") > -1) {
@@ -80,6 +89,11 @@ const MenuEdit = (props) => {
             return;
         }
         // Otherwise, set the path to empty
+        setCurrentMenuId(undefined);
+        setCurrentMenuLabel(undefined);
+        setCurrentContentType("menu");
+        setCurrentMenuContent([]);
+        setCurrentMenuTable(undefined);
         setPath("");
     }
 
@@ -174,10 +188,10 @@ const MenuEdit = (props) => {
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Button onClick={() => deleteMenu(menuToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">Yes</Button>
             </Grid>
-            <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Button onClick={() => setMenuToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">No</Button>
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
@@ -194,7 +208,7 @@ const MenuEdit = (props) => {
                 <Button startIcon={<ArrowBackIosNewIcon />} style={{ marginRight: "7px" }} variant="contained" color="primary" onClick={backOneLevel}>Back</Button>
             </Grid>
             <Grid item xs={3}>
-                <Button startIcon={<HomeIcon />} style={{ marginLeft: "7px" }} variant="contained" color="primary" onClick={() => setPath("")}>Home</Button>
+                <Button startIcon={<HomeIcon />} style={{ marginLeft: "7px" }} variant="contained" color="primary" onClick={() => backToRootMenu()}>Home</Button>
             </Grid>
             <Grid item xs={6}>
                 <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{contentName}</Typography>
@@ -271,6 +285,7 @@ const MenuEdit = (props) => {
                         <Grid item xs={12}>
                             <TextField
                                 value={currentMenuContent}
+                                disabled={path.length === 0}
                                 id="text-content"
                                 variant="outlined"
                                 sx={{ width: "100%" }}
