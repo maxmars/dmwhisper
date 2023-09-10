@@ -178,7 +178,7 @@ const MenuEdit = (props) => {
     if (menuToDelete) {
         return <Grid container sx={{ height: "100%" }} >
             <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
                 <Typography>Warning! Menu is about to be deleted</Typography>
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
@@ -215,7 +215,7 @@ const MenuEdit = (props) => {
             </Grid>
 
             <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
                 <Typography>Menu header</Typography>
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
@@ -317,7 +317,7 @@ const MenuEdit = (props) => {
                 !currentContentType || currentContentType === "menu" ?
                     <>
                         <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
                             <Typography>Sub menus</Typography>
                         </Grid>
                         <Grid item xs={12}>&nbsp;</Grid>
@@ -336,7 +336,7 @@ const MenuEdit = (props) => {
             {
                 currentContentType === "menu" ?
                     <>
-                        <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
                             <Typography>Add a new sub menu</Typography>
                         </Grid>
                         <Grid item xs={12}>&nbsp;</Grid>

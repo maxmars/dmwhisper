@@ -1,7 +1,15 @@
 # What's this
 
 DMWhisper is an app that helps Dungeon Masters run Role Playing Games sessions,  
-by rolling dice and instantly looking up table items.  
+by rolling dice, instantly looking up table items, read text notes, all organized as a single content tree.  
+
+In this repository you will find all the source files needed to build, run and modify DMWhisper.
+
+# I'm not a developer. I just want to use DMWhisper. Is it possible?  
+
+Sure thing. The most up to date version of DMWhisper can be accessed here:
+
+https://marsiglietti.it/dmwhisper/
 
 # First installation
 
@@ -17,9 +25,20 @@ by rolling dice and instantly looking up table items.
 
 # Creating content
 
-## General format
+## In app
 
-Content is uploaded in the settings tab.  
+Since version 1.1.0 it is now possible to author your content directly in app.
+DMWhisper content is made up of:
+
+- tables: these are collections of values that you can roll upon. 
+          E.g. a weather table may have a value of "rainy" when rolling 1,
+          "foggy" when rolling 2, etc.
+- menus: by means of menu items you build a content tree, whose leaves are
+         either tables (defined above) or simple text (information) nodes.
+
+## Import JSON text
+
+Content can be also uploaded in the "edit" tab.  
 It should be created as a JSON file, following this schema:  
 
     {
@@ -331,6 +350,18 @@ The first table here contains references to the two tables next to it.
     }
 
 # Log of Changes
+
+    10 Sep 2023
+    -----------
+    - 1.1.0 Menu editing completed.
+
+    06 Sep 2023
+    -----------
+    - 1.0.9 Table editing completed.
+
+    05 Sep 2023
+    -----------
+    - 1.0.8 Work started on content authoring; copy content to clipboard added. Refactoring.
 
     25 Aug 2023
     -----------

@@ -119,10 +119,10 @@ const Table = (props) => {
     return <>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={3} style={{display: "flex", justifyContent: "flex-end"}} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText}>
-          <div style={{marginRight: "1em"}}>Die</div>
+        <Grid item xs={3} style={{display: "flex", justifyContent: "flex-end"}} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText}>
+          <div style={{marginRight: "1em"}}>Roll</div>
         </Grid>
-        <Grid item xs={9} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText}>
+        <Grid item xs={9} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText}>
           <div>Description</div>
         </Grid>
         {items}

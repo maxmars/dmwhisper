@@ -82,7 +82,7 @@ export default function TablesList(props) {
     return (
       <Grid container >
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{display: 'flex', justifyContent: 'center'}}>
+        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{display: 'flex', justifyContent: 'center'}}>
           <Typography>List of Tables</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -101,7 +101,7 @@ export default function TablesList(props) {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{display: 'flex', justifyContent: 'center'}}>
+        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{display: 'flex', justifyContent: 'center'}}>
           <Typography>Add a new table:</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -132,7 +132,7 @@ export default function TablesList(props) {
   } else {
     return <Grid container >
       <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{display: 'flex', justifyContent: 'center'}}>
+      <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{display: 'flex', justifyContent: 'center'}}>
         <Typography>Warning! Table is about to be deleted</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
