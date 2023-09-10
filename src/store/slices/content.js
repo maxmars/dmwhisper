@@ -403,9 +403,16 @@ const content = createSlice({
             }
 
             content = content.find(item => item.id === pathArray[pathArray.length - 1]);
+
             content.id = updatedContentHeader.id;
             content.label = updatedContentHeader.label;
             content.type = updatedContentHeader.type;
+            content.data.textContent = updatedContentHeader.textContent;
+
+            if (content.type === "table") {
+                content.data.table = updatedContentHeader.table;
+            }
+
             if (content.type === "menu") {
                 if (!(content.data.children)) {
                     content.data.children = [];

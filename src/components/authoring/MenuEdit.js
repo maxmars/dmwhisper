@@ -28,10 +28,15 @@ const MenuEdit = (props) => {
     const [menuToDelete, setMenuToDelete] = useState(null);
     const [path, setPath] = useState("");
     const tree = useSelector((st) => st.content).tree;
-    const content = getContent(tree, path);
+    const cntnt = getContent(tree, path);
+    const [content, setContent] = useState(cntnt ? cntnt : []);
     const contentMetaData = getContentMetaData(tree, path);
     const [currentMenuId, setCurrentMenuId] = useState(contentMetaData.id);
     const [currentMenuLabel, setCurrentMenuLabel] = useState(contentMetaData.label);
+    const ctcntnt = contentMetaData.data && contentMetaData.data.textContent ? contentMetaData.data.textContent : [];
+    const [currentMenuContent, setCurrentMenuContent] = useState(ctcntnt);
+    const cttbl = contentMetaData.data && contentMetaData.data.table ? contentMetaData.data.table : undefined;
+    const [currentMenuTable, setCurrentMenuTable] = useState(cttbl);
     const contentName = getContentName(tree, path);
     const ctyp = contentMetaData.type ? contentMetaData.type : "menu";
     const [currentContentType, setCurrentContentType] = useState(ctyp);
@@ -70,6 +75,8 @@ const MenuEdit = (props) => {
             setCurrentMenuId(newContentMetaData.id);
             setCurrentMenuLabel(newContentMetaData.label);
             setCurrentContentType(newCtyp);
+            setCurrentMenuContent(newContentMetaData.data.textContent);
+            setCurrentMenuTable(newContentMetaData.data.table ? newContentMetaData.data.table : "");
             setPath(newPath);
             return;
         }
@@ -84,11 +91,18 @@ const MenuEdit = (props) => {
         setCurrentMenuId(newContentMetaData.id);
         setCurrentMenuLabel(newContentMetaData.label);
         setCurrentContentType(newCtyp);
+        setCurrentMenuContent(newContentMetaData.data.textContent);
+        setCurrentMenuTable(newContentMetaData.data.table ? newContentMetaData.data.table : "");
         setPath(newPath);
     };
 
     const handleContentTypeChange = (event) => {
         if (event.target.value !== currentContentType) {
+
+            if (event.target.value === "menu") {
+                setContent([]);
+            }
+
             setCurrentContentType(event.target.value);
         }
     }
@@ -127,6 +141,8 @@ const MenuEdit = (props) => {
         const updatedContentHeader = {
             id: currentMenuId,
             label: currentMenuLabel,
+            textContent: currentMenuContent,
+            table: currentMenuTable,
             type: currentContentType,
         };
 
@@ -138,6 +154,8 @@ const MenuEdit = (props) => {
         setCurrentMenuId("");
         setCurrentMenuLabel("");
         setCurrentContentType("menu");
+        setCurrentMenuContent("");
+        setCurrentMenuTable("");
     }
 
     const deleteMenu = (menuToDelete) => {
@@ -253,33 +271,34 @@ const MenuEdit = (props) => {
                 </Select>
             </Grid>
             {
-                contentMetaData.type ?
+                currentContentType ?
                     <>
                         <Grid item xs={12}>&nbsp;</Grid>
                         <Grid item xs={12}><Typography>Text content</Typography></Grid>
                         <Grid item xs={12}>
                             <TextField
-                                value={contentMetaData.data.textContent}
+                                value={currentMenuContent}
                                 id="text-content"
-                                label={contentMetaData.data.textContent ? "" : "Text content"}
                                 variant="outlined"
                                 sx={{ width: "100%" }}
+                                onChange={(event) => setCurrentMenuContent(event.target.value)}
                                 multiline
+                                minRows={3}
                                 maxRows={8} />
                         </Grid>
                     </> : null
             }
             {
-                contentMetaData.type === "table" ?
+                currentContentType === "table" ?
                     <>
                         <Grid item xs={12}>&nbsp;</Grid>
                         <Grid item xs={12}><Typography>Table</Typography></Grid>
                         <Grid item xs={12}>
                             <TextField
-                                value={contentMetaData.data.table}
+                                value={currentMenuTable}
                                 id="table-content"
-                                label={contentMetaData.data.table ? "" : "Table content"}
                                 variant="outlined"
+                                onChange={(event) => setCurrentMenuTable(event.target.value)}
                                 sx={{ width: "100%" }} />
                         </Grid>
                     </> : null
@@ -287,7 +306,7 @@ const MenuEdit = (props) => {
             <Grid item xs={12}>&nbsp;</Grid>
             <Button disabled={!contentMetaData.type} startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => updateMenuHeader()}>Save header data</Button>
             {
-                contentMetaData.type === "menu" || !contentMetaData.type ?
+                !currentContentType || currentContentType === "menu" ?
                     <>
                         <Grid item xs={12}>&nbsp;</Grid>
                         <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
@@ -306,48 +325,53 @@ const MenuEdit = (props) => {
                     </> : null
             }
             <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-                <Typography>Add a new sub menu</Typography>
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}><Typography>Content ID</Typography></Grid>
-            <Grid item xs={12}>
-                <TextField
-                    value={newContentId}
-                    onChange={(event) => setNewContentId(event.target.value)}
-                    id="new-content-id"
-                    variant="outlined"
-                    sx={{ width: "100%" }} />
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}><Typography>Content Label</Typography></Grid>
-            <Grid item xs={12}>
-                <TextField
-                    value={newContentLabel}
-                    onChange={(event) => setNewContentLabel(event.target.value)}
-                    id="new-content-label"
-                    variant="outlined"
-                    sx={{ width: "100%" }} />
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}><Typography>Content Type</Typography></Grid>
-            <Grid item xs={12}>
-                <Select
-                    labelId="new-content-type-select-label"
-                    id="new-content-type-select"
-                    value={newContentType}
-                    label="Content Type"
-                    onChange={handleNewContentTypeChange}
-                    sx={{ width: "100%" }}
-                >
-                    <MenuItem value="menu">Menu</MenuItem>
-                    <MenuItem value="information">Information</MenuItem>
-                    <MenuItem value="table">Table</MenuItem>
-                </Select>
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Button startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => addNewSubmenu()}>Add Sub menu</Button>
-            <Grid item xs={12}>&nbsp;</Grid>
+            {
+                currentContentType === "menu" ?
+                    <>
+                        <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+                            <Typography>Add a new sub menu</Typography>
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12}><Typography>Content ID</Typography></Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                value={newContentId}
+                                onChange={(event) => setNewContentId(event.target.value)}
+                                id="new-content-id"
+                                variant="outlined"
+                                sx={{ width: "100%" }} />
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12}><Typography>Content Label</Typography></Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                value={newContentLabel}
+                                onChange={(event) => setNewContentLabel(event.target.value)}
+                                id="new-content-label"
+                                variant="outlined"
+                                sx={{ width: "100%" }} />
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12}><Typography>Content Type</Typography></Grid>
+                        <Grid item xs={12}>
+                            <Select
+                                labelId="new-content-type-select-label"
+                                id="new-content-type-select"
+                                value={newContentType}
+                                label="Content Type"
+                                onChange={handleNewContentTypeChange}
+                                sx={{ width: "100%" }}
+                            >
+                                <MenuItem value="menu">Menu</MenuItem>
+                                <MenuItem value="information">Information</MenuItem>
+                                <MenuItem value="table">Table</MenuItem>
+                            </Select>
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Button startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => addNewSubmenu()}>Add Sub menu</Button>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                    </> : null
+            }
         </Grid >
     );
 
