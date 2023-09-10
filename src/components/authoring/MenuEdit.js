@@ -95,7 +95,7 @@ const MenuEdit = (props) => {
     }
 
     if (menuToDelete) {
-        return <Grid container sx={{height: "100%"}} >
+        return <Grid container sx={{ height: "100%" }} >
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
                 <Typography>Warning! Menu is about to be deleted</Typography>
@@ -118,7 +118,7 @@ const MenuEdit = (props) => {
     }
 
     return (
-        <Grid container sx={{height: "100%"}} >
+        <Grid container sx={{ height: "100%" }} >
             <Grid item xs={12}>
                 <Button startIcon={<ArrowBackIosNewIcon />} sx={{ margin: "5px", width: "95%" }} variant="contained" color="primary" onClick={props.returnToMenu}>Main menu</Button>
             </Grid>
@@ -133,6 +133,10 @@ const MenuEdit = (props) => {
                 <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{contentName}</Typography>
             </Grid>
 
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+                <Typography>Menu header</Typography>
+            </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={12}><Typography>Content ID</Typography></Grid>
             <Grid item xs={12}>
@@ -224,20 +228,19 @@ const MenuEdit = (props) => {
                         </Grid>
                     </> : null
             }
-            {
-                contentMetaData.type ?
-                    <>
-                        <Grid item xs={12}>&nbsp;</Grid>
-                        <Button startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => setPath("")}>Save header data</Button>
-                    </> : null
-            }
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Button disabled={!contentMetaData.type} startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => setPath("")}>Save header data</Button>
             {
                 contentMetaData.type === "menu" || !contentMetaData.type ?
                     <>
                         <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12}><Typography>Sub-menus</Typography></Grid>
-                        <Grid item xs={12} style={{ height: "100%" }}>
+                        <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+                            <Typography>Sub menus</Typography>
+                        </Grid>
+                        <Grid item xs={12}>&nbsp;</Grid>
+                        <Grid item xs={12} style={{ height: (content ? (content.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
                             <DataGrid
+                                hideFooter
                                 rows={content}
                                 columns={columns}
                                 width="100%"
@@ -246,6 +249,49 @@ const MenuEdit = (props) => {
                         </Grid>
                     </> : null
             }
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12} bgcolor={theme.palette.info.main} color={theme.palette.info.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+                <Typography>Add a new sub menu</Typography>
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}><Typography>Content ID</Typography></Grid>
+            <Grid item xs={12}>
+                <TextField
+                    value=""
+                    id="new-content-id"
+                    label="Content ID"
+                    variant="outlined"
+                    sx={{ width: "100%" }} />
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}><Typography>Content Label</Typography></Grid>
+            <Grid item xs={12}>
+                <TextField
+                    value=""
+                    id="new-content-label"
+                    label="Content Label"
+                    variant="outlined"
+                    sx={{ width: "100%" }} />
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}><Typography>Content Type</Typography></Grid>
+            <Grid item xs={12}>
+                <Select
+                    labelId="new-content-type-select-label"
+                    id="new-content-type-select"
+                    value={contentType}
+                    disabled={path.length === 0}
+                    label="Content Type"
+                    onChange={handleContentTypeChange}
+                    sx={{ width: "100%" }}
+                >
+                    <MenuItem value="menu">Menu</MenuItem>
+                    <MenuItem value="information">Information</MenuItem>
+                    <MenuItem value="table">Table</MenuItem>
+                </Select>
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Button startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => setPath("")}>Add Sub menu</Button>
             <Grid item xs={12}>&nbsp;</Grid>
         </Grid >
     );

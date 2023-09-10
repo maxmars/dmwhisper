@@ -248,7 +248,7 @@ export default function TableEdit(props) {
           <Typography>Click on the bin to delete values.</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} sx={{ height: "400px" }}>
+        <Grid item xs={12} style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
           <DataGrid
             onRowClick={(params) => editRNGValues(params.row.id)}
             rows={rows}

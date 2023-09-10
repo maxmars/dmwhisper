@@ -90,7 +90,7 @@ export default function TablesList(props) {
           <Typography>Click on a table to edit/delete it</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} sx={{ height: "400px" }}>
+        <Grid item xs={12} style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
           <DataGrid
             onRowClick={(params, event, details) => props.selectTable(params.row.id)}
             rows={rows}
