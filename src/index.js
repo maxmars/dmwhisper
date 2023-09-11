@@ -7,6 +7,8 @@ import { store } from './store';
 // import { store, persister } from './store';
 import { Provider } from 'react-redux';
 // import { PersistGate } from 'redux-persist/integration/react';
+// import i18n (needs to be bundled ;))
+import './i18n';
 
 const renderReactDom = () => {
   const root = ReactDOM.createRoot(document.getElementById('root'));
