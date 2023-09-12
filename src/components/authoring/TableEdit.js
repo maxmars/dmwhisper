@@ -16,10 +16,12 @@ import { updateTableHeader, updateTableRng } from '../../store/slices/content';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import { useTranslation } from 'react-i18next';
 
 
 export default function TableEdit(props) {
 
+  const { t } = useTranslation();
   const [rngToDelete, setRNGToDelete] = useState(null);
   const [editedTableId, setEditedTableId] = useState(props.tableId);
   const tables = useSelector((st) => st.content.tables);
@@ -56,17 +58,17 @@ export default function TableEdit(props) {
   const updateHeader = () => {
 
     if (tables.find((table) => table.id === editedTableId) && editedTableId !== props.tableId) {
-      setAlert('Table ID already exists');
+      setAlert(t('Table ID already exists'));
       return;
     }
 
     if (editedTableId === '') {
-      setAlert('Table ID cannot be blank');
+      setAlert(t('Table ID cannot be blank'));
       return;
     }
 
     if (editedTableId === props.tableId && editedTableDescription === props.tableDescription) {
-      setAlert('No changes to save');
+      setAlert(t('No changes to save'));
       return;
     }
 
@@ -82,12 +84,12 @@ export default function TableEdit(props) {
   const columns = [
     {
       field: 'id',
-      headerName: 'RNG',
+      headerName: t('RNG'),
       width: window.innerWidth * 0.25,
     },
     {
       field: 'description',
-      headerName: 'Description',
+      headerName: t('Description'),
       width: window.innerWidth * 0.6,
     },
     {
@@ -97,7 +99,7 @@ export default function TableEdit(props) {
       getActions: (params) => [
         <GridActionsCellItem
           icon={<DeleteIcon />}
-          label="Delete"
+          label={t("Delete")}
           onClick={() => setRNGToDelete(params.id)} />
       ]
     },
@@ -105,28 +107,28 @@ export default function TableEdit(props) {
 
   const addRng = () => {
     if (document.getElementById('new-min').value === '') {
-      setRngAlert('Min value cannot be blank');
+      setRngAlert(t('Min value cannot be blank'));
       return;
     }
 
     if (document.getElementById('new-max').value === '') {
-      setRngAlert('Max value cannot be blank');
+      setRngAlert(t('Max value cannot be blank'));
       return;
     }
 
     if (document.getElementById('new-result').value === '' &&
       document.getElementById('new-table').value === '') {
-      setRngAlert('Either Fixed result or Table must have a value');
+      setRngAlert(t('Either Fixed result or Table must have a value'));
       return;
     }
 
     if (parseInt(document.getElementById('new-min').value) > parseInt(document.getElementById('new-max').value)) {
-      setRngAlert('Min value cannot be greater than max value');
+      setRngAlert(t('Min value cannot be greater than max value'));
       return;
     }
 
     if (table.rng.find((rng) => rng.min === parseInt(document.getElementById('new-min').value) && rng.max === parseInt(document.getElementById('new-max').value))) {
-      setRngAlert('RNG value already exists');
+      setRngAlert(t('RNG value already exists'));
       return;
     }
 
@@ -200,13 +202,13 @@ export default function TableEdit(props) {
     return (
       <Grid container >
         <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography>Edited table: {props.tableId}</Typography>
+          <Typography>{t("Edited table:")} {props.tableId}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
           <TextField id="table-id"
-            label="Table ID"
+            label={t("Table ID")}
             variant="outlined"
             sx={{ width: "100%" }}
             defaultValue={props.tableId}
@@ -216,7 +218,7 @@ export default function TableEdit(props) {
         </Grid>
         <Grid item xs={12}>
           <TextField id="table-description"
-            label="Table Description"
+            label={t("Table Description")}
             variant="outlined"
             sx={{ width: "100%" }}
             defaultValue={props.tableDescription}
@@ -236,16 +238,16 @@ export default function TableEdit(props) {
           :
           null}
         <Grid item xs={12}>
-          <Button onClick={updateHeader} startIcon={<SaveAltIcon />} style={{ width: '100%' }} variant="contained" color="primary">Update header info</Button>
+          <Button onClick={updateHeader} startIcon={<SaveAltIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Update header info")}</Button>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography>List of RNG values</Typography>
+          <Typography>{t("List of RNG values")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <Typography>Click on the bin to delete values.</Typography>
+          <Typography>{t("Click on the bin to delete values.")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
@@ -260,7 +262,7 @@ export default function TableEdit(props) {
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography>Add a new RNG:</Typography>
+          <Typography>{t("Add a new RNG:")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
@@ -268,7 +270,7 @@ export default function TableEdit(props) {
             onChange={(event) => setNewMin(event.target.value)} 
             value={newMin} 
             id="new-min" 
-            label={newMin? "" : "Min value"} 
+            label={newMin? "" : t("Min value")} 
             type='number' 
             variant="outlined" 
             sx={{ width: "100%" }} />
@@ -278,34 +280,34 @@ export default function TableEdit(props) {
             onChange={(event) => setNewMax(event.target.value)}
             value={newMax} 
             id="new-max" 
-            label={newMax? "" : "Max value"}
+            label={newMax? "" : t("Max value")}
             type='number' 
             variant="outlined" 
             sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <Typography>Either specify a fixed result:</Typography>
+          <Typography>{t("Either specify a fixed result:")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
           <TextField 
             value={newResult} 
             id="new-result" 
-            label={newResult? "" : "Fixed result"}
+            label={newResult? "" : t("Fixed result")}
             variant="outlined" 
             sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <Typography>Or specfiy one or more (space separated) tables to roll on, plus optional prefix and postfix:</Typography>
+          <Typography>{t("Or specfiy one or more (space separated) tables to roll on, plus optional prefix and postfix:")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
           <TextField 
             value={newPrefix} 
             id="new-prefix" 
-            label={newPrefix? "" : "Prefix"}
+            label={newPrefix? "" : t("Prefix")}
             variant="outlined" 
             sx={{ width: "100%" }} />
         </Grid>
@@ -313,7 +315,7 @@ export default function TableEdit(props) {
           <TextField 
             value={newTable} 
             id="new-table" 
-            label={newTable? "" : "Table (ID)"}
+            label={newTable? "" : t("Table (ID)")}
             variant="outlined" 
             sx={{ width: "100%" }} />
         </Grid>
@@ -321,7 +323,7 @@ export default function TableEdit(props) {
           <TextField 
             value={newPostfix} 
             id="new-postfix" 
-            label={newPostfix? "" : "Postfix"}
+            label={newPostfix? "" : t("Postfix")}
             variant="outlined" 
             sx={{ width: "100%" }} />
         </Grid>
@@ -338,11 +340,11 @@ export default function TableEdit(props) {
           :
           null}
         <Grid item xs={12}>
-          <Button onClick={addRng} startIcon={<AddIcon />} style={{ width: '100%' }} variant="contained" color="primary">Add new RNG</Button>
+          <Button onClick={addRng} startIcon={<AddIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Add new RNG")}</Button>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <Button onClick={props.endEditing} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">Back to tables list</Button>
+          <Button onClick={props.endEditing} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to tables list")}</Button>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
       </Grid >
@@ -354,20 +356,20 @@ export default function TableEdit(props) {
     return <Grid container >
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-        <Typography>Warning! RNG is about to be deleted</Typography>
+        <Typography>{t("Warning! RNG is about to be deleted")}</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>
-        <Typography>Do you really want to delete RNG {rngToDelete} ({result})?</Typography>
+        <Typography>{t("Do you really want to delete RNG")} {rngToDelete} ({result})?</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button onClick={() => deleteRng(rngToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">Yes</Button>
+        <Button onClick={() => deleteRng(rngToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
       </Grid>
       <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button onClick={() => setRNGToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">No</Button>
+        <Button onClick={() => setRNGToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
     </Grid >

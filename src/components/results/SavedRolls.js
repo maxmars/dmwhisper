@@ -2,9 +2,11 @@ import { useSelector } from 'react-redux';
 import { Button, Grid, List, ListItem, ListItemText } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { clearThrows } from '../../store/slices/throws';
+import { useTranslation } from 'react-i18next';
 
 const ResultsList = () => {
 
+  const { t } = useTranslation();
   const throws = useSelector((st) => st.throws);
   const dispatch = useDispatch();
 
@@ -28,7 +30,7 @@ const ResultsList = () => {
       <Grid item xs={12}>
         {
           throws.sequence.length > 0 ?
-            <Button style={{ width: '100%' }} variant="contained" color="primary" onClick={onClick}>Clean</Button>
+            <Button style={{ width: '100%' }} variant="contained" color="primary" onClick={onClick}>{t("Clean")}</Button>
             : null
         }
       </Grid>

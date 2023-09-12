@@ -4,9 +4,12 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Information from '../contentwidgets/Information';
 import Table from '../contentwidgets/Table';
+import { useTranslation } from 'react-i18next';
 
 
 const SelectedContent = (props) => {
+
+  const { t } = useTranslation();
 
   const getProperWidget = () => {
 
@@ -86,7 +89,7 @@ const SelectedContent = (props) => {
         }}
       >
         <Grid item xs={12}>
-          <Button sx={{ width: '100%' }} variant="outlined" onClick={() => props.clearSelectedContent()}>Back</Button>
+          <Button sx={{ width: '100%' }} variant="outlined" onClick={() => props.clearSelectedContent()}>{t("Back")}</Button>
         </Grid>
       </Grid>
     </div>

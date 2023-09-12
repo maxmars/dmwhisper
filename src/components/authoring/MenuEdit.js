@@ -3,8 +3,8 @@ import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import { getContent, getContentMetaData, getContentName, updateContent, addMenuItem, updateContentHeader, updateContentType } from '../../store/slices/content';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-//import SelectedContent from './SelectedContent';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import HomeIcon from '@mui/icons-material/Home';
 import Typography from '@mui/material/Typography';
@@ -18,10 +18,12 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
 import useTheme from '@mui/private-theming/useTheme';
+import { useTranslation } from 'react-i18next';
 import './style.css'
 
 const MenuEdit = (props) => {
 
+    const { t } = useTranslation();
     const [newContentId, setNewContentId] = useState("");
     const [newContentLabel, setNewContentLabel] = useState("");
     const [newContentType, setNewContentType] = useState("menu");
@@ -46,7 +48,7 @@ const MenuEdit = (props) => {
     const columns = [
         {
             field: 'label',
-            headerName: 'Content',
+            headerName: t('Content'),
             flex: 1
         },
         {
@@ -56,7 +58,7 @@ const MenuEdit = (props) => {
             getActions: (params) => [
                 <GridActionsCellItem
                     icon={<DeleteIcon />}
-                    label="Delete"
+                    label={t("Delete")}
                     onClick={() => {
                         setMenuToDelete(params.id);
                     }
@@ -179,20 +181,20 @@ const MenuEdit = (props) => {
         return <Grid container sx={{ height: "100%" }} >
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-                <Typography>Warning! Menu is about to be deleted</Typography>
+                <Typography>{t("Warning! Menu is about to be deleted")}</Typography>
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={12}>
-                <Typography>Do you really want to delete RNG {menuToDelete} ({menuToDelete})?</Typography>
+                <Typography>{t("Do you really want to delete RNG")} {menuToDelete} ({menuToDelete})?</Typography>
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Button onClick={() => deleteMenu(menuToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">Yes</Button>
+                <Button onClick={() => deleteMenu(menuToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
             </Grid>
             <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Button onClick={() => setMenuToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">No</Button>
+                <Button onClick={() => setMenuToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
         </Grid >
@@ -201,25 +203,25 @@ const MenuEdit = (props) => {
     return (
         <Grid container sx={{ height: "100%" }} >
             <Grid item xs={12}>
-                <Button startIcon={<ArrowBackIosNewIcon />} sx={{ margin: "5px", width: "95%" }} variant="contained" color="primary" onClick={props.returnToMenu}>Main menu</Button>
+                <Button startIcon={<ArrowBackIosNewIcon />} sx={{ margin: "5px", width: "95%" }} variant="contained" color="primary" onClick={props.returnToMenu}>{t("Main menu")}</Button>
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={3}>
-                <Button startIcon={<ArrowBackIosNewIcon />} style={{ marginRight: "7px" }} variant="contained" color="primary" onClick={backOneLevel}>Back</Button>
+            <Grid item xs={1}>
+                <IconButton style={{ marginRight: "7px" }} variant="contained" color="primary" onClick={backOneLevel}><ArrowBackIosNewIcon /></IconButton>
             </Grid>
-            <Grid item xs={3}>
-                <Button startIcon={<HomeIcon />} style={{ marginLeft: "7px" }} variant="contained" color="primary" onClick={() => backToRootMenu()}>Home</Button>
+            <Grid item xs={1}>
+                <IconButton style={{ marginLeft: "7px" }} variant="contained" color="primary" onClick={() => backToRootMenu()}><HomeIcon /></IconButton>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={10}>
                 <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{contentName}</Typography>
             </Grid>
 
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-                <Typography>Menu header</Typography>
+                <Typography>{t("Menu header")}</Typography>
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}><Typography>Content ID</Typography></Grid>
+            <Grid item xs={12}><Typography>{t("Content ID")}</Typography></Grid>
             <Grid item xs={12}>
                 {
                     path.length > 0 ?
@@ -240,7 +242,7 @@ const MenuEdit = (props) => {
                 }
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}><Typography>Content Label</Typography></Grid>
+            <Grid item xs={12}><Typography>{t("Content Label")}</Typography></Grid>
             <Grid item xs={12}>
                 {
                     path.length > 0 ?
@@ -261,27 +263,27 @@ const MenuEdit = (props) => {
                 }
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}><Typography>Content Type</Typography></Grid>
+            <Grid item xs={12}><Typography>{t("Content Type")}</Typography></Grid>
             <Grid item xs={12}>
                 <Select
                     labelId="current-content-type-select-label"
                     id="current-content-type-select"
                     value={currentContentType}
                     disabled={path.length === 0}
-                    label="Content Type"
+                    label={t("Content Type")}
                     onChange={handleContentTypeChange}
                     sx={{ width: "100%" }}
                 >
-                    <MenuItem value="menu">Menu</MenuItem>
-                    <MenuItem value="information">Information</MenuItem>
-                    <MenuItem value="table">Table</MenuItem>
+                    <MenuItem value="menu">{t("Menu")}</MenuItem>
+                    <MenuItem value="information">{t("Information")}</MenuItem>
+                    <MenuItem value="table">{t("Table")}</MenuItem>
                 </Select>
             </Grid>
             {
                 currentContentType ?
                     <>
                         <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12}><Typography>Text content</Typography></Grid>
+                        <Grid item xs={12}><Typography>{t("Text content")}</Typography></Grid>
                         <Grid item xs={12}>
                             <TextField
                                 value={currentMenuContent}
@@ -300,7 +302,7 @@ const MenuEdit = (props) => {
                 currentContentType === "table" ?
                     <>
                         <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12}><Typography>Table</Typography></Grid>
+                        <Grid item xs={12}><Typography>{t("Table")}</Typography></Grid>
                         <Grid item xs={12}>
                             <TextField
                                 value={currentMenuTable}
@@ -312,13 +314,13 @@ const MenuEdit = (props) => {
                     </> : null
             }
             <Grid item xs={12}>&nbsp;</Grid>
-            <Button disabled={!contentMetaData.type} startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => updateMenuHeader()}>Save header data</Button>
+            <Button disabled={!contentMetaData.type} startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => updateMenuHeader()}>{t("Save header data")}</Button>
             {
                 !currentContentType || currentContentType === "menu" ?
                     <>
                         <Grid item xs={12}>&nbsp;</Grid>
                         <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-                            <Typography>Sub menus</Typography>
+                            <Typography>{t("Sub menus")}</Typography>
                         </Grid>
                         <Grid item xs={12}>&nbsp;</Grid>
                         <Grid item xs={12} style={{ height: (content ? (content.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>
@@ -337,10 +339,10 @@ const MenuEdit = (props) => {
                 currentContentType === "menu" ?
                     <>
                         <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-                            <Typography>Add a new sub menu</Typography>
+                            <Typography>{t("Add a new sub menu")}</Typography>
                         </Grid>
                         <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12}><Typography>Content ID</Typography></Grid>
+                        <Grid item xs={12}><Typography>{t("Content ID")}</Typography></Grid>
                         <Grid item xs={12}>
                             <TextField
                                 value={newContentId}
@@ -350,7 +352,7 @@ const MenuEdit = (props) => {
                                 sx={{ width: "100%" }} />
                         </Grid>
                         <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12}><Typography>Content Label</Typography></Grid>
+                        <Grid item xs={12}><Typography>{t("Content Label")}</Typography></Grid>
                         <Grid item xs={12}>
                             <TextField
                                 value={newContentLabel}
@@ -360,23 +362,23 @@ const MenuEdit = (props) => {
                                 sx={{ width: "100%" }} />
                         </Grid>
                         <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12}><Typography>Content Type</Typography></Grid>
+                        <Grid item xs={12}><Typography>{t("Content Type")}</Typography></Grid>
                         <Grid item xs={12}>
                             <Select
                                 labelId="new-content-type-select-label"
                                 id="new-content-type-select"
                                 value={newContentType}
-                                label="Content Type"
+                                label={t("Content Type")}
                                 onChange={handleNewContentTypeChange}
                                 sx={{ width: "100%" }}
                             >
-                                <MenuItem value="menu">Menu</MenuItem>
-                                <MenuItem value="information">Information</MenuItem>
-                                <MenuItem value="table">Table</MenuItem>
+                                <MenuItem value="menu">{t("Menu")}</MenuItem>
+                                <MenuItem value="information">{t("Information")}</MenuItem>
+                                <MenuItem value="table">{t("Table")}</MenuItem>
                             </Select>
                         </Grid>
                         <Grid item xs={12}>&nbsp;</Grid>
-                        <Button startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => addNewSubmenu()}>Add Sub menu</Button>
+                        <Button startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => addNewSubmenu()}>{t("Add Sub menu")}</Button>
                         <Grid item xs={12}>&nbsp;</Grid>
                     </> : null
             }

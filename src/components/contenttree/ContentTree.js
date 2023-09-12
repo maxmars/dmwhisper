@@ -4,23 +4,25 @@ import { getContent, getContentName } from '../../store/slices/content';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import SelectedContent from './SelectedContent';
-import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import HomeIcon from '@mui/icons-material/Home';
 import Typography from '@mui/material/Typography';
+import { useTranslation } from 'react-i18next';
 import './style.css'
-
-const columns = [
-    { field: 'label', headerName: 'Content', flex: 1 },
-];
 
 const ContentTree = () => {
 
+    const { t } = useTranslation();
     const [path, setPath] = useState("");
     const [selectedContent, setSelectedContent] = useState(null);
     const tree = useSelector((st) => st.content).tree;
     const content = getContent(tree, path);
     const contentName = getContentName(tree, path);
+
+    const columns = [
+        { field: 'label', headerName: t('Content'), flex: 1 },
+    ];
 
     const backOneLevel = () => {
         // If there's a dot in the path, remove the last part
@@ -55,8 +57,8 @@ const ContentTree = () => {
 
                 <div style={{ height: '90%', width: '100%' }}>
                     <div style={{ height: '10%', width: '100%', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                        <Button startIcon={<ArrowBackIosNewIcon />} style={{ marginRight: "2px" }} variant="contained" color="primary" onClick={backOneLevel}>Back</Button>
-                        <Button startIcon={<HomeIcon />} style={{ marginLeft: "2px" }} variant="contained" color="primary" onClick={() => setPath("")}>Home</Button>
+                        <IconButton style={{ marginRight: "7px" }} variant="contained" color="primary" onClick={backOneLevel}><ArrowBackIosNewIcon /></IconButton>
+                        <IconButton style={{ marginLeft: "7px" }} variant="contained" color="primary" onClick={() => setPath("")}><HomeIcon /></IconButton>
                         <Typography variant="h6" component="div" style={{ width: '60%', textAlign: 'center' }}>{contentName}</Typography>
                     </div>
                     <DataGrid

@@ -15,9 +15,11 @@ import ErrorIcon from '@mui/icons-material/Error';
 import CasinoIcon from '@mui/icons-material/Casino';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import useTheme from '@mui/private-theming/useTheme';
+import { useTranslation } from 'react-i18next';
 
 const Table = (props) => {
 
+  const { t } = useTranslation();
   const content = useSelector((st) => st.content);
   const [mode, setMode] = useState("rockandroll");
   const [currentThrow, setCurrentThrow] = useState(null);
@@ -72,9 +74,9 @@ const Table = (props) => {
           <Stack spacing={2} direction="column"
             justifyContent="space-evenly"
             alignItems="center">
-            <div>Content Error: {error}. Please check content for errors.</div>
+            <div>{t("Content Error:")} {error}. {t("Please check content for errors.")}</div>
             <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-              <Button onClick={resetError} startIcon={<ErrorIcon />} variant='contained'>Dismiss</Button>
+              <Button onClick={resetError} startIcon={<ErrorIcon />} variant='contained'>{t("Dismiss")}</Button>
             </div>
           </Stack>
           :
@@ -86,16 +88,16 @@ const Table = (props) => {
             <br />
             <div style={{ width: '100%' }}>
               <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-                <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>Roll</Button>
-                <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>Save</Button>
+                <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
+                <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
               </div>
               <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-                <Button onClick={() => setMode("consult")} startIcon={<MenuBookIcon />} variant='contained'>Browse</Button>
+                <Button onClick={() => setMode("consult")} startIcon={<MenuBookIcon />} variant='contained'>{t("Browse")}</Button>
                 {
                   autoUpdate ?
-                    <Button onClick={() => setAutoUpdate(false)} startIcon={<UpdateDisabledIcon />} variant='contained'>Stop auto update</Button>
+                    <Button onClick={() => setAutoUpdate(false)} startIcon={<UpdateDisabledIcon />} variant='contained'>{t("Stop auto update")}</Button>
                     :
-                    <Button onClick={() => setAutoUpdate(true)} startIcon={<UpdateIcon />} variant='contained'>Auto update</Button>
+                    <Button onClick={() => setAutoUpdate(true)} startIcon={<UpdateIcon />} variant='contained'>{t("Auto update")}</Button>
                 }
               </div>
             </div>
@@ -120,15 +122,15 @@ const Table = (props) => {
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={3} style={{display: "flex", justifyContent: "flex-end"}} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText}>
-          <div style={{marginRight: "1em"}}>Roll</div>
+          <div style={{marginRight: "1em"}}>{t("Roll")}</div>
         </Grid>
         <Grid item xs={9} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText}>
-          <div>Description</div>
+          <div>{t("Description")}</div>
         </Grid>
         {items}
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-          <Button onClick={() => setMode("rockandroll")} startIcon={<CasinoIcon />} variant='contained'>Return to rolling mode</Button>
+          <Button onClick={() => setMode("rockandroll")} startIcon={<CasinoIcon />} variant='contained'>{t("Return to rolling mode")}</Button>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
       </Grid>

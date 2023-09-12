@@ -1,6 +1,10 @@
 # Changelog Template progetto DM Whisper
 
 
+    12 Sep 2023
+    -----------
+    - 1.2.0 I18N is fully in place.
+
     10 Sep 2023
     -----------
     - 1.1.0 Menu editing completed.

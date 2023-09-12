@@ -12,8 +12,11 @@ import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import InfoIcon from '@mui/icons-material/Info';
 import Info from './info/Info';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const DMWhisper = () => {
+
+  const { t } = useTranslation();
 
   const [darkTheme, setDarkTheme] = useState(createTheme({
     palette: {
@@ -41,10 +44,10 @@ const DMWhisper = () => {
       <CssBaseline />
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', height: '12vh' }}>
         <Tabs value={tab} onChange={handleChange} variant="scrollable">
-          <Tab icon={<InfoIcon />} label="Info" iconPosition="start" />
-          <Tab icon={<DataObjectIcon />} label="Edit" iconPosition="start" />
-          <Tab icon={<TableChartIcon />} label="Browse" iconPosition="start" />
-          <Tab icon={<BookmarksIcon />} label={"Saved (" + throws.sequence.length + ")"} iconPosition="start" />
+          <Tab icon={<InfoIcon />} label={t("Info")} iconPosition="start" />
+          <Tab icon={<DataObjectIcon />} label={t("Edit")} iconPosition="start" />
+          <Tab icon={<TableChartIcon />} label={t("Browse")} iconPosition="start" />
+          <Tab icon={<BookmarksIcon />} label={t("Saved") + " (" + throws.sequence.length + ")"} iconPosition="start" />
         </Tabs>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'scroll', height: '88vh', width: '100%' }}>
