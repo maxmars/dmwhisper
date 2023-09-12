@@ -683,7 +683,7 @@ i18n
           "Clean": "Ren",
         }
       },
-      ua: {
+      uk: {
         translation: {
           "Edit content tree": "Редагувати дерево вмісту",
           "Edit content tables": "Редагувати таблиці вмісту",
@@ -766,7 +766,7 @@ i18n
           "Clean": "Чистий",
         }
       },
-      il: {
+      he: {
         translation: {
           "Edit content tree": "ערוך עץ תוכן",
           "Edit content tables": "ערוך טבלאות תוכן",
