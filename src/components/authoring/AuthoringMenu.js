@@ -9,10 +9,11 @@ import TablesEdit from './TablesEdit';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import MenuEdit from './MenuEdit';
-
+import { useTranslation } from 'react-i18next';
 
 const AuthoringMenu = () => {
 
+  const { t } = useTranslation();
   const content = useSelector((st) => st.content);
 
   const [pageMode, setPageMode] = useState('menu');
@@ -30,19 +31,19 @@ const AuthoringMenu = () => {
       return (
         <Grid container sx={{ overflow: 'scroll' }}>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button startIcon={<AccountTreeIcon />} onClick={() => setPageMode('menuedit')} variant="contained" color="primary">Edit content tree</Button>
+            <Button startIcon={<AccountTreeIcon />} onClick={() => setPageMode('menuedit')} variant="contained" color="primary">{t("Edit content tree")}</Button>
           </Grid>
           <Grid item xs={12}>&nbsp;</Grid>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button startIcon={<TableChartIcon />} onClick={() => setPageMode('tablesedit')} variant="contained" color="primary">Edit content tables</Button>
+            <Button startIcon={<TableChartIcon />} onClick={() => setPageMode('tablesedit')} variant="contained" color="primary">{t("Edit content tables")}</Button>
           </Grid>
           <Grid item xs={12}>&nbsp;</Grid>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button startIcon={<ContentCopyIcon />} onClick={copyContentToClipboard} variant="contained" color="primary">Copy content as JSON to clipboard</Button>
+            <Button startIcon={<ContentCopyIcon />} onClick={copyContentToClipboard} variant="contained" color="primary">{t("Copy content as JSON to clipboard")}</Button>
           </Grid>
           <Grid item xs={12}>&nbsp;</Grid>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button startIcon={<ContentPasteIcon />} onClick={() => setPageMode('parse')} variant="contained" color="primary">Paste JSON and parse as content</Button>
+            <Button startIcon={<ContentPasteIcon />} onClick={() => setPageMode('parse')} variant="contained" color="primary">{t("Paste JSON and parse as content")}</Button>
           </Grid>
         </Grid>
       );

@@ -20,8 +20,21 @@ i18n
       en: {
         translation: {
           // here we will place our translations, e.g.: myKey: 'text for translation'
+          "Edit content tree": "Edit content tree",
+          "Edit content tables": "Edit content tables",
+          "Copy content as JSON to clipboard": "Copy content as JSON to clipboard",
+          "Paste JSON and parse as content": "Paste JSON and parse as content",
         }
-      }
+      },
+      it: {
+        translation: {
+          // here we will place our translations, e.g.: myKey: 'text for translation'
+          "Edit content tree": "Modifica l'albero dei contenuti",
+          "Edit content tables": "Modifica le tabelle dei contenuti",
+          "Copy content as JSON to clipboard": "Copia contenuto negli appunti",
+          "Paste JSON and parse as content": "Incolla un testo JSON per importarlo",
+        }
+      },
     }
   });
 
