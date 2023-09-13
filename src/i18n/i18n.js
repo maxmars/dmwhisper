@@ -1347,7 +1347,7 @@ i18n
           "Clean": "Puhdas",
         }
       },
-      dk: {
+      da: {
         translation: {
           "Edit content tree": "Rediger indholdstræ",
           "Edit content tables": "Rediger indholdstabeller",
@@ -1513,7 +1513,7 @@ i18n
           "Clean": "Curat",
         }
       },
-      cz: {
+      cs: {
         translation: {
           "Edit content tree": "Upravit obsah stromu",
           "Edit content tables": "Upravit obsah tabulek",
