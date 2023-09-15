@@ -351,6 +351,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    15 Sep 2023
+    -----------
+    - 1.3.0 "Information" menu items now accept HTML.
+
     12 Sep 2023
     -----------
     - 1.2.0 I18N is fully in place.

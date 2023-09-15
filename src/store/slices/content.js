@@ -13,7 +13,7 @@ export const initialState = {
                     label: "A description of the farm",
                     type: "information",
                     data: {
-                        textContent: "The farm is located between the city gates, the forest and the wizard's castle, which is located on the hill. The farm is run by an old farmer and his wife, who have a 10 year old son. The farm is surrounded by a stone wall, with a wooden gate. The house is a wooden construction with a thatched roof. The farm has a small vegetable garden, a chicken coop, a sheep pen and a pig pen. The farm also has a water well."
+                        textContent: "The farm is located between the city gates, the forest and the wizard's castle, which is located on the hill.<br />The farm is run by an old farmer and his wife, who have a 10 year old son.<br />The farm is surrounded by a stone wall, with a wooden gate.<br />The house is a wooden construction with a thatched roof.<br />The farm has a small vegetable garden, a chicken coop, a sheep pen and a pig pen. The farm also has a water well.<br /><h1>By the way you can use HTML tags in this kind of content (this is H1)</h1>"
                     }
                 },
                 {
@@ -51,7 +51,7 @@ export const initialState = {
         label: "Explanation of the example tables",
         type: "information",
         data: {
-            textContent: "The data herein is only an example. The other item in this menu is an example of a sub-menu. Inside of it there are three tables: the farm weather is a table of values only; farm NPCs is a table that has some values and others are taken from two other tables (NPC from Castle and NPC from Town). The last table is that of the farm events: in it there are values, references to the farm animals table and references to the farm NPC table which, as seen before, in turn contains references to other tables.",
+            textContent: "The data herein is only an example.<br />The other item in this menu is an example of a sub-menu.<br />Inside of it there are three tables: the farm weather is a table of values only; farm NPCs is a table that has some values and others are taken from two other tables (NPC from Castle and NPC from Town).<br />The last table is that of the farm events: in it there are values, references to the farm animals table and references to the farm NPC table which, as seen before, in turn contains references to other tables.<br /><h1>By the way you can use HTML tags in this kind of content (this is H1)</h1>",
         }
     }
     ],
