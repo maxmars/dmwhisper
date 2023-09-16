@@ -1,3 +1,7 @@
 .MuiDataGrid-footerContainer {
     display: none !important;
 }
+
+.ck-style-dropdown {
+    display: none !important;
+}
