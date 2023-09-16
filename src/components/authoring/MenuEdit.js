@@ -53,7 +53,6 @@ const MenuEdit = (props) => {
         require('./ckeditor-dark.css');
     }
 
-    console.log(i18n);
     require('../../ckeditor/translations/' + navigator.language.substring(0, 2) + '.js');
 
     const dispatch = useDispatch();
