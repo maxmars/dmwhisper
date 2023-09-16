@@ -83,7 +83,7 @@ const Table = (props) => {
           <Stack spacing={2} direction="column"
             justifyContent="space-evenly"
             alignItems="center">
-            <div>{props.content.data.textContent}</div>
+            <div dangerouslySetInnerHTML={{__html: props.content.data.textContent}} />
             <div>{currentThrow}</div>
             <br />
             <div style={{ width: '100%' }}>
