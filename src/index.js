@@ -13,11 +13,11 @@ import './i18n/i18n.js';
 const renderReactDom = () => {
   const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(
-    <React.StrictMode>
+    
       <Provider store={store}>
         <DMWhisper />
       </Provider>
-    </React.StrictMode>
+    
   );
 };
 

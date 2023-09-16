@@ -20,12 +20,12 @@ import { useDispatch } from 'react-redux';
 import useTheme from '@mui/private-theming/useTheme';
 import { useTranslation } from 'react-i18next';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '../../ckeditor/ckeditor';
+import { Editor } from 'ckeditor5-custom-build/build/ckeditor';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import './style.css'
+import './style.css';
 
 
 const MenuEdit = (props) => {
@@ -55,7 +55,7 @@ const MenuEdit = (props) => {
         require('./ckeditor-dark.css');
     }
 
-    require('../../ckeditor/translations/' + navigator.language.substring(0, 2) + '.js');
+    require('ckeditor5-custom-build/build/translations/' + navigator.language.substring(0, 2) + '.js');
 
     const dispatch = useDispatch();
 
@@ -313,8 +313,9 @@ const MenuEdit = (props) => {
                                         <Grid item xs={12}><Typography>{t("Text content")}</Typography></Grid>
                                         <Grid item xs={12}>
                                             {path.length > 0 ?
+
                                                 <CKEditor
-                                                    editor={ClassicEditor}
+                                                    editor={Editor}
                                                     data={currentMenuContent}
                                                     config={{ language: { ui: navigator.language.substring(0, 2), content: navigator.language.substring(0, 2) } }}
                                                     onReady={editor => {
