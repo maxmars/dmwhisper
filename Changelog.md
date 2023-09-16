@@ -1,6 +1,10 @@
 # Changelog Template progetto DM Whisper
 
 
+    16 Sep 2023
+    -----------
+    - 1.4.0 Added CKEditor for text content editing.
+
     15 Sep 2023
     -----------
     - 1.3.0 "Information" menu items now accept HTML.

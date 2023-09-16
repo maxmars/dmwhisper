@@ -19,7 +19,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
 import useTheme from '@mui/private-theming/useTheme';
 import { useTranslation } from 'react-i18next';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '../../ckeditor/ckeditor';
+import i18n from '../../i18n/i18n';
+
 import './style.css'
+
+
 
 const MenuEdit = (props) => {
 
@@ -42,6 +48,13 @@ const MenuEdit = (props) => {
     const ctyp = contentMetaData.type ? contentMetaData.type : "menu";
     const [currentContentType, setCurrentContentType] = useState(ctyp);
     const theme = useTheme();
+
+    if (theme.palette.mode === "dark") {
+        require('./ckeditor-dark.css');
+    }
+
+    console.log(i18n);
+    require('../../ckeditor/translations/' + navigator.language.substring(0, 2) + '.js');
 
     const dispatch = useDispatch();
 
@@ -285,16 +298,39 @@ const MenuEdit = (props) => {
                         <Grid item xs={12}>&nbsp;</Grid>
                         <Grid item xs={12}><Typography>{t("Text content")}</Typography></Grid>
                         <Grid item xs={12}>
-                            <TextField
-                                value={currentMenuContent}
-                                disabled={path.length === 0}
-                                id="text-content"
-                                variant="outlined"
-                                sx={{ width: "100%" }}
-                                onChange={(event) => setCurrentMenuContent(event.target.value)}
-                                multiline
-                                minRows={3}
-                                maxRows={8} />
+                            {path.length > 0 ?
+                                <CKEditor
+                                    editor={ClassicEditor}
+                                    data={currentMenuContent}
+                                    config= {{language: {ui: navigator.language.substring(0, 2), content: navigator.language.substring(0, 2) }}}
+                                    onReady={editor => {
+                                        // You can store the "editor" and use when it is needed.
+                                        console.log('Editor is ready to use!', editor);
+                                    }}
+                                    onChange={(event, editor) => {
+                                        const data = editor.getData();
+                                        console.log({ event, editor, data });
+                                        setCurrentMenuContent(data)
+                                    }}
+                                    onBlur={(event, editor) => {
+                                        console.log('Blur.', editor);
+                                    }}
+                                    onFocus={(event, editor) => {
+                                        console.log('Focus.', editor);
+                                    }}
+                                />
+                                :
+                                <TextField
+                                    value={currentMenuContent}
+                                    disabled
+                                    id="text-content"
+                                    variant="outlined"
+                                    sx={{ width: "100%" }}
+                                    onChange={(event) => setCurrentMenuContent(event.target.value)}
+                                    multiline
+                                    minRows={3}
+                                    maxRows={8} />
+                            }
                         </Grid>
                     </> : null
             }
