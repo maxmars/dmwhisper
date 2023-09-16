@@ -21,7 +21,10 @@ import useTheme from '@mui/private-theming/useTheme';
 import { useTranslation } from 'react-i18next';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '../../ckeditor/ckeditor';
-import i18n from '../../i18n/i18n';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import './style.css'
 
@@ -48,6 +51,7 @@ const MenuEdit = (props) => {
     const ctyp = contentMetaData.type ? contentMetaData.type : "menu";
     const [currentContentType, setCurrentContentType] = useState(ctyp);
     const theme = useTheme();
+    const [headerInfoOpen, setHeaderInfoOpen] = useState(currentContentType !== "menu");
 
     if (theme.palette.mode === "dark") {
         require('./ckeditor-dark.css');
@@ -85,6 +89,7 @@ const MenuEdit = (props) => {
         setCurrentContentType("menu");
         setCurrentMenuContent([]);
         setCurrentMenuTable(undefined);
+        setHeaderInfoOpen(false);
         setPath("");
     }
 
@@ -99,6 +104,7 @@ const MenuEdit = (props) => {
             setCurrentContentType(newCtyp);
             setCurrentMenuContent(newContentMetaData.data.textContent);
             setCurrentMenuTable(newContentMetaData.data.table ? newContentMetaData.data.table : "");
+            setHeaderInfoOpen(newCtyp !== "menu");
             setPath(newPath);
             return;
         }
@@ -108,6 +114,7 @@ const MenuEdit = (props) => {
         setCurrentContentType("menu");
         setCurrentMenuContent([]);
         setCurrentMenuTable(undefined);
+        setHeaderInfoOpen(false);
         setPath("");
     }
 
@@ -120,6 +127,7 @@ const MenuEdit = (props) => {
         setCurrentContentType(newCtyp);
         setCurrentMenuContent(newContentMetaData.data.textContent);
         setCurrentMenuTable(newContentMetaData.data.table ? newContentMetaData.data.table : "");
+        setHeaderInfoOpen(newCtyp !== "menu");
         setPath(newPath);
     };
 
@@ -229,132 +237,146 @@ const MenuEdit = (props) => {
             </Grid>
 
             <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-                <Typography>{t("Menu header")}</Typography>
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}><Typography>{t("Content ID")}</Typography></Grid>
+
             <Grid item xs={12}>
-                {
-                    path.length > 0 ?
-                        <TextField
-                            value={currentMenuId}
-                            onChange={(event) => setCurrentMenuId(event.target.value)}
-                            id="content-id"
-                            variant="outlined"
-                            sx={{ width: "100%" }} />
-                        :
-                        <TextField
-                            disabled={true}
-                            value="ID: HOME"
-                            id="content-id"
-                            label=""
-                            variant="outlined"
-                            sx={{ width: "100%" }} />
-                }
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}><Typography>{t("Content Label")}</Typography></Grid>
-            <Grid item xs={12}>
-                {
-                    path.length > 0 ?
-                        <TextField
-                            value={currentMenuLabel}
-                            onChange={(event) => setCurrentMenuLabel(event.target.value)}
-                            id="content-label"
-                            variant="outlined"
-                            sx={{ width: "100%" }} />
-                        :
-                        <TextField
-                            disabled={true}
-                            value="LABEL: HOME"
-                            id="content-label"
-                            label=""
-                            variant="outlined"
-                            sx={{ width: "100%" }} />
-                }
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}><Typography>{t("Content Type")}</Typography></Grid>
-            <Grid item xs={12}>
-                <Select
-                    labelId="current-content-type-select-label"
-                    id="current-content-type-select"
-                    value={currentContentType}
-                    disabled={path.length === 0}
-                    label={t("Content Type")}
-                    onChange={handleContentTypeChange}
-                    sx={{ width: "100%" }}
-                >
-                    <MenuItem value="menu">{t("Menu")}</MenuItem>
-                    <MenuItem value="information">{t("Information")}</MenuItem>
-                    <MenuItem value="table">{t("Table")}</MenuItem>
-                </Select>
-            </Grid>
-            {
-                currentContentType ?
-                    <>
-                        <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12}><Typography>{t("Text content")}</Typography></Grid>
-                        <Grid item xs={12}>
-                            {path.length > 0 ?
-                                <CKEditor
-                                    editor={ClassicEditor}
-                                    data={currentMenuContent}
-                                    config= {{language: {ui: navigator.language.substring(0, 2), content: navigator.language.substring(0, 2) }}}
-                                    onReady={editor => {
-                                        // You can store the "editor" and use when it is needed.
-                                        //console.log('Editor is ready to use!', editor);
-                                    }}
-                                    onChange={(event, editor) => {
-                                        const data = editor.getData();
-                                        //console.log({ event, editor, data });
-                                        setCurrentMenuContent(data)
-                                    }}
-                                    onBlur={(event, editor) => {
-                                        //console.log('Blur.', editor);
-                                    }}
-                                    onFocus={(event, editor) => {
-                                        //console.log('Focus.', editor);
-                                    }}
-                                />
-                                :
-                                <TextField
-                                    value={currentMenuContent}
-                                    disabled
-                                    id="text-content"
-                                    variant="outlined"
+                <Accordion expanded={headerInfoOpen} onChange={(event, newExpanded) => setHeaderInfoOpen(newExpanded)}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="menuheader-content"
+                        id="menuheader-header"
+                    >
+                        <Typography>{t("Menu header")}</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        <Grid container>
+                            <Grid item xs={12}>&nbsp;</Grid>
+                            <Grid item xs={12}><Typography>{t("Content ID")}</Typography></Grid>
+                            <Grid item xs={12}>
+                                {
+                                    path.length > 0 ?
+                                        <TextField
+                                            value={currentMenuId}
+                                            onChange={(event) => setCurrentMenuId(event.target.value)}
+                                            id="content-id"
+                                            variant="outlined"
+                                            sx={{ width: "100%" }} />
+                                        :
+                                        <TextField
+                                            disabled={true}
+                                            value="ID: HOME"
+                                            id="content-id"
+                                            label=""
+                                            variant="outlined"
+                                            sx={{ width: "100%" }} />
+                                }
+                            </Grid>
+                            <Grid item xs={12}>&nbsp;</Grid>
+                            <Grid item xs={12}><Typography>{t("Content Label")}</Typography></Grid>
+                            <Grid item xs={12}>
+                                {
+                                    path.length > 0 ?
+                                        <TextField
+                                            value={currentMenuLabel}
+                                            onChange={(event) => setCurrentMenuLabel(event.target.value)}
+                                            id="content-label"
+                                            variant="outlined"
+                                            sx={{ width: "100%" }} />
+                                        :
+                                        <TextField
+                                            disabled={true}
+                                            value="LABEL: HOME"
+                                            id="content-label"
+                                            label=""
+                                            variant="outlined"
+                                            sx={{ width: "100%" }} />
+                                }
+                            </Grid>
+                            <Grid item xs={12}>&nbsp;</Grid>
+                            <Grid item xs={12}><Typography>{t("Content Type")}</Typography></Grid>
+                            <Grid item xs={12}>
+                                <Select
+                                    labelId="current-content-type-select-label"
+                                    id="current-content-type-select"
+                                    value={currentContentType}
+                                    disabled={path.length === 0}
+                                    label={t("Content Type")}
+                                    onChange={handleContentTypeChange}
                                     sx={{ width: "100%" }}
-                                    onChange={(event) => setCurrentMenuContent(event.target.value)}
-                                    multiline
-                                    minRows={3}
-                                    maxRows={8} />
+                                >
+                                    <MenuItem value="menu">{t("Menu")}</MenuItem>
+                                    <MenuItem value="information">{t("Information")}</MenuItem>
+                                    <MenuItem value="table">{t("Table")}</MenuItem>
+                                </Select>
+                            </Grid>
+                            {
+                                currentContentType ?
+                                    <>
+                                        <Grid item xs={12}>&nbsp;</Grid>
+                                        <Grid item xs={12}><Typography>{t("Text content")}</Typography></Grid>
+                                        <Grid item xs={12}>
+                                            {path.length > 0 ?
+                                                <CKEditor
+                                                    editor={ClassicEditor}
+                                                    data={currentMenuContent}
+                                                    config={{ language: { ui: navigator.language.substring(0, 2), content: navigator.language.substring(0, 2) } }}
+                                                    onReady={editor => {
+                                                        // You can store the "editor" and use when it is needed.
+                                                        //console.log('Editor is ready to use!', editor);
+                                                    }}
+                                                    onChange={(event, editor) => {
+                                                        const data = editor.getData();
+                                                        //console.log({ event, editor, data });
+                                                        setCurrentMenuContent(data)
+                                                    }}
+                                                    onBlur={(event, editor) => {
+                                                        //console.log('Blur.', editor);
+                                                    }}
+                                                    onFocus={(event, editor) => {
+                                                        //console.log('Focus.', editor);
+                                                    }}
+                                                />
+                                                :
+                                                <TextField
+                                                    value={currentMenuContent}
+                                                    disabled
+                                                    id="text-content"
+                                                    variant="outlined"
+                                                    sx={{ width: "100%" }}
+                                                    onChange={(event) => setCurrentMenuContent(event.target.value)}
+                                                    multiline
+                                                    minRows={3}
+                                                    maxRows={8} />
+                                            }
+                                        </Grid>
+                                    </> : null
                             }
+                            {
+                                currentContentType === "table" ?
+                                    <>
+                                        <Grid item xs={12}>&nbsp;</Grid>
+                                        <Grid item xs={12}><Typography>{t("Table")}</Typography></Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                value={currentMenuTable}
+                                                id="table-content"
+                                                variant="outlined"
+                                                onChange={(event) => setCurrentMenuTable(event.target.value)}
+                                                sx={{ width: "100%" }} />
+                                        </Grid>
+                                    </> : null
+                            }
+                            <Grid item xs={12}>&nbsp;</Grid>
+                            <Button disabled={!contentMetaData.type} startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => updateMenuHeader()}>{t("Save header data")}</Button>
                         </Grid>
-                    </> : null
-            }
-            {
-                currentContentType === "table" ?
-                    <>
-                        <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12}><Typography>{t("Table")}</Typography></Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                value={currentMenuTable}
-                                id="table-content"
-                                variant="outlined"
-                                onChange={(event) => setCurrentMenuTable(event.target.value)}
-                                sx={{ width: "100%" }} />
-                        </Grid>
-                    </> : null
-            }
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Button disabled={!contentMetaData.type} startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => updateMenuHeader()}>{t("Save header data")}</Button>
+                    </AccordionDetails>
+                </Accordion>
+
+            </Grid>
             {
                 !currentContentType || currentContentType === "menu" ?
                     <>
                         <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <Typography>{t("Sub menus")}</Typography>
                         </Grid>
                         <Grid item xs={12}>&nbsp;</Grid>
@@ -372,50 +394,57 @@ const MenuEdit = (props) => {
             <Grid item xs={12}>&nbsp;</Grid>
             {
                 currentContentType === "menu" ?
-                    <>
-                        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="menuadd-content"
+                            id="menuadd-header"
+                        >
                             <Typography>{t("Add a new sub menu")}</Typography>
-                        </Grid>
-                        <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12}><Typography>{t("Content ID")}</Typography></Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                value={newContentId}
-                                onChange={(event) => setNewContentId(event.target.value)}
-                                id="new-content-id"
-                                variant="outlined"
-                                sx={{ width: "100%" }} />
-                        </Grid>
-                        <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12}><Typography>{t("Content Label")}</Typography></Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                value={newContentLabel}
-                                onChange={(event) => setNewContentLabel(event.target.value)}
-                                id="new-content-label"
-                                variant="outlined"
-                                sx={{ width: "100%" }} />
-                        </Grid>
-                        <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12}><Typography>{t("Content Type")}</Typography></Grid>
-                        <Grid item xs={12}>
-                            <Select
-                                labelId="new-content-type-select-label"
-                                id="new-content-type-select"
-                                value={newContentType}
-                                label={t("Content Type")}
-                                onChange={handleNewContentTypeChange}
-                                sx={{ width: "100%" }}
-                            >
-                                <MenuItem value="menu">{t("Menu")}</MenuItem>
-                                <MenuItem value="information">{t("Information")}</MenuItem>
-                                <MenuItem value="table">{t("Table")}</MenuItem>
-                            </Select>
-                        </Grid>
-                        <Grid item xs={12}>&nbsp;</Grid>
-                        <Button startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => addNewSubmenu()}>{t("Add Sub menu")}</Button>
-                        <Grid item xs={12}>&nbsp;</Grid>
-                    </> : null
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Grid container>
+                                <Grid item xs={12}><Typography>{t("Content ID")}</Typography></Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        value={newContentId}
+                                        onChange={(event) => setNewContentId(event.target.value)}
+                                        id="new-content-id"
+                                        variant="outlined"
+                                        sx={{ width: "100%" }} />
+                                </Grid>
+                                <Grid item xs={12}>&nbsp;</Grid>
+                                <Grid item xs={12}><Typography>{t("Content Label")}</Typography></Grid>
+                                <Grid item xs={12}>
+                                    <TextField
+                                        value={newContentLabel}
+                                        onChange={(event) => setNewContentLabel(event.target.value)}
+                                        id="new-content-label"
+                                        variant="outlined"
+                                        sx={{ width: "100%" }} />
+                                </Grid>
+                                <Grid item xs={12}>&nbsp;</Grid>
+                                <Grid item xs={12}><Typography>{t("Content Type")}</Typography></Grid>
+                                <Grid item xs={12}>
+                                    <Select
+                                        labelId="new-content-type-select-label"
+                                        id="new-content-type-select"
+                                        value={newContentType}
+                                        label={t("Content Type")}
+                                        onChange={handleNewContentTypeChange}
+                                        sx={{ width: "100%" }}
+                                    >
+                                        <MenuItem value="menu">{t("Menu")}</MenuItem>
+                                        <MenuItem value="information">{t("Information")}</MenuItem>
+                                        <MenuItem value="table">{t("Table")}</MenuItem>
+                                    </Select>
+                                </Grid>
+                                <Grid item xs={12}>&nbsp;</Grid>
+                                <Button startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => addNewSubmenu()}>{t("Add Sub menu")}</Button>
+                                <Grid item xs={12}>&nbsp;</Grid>
+                            </Grid>
+                        </AccordionDetails>
+                    </Accordion> : null
             }
         </Grid >
     );
