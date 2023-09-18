@@ -32,7 +32,6 @@
     "@ckeditor/ckeditor5-paragraph": "39.0.2",
     "@ckeditor/ckeditor5-paste-from-office": "39.0.2",
     "@ckeditor/ckeditor5-remove-format": "39.0.2",
-    "@ckeditor/ckeditor5-restricted-editing": "39.0.2",
     "@ckeditor/ckeditor5-select-all": "39.0.2",
     "@ckeditor/ckeditor5-show-blocks": "39.0.2",
     "@ckeditor/ckeditor5-source-editing": "39.0.2",
@@ -41,7 +40,8 @@
     "@ckeditor/ckeditor5-table": "39.0.2",
     "@ckeditor/ckeditor5-typing": "39.0.2",
     "@ckeditor/ckeditor5-upload": "39.0.2",
-    "@ckeditor/ckeditor5-watchdog": "39.0.2"
+    "@ckeditor/ckeditor5-watchdog": "39.0.2",
+    "@ckeditor/ckeditor5-word-count": "39.0.2"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-dev-translations": "^32.1.2",

@@ -3,6 +3,8 @@ import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import { getContent, getContentMetaData, getContentName, updateContent, addMenuItem, updateContentHeader, updateContentType } from '../../store/slices/content';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -50,10 +52,32 @@ const MenuEdit = (props) => {
     const [currentContentType, setCurrentContentType] = useState(ctyp);
     const theme = useTheme();
     const [headerInfoOpen, setHeaderInfoOpen] = useState(currentContentType !== "menu");
+    const mounted = useRef();
 
-    if (theme.palette.mode === "dark") {
-        require('./ckeditor-dark.css');
-    }
+    useEffect(() => {
+        setTimeout(() => {
+            const elToApply = document.getElementsByClassName("ck-content")[0];
+            if (elToApply) {
+                if (!mounted.current) {
+                    // do componentDidMount logic
+                    if (theme.palette.mode === "dark") {
+                        elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
+                    } else {
+                        elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
+                    }
+                    mounted.current = true;
+                } else {
+                    if (theme.palette.mode === "dark") {
+                        elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
+                    } else {
+                        elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
+                    }
+                }
+            }
+        }, 250);
+    });
+
+
 
     require('ckeditor5-custom-build/build/translations/' + navigator.language.substring(0, 2) + '.js');
 
