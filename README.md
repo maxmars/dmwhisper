@@ -15,9 +15,15 @@ https://marsiglietti.it/dmwhisper/
 
 ### `yarn install`
 
-# Run this project (http://localhost:3000)
+After that, you need to install a custom CKEditor build that is conveniently located as a subfolder of the main project folder. Do that with:
+
+### `yarn add file:./ckeditor5`
+
+# Run this project
 
 ### `yarn start`
+
+After that, open [http://localhost:3000](http://localhost:3000) to view it in the browser, if it doesn't open automatically.
 
 # Build project (make sure to edit the "homepage" value in package.json)
 
@@ -350,6 +356,10 @@ The first table here contains references to the two tables next to it.
     }
 
 # Log of Changes
+
+    18 Sep 2023
+    -----------
+    - 1.4.1 Fixed ckeditor theme sync, added ckeditor custom build zip for reference.
 
     16 Sep 2023
     -----------

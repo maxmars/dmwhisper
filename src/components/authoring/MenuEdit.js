@@ -55,6 +55,10 @@ const MenuEdit = (props) => {
     const mounted = useRef();
 
     useEffect(() => {
+        ckEditorThemeSync();
+    });
+
+    const ckEditorThemeSync = () => {
         setTimeout(() => {
             const elToApply = document.getElementsByClassName("ck-content")[0];
             if (elToApply) {
@@ -75,9 +79,7 @@ const MenuEdit = (props) => {
                 }
             }
         }, 250);
-    });
-
-
+    }
 
     require('ckeditor5-custom-build/build/translations/' + navigator.language.substring(0, 2) + '.js');
 
@@ -353,9 +355,11 @@ const MenuEdit = (props) => {
                                                     }}
                                                     onBlur={(event, editor) => {
                                                         //console.log('Blur.', editor);
+                                                        ckEditorThemeSync();
                                                     }}
                                                     onFocus={(event, editor) => {
                                                         //console.log('Focus.', editor);
+                                                        ckEditorThemeSync();
                                                     }}
                                                 />
                                                 :

@@ -1,6 +1,10 @@
 # Changelog Template progetto DM Whisper
 
 
+    18 Sep 2023
+    -----------
+    - 1.4.1 Fixed ckeditor theme sync, added ckeditor custom build zip for reference.
+
     16 Sep 2023
     -----------
     - 1.4.0 Added CKEditor for text content editing.
