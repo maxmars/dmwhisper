@@ -368,6 +368,7 @@ The first table here contains references to the two tables next to it.
 
     19 Sep 2023
     -----------
+    - 1.4.3 Continued work on import/export of data files.
     - 1.4.2 Started work on alternative ways of importing data files (<dmwhisper url>?datafile=<datafile url>).
 
     18 Sep 2023

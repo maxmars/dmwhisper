@@ -99,6 +99,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "published under the Apache 2.0 Open Source license.",
           "See the product home page for information about the content JSON format.": "See the product home page for information about the content JSON format.",
           "Clean": "Clean",
+          "Download content as JSON": "Download content as JSON",
+          "Upload JSON file": "Upload JSON file"
         }
       },
       it: {
@@ -183,6 +185,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "pubblicato con licenza Open Source Apache 2.0.",
           "See the product home page for information about the content JSON format.": "Consulta la pagina del prodotto per informazioni sul formato JSON dei contenuti.",
           "Clean": "Pulisci",
+          "Download content as JSON": "Scarica contenuto come JSON",
+          "Upload JSON file": "Carica file JSON"
         }
       },
       es: {
@@ -266,6 +270,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "publicado bajo la licencia de código abierto Apache 2.0.",
           "See the product home page for information about the content JSON format.": "Consulte la página de inicio del producto para obtener información sobre el formato JSON del contenido.",
           "Clean": "Limpiar",
+          "Download content as JSON": "Descargar contenido como JSON",
+          "Upload JSON file": "Subir archivo JSON"
         },
       },
       fr: {
@@ -349,6 +355,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "publié sous la licence Open Source Apache 2.0.",
           "See the product home page for information about the content JSON format.": "Consultez la page d'accueil du produit pour obtenir des informations sur le format JSON du contenu.",
           "Clean": "Nettoyer",
+          "Download content as JSON": "Télécharger le contenu au format JSON",
+          "Upload JSON file": "Télécharger un fichier JSON"
         },
       },
       de: {
@@ -432,6 +440,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "veröffentlicht unter der Apache 2.0 Open Source-Lizenz.",
           "See the product home page for information about the content JSON format.": "Weitere Informationen zum JSON-Format des Inhalts finden Sie auf der Homepage des Produkts.",
           "Clean": "Sauber",
+          "Download content as JSON": "Inhalt als JSON herunterladen",
+          "Upload JSON file": "JSON-Datei hochladen"
         }
       },
       pt: {
@@ -515,6 +525,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "publicado sob a licença Open Source Apache 2.0.",
           "See the product home page for information about the content JSON format.": "Consulte a página inicial do produto para obter informações sobre o formato JSON do conteúdo.",
           "Clean": "Limpar",
+          "Download content as JSON": "Baixar conteúdo como JSON",
+          "Upload JSON file": "Carregar arquivo JSON"
         }
       },
       gr: {
@@ -598,6 +610,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "δημοσιεύεται υπό την άδεια Apache 2.0 Open Source.",
           "See the product home page for information about the content JSON format.": "Δείτε την αρχική σελίδα του προϊόντος για πληροφορίες σχετικά με τη μορφή JSON περιεχομένου.",
           "Clean": "Καθαρός",
+          "Download content as JSON": "Λήψη περιεχομένου ως JSON",
+          "Upload JSON file": "Μεταφόρτωση αρχείου JSON"
         }
       },
       se: {
@@ -681,6 +695,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "publicerad under licensen Apache 2.0 Open Source.",
           "See the product home page for information about the content JSON format.": "Se produkthemsidan för information om innehåll JSON-format.",
           "Clean": "Ren",
+          "Download content as JSON": "Ladda ner innehåll som JSON",
+          "Upload JSON file": "Ladda upp JSON-fil"
         }
       },
       uk: {
@@ -764,6 +780,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "опубліковано за ліцензією Apache 2.0 Open Source.",
           "See the product home page for information about the content JSON format.": "Див. Домашню сторінку продукту для отримання інформації про формат JSON вмісту.",
           "Clean": "Чистий",
+          "Download content as JSON": "Завантажити вміст як JSON",
+          "Upload JSON file": "Завантажити файл JSON"
         }
       },
       he: {
@@ -847,6 +865,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "פורסם בסקירת הקוד הפתוח Apache 2.0.",
           "See the product home page for information about the content JSON format.": "ראה את דף הבית של המוצר למידע על פורמט JSON של התוכן.",
           "Clean": "נָקִי",
+          "Download content as JSON": "הורד תוכן כ- JSON",
+          "Upload JSON file": "העלה קובץ JSON"
         }
       },
       no: {
@@ -930,6 +950,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "publisert under Apache 2.0 Open Source-lisensen.",
           "See the product home page for information about the content JSON format.": "Se produkthjemmesiden for informasjon om innhold JSON-format.",
           "Clean": "Ren",
+          "Download content as JSON": "Last ned innhold som JSON",
+          "Upload JSON file": "Last opp JSON-fil"
         }
       },
       nl: {
@@ -1013,6 +1035,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "gepubliceerd onder de Apache 2.0 Open Source-licentie.",
           "See the product home page for information about the content JSON format.": "Zie de producthomepage voor informatie over de JSON-indeling van de inhoud.",
           "Clean": "Schoon",
+          "Download content as JSON": "Download inhoud als JSON",
+          "Upload JSON file": "Upload JSON-bestand"
         }
       },
       pl: {
@@ -1096,6 +1120,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "opublikowane na licencji Apache 2.0 Open Source.",
           "See the product home page for information about the content JSON format.": "Zobacz stronę główną produktu, aby uzyskać informacje na temat formatu JSON zawartości.",
           "Clean": "Czysty",
+          "Download content as JSON": "Pobierz zawartość jako JSON",
+          "Upload JSON file": "Prześlij plik JSON"
         }
       },
       hu: {
@@ -1179,6 +1205,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "az Apache 2.0 nyílt forráskódú licenc alatt.",
           "See the product home page for information about the content JSON format.": "A termék kezdőlapján található információk a tartalom JSON formátumáról.",
           "Clean": "Tiszta",
+          "Download content as JSON": "Tartalom letöltése JSON-ként",
+          "Upload JSON file": "JSON fájl feltöltése"
         }
       },
       bg: {
@@ -1262,6 +1290,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "публикувано под лиценза за отворен код Apache 2.0.",
           "See the product home page for information about the content JSON format.": "Вижте началната страница на продукта за информация относно формата JSON на съдържанието.",
           "Clean": "Чист",
+          "Download content as JSON": "Изтеглете съдържанието като JSON",
+          "Upload JSON file": "Качване на JSON файл"
         }
       },
       fi: {
@@ -1345,6 +1375,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "julkaistu Apache 2.0 Open Source -lisenssin mukaisesti.",
           "See the product home page for information about the content JSON format.": "Katso tuotteen kotisivu sisällön JSON-muodon tiedoista.",
           "Clean": "Puhdas",
+          "Download content as JSON": "Lataa sisältö JSON-muodossa",
+          "Upload JSON file": "Lataa JSON-tiedosto"
         }
       },
       da: {
@@ -1427,7 +1459,9 @@ i18n
           "By": "Ved",
           "published under the Apache 2.0 Open Source license.": "udgivet under Apache 2.0 Open Source-licensen.",
           "See the product home page for information about the content JSON format.": "Se produktets hjemmeside for information om indhold JSON-format.",
-          "Clean": "Ren",          
+          "Clean": "Ren",   
+          "Download content as JSON": "Download indhold som JSON",
+          "Upload JSON file": "Upload JSON-fil"       
         }
       },
       ro: {
@@ -1511,6 +1545,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "publicat sub licența Apache 2.0 Open Source.",
           "See the product home page for information about the content JSON format.": "Consultați pagina de pornire a produsului pentru informații despre formatul JSON al conținutului.",
           "Clean": "Curat",
+          "Download content as JSON": "Descărcați conținutul ca JSON",
+          "Upload JSON file": "Încărcați fișierul JSON"
         }
       },
       cs: {
@@ -1594,6 +1630,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "publikováno pod licencí Apache 2.0 Open Source.",
           "See the product home page for information about the content JSON format.": "Informace o formátu JSON obsahu naleznete na domovské stránce produktu.",
           "Clean": "Čistý",
+          "Download content as JSON": "Stáhnout obsah jako JSON",
+          "Upload JSON file": "Nahrát soubor JSON"
         }
       },
       is: {
@@ -1677,6 +1715,8 @@ i18n
           "published under the Apache 2.0 Open Source license.": "birt undir Apache 2.0 Open Source leyfi.",
           "See the product home page for information about the content JSON format.": "Sjá heimasíðu vörunnar fyrir upplýsingar um efni JSON snið.",
           "Clean": "Hreinsa",
+          "Download content as JSON": "Sækja efni sem JSON",
+          "Upload JSON file": "Hlaða upp JSON skrá"
         }
       }
     }

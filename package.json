@@ -1,6 +1,6 @@
 {
   "name": "dmwhisper",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "homepage": "/dmwhisper",
   "private": true,
   "dependencies": {
