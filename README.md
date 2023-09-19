@@ -42,7 +42,7 @@ DMWhisper content is made up of:
 - menus: by means of menu items you build a content tree, whose leaves are
          either tables (defined above) or simple text (information) nodes.
 
-## Import JSON text
+## Import JSON text (paste into the "edit" tab)
 
 Content can be also uploaded in the "edit" tab.  
 It should be created as a JSON file, following this schema:  
@@ -73,6 +73,15 @@ It should be created as a JSON file, following this schema:
             }
         ]
     }
+
+## Import JSON test (pass it on the webapp URL)
+If you're using the webapp version of DMWhisper, you can also pass the JSON content as a parameter in the URL, like this:
+
+    https://marsiglietti.it/dmwhisper/?datafile=https://marsiglietti.it/dmwhisper/data.json
+
+Please note that nowadays this only works if both URLs are on the same site or if the server that contains the data file allows all origins:
+
+Access-Control-Allow-Origin: *
 
 ## The "tree" object
 
@@ -356,6 +365,10 @@ The first table here contains references to the two tables next to it.
     }
 
 # Log of Changes
+
+    19 Sep 2023
+    -----------
+    - 1.4.2 Started work on alternative ways of importing data files (<dmwhisper url>?datafile=<datafile url>).
 
     18 Sep 2023
     -----------

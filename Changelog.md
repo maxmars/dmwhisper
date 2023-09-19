@@ -1,6 +1,10 @@
 # Changelog Template progetto DM Whisper
 
 
+    19 Sep 2023
+    -----------
+    - 1.4.2 Started work on alternative ways of importing data files (<dmwhisper url>?datafile=<datafile url>).
+
     18 Sep 2023
     -----------
     - 1.4.1 Fixed ckeditor theme sync, added ckeditor custom build zip for reference.
