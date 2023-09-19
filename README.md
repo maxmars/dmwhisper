@@ -366,6 +366,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    20 Sep 2023
+    -----------
+    - 1.5.0 Import / Export of json data files; import a data file loding the webapp via <dmwhisper url>?datafile=<datafile url>.
+
     19 Sep 2023
     -----------
     - 1.4.3 Continued work on import/export of data files.

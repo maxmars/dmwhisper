@@ -100,7 +100,8 @@ i18n
           "See the product home page for information about the content JSON format.": "See the product home page for information about the content JSON format.",
           "Clean": "Clean",
           "Download content as JSON": "Download content as JSON",
-          "Upload JSON file": "Upload JSON file"
+          "Upload JSON file": "Upload JSON file",
+          "Tap to select a JSON file to import": "Tap to select a JSON file to import",
         }
       },
       it: {
@@ -186,7 +187,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Consulta la pagina del prodotto per informazioni sul formato JSON dei contenuti.",
           "Clean": "Pulisci",
           "Download content as JSON": "Scarica contenuto come JSON",
-          "Upload JSON file": "Carica file JSON"
+          "Upload JSON file": "Carica file JSON",
+          "Tap to select a JSON file to import": "Tocca per selezionare un file JSON da importare",
         }
       },
       es: {
@@ -271,7 +273,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Consulte la página de inicio del producto para obtener información sobre el formato JSON del contenido.",
           "Clean": "Limpiar",
           "Download content as JSON": "Descargar contenido como JSON",
-          "Upload JSON file": "Subir archivo JSON"
+          "Upload JSON file": "Subir archivo JSON",
+          "Tap to select a JSON file to import": "Toque para seleccionar un archivo JSON para importar",
         },
       },
       fr: {
@@ -356,7 +359,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Consultez la page d'accueil du produit pour obtenir des informations sur le format JSON du contenu.",
           "Clean": "Nettoyer",
           "Download content as JSON": "Télécharger le contenu au format JSON",
-          "Upload JSON file": "Télécharger un fichier JSON"
+          "Upload JSON file": "Télécharger un fichier JSON",
+          "Tap to select a JSON file to import": "Appuyez pour sélectionner un fichier JSON à importer",
         },
       },
       de: {
@@ -441,7 +445,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Weitere Informationen zum JSON-Format des Inhalts finden Sie auf der Homepage des Produkts.",
           "Clean": "Sauber",
           "Download content as JSON": "Inhalt als JSON herunterladen",
-          "Upload JSON file": "JSON-Datei hochladen"
+          "Upload JSON file": "JSON-Datei hochladen",
+          "Tap to select a JSON file to import": "Tippen Sie hier, um eine JSON-Datei zum Importieren auszuwählen",
         }
       },
       pt: {
@@ -526,7 +531,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Consulte a página inicial do produto para obter informações sobre o formato JSON do conteúdo.",
           "Clean": "Limpar",
           "Download content as JSON": "Baixar conteúdo como JSON",
-          "Upload JSON file": "Carregar arquivo JSON"
+          "Upload JSON file": "Carregar arquivo JSON",
+          "Tap to select a JSON file to import": "Toque para selecionar um arquivo JSON para importar",
         }
       },
       gr: {
@@ -611,7 +617,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Δείτε την αρχική σελίδα του προϊόντος για πληροφορίες σχετικά με τη μορφή JSON περιεχομένου.",
           "Clean": "Καθαρός",
           "Download content as JSON": "Λήψη περιεχομένου ως JSON",
-          "Upload JSON file": "Μεταφόρτωση αρχείου JSON"
+          "Upload JSON file": "Μεταφόρτωση αρχείου JSON",
+          "Tap to select a JSON file to import": "Πατήστε για να επιλέξετε ένα αρχείο JSON για εισαγωγή",
         }
       },
       se: {
@@ -696,7 +703,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Se produkthemsidan för information om innehåll JSON-format.",
           "Clean": "Ren",
           "Download content as JSON": "Ladda ner innehåll som JSON",
-          "Upload JSON file": "Ladda upp JSON-fil"
+          "Upload JSON file": "Ladda upp JSON-fil",
+          "Tap to select a JSON file to import": "Tryck för att välja en JSON-fil att importera",
         }
       },
       uk: {
@@ -781,7 +789,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Див. Домашню сторінку продукту для отримання інформації про формат JSON вмісту.",
           "Clean": "Чистий",
           "Download content as JSON": "Завантажити вміст як JSON",
-          "Upload JSON file": "Завантажити файл JSON"
+          "Upload JSON file": "Завантажити файл JSON",
+          "Tap to select a JSON file to import": "Натисніть, щоб вибрати файл JSON для імпорту",
         }
       },
       he: {
@@ -866,7 +875,8 @@ i18n
           "See the product home page for information about the content JSON format.": "ראה את דף הבית של המוצר למידע על פורמט JSON של התוכן.",
           "Clean": "נָקִי",
           "Download content as JSON": "הורד תוכן כ- JSON",
-          "Upload JSON file": "העלה קובץ JSON"
+          "Upload JSON file": "העלה קובץ JSON",
+          "Tap to select a JSON file to import": "הקש כדי לבחור קובץ JSON לייבוא",
         }
       },
       no: {
@@ -951,7 +961,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Se produkthjemmesiden for informasjon om innhold JSON-format.",
           "Clean": "Ren",
           "Download content as JSON": "Last ned innhold som JSON",
-          "Upload JSON file": "Last opp JSON-fil"
+          "Upload JSON file": "Last opp JSON-fil",
+          "Tap to select a JSON file to import": "Trykk for å velge en JSON-fil for import",
         }
       },
       nl: {
@@ -1036,7 +1047,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Zie de producthomepage voor informatie over de JSON-indeling van de inhoud.",
           "Clean": "Schoon",
           "Download content as JSON": "Download inhoud als JSON",
-          "Upload JSON file": "Upload JSON-bestand"
+          "Upload JSON file": "Upload JSON-bestand",
+          "Tap to select a JSON file to import": "Tik om een JSON-bestand te selecteren om te importeren",
         }
       },
       pl: {
@@ -1121,7 +1133,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Zobacz stronę główną produktu, aby uzyskać informacje na temat formatu JSON zawartości.",
           "Clean": "Czysty",
           "Download content as JSON": "Pobierz zawartość jako JSON",
-          "Upload JSON file": "Prześlij plik JSON"
+          "Upload JSON file": "Prześlij plik JSON",
+          "Tap to select a JSON file to import": "Dotknij, aby wybrać plik JSON do zaimportowania",
         }
       },
       hu: {
@@ -1206,7 +1219,8 @@ i18n
           "See the product home page for information about the content JSON format.": "A termék kezdőlapján található információk a tartalom JSON formátumáról.",
           "Clean": "Tiszta",
           "Download content as JSON": "Tartalom letöltése JSON-ként",
-          "Upload JSON file": "JSON fájl feltöltése"
+          "Upload JSON file": "JSON fájl feltöltése",
+          "Tap to select a JSON file to import": "Koppintson a JSON fájl kiválasztásához importáláshoz",
         }
       },
       bg: {
@@ -1291,7 +1305,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Вижте началната страница на продукта за информация относно формата JSON на съдържанието.",
           "Clean": "Чист",
           "Download content as JSON": "Изтеглете съдържанието като JSON",
-          "Upload JSON file": "Качване на JSON файл"
+          "Upload JSON file": "Качване на JSON файл",
+          "Tap to select a JSON file to import": "Докоснете, за да изберете JSON файл за импортиране",
         }
       },
       fi: {
@@ -1376,7 +1391,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Katso tuotteen kotisivu sisällön JSON-muodon tiedoista.",
           "Clean": "Puhdas",
           "Download content as JSON": "Lataa sisältö JSON-muodossa",
-          "Upload JSON file": "Lataa JSON-tiedosto"
+          "Upload JSON file": "Lataa JSON-tiedosto",
+          "Tap to select a JSON file to import": "Napauta valitaksesi tuotavan JSON-tiedoston",
         }
       },
       da: {
@@ -1461,7 +1477,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Se produktets hjemmeside for information om indhold JSON-format.",
           "Clean": "Ren",   
           "Download content as JSON": "Download indhold som JSON",
-          "Upload JSON file": "Upload JSON-fil"       
+          "Upload JSON file": "Upload JSON-fil",
+          "Tap to select a JSON file to import": "Tryk for at vælge en JSON-fil til import",  
         }
       },
       ro: {
@@ -1546,7 +1563,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Consultați pagina de pornire a produsului pentru informații despre formatul JSON al conținutului.",
           "Clean": "Curat",
           "Download content as JSON": "Descărcați conținutul ca JSON",
-          "Upload JSON file": "Încărcați fișierul JSON"
+          "Upload JSON file": "Încărcați fișierul JSON",
+          "Tap to select a JSON file to import": "Atingeți pentru a selecta un fișier JSON pentru import",
         }
       },
       cs: {
@@ -1631,7 +1649,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Informace o formátu JSON obsahu naleznete na domovské stránce produktu.",
           "Clean": "Čistý",
           "Download content as JSON": "Stáhnout obsah jako JSON",
-          "Upload JSON file": "Nahrát soubor JSON"
+          "Upload JSON file": "Nahrát soubor JSON",
+          "Tap to select a JSON file to import": "Klepnutím vyberte soubor JSON k importu",
         }
       },
       is: {
@@ -1716,7 +1735,8 @@ i18n
           "See the product home page for information about the content JSON format.": "Sjá heimasíðu vörunnar fyrir upplýsingar um efni JSON snið.",
           "Clean": "Hreinsa",
           "Download content as JSON": "Sækja efni sem JSON",
-          "Upload JSON file": "Hlaða upp JSON skrá"
+          "Upload JSON file": "Hlaða upp JSON skrá",
+          "Tap to select a JSON file to import": "Smelltu til að velja JSON skrá til að flytja inn",
         }
       }
     }

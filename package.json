@@ -1,6 +1,6 @@
 {
   "name": "dmwhisper",
-  "version": "1.4.3",
+  "version": "1.5.0",
   "homepage": "/dmwhisper",
   "private": true,
   "dependencies": {
@@ -26,6 +26,7 @@
     "i18next": "^23.5.1",
     "i18next-browser-languagedetector": "^7.1.0",
     "lodash": "^4.17.21",
+    "mui-file-input": "^3.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^13.2.2",

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { getContent, getContentName } from '../../store/slices/content';
+import { getContent, setContent, getContentName, initialState } from '../../store/slices/content';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import SelectedContent from './SelectedContent';
@@ -9,6 +9,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import HomeIcon from '@mui/icons-material/Home';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import './style.css'
 
 const ContentTree = () => {
@@ -19,10 +20,15 @@ const ContentTree = () => {
     const tree = useSelector((st) => st.content).tree;
     const content = getContent(tree, path);
     const contentName = getContentName(tree, path);
+    const dispatch = useDispatch();
 
     const columns = [
         { field: 'label', headerName: t('Content'), flex: 1 },
     ];
+
+    if (!content) {
+        dispatch(setContent(initialState));
+    }
 
     const backOneLevel = () => {
         // If there's a dot in the path, remove the last part

@@ -10,6 +10,7 @@ import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import DownloadIcon from '@mui/icons-material/Download';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
+import ImportJsonFile from './ImportJsonFile';
 import MenuEdit from './MenuEdit';
 import { useTranslation } from 'react-i18next';
 
@@ -63,7 +64,7 @@ const AuthoringMenu = () => {
           </Grid>
           <Grid item xs={12}>&nbsp;</Grid>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-            <Button startIcon={<FileUploadIcon />} variant="contained" color="primary">{t("Upload JSON file")}</Button>
+            <Button startIcon={<FileUploadIcon />} onClick={() => setPageMode("importJson")} variant="contained" color="primary">{t("Upload JSON file")}</Button>
           </Grid>
         </Grid>
       );
@@ -73,6 +74,9 @@ const AuthoringMenu = () => {
 
     case 'tablesedit':
       return <TablesEdit returnToMenu={returnToMenu} />;
+
+    case 'importJson':
+      return <ImportJsonFile returnToMenu={returnToMenu} />;
 
     case 'menuedit':
     default:
