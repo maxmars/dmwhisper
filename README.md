@@ -74,7 +74,7 @@ It should be created as a JSON file, following this schema:
         ]
     }
 
-## Import JSON test (pass it on the webapp URL)
+## Import JSON text (pass it on the webapp URL)
 If you're using the webapp version of DMWhisper, you can also pass the JSON content as a parameter in the URL, like this:
 
     https://marsiglietti.it/dmwhisper/?datafile=https://marsiglietti.it/dmwhisper/data.json
