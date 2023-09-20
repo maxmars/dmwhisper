@@ -3,6 +3,7 @@
 
     20 Sep 2023
     -----------
+    - 1.5.2 Improved menu layout.
     - 1.5.1 Additional warning messages and hints.
     - 1.5.0 Import / Export of json data files; import a data file loding the webapp via <dmwhisper url>?datafile=<datafile url>.
 

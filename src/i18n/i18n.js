@@ -104,6 +104,9 @@ i18n
           "Tap to select a JSON file to import": "Tap to select a JSON file to import",
           "Warning: ALL existing content will be overwritten!": "Warning: ALL existing content will be overwritten!",
           "Tip: importing an empty content will reset current content to the initial values.": "Tip: importing an empty content will reset current content to the initial values.",
+          "Import data": "Import data",
+          "Export data": "Export data",
+          "Edit content": "Edit content",
         }
       },
       it: {
@@ -193,6 +196,9 @@ i18n
           "Tap to select a JSON file to import": "Tocca per selezionare un file JSON da importare",
           "Warning: ALL existing content will be overwritten!": "Attenzione: TUTTI i contenuti esistenti verranno sovrascritti!",
           "Tip: importing an empty content will reset current content to the initial values.": "Suggerimento: l'importazione di un contenuto vuoto ripristinerà i contenuti correnti ai valori iniziali.",
+          "Import data": "Importa dati",
+          "Export data": "Esporta dati",
+          "Edit content": "Modifica contenuto",
         }
       },
       es: {
@@ -281,6 +287,9 @@ i18n
           "Tap to select a JSON file to import": "Toque para seleccionar un archivo JSON para importar",
           "Warning: ALL existing content will be overwritten!": "¡Advertencia: TODO el contenido existente se sobrescribirá!",
           "Tip: importing an empty content will reset current content to the initial values.": "Consejo: importar un contenido vacío restablecerá el contenido actual a los valores iniciales.",
+          "Import data": "Importar datos",
+          "Export data": "Exportar datos",
+          "Edit content": "Editar contenido",
         },
       },
       fr: {
@@ -369,6 +378,9 @@ i18n
           "Tap to select a JSON file to import": "Appuyez pour sélectionner un fichier JSON à importer",
           "Warning: ALL existing content will be overwritten!": "Attention: TOUS les contenus existants seront écrasés!",
           "Tip: importing an empty content will reset current content to the initial values.": "Astuce: l'importation d'un contenu vide réinitialisera le contenu actuel aux valeurs initiales.",
+          "Import data": "Importer des données",
+          "Export data": "Exporter des données",
+          "Edit content": "Modifier le contenu",
         },
       },
       de: {
@@ -457,6 +469,9 @@ i18n
           "Tap to select a JSON file to import": "Tippen Sie hier, um eine JSON-Datei zum Importieren auszuwählen",
           "Warning: ALL existing content will be overwritten!": "Warnung: ALLE vorhandenen Inhalte werden überschrieben!",
           "Tip: importing an empty content will reset current content to the initial values.": "Tipp: Der Import eines leeren Inhalts setzt den aktuellen Inhalt auf die Anfangswerte zurück.",
+          "Import data": "Daten importieren",
+          "Export data": "Daten exportieren",
+          "Edit content": "Inhalt bearbeiten",
         }
       },
       pt: {
@@ -545,6 +560,9 @@ i18n
           "Tap to select a JSON file to import": "Toque para selecionar um arquivo JSON para importar",
           "Warning: ALL existing content will be overwritten!": "Aviso: TODO o conteúdo existente será sobrescrito!",
           "Tip: importing an empty content will reset current content to the initial values.": "Dica: a importação de um conteúdo vazio redefinirá o conteúdo atual para os valores iniciais.",
+          "Import data": "Importar dados",
+          "Export data": "Exportar dados",
+          "Edit content": "Editar conteúdo",
         }
       },
       gr: {
@@ -633,6 +651,9 @@ i18n
           "Tap to select a JSON file to import": "Πατήστε για να επιλέξετε ένα αρχείο JSON για εισαγωγή",
           "Warning: ALL existing content will be overwritten!": "Προειδοποίηση: ΌΛΟ το υπάρχον περιεχόμενο θα αντικατασταθεί!",
           "Tip: importing an empty content will reset current content to the initial values.": "Συμβουλή: η εισαγωγή ενός κενού περιεχομένου θα επαναφέρει το τρέχον περιεχόμενο στις αρχικές τιμές.",
+          "Import data": "Εισαγωγή δεδομένων",
+          "Export data": "Εξαγωγή δεδομένων",
+          "Edit content": "Επεξεργασία περιεχομένου",          
         }
       },
       se: {
@@ -721,6 +742,9 @@ i18n
           "Tap to select a JSON file to import": "Tryck för att välja en JSON-fil att importera",
           "Warning: ALL existing content will be overwritten!": "Varning: ALLT befintligt innehåll kommer att skrivas över!",
           "Tip: importing an empty content will reset current content to the initial values.": "Tips: importera ett tomt innehåll återställer aktuellt innehåll till de ursprungliga värdena.",
+          "Import data": "Importera data",
+          "Export data": "Exportera data",
+          "Edit content": "Redigera innehåll",
         }
       },
       uk: {
@@ -809,6 +833,9 @@ i18n
           "Tap to select a JSON file to import": "Натисніть, щоб вибрати файл JSON для імпорту",
           "Warning: ALL existing content will be overwritten!": "Увага: ВСІ існуючі вміст буде перезаписано!",
           "Tip: importing an empty content will reset current content to the initial values.": "Порада: імпорт порожнього вмісту скине поточний вміст на початкові значення.",
+          "Import data": "Імпорт даних",
+          "Export data": "Експорт даних",
+          "Edit content": "Редагувати вміст",
         }
       },
       he: {
@@ -897,6 +924,9 @@ i18n
           "Tap to select a JSON file to import": "הקש כדי לבחור קובץ JSON לייבוא",
           "Warning: ALL existing content will be overwritten!": "אזהרה: כל התוכן הקיים יימחק!",
           "Tip: importing an empty content will reset current content to the initial values.": "טיפ: ייבוא תוכן ריק יאפס את התוכן הנוכחי לערכים ההתחלתיים.",
+          "Import data": "ייבוא נתונים",
+          "Export data": "ייצוא נתונים",
+          "Edit content": "ערוך תוכן",
         }
       },
       no: {
@@ -985,6 +1015,9 @@ i18n
           "Tap to select a JSON file to import": "Trykk for å velge en JSON-fil for import",
           "Warning: ALL existing content will be overwritten!": "Advarsel: ALT eksisterende innhold vil bli overskrevet!",
           "Tip: importing an empty content will reset current content to the initial values.": "Tips: Import av tomt innhold vil tilbakestille gjeldende innhold til de opprinnelige verdiene.",
+          "Import data": "Importer data",
+          "Export data": "Eksporter data",
+          "Edit content": "Rediger innhold",
         }
       },
       nl: {
@@ -1073,6 +1106,9 @@ i18n
           "Tap to select a JSON file to import": "Tik om een JSON-bestand te selecteren om te importeren",
           "Warning: ALL existing content will be overwritten!": "Waarschuwing: ALLE bestaande inhoud wordt overschreven!",
           "Tip: importing an empty content will reset current content to the initial values.": "Tip: het importeren van een lege inhoud zal de huidige inhoud resetten naar de oorspronkelijke waarden.",
+          "Import data": "Importeer gegevens",
+          "Export data": "Exporteer gegevens",
+          "Edit content": "Bewerk inhoud",
         }
       },
       pl: {
@@ -1161,6 +1197,9 @@ i18n
           "Tap to select a JSON file to import": "Dotknij, aby wybrać plik JSON do zaimportowania",
           "Warning: ALL existing content will be overwritten!": "Ostrzeżenie: WSZYSTKIE istniejące treści zostaną nadpisane!",
           "Tip: importing an empty content will reset current content to the initial values.": "Wskazówka: importowanie pustej zawartości zresetuje bieżącą zawartość do wartości początkowych.",
+          "Import data": "Importuj dane",
+          "Export data": "Eksportuj dane",
+          "Edit content": "Edytuj zawartość",
         }
       },
       hu: {
@@ -1249,6 +1288,9 @@ i18n
           "Tap to select a JSON file to import": "Koppintson a JSON fájl kiválasztásához importáláshoz",
           "Warning: ALL existing content will be overwritten!": "Figyelem: MINDEN meglévő tartalom felül lesz írva!",
           "Tip: importing an empty content will reset current content to the initial values.": "Tipp: ha üres tartalmat importál, a jelenlegi tartalom visszaáll az eredeti értékekre.",
+          "Import data": "Adatok importálása",
+          "Export data": "Adatok exportálása",
+          "Edit content": "Tartalom szerkesztése",
         }
       },
       bg: {
@@ -1337,6 +1379,9 @@ i18n
           "Tap to select a JSON file to import": "Докоснете, за да изберете JSON файл за импортиране",
           "Warning: ALL existing content will be overwritten!": "Внимание: ВСИЧКО съществуващо съдържание ще бъде презаписано!",
           "Tip: importing an empty content will reset current content to the initial values.": "Съвет: импортирането на празно съдържание ще нулира текущото съдържание до първоначалните стойности.",
+          "Import data": "Импортиране на данни",
+          "Export data": "Експортиране на данни",
+          "Edit content": "Редактиране на съдържание",
         }
       },
       fi: {
@@ -1425,6 +1470,9 @@ i18n
           "Tap to select a JSON file to import": "Napauta valitaksesi tuotavan JSON-tiedoston",
           "Warning: ALL existing content will be overwritten!": "Varoitus: KAIKKI olemassa oleva sisältö kirjoitetaan yli!",
           "Tip: importing an empty content will reset current content to the initial values.": "Vihje: tyhjän sisällön tuonti nollaa nykyisen sisällön alkuperäisiin arvoihin.",
+          "Import data": "Tuo tiedot",
+          "Export data": "Vie tiedot",
+          "Edit content": "Muokkaa sisältöä",
         }
       },
       da: {
@@ -1513,6 +1561,9 @@ i18n
           "Tap to select a JSON file to import": "Tryk for at vælge en JSON-fil til import",  
           "Warning: ALL existing content will be overwritten!": "Advarsel: ALT eksisterende indhold vil blive overskrevet!",
           "Tip: importing an empty content will reset current content to the initial values.": "Tip: import af tomt indhold nulstiller det aktuelle indhold til de oprindelige værdier.",
+          "Import data": "Importer data",
+          "Export data": "Eksporter data",
+          "Edit content": "Rediger indhold",
         }
       },
       ro: {
@@ -1601,6 +1652,9 @@ i18n
           "Tap to select a JSON file to import": "Atingeți pentru a selecta un fișier JSON pentru import",
           "Warning: ALL existing content will be overwritten!": "Atenție: TOATE conținuturile existente vor fi suprascrise!",
           "Tip: importing an empty content will reset current content to the initial values.": "Sfat: importul unui conținut gol va reseta conținutul curent la valorile inițiale.",
+          "Import data": "Importați date",
+          "Export data": "Exportați date",
+          "Edit content": "Editați conținutul",
         }
       },
       cs: {
@@ -1689,6 +1743,9 @@ i18n
           "Tap to select a JSON file to import": "Klepnutím vyberte soubor JSON k importu",
           "Warning: ALL existing content will be overwritten!": "Varování: VŠECHEN stávající obsah bude přepsán!",
           "Tip: importing an empty content will reset current content to the initial values.": "Tip: import prázdného obsahu obnoví aktuální obsah na počáteční hodnoty.",
+          "Import data": "Importovat data",
+          "Export data": "Exportovat data",
+          "Edit content": "Upravit obsah",
         }
       },
       is: {
@@ -1777,6 +1834,9 @@ i18n
           "Tap to select a JSON file to import": "Smelltu til að velja JSON skrá til að flytja inn",
           "Warning: ALL existing content will be overwritten!": "Viðvörun: ALLT núverandi efni verður yfirskrifað!",
           "Tip: importing an empty content will reset current content to the initial values.": "Ábending: innflutningur tóms efni mun endurstilla núverandi efni til upphaflegra gilda.",
+          "Import data": "Flytja inn gögn",
+          "Export data": "Flytja út gögn",
+          "Edit content": "Breyta efni",
         }
       }
     }

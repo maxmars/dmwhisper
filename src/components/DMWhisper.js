@@ -3,6 +3,8 @@ import { useState } from 'react';
 import ResultsList from './results/SavedRolls';
 import ContentTree from './contenttree/ContentTree';
 import AuthoringMenu from './authoring/AuthoringMenu';
+import InputMenu from './authoring/InputMenu';
+import OutputMenu from './authoring/OutputMenu';
 import { useSelector } from 'react-redux';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -15,6 +17,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setContent, initialState } from '../store/slices/content';
 import { useTranslation } from 'react-i18next';
+import InputIcon from '@mui/icons-material/Input';
+import OutputIcon from '@mui/icons-material/Output';
 
 const DMWhisper = () => {
 
@@ -82,16 +86,20 @@ const DMWhisper = () => {
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', height: '12vh' }}>
           <Tabs value={tab} onChange={handleChange} variant="scrollable">
             <Tab icon={<InfoIcon />} label={t("Info")} iconPosition="start" />
-            <Tab icon={<DataObjectIcon />} label={t("Edit")} iconPosition="start" />
+            <Tab icon={<InputIcon />} label={t("Import data")} iconPosition="start" />
+            <Tab icon={<OutputIcon />} label={t("Export data")} iconPosition="start" />
+            <Tab icon={<DataObjectIcon />} label={t("Edit content")} iconPosition="start" />
             <Tab icon={<TableChartIcon />} label={t("Browse")} iconPosition="start" />
             <Tab icon={<BookmarksIcon />} label={t("Saved") + " (" + throws.sequence.length + ")"} iconPosition="start" />
           </Tabs>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'scroll', height: '88vh', width: '100%' }}>
           {tab === 0 && <Info />}
-          {tab === 1 && <AuthoringMenu />}
-          {tab === 2 && <ContentTree />}
-          {tab === 3 && <ResultsList />}
+          {tab === 1 && <InputMenu />}
+          {tab === 2 && <OutputMenu />}
+          {tab === 3 && <AuthoringMenu />}
+          {tab === 4 && <ContentTree />}
+          {tab === 5 && <ResultsList />}
         </div>
       </ThemeProvider>
 
