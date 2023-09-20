@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Grid, Button, TextField, Typography } from '@mui/material';
+import { Grid, Button, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { setContent, initialState } from '../../store/slices/content';
+import { setContent } from '../../store/slices/content';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTranslation } from 'react-i18next';
 import { MuiFileInput } from 'mui-file-input'
@@ -14,28 +14,11 @@ const ImportJsonFile = (props) => {
   const [jsonFile, setJsonFile] = React.useState(null)
 
   const handleChange = async (newValue) => {
+    setJsonFile(newValue);
     const jsonText = await newValue.text();
     dispatch(setContent(JSON.parse(jsonText)));
     props.returnToMenu();
-    // setJsonFile(newValue)
   }
-
-  // const setTables = () => {
-  //   const jsonString = document.getElementById('new-tables').value;
-
-  //   if (jsonString === '') {
-  //     dispatch(setContent(initialState));
-  //     return;
-  //   }
-
-  //   const newTables = JSON.parse(jsonString);
-
-  //   if (newTables.tree && newTables.tables) {
-  //     dispatch(setContent(newTables));
-  //   }
-
-  //   document.getElementById('new-tables').value = '';
-  // };
 
   return (
     <Grid container >
@@ -48,6 +31,10 @@ const ImportJsonFile = (props) => {
       </Grid>
       <Grid item xs={12}>
         <MuiFileInput style={{width: '100%'}} getInputText={(value) => value ? value.name : t('Tap to select a file to import') } inputProps={{ accept: '.json' }} value={jsonFile} onChange={handleChange} />
+      </Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>
+        <Typography>{t("Warning: ALL existing content will be overwritten!")}</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
     </Grid>

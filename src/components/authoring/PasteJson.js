@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { setContent, initialState } from '../../store/slices/content';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTranslation } from 'react-i18next';
+import Typography from '@mui/material/Typography';
 
 const PasteJson = (props) => {
 
@@ -43,7 +44,15 @@ const PasteJson = (props) => {
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>
+        <Typography>{t("Warning: ALL existing content will be overwritten!")}</Typography>
+      </Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>
         <Button onClick={setTables} style={{ width: '100%' }} variant="contained" color="primary">{t("Parse content")}</Button>
+      </Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>
+        <Typography>{t("Tip: importing an empty content will reset current content to the initial values.")}</Typography>
       </Grid>
     </Grid>
   );
