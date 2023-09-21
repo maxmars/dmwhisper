@@ -39,7 +39,8 @@ const DMWhisper = () => {
     }));
   });
 
-  const [tab, setTab] = useState(2);
+  // By default, user is on the "Browse content" tab
+  const [tab, setTab] = useState(4);
   const throws = useSelector((st) => st.throws);
 
   const handleChange = (event, newValue) => {
@@ -61,7 +62,7 @@ const DMWhisper = () => {
 
           if (datafile && datafile.ok) {
             const datafileJsonString = await datafile.text();
-            //console.log(datafileJsonString);
+            
             if (dispatch) {
               try {
                 dispatch(setContent(JSON.parse(datafileJsonString)));
