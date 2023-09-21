@@ -63,7 +63,7 @@ const SelectedContent = (props) => {
         sx={{
           marginLeft: '20px',
           marginRight: '20px',
-          height: '79%',
+          height: '75%',
           width: '97vw',
           overflowY: 'scroll',
           overflowX: 'hidden',
@@ -75,19 +75,21 @@ const SelectedContent = (props) => {
         <Grid item xs={12}>
           { getProperWidget() }
         </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
       </Grid>
       <Grid
         container
         sx={{
           marginLeft: '20px',
           marginRight: '20px',
-          minHeight: '10%',
-          height: '10%',
+          minHeight: '14%',
+          height: '14%',
           width: '97vw',
           overflowY: 'hidden',
           overflowX: 'hidden',
         }}
       >
+        <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
           <Button sx={{ width: '100%' }} variant="outlined" onClick={() => props.clearSelectedContent()}>{t("Back")}</Button>
         </Grid>

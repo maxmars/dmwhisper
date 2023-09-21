@@ -27,6 +27,7 @@ const Table = (props) => {
   const [autoUpdate, setAutoUpdate] = useState(false);
   const dispatch = useDispatch();
   const theme = useTheme();
+  const multipleTables = props.content.data.table.indexOf(" ") > -1;
 
   const saveRoll = () => {
     dispatch(addThrow({ result: currentThrow, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
@@ -92,7 +93,7 @@ const Table = (props) => {
                 <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
               </div>
               <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-                <Button onClick={() => setMode("consult")} startIcon={<MenuBookIcon />} variant='contained'>{t("Browse")}</Button>
+                <Button disabled={multipleTables} onClick={() => setMode("consult")} startIcon={<MenuBookIcon />} variant='contained'>{t("Browse")}</Button>
                 {
                   autoUpdate ?
                     <Button onClick={() => setAutoUpdate(false)} startIcon={<UpdateDisabledIcon />} variant='contained'>{t("Stop auto update")}</Button>
