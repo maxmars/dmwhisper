@@ -366,6 +366,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    22 Sep 2023
+    -----------
+    - 1.6.0 Menus can now be rearranged. Small UI improvements.
+
     20 Sep 2023
     -----------
     - 1.5.2 Improved menu layout.

@@ -252,6 +252,7 @@ export default function TableEdit(props) {
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
           <DataGrid
+            sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
             onRowClick={(params) => editRNGValues(params.row.id)}
             rows={rows}
             columns={columns}

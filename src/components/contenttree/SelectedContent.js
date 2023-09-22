@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Information from '../contentwidgets/Information';
 import Table from '../contentwidgets/Table';
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTranslation } from 'react-i18next';
 
 
@@ -33,29 +35,21 @@ const SelectedContent = (props) => {
         sx={{
           marginLeft: '20px',
           marginRight: '20px',
-          height: '10%',
+          height: '4em',
           width: '97vw',
           overflowY: 'hidden',
           overflowX: 'hidden',
-        }}
+          backgroundColor: '#1976d2',
+          color: 'white',
+          display: 'flex',
+          alignItems: 'center',
+      }}
       >
-        <Grid
-          item
-          xs={12}
-          sx={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingTop: '15px',
-            paddingBottom: '20px',
-            backgroundColor: '#1976d2',
-            color: 'white',
-            width: '100%',
-          }}
-        >
-          <Typography variant="body">
-            {props.selectedContent.label}
-          </Typography>
+        <Grid item xs={1}>
+          <IconButton style={{ marginRight: "7px" }} variant="contained" color="primary" onClick={props.clearSelectedContent}><ArrowBackIosNewIcon /></IconButton>
+        </Grid>
+        <Grid item xs={11}>
+          <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{props.selectedContent.label}</Typography>
         </Grid>
       </Grid>
       <Grid
@@ -73,7 +67,7 @@ const SelectedContent = (props) => {
         }}
       >
         <Grid item xs={12}>
-          { getProperWidget() }
+          {getProperWidget()}
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
       </Grid>

@@ -10,11 +10,13 @@ import HomeIcon from '@mui/icons-material/Home';
 import Typography from '@mui/material/Typography';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import useTheme from '@mui/private-theming/useTheme';
 import './style.css'
 
 const ContentTree = () => {
 
     const { t } = useTranslation();
+    const theme = useTheme();
     const [path, setPath] = useState("");
     const [selectedContent, setSelectedContent] = useState(null);
     const tree = useSelector((st) => st.content).tree;
@@ -68,6 +70,7 @@ const ContentTree = () => {
                         <Typography variant="h6" component="div" style={{ width: '60%', textAlign: 'center' }}>{contentName}</Typography>
                     </div>
                     <DataGrid
+                        sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
                         rows={content}
                         columns={columns}
                         height="100%"

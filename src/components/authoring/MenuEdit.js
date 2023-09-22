@@ -16,6 +16,8 @@ import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import DeleteIcon from '@mui/icons-material/Delete';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
@@ -96,6 +98,20 @@ const MenuEdit = (props) => {
             type: 'actions',
             width: window.innerWidth * 0.15,
             getActions: (params) => [
+                <GridActionsCellItem
+                    icon={<ArrowUpwardIcon />}
+                    label={t("Move up")}
+                    onClick={() => {
+                        raiseMenu(params.id);
+                    }
+                    } />,
+                    <GridActionsCellItem
+                    icon={<ArrowDownwardIcon />}
+                    label={t("Move down")}
+                    onClick={() => {
+                        lowerMenu(params.id);
+                    }
+                    } />,
                 <GridActionsCellItem
                     icon={<DeleteIcon />}
                     label={t("Delete")}
@@ -221,6 +237,40 @@ const MenuEdit = (props) => {
         setMenuToDelete(null);
     }
 
+    const raiseMenu = (menuToRaise) => {
+
+        const menuToRaiseIndex = content.findIndex((item) => item.id === menuToRaise);
+
+        if (menuToRaiseIndex === 0) {
+            return;
+        }
+
+        const menuToRaiseItem = content[menuToRaiseIndex];
+        const swappedContent = content.filter((item) => item.id !== menuToRaise);
+        swappedContent.splice(menuToRaiseIndex - 1, 0, menuToRaiseItem);
+        dispatch(updateContent({
+            updatedContent: swappedContent,
+            path: path,
+        }));
+    }
+
+    const lowerMenu = (menuToLower) => {
+
+        const menuToLowerIndex = content.findIndex((item) => item.id === menuToLower);
+
+        if (menuToLowerIndex === content.length - 1) {
+            return;
+        }
+
+        const menuToLowerItem = content[menuToLowerIndex];
+        const swappedContent = content.filter((item) => item.id !== menuToLower);
+        swappedContent.splice(menuToLowerIndex + 1, 0, menuToLowerItem);
+        dispatch(updateContent({
+            updatedContent: swappedContent,
+            path: path,
+        }));
+    }
+    
     if (menuToDelete) {
         return <Grid container sx={{ height: "100%" }} >
             <Grid item xs={12}>&nbsp;</Grid>
@@ -409,6 +459,7 @@ const MenuEdit = (props) => {
                         <Grid item xs={12}>&nbsp;</Grid>
                         <Grid item xs={12} style={{ height: (content ? (content.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>
                             <DataGrid
+                                sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
                                 hideFooter
                                 rows={content}
                                 columns={columns}

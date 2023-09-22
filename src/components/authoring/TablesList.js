@@ -94,6 +94,7 @@ export default function TablesList(props) {
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
           <DataGrid
+            sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
             onRowClick={(params, event, details) => props.selectTable(params.row.id)}
             rows={rows}
             columns={columns}
