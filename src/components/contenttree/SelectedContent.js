@@ -46,7 +46,9 @@ const SelectedContent = (props) => {
       }}
       >
         <Grid item xs={1}>
-          <IconButton style={{ marginRight: "7px" }} variant="contained" color="primary" onClick={props.clearSelectedContent}><ArrowBackIosNewIcon /></IconButton>
+          <IconButton style={{ marginRight: "7px" }} variant="contained" onClick={props.clearSelectedContent}>
+            <ArrowBackIosNewIcon sx={{ 'color': 'white !important' }} />
+          </IconButton>
         </Grid>
         <Grid item xs={11}>
           <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{props.selectedContent.label}</Typography>

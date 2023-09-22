@@ -96,7 +96,6 @@ const MenuEdit = (props) => {
         {
             field: 'actions',
             type: 'actions',
-            width: window.innerWidth * 0.15,
             getActions: (params) => [
                 <GridActionsCellItem
                     icon={<ArrowUpwardIcon />}
