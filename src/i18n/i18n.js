@@ -107,6 +107,14 @@ i18n
           "Import data": "Import data",
           "Export data": "Export data",
           "Edit content": "Edit content",
+          "Ok": "Ok",
+          "No content to paste": "No content to paste",
+          "Cannot paste in the same menu of the source": "Cannot paste in the same menu of the source",
+          "Cannot cut and paste inside the same content": "Cannot cut and paste inside the same content",
+          "Warning!" : "Warning!",
+          "Cut": "Cut",
+          "Copy": "Copy",
+          "Paste": "Paste"
         }
       },
       it: {
@@ -199,6 +207,14 @@ i18n
           "Import data": "Importa dati",
           "Export data": "Esporta dati",
           "Edit content": "Modifica contenuto",
+          "Ok": "Ok",
+          "No content to paste": "Nessun contenuto da incollare",
+          "Cannot paste in the same menu of the source": "Non puoi incollare nello stesso menu della fonte",
+          "Cannot cut and paste inside the same content": "Non puoi tagliare e incollare nello stesso contenuto",
+          "Warning!" : "Attenzione!",
+          "Cut": "Taglia",
+          "Copy": "Copia",
+          "Paste": "Incolla"
         }
       },
       es: {
@@ -290,6 +306,14 @@ i18n
           "Import data": "Importar datos",
           "Export data": "Exportar datos",
           "Edit content": "Editar contenido",
+          "Ok": "Ok",
+          "No content to paste": "No hay contenido para pegar",
+          "Cannot paste in the same menu of the source": "No se puede pegar en el mismo menú de la fuente",
+          "Cannot cut and paste inside the same content": "No se puede cortar y pegar dentro del mismo contenido",
+          "Warning!" : "¡Advertencia!",
+          "Cut": "Cortar",
+          "Copy": "Copiar",
+          "Paste": "Pegar"
         },
       },
       fr: {
@@ -381,6 +405,14 @@ i18n
           "Import data": "Importer des données",
           "Export data": "Exporter des données",
           "Edit content": "Modifier le contenu",
+          "Ok": "Ok",
+          "No content to paste": "Aucun contenu à coller",
+          "Cannot paste in the same menu of the source": "Impossible de coller dans le même menu de la source",
+          "Cannot cut and paste inside the same content": "Impossible de couper et coller dans le même contenu",
+          "Warning!" : "Attention!",
+          "Cut": "Couper",
+          "Copy": "Copie",
+          "Paste": "Coller"
         },
       },
       de: {
@@ -472,6 +504,14 @@ i18n
           "Import data": "Daten importieren",
           "Export data": "Daten exportieren",
           "Edit content": "Inhalt bearbeiten",
+          "Ok": "Ok",
+          "No content to paste": "Kein Inhalt zum Einfügen",
+          "Cannot paste in the same menu of the source": "Kann nicht im selben Menü der Quelle einfügen",
+          "Cannot cut and paste inside the same content": "Kann nicht im selben Inhalt schneiden und einfügen",
+          "Warning!" : "Warnung!",
+          "Cut": "Schneiden",
+          "Copy": "Kopieren",
+          "Paste": "Einfügen"
         }
       },
       pt: {
@@ -563,6 +603,14 @@ i18n
           "Import data": "Importar dados",
           "Export data": "Exportar dados",
           "Edit content": "Editar conteúdo",
+          "Ok": "Ok",
+          "No content to paste": "Nenhum conteúdo para colar",
+          "Cannot paste in the same menu of the source": "Não é possível colar no mesmo menu da fonte",
+          "Cannot cut and paste inside the same content": "Não é possível cortar e colar dentro do mesmo conteúdo",
+          "Warning!" : "Aviso!",
+          "Cut": "Cortar",
+          "Copy": "Cópia",
+          "Paste": "Colar"
         }
       },
       gr: {
@@ -653,7 +701,15 @@ i18n
           "Tip: importing an empty content will reset current content to the initial values.": "Συμβουλή: η εισαγωγή ενός κενού περιεχομένου θα επαναφέρει το τρέχον περιεχόμενο στις αρχικές τιμές.",
           "Import data": "Εισαγωγή δεδομένων",
           "Export data": "Εξαγωγή δεδομένων",
-          "Edit content": "Επεξεργασία περιεχομένου",          
+          "Edit content": "Επεξεργασία περιεχομένου",
+          "Ok": "Εντάξει",
+          "No content to paste": "Δεν υπάρχει περιεχόμενο για επικόλληση",
+          "Cannot paste in the same menu of the source": "Δεν είναι δυνατή η επικόλληση στο ίδιο μενού της πηγής",
+          "Cannot cut and paste inside the same content": "Δεν είναι δυνατή η αποκοπή και επικόλληση μέσα στο ίδιο περιεχόμενο",
+          "Warning!" : "Προειδοποίηση!",
+          "Cut": "Κοπή",
+          "Copy": "Αντίγραφο",
+          "Paste": "Επικόλληση" 
         }
       },
       se: {
@@ -745,6 +801,14 @@ i18n
           "Import data": "Importera data",
           "Export data": "Exportera data",
           "Edit content": "Redigera innehåll",
+          "Ok": "Ok",
+          "No content to paste": "Inget innehåll att klistra in",
+          "Cannot paste in the same menu of the source": "Kan inte klistra in i samma meny som källan",
+          "Cannot cut and paste inside the same content": "Kan inte klippa ut och klistra in i samma innehåll",
+          "Warning!" : "Varning!",
+          "Cut": "Klippa",
+          "Copy": "Kopiera",
+          "Paste": "Klistra in"
         }
       },
       uk: {
@@ -836,6 +900,14 @@ i18n
           "Import data": "Імпорт даних",
           "Export data": "Експорт даних",
           "Edit content": "Редагувати вміст",
+          "Ok": "Добре",
+          "No content to paste": "Немає вмісту для вставки",
+          "Cannot paste in the same menu of the source": "Не вдається вставити в те ж саме меню джерела",
+          "Cannot cut and paste inside the same content": "Не вдається вирізати і вставити в те ж саме вміст",
+          "Warning!" : "Увага!",
+          "Cut": "Вирізати",
+          "Copy": "Копіювати",
+          "Paste": "Вставити"
         }
       },
       he: {
@@ -927,6 +999,14 @@ i18n
           "Import data": "ייבוא נתונים",
           "Export data": "ייצוא נתונים",
           "Edit content": "ערוך תוכן",
+          "Ok": "בסדר",
+          "No content to paste": "אין תוכן להדבקה",
+          "Cannot paste in the same menu of the source": "לא ניתן להדביק באותו תפריט של המקור",
+          "Cannot cut and paste inside the same content": "לא ניתן לגזור ולהדביק בתוך אותו תוכן",
+          "Warning!" : "אזהרה!",
+          "Cut": "לְגַזֵם",
+          "Copy": "עותק",
+          "Paste": "הדבק"
         }
       },
       no: {
@@ -1018,6 +1098,14 @@ i18n
           "Import data": "Importer data",
           "Export data": "Eksporter data",
           "Edit content": "Rediger innhold",
+          "Ok": "Ok",
+          "No content to paste": "Ingen innhold å lime inn",
+          "Cannot paste in the same menu of the source": "Kan ikke lime inn i samme meny som kilden",
+          "Cannot cut and paste inside the same content": "Kan ikke klippe ut og lime inn i samme innhold",
+          "Warning!" : "Advarsel!",
+          "Cut": "Kutt",
+          "Copy": "Kopiere",
+          "Paste": "Lim inn"
         }
       },
       nl: {
@@ -1109,6 +1197,14 @@ i18n
           "Import data": "Importeer gegevens",
           "Export data": "Exporteer gegevens",
           "Edit content": "Bewerk inhoud",
+          "Ok": "Ok",
+          "No content to paste": "Geen inhoud om te plakken",
+          "Cannot paste in the same menu of the source": "Kan niet plakken in hetzelfde menu van de bron",
+          "Cannot cut and paste inside the same content": "Kan niet knippen en plakken in dezelfde inhoud",
+          "Warning!" : "Waarschuwing!",
+          "Cut": "Knippen",
+          "Copy": "Kopiëren",
+          "Paste": "Plakken"
         }
       },
       pl: {
@@ -1200,6 +1296,14 @@ i18n
           "Import data": "Importuj dane",
           "Export data": "Eksportuj dane",
           "Edit content": "Edytuj zawartość",
+          "Ok": "Ok",
+          "No content to paste": "Brak zawartości do wklejenia",
+          "Cannot paste in the same menu of the source": "Nie można wkleić w tym samym menu źródłowym",
+          "Cannot cut and paste inside the same content": "Nie można wyciąć i wkleić w tej samej zawartości",
+          "Warning!" : "Ostrzeżenie!",
+          "Cut": "Ciąć",
+          "Copy": "Kopiuj",
+          "Paste": "Wkleić"
         }
       },
       hu: {
@@ -1291,6 +1395,14 @@ i18n
           "Import data": "Adatok importálása",
           "Export data": "Adatok exportálása",
           "Edit content": "Tartalom szerkesztése",
+          "Ok": "Rendben",
+          "No content to paste": "Nincs tartalom beillesztésre",
+          "Cannot paste in the same menu of the source": "Nem lehet ugyanabban a forrás menüben beilleszteni",
+          "Cannot cut and paste inside the same content": "Nem lehet ugyanabban a tartalomban kivágni és beilleszteni",
+          "Warning!" : "Figyelem!",
+          "Cut": "Vágás",
+          "Copy": "Másolat",
+          "Paste": "Beillesztés"
         }
       },
       bg: {
@@ -1382,6 +1494,14 @@ i18n
           "Import data": "Импортиране на данни",
           "Export data": "Експортиране на данни",
           "Edit content": "Редактиране на съдържание",
+          "Ok": "Добре",
+          "No content to paste": "Няма съдържание за поставяне",
+          "Cannot paste in the same menu of the source": "Не можете да поставяте в същото меню на източника",
+          "Cannot cut and paste inside the same content": "Не можете да изрежете и поставите в същото съдържание",
+          "Warning!" : "Внимание!",
+          "Cut": "Изрязване",
+          "Copy": "Копие",
+          "Paste": "Поставяне"
         }
       },
       fi: {
@@ -1473,6 +1593,14 @@ i18n
           "Import data": "Tuo tiedot",
           "Export data": "Vie tiedot",
           "Edit content": "Muokkaa sisältöä",
+          "Ok": "Kunnossa",
+          "No content to paste": "Ei sisältöä liitettäväksi",
+          "Cannot paste in the same menu of the source": "Et voi liittää samaan lähteen valikkoon",
+          "Cannot cut and paste inside the same content": "Et voi leikata ja liittää samaan sisältöön",
+          "Warning!" : "Varoitus!",
+          "Cut": "Leikata",
+          "Copy": "Kopio",
+          "Paste": "Liittää"
         }
       },
       da: {
@@ -1564,6 +1692,14 @@ i18n
           "Import data": "Importer data",
           "Export data": "Eksporter data",
           "Edit content": "Rediger indhold",
+          "Ok": "Okay",
+          "No content to paste": "Intet indhold at indsætte",
+          "Cannot paste in the same menu of the source": "Kan ikke indsætte i den samme menu som kilden",
+          "Cannot cut and paste inside the same content": "Kan ikke klippe og indsætte inde i det samme indhold",
+          "Warning!" : "Advarsel!",
+          "Cut": "Skære",
+          "Copy": "Kopi",
+          "Paste": "Indsætte"
         }
       },
       ro: {
@@ -1655,6 +1791,14 @@ i18n
           "Import data": "Importați date",
           "Export data": "Exportați date",
           "Edit content": "Editați conținutul",
+          "Ok": "O.K.",
+          "No content to paste": "Nici un conținut de lipit",
+          "Cannot paste in the same menu of the source": "Nu se poate lipi în același meniu al sursei",
+          "Cannot cut and paste inside the same content": "Nu se poate tăia și lipi în același conținut",
+          "Warning!" : "Atenție!",
+          "Cut": "Tăiați",
+          "Copy": "Copie",
+          "Paste": "Lipire"
         }
       },
       cs: {
@@ -1746,6 +1890,14 @@ i18n
           "Import data": "Importovat data",
           "Export data": "Exportovat data",
           "Edit content": "Upravit obsah",
+          "Ok": "OK",
+          "No content to paste": "Žádný obsah k vložení",
+          "Cannot paste in the same menu of the source": "Nelze vložit do stejné nabídky zdroje",
+          "Cannot cut and paste inside the same content": "Nelze vystřihnout a vložit do stejného obsahu",
+          "Warning!" : "Varování!",
+          "Cut": "Střih",
+          "Copy": "Kopie",
+          "Paste": "Vložit"
         }
       },
       is: {
@@ -1837,6 +1989,14 @@ i18n
           "Import data": "Flytja inn gögn",
           "Export data": "Flytja út gögn",
           "Edit content": "Breyta efni",
+          "Ok": "Í lagi",
+          "No content to paste": "Engin innihald til að líma",
+          "Cannot paste in the same menu of the source": "Ekki er hægt að líma í sama valmynd uppspretta",
+          "Cannot cut and paste inside the same content": "Ekki er hægt að klippa og líma inni í sama efni",
+          "Warning!" : "Viðvörun!",
+          "Cut": "Klippa",
+          "Copy": "Afrita",
+          "Paste": "Líma"
         }
       }
     }

@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
-import { getContent, getContentMetaData, getContentName, updateContent, addMenuItem, updateContentHeader, updateContentType } from '../../store/slices/content';
+import {
+    getContent, getContentMetaData, getContentName, updateContent, addMenuItem,
+    updateContentHeader, updateContentType, setClipboardAction, deleteMenuItem
+} from '../../store/slices/content';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -22,6 +25,9 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
 import useTheme from '@mui/private-theming/useTheme';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import ContentCutIcon from '@mui/icons-material/ContentCut';
+import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import { useTranslation } from 'react-i18next';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Editor } from 'ckeditor5-custom-build/build/ckeditor';
@@ -35,11 +41,13 @@ import './style.css';
 const MenuEdit = (props) => {
 
     const { t } = useTranslation();
+    const [errorMessage, setErrorMessage] = useState(null);
     const [newContentId, setNewContentId] = useState("");
     const [newContentLabel, setNewContentLabel] = useState("");
     const [newContentType, setNewContentType] = useState("menu");
     const [menuToDelete, setMenuToDelete] = useState(null);
     const [path, setPath] = useState("");
+    const wholeContent = useSelector((st) => st.content);
     const tree = useSelector((st) => st.content).tree;
     const content = getContent(tree, path);
     const contentMetaData = getContentMetaData(tree, path);
@@ -90,7 +98,7 @@ const MenuEdit = (props) => {
     const columns = [
         {
             field: 'label',
-            headerName: t('Content'),
+            headerName: t('Sub menus'),
             flex: 1
         },
         {
@@ -104,7 +112,7 @@ const MenuEdit = (props) => {
                         raiseMenu(params.id);
                     }
                     } />,
-                    <GridActionsCellItem
+                <GridActionsCellItem
                     icon={<ArrowDownwardIcon />}
                     label={t("Move down")}
                     onClick={() => {
@@ -269,7 +277,80 @@ const MenuEdit = (props) => {
             path: path,
         }));
     }
-    
+
+    const copyContent = (path) => {
+        dispatch(setClipboardAction({
+            clipboardAction: "copy",
+            copiedContent: path,
+        }));
+    }
+
+    const cutContent = (path) => {
+        dispatch(setClipboardAction({
+            clipboardAction: "cut",
+            copiedContent: path,
+        }));
+    }
+
+    const pasteContent = (contentState, targetPath) => {
+        const sourcePath = contentState.copiedContent;
+
+        if (sourcePath === undefined || sourcePath === null || sourcePath === "") {
+            setErrorMessage("No content to paste");
+            return;
+        }
+
+        if (targetPath === sourcePath) {
+            setErrorMessage("Cannot paste in the same menu of the source");
+            return;
+        }
+
+        if (contentState.clipboardAction === "cut" && targetPath.startsWith(sourcePath)) {
+            setErrorMessage("Cannot cut and paste inside the same content");
+            return;
+        }
+
+        const sourceContent = getContentMetaData(contentState.tree, sourcePath);
+
+        dispatch(addMenuItem({
+            newMenuItem: sourceContent,
+            path: targetPath
+        }));
+
+        if (contentState.clipboardAction === "cut") {
+            //const containerPath = sourcePath.substring(0, sourcePath.lastIndexOf("."));
+            //const containerContent = getContent(state.tree, containerPath);
+
+            dispatch(deleteMenuItem({
+                path: sourcePath
+            }));
+        }
+
+        dispatch(setClipboardAction({
+            clipboardAction: "clear"
+        }));
+    }
+
+    if (errorMessage) {
+        return <Grid container sx={{ height: "100%" }} >
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Typography>{t("Warning!")}</Typography>
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}>
+                <Typography>{t(errorMessage)}</Typography>
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Button onClick={() => setErrorMessage(null)} variant="contained" color="primary">{t("Ok")}</Button>
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+        </Grid >
+    }
+
     if (menuToDelete) {
         return <Grid container sx={{ height: "100%" }} >
             <Grid item xs={12}>&nbsp;</Grid>
@@ -448,13 +529,22 @@ const MenuEdit = (props) => {
                 </Accordion>
 
             </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Button startIcon={<ContentCutIcon />} disabled={path === ""} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => cutContent(path)}>{t("Cut")}</Button>
+            </Grid>
+            <Grid item xs={1}>&nbsp;</Grid>
+            <Grid item xs={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Button startIcon={<ContentCopyIcon />} disabled={path === ""} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => copyContent(path)}>{t("Copy")}</Button>
+            </Grid>
+            <Grid item xs={1}>&nbsp;</Grid>
+            <Grid item xs={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Button startIcon={<ContentPasteIcon />} disabled={wholeContent.clipboardAction === null} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => pasteContent(wholeContent, path)}>{t("Paste")}</Button>
+            </Grid>
+
             {
                 !currentContentType || currentContentType === "menu" ?
                     <>
-                        <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <Typography>{t("Sub menus")}</Typography>
-                        </Grid>
                         <Grid item xs={12}>&nbsp;</Grid>
                         <Grid item xs={12} style={{ height: (content ? (content.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>
                             <DataGrid
