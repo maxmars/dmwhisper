@@ -5,6 +5,7 @@ import ContentTree from './contenttree/ContentTree';
 import AuthoringMenu from './authoring/AuthoringMenu';
 import InputMenu from './authoring/InputMenu';
 import OutputMenu from './authoring/OutputMenu';
+import ContentsList from './authoring/ContentsList';
 import { useSelector } from 'react-redux';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -19,6 +20,7 @@ import { setContent, initialState } from '../store/slices/content';
 import { useTranslation } from 'react-i18next';
 import InputIcon from '@mui/icons-material/Input';
 import OutputIcon from '@mui/icons-material/Output';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 
 const DMWhisper = () => {
 
@@ -40,7 +42,7 @@ const DMWhisper = () => {
   });
 
   // By default, user is on the "Browse content" tab
-  const [tab, setTab] = useState(4);
+  const [tab, setTab] = useState(5);
   const throws = useSelector((st) => st.throws);
 
   const handleChange = (event, newValue) => {
@@ -89,6 +91,7 @@ const DMWhisper = () => {
             <Tab icon={<InfoIcon />} label={t("Info")} iconPosition="start" />
             <Tab icon={<InputIcon />} label={t("Import data")} iconPosition="start" />
             <Tab icon={<OutputIcon />} label={t("Export data")} iconPosition="start" />
+            <Tab icon={<FormatListBulletedIcon />} label={t("List of contents")} iconPosition="start" />
             <Tab icon={<DataObjectIcon />} label={t("Edit content")} iconPosition="start" />
             <Tab icon={<TableChartIcon />} label={t("Browse")} iconPosition="start" />
             <Tab icon={<BookmarksIcon />} label={t("Saved") + " (" + throws.sequence.length + ")"} iconPosition="start" />
@@ -98,9 +101,10 @@ const DMWhisper = () => {
           {tab === 0 && <Info />}
           {tab === 1 && <InputMenu />}
           {tab === 2 && <OutputMenu />}
-          {tab === 3 && <AuthoringMenu />}
-          {tab === 4 && <ContentTree />}
-          {tab === 5 && <ResultsList />}
+          {tab === 3 && <ContentsList />}
+          {tab === 4 && <AuthoringMenu />}
+          {tab === 5 && <ContentTree />}
+          {tab === 6 && <ResultsList />}
         </div>
       </ThemeProvider>
 

@@ -126,7 +126,7 @@ export default function TablesChooser(props) {
   return (
     <Grid container sx={{ width: '100%' }}>
       <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={9} sx={{ display: 'flex', verticalAlign: 'center' }}>
+      <Grid item xs={9} sx={{ display: 'flex', alignItems: 'center' }}>
         <Autocomplete
           disablePortal
           id="combo-box-demo"
@@ -138,7 +138,7 @@ export default function TablesChooser(props) {
           renderInput={(params) => <TextField {...params} label={t("Table Id..")} />}
         />
       </Grid>
-      <Grid item xs={3} sx={{ display: 'flex', justifyContent: 'center', verticalAlign: 'center', borderLeft: '1em' }}>
+      <Grid item xs={3} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', borderLeft: '1em' }}>
         <IconButton disabled={!tableId} onClick={() => addTableId(tableId)}><AddIcon /></IconButton>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
