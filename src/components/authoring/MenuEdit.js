@@ -35,6 +35,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import TablesChooser from './TablesChooser';
 import './style.css';
 
 
@@ -318,9 +319,6 @@ const MenuEdit = (props) => {
         }));
 
         if (contentState.clipboardAction === "cut") {
-            //const containerPath = sourcePath.substring(0, sourcePath.lastIndexOf("."));
-            //const containerContent = getContent(state.tree, containerPath);
-
             dispatch(deleteMenuItem({
                 path: sourcePath
             }));
@@ -388,6 +386,19 @@ const MenuEdit = (props) => {
             </Grid>
             <Grid item xs={10}>
                 <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{contentName}</Typography>
+            </Grid>
+
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Button startIcon={<ContentCutIcon />} disabled={path === ""} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => cutContent(path)}>{t("Cut")}</Button>
+            </Grid>
+            <Grid item xs={1}>&nbsp;</Grid>
+            <Grid item xs={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Button startIcon={<ContentCopyIcon />} disabled={path === ""} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => copyContent(path)}>{t("Copy")}</Button>
+            </Grid>
+            <Grid item xs={1}>&nbsp;</Grid>
+            <Grid item xs={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Button startIcon={<ContentPasteIcon />} disabled={wholeContent.clipboardAction === null} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => pasteContent(wholeContent, path)}>{t("Paste")}</Button>
             </Grid>
 
             <Grid item xs={12}>&nbsp;</Grid>
@@ -511,14 +522,12 @@ const MenuEdit = (props) => {
                                 currentContentType === "table" ?
                                     <>
                                         <Grid item xs={12}>&nbsp;</Grid>
-                                        <Grid item xs={12}><Typography>{t("Table")}</Typography></Grid>
+                                        <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
                                         <Grid item xs={12}>
-                                            <TextField
-                                                value={currentMenuTable}
-                                                id="table-content"
-                                                variant="outlined"
-                                                onChange={(event) => setCurrentMenuTable(event.target.value)}
-                                                sx={{ width: "100%" }} />
+                                            <TablesChooser 
+                                                tablesIds={currentMenuTable.split(' ').map((item) => { return { label: item, id: item }})}
+                                                onTablesChange={(tables) => setCurrentMenuTable(tables)} 
+                                            />
                                         </Grid>
                                     </> : null
                             }
@@ -529,19 +538,6 @@ const MenuEdit = (props) => {
                 </Accordion>
 
             </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Button startIcon={<ContentCutIcon />} disabled={path === ""} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => cutContent(path)}>{t("Cut")}</Button>
-            </Grid>
-            <Grid item xs={1}>&nbsp;</Grid>
-            <Grid item xs={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Button startIcon={<ContentCopyIcon />} disabled={path === ""} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => copyContent(path)}>{t("Copy")}</Button>
-            </Grid>
-            <Grid item xs={1}>&nbsp;</Grid>
-            <Grid item xs={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Button startIcon={<ContentPasteIcon />} disabled={wholeContent.clipboardAction === null} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => pasteContent(wholeContent, path)}>{t("Paste")}</Button>
-            </Grid>
-
             {
                 !currentContentType || currentContentType === "menu" ?
                     <>

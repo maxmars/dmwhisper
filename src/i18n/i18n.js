@@ -114,7 +114,13 @@ i18n
           "Warning!" : "Warning!",
           "Cut": "Cut",
           "Copy": "Copy",
-          "Paste": "Paste"
+          "Paste": "Paste",
+          "Move up": "Move up",
+          "Move down": "Move down",
+          "Roll on the following tables:": "Roll on the following tables:",
+          "Tables to roll on": "Tables to roll on",
+          "Add table": "Add table",
+          "Table Id..": "Table Id..",
         }
       },
       it: {
@@ -214,7 +220,13 @@ i18n
           "Warning!" : "Attenzione!",
           "Cut": "Taglia",
           "Copy": "Copia",
-          "Paste": "Incolla"
+          "Paste": "Incolla",
+          "Move up": "Sposta su",
+          "Move down": "Sposta giù",
+          "Roll on the following tables:": "Tira sulle seguenti tabelle:",
+          "Tables to roll on": "Tabelle su cui tirare",
+          "Add table": "Aggiungi tabella",
+          "Table Id..": "ID tabella..",
         }
       },
       es: {
@@ -313,7 +325,13 @@ i18n
           "Warning!" : "¡Advertencia!",
           "Cut": "Cortar",
           "Copy": "Copiar",
-          "Paste": "Pegar"
+          "Paste": "Pegar",
+          "Move up": "Mover hacia arriba",
+          "Move down": "Mover hacia abajo",
+          "Roll on the following tables:": "Tirar en las siguientes tablas:",
+          "Tables to roll on": "Tablas para rodar",
+          "Add table": "Agregar tabla",
+          "Table Id..": "ID de tabla..",
         },
       },
       fr: {
@@ -412,7 +430,13 @@ i18n
           "Warning!" : "Attention!",
           "Cut": "Couper",
           "Copy": "Copie",
-          "Paste": "Coller"
+          "Paste": "Coller",
+          "Move up": "Monter",
+          "Move down": "Descendre",
+          "Roll on the following tables:": "Rouler sur les tables suivantes:",
+          "Tables to roll on": "Tables à rouler",
+          "Add table": "Ajouter une table",
+          "Table Id..": "ID de table..",
         },
       },
       de: {
@@ -511,7 +535,13 @@ i18n
           "Warning!" : "Warnung!",
           "Cut": "Schneiden",
           "Copy": "Kopieren",
-          "Paste": "Einfügen"
+          "Paste": "Einfügen",
+          "Move up": "Nach oben bewegen",
+          "Move down": "Nach unten bewegen",
+          "Roll on the following tables:": "Rollen Sie auf den folgenden Tabellen:",
+          "Tables to roll on": "Tabellen zum Rollen",
+          "Add table": "Tabelle hinzufügen",
+          "Table Id..": "Tabellen-ID..",
         }
       },
       pt: {
@@ -610,7 +640,13 @@ i18n
           "Warning!" : "Aviso!",
           "Cut": "Cortar",
           "Copy": "Cópia",
-          "Paste": "Colar"
+          "Paste": "Colar",
+          "Move up": "Mover para cima",
+          "Move down": "Mover para baixo",
+          "Roll on the following tables:": "Rolar nas seguintes tabelas:",
+          "Tables to roll on": "Tabelas para rolar",
+          "Add table": "Adicionar tabela",
+          "Table Id..": "ID da tabela..",
         }
       },
       gr: {
@@ -709,7 +745,13 @@ i18n
           "Warning!" : "Προειδοποίηση!",
           "Cut": "Κοπή",
           "Copy": "Αντίγραφο",
-          "Paste": "Επικόλληση" 
+          "Paste": "Επικόλληση",
+          "Move up": "Μετακίνηση προς τα πάνω",
+          "Move down": "Μετακίνηση προς τα κάτω",
+          "Roll on the following tables:": "Ρολό στους παρακάτω πίνακες:",
+          "Tables to roll on": "Πίνακες για κύλιση",
+          "Add table": "Προσθήκη πίνακα",
+          "Table Id..": "Αναγνωριστικό πίνακα..",
         }
       },
       se: {
@@ -808,7 +850,13 @@ i18n
           "Warning!" : "Varning!",
           "Cut": "Klippa",
           "Copy": "Kopiera",
-          "Paste": "Klistra in"
+          "Paste": "Klistra in",
+          "Move up": "Flytta upp",
+          "Move down": "Flytta ner",
+          "Roll on the following tables:": "Rulla på följande tabeller:",
+          "Tables to roll on": "Tabeller att rulla på",
+          "Add table": "Lägg till tabell",
+          "Table Id..": "Tabell-ID..",
         }
       },
       uk: {
@@ -907,7 +955,13 @@ i18n
           "Warning!" : "Увага!",
           "Cut": "Вирізати",
           "Copy": "Копіювати",
-          "Paste": "Вставити"
+          "Paste": "Вставити",
+          "Move up": "Перемістити вгору",
+          "Move down": "Перемістити вниз",
+          "Roll on the following tables:": "Рулон на наступних таблицях:",
+          "Tables to roll on": "Таблиці для прокрутки",
+          "Add table": "Додати таблицю",
+          "Table Id..": "ID таблиці..",
         }
       },
       he: {
@@ -1006,7 +1060,13 @@ i18n
           "Warning!" : "אזהרה!",
           "Cut": "לְגַזֵם",
           "Copy": "עותק",
-          "Paste": "הדבק"
+          "Paste": "הדבק",
+          "Move up": "הזז למעלה",
+          "Move down": "הזז למטה",
+          "Roll on the following tables:": "גלישה על הטבלאות הבאות:",
+          "Tables to roll on": "טבלאות לגלישה",
+          "Add table": "הוסף טבלה",
+          "Table Id..": "מזהה טבלה..",
         }
       },
       no: {
@@ -1105,7 +1165,13 @@ i18n
           "Warning!" : "Advarsel!",
           "Cut": "Kutt",
           "Copy": "Kopiere",
-          "Paste": "Lim inn"
+          "Paste": "Lim inn",
+          "Move up": "Flytt opp",
+          "Move down": "Flytt ned",
+          "Roll on the following tables:": "Rull på følgende tabeller:",
+          "Tables to roll on": "Tabeller å rulle på",
+          "Add table": "Legg til bord",
+          "Table Id..": "Bord-ID..",
         }
       },
       nl: {
@@ -1204,7 +1270,13 @@ i18n
           "Warning!" : "Waarschuwing!",
           "Cut": "Knippen",
           "Copy": "Kopiëren",
-          "Paste": "Plakken"
+          "Paste": "Plakken",
+          "Move up": "Omhoog bewegen",
+          "Move down": "Naar beneden bewegen",
+          "Roll on the following tables:": "Rol op de volgende tabellen:",
+          "Tables to roll on": "Tabellen om op te rollen",
+          "Add table": "Tabel toevoegen",
+          "Table Id..": "Tabel-ID..",
         }
       },
       pl: {
@@ -1303,7 +1375,13 @@ i18n
           "Warning!" : "Ostrzeżenie!",
           "Cut": "Ciąć",
           "Copy": "Kopiuj",
-          "Paste": "Wkleić"
+          "Paste": "Wkleić",
+          "Move up": "Poruszaj się w górę",
+          "Move down": "Poruszaj się w dół",
+          "Roll on the following tables:": "Rzuć na następujących stołach:",
+          "Tables to roll on": "Tabele do toczenia",
+          "Add table": "Dodaj tabelę",
+          "Table Id..": "ID tabeli..",
         }
       },
       hu: {
@@ -1402,7 +1480,13 @@ i18n
           "Warning!" : "Figyelem!",
           "Cut": "Vágás",
           "Copy": "Másolat",
-          "Paste": "Beillesztés"
+          "Paste": "Beillesztés",
+          "Move up": "Fel",
+          "Move down": "Le",
+          "Roll on the following tables:": "Gördüljön az alábbi táblázatokon:",
+          "Tables to roll on": "Táblázatok gördítése",
+          "Add table": "Tábla hozzáadása",
+          "Table Id..": "Tábla azonosító..",
         }
       },
       bg: {
@@ -1501,7 +1585,13 @@ i18n
           "Warning!" : "Внимание!",
           "Cut": "Изрязване",
           "Copy": "Копие",
-          "Paste": "Поставяне"
+          "Paste": "Поставяне",
+          "Move up": "Премести нагоре",
+          "Move down": "Премести надолу",
+          "Roll on the following tables:": "Ролка на следните маси:",
+          "Tables to roll on": "Маси за навиване",
+          "Add table": "Добавяне на маса",
+          "Table Id..": "Идентификатор на таблицата..",
         }
       },
       fi: {
@@ -1600,7 +1690,13 @@ i18n
           "Warning!" : "Varoitus!",
           "Cut": "Leikata",
           "Copy": "Kopio",
-          "Paste": "Liittää"
+          "Paste": "Liittää",
+          "Move up": "Siirrä ylös",
+          "Move down": "Siirrä alas",
+          "Roll on the following tables:": "Rullaa seuraavilla taulukoilla:",
+          "Tables to roll on": "Taulukot rullataan",
+          "Add table": "Lisää taulukko",
+          "Table Id..": "Taulukon tunnus..",
         }
       },
       da: {
@@ -1699,7 +1795,13 @@ i18n
           "Warning!" : "Advarsel!",
           "Cut": "Skære",
           "Copy": "Kopi",
-          "Paste": "Indsætte"
+          "Paste": "Indsætte",
+          "Move up": "Flyt op",
+          "Move down": "Flyt ned",
+          "Roll on the following tables:": "Rul på følgende tabeller:",
+          "Tables to roll on": "Tabeller at rulle på",
+          "Add table": "Tilføj tabel",
+          "Table Id..": "Tabel-ID..",
         }
       },
       ro: {
@@ -1798,7 +1900,13 @@ i18n
           "Warning!" : "Atenție!",
           "Cut": "Tăiați",
           "Copy": "Copie",
-          "Paste": "Lipire"
+          "Paste": "Lipire",
+          "Move up": "Mută în sus",
+          "Move down": "Mută în jos",
+          "Roll on the following tables:": "Rulati pe urmatoarele mese:",
+          "Tables to roll on": "Mese pentru a rula",
+          "Add table": "Adăugați tabel",
+          "Table Id..": "ID-ul tabelului..",
         }
       },
       cs: {
@@ -1897,7 +2005,13 @@ i18n
           "Warning!" : "Varování!",
           "Cut": "Střih",
           "Copy": "Kopie",
-          "Paste": "Vložit"
+          "Paste": "Vložit",
+          "Move up": "Pohni se nahoru",
+          "Move down": "Pohni se dolů",
+          "Roll on the following tables:": "Roztočte na následujících tabulkách:",
+          "Tables to roll on": "Tabulky k roztočení",
+          "Add table": "Přidat tabulku",
+          "Table Id..": "ID tabulky..",
         }
       },
       is: {
@@ -1996,7 +2110,13 @@ i18n
           "Warning!" : "Viðvörun!",
           "Cut": "Klippa",
           "Copy": "Afrita",
-          "Paste": "Líma"
+          "Paste": "Líma",
+          "Move up": "Færa upp",
+          "Move down": "Færa niður",
+          "Roll on the following tables:": "Rúlla á eftirfarandi töflum:",
+          "Tables to roll on": "Töflur til að rúlla á",
+          "Add table": "Bæta við töflu",
+          "Table Id..": "Töflu ID..",
         }
       }
     }
