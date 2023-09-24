@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { useState } from 'react';
@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import Grid from '@mui/material/Grid';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import useTheme from '@mui/private-theming/useTheme';
+import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
@@ -138,7 +139,7 @@ export default function TablesChooser(props) {
         />
       </Grid>
       <Grid item xs={3} sx={{ display: 'flex', justifyContent: 'center', verticalAlign: 'center', borderLeft: '1em' }}>
-        <Button disabled={!tableId} onClick={() => addTableId(tableId)} variant="contained" color="primary">{t("Add table")}</Button>
+        <IconButton disabled={!tableId} onClick={() => addTableId(tableId)}><AddIcon /></IconButton>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} style={{ height: (tableIds ? (tableIds.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>
