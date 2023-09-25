@@ -41,7 +41,7 @@ export default function TablesChooser(props) {
     const emitTablesChange = () => {
       if (props.onTablesChange) {
         const newTablesIdsArray = tableIds.map((item) => item.id);
-        props.onTablesChange(newTablesIdsArray.join(' '));
+        props.onTablesChange(newTablesIdsArray.join(' ').trim());
       }
     };
     emitTablesChange();
