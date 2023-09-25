@@ -32,6 +32,22 @@ const Info = () => {
         <Link href="https://github.com/maxmars/dmwhisper">github.com/maxmars/dmwhisper</Link>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <code>In addition to the Apache 2.0 license (that you can find in the same directory as this file), this project uses the following licensed third party libraries:
+
+        CKEditor 5, which is licensed from CKSource (www.cksource.com).
+
+        Please note that:
+
+        THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+        NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+        NONINFRINGEMENT. IN NO EVENT SHALL CKSOURCE OR ITS LICENSORS BE LIABLE FOR ANY CLAIM, DAMAGES
+        OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
+        IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+        The same conditions apply to DMWhisper -- it is provided "as is", without warranty of any kind, express or implied.
+        Feel free to use it but please note that the authors are not responsible for any damage that may occur from its use.</code>
+      </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
     </Grid>
   );
