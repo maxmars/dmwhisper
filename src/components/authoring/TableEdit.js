@@ -167,32 +167,26 @@ export default function TableEdit(props) {
   }
 
   const editRNGValues = (rngId) => {
-    //document.getElementById('new-min').value = rngId.split('-')[0];
-    //document.getElementById('new-max').value = rngId.split('-')[1];
     setNewMin(rngId.split('-')[0]);
     setNewMax(rngId.split('-')[1]);
 
     const result = table.rng.find((rng) => rng.min + '-' + rng.max === rngId).result;
     if (result) {
-      //document.getElementById('new-result').value = result;
       setNewResult(result);
     }
 
     const prefix = table.rng.find((rng) => rng.min + '-' + rng.max === rngId).prefix;
     if (prefix) {
-      //document.getElementById('new-prefix').value = prefix;
       setNewPrefix(prefix);
     }
 
     const postfix = table.rng.find((rng) => rng.min + '-' + rng.max === rngId).postfix;
     if (postfix) {
-      //document.getElementById('new-postfix').value = postfix;
       setNewPostfix(postfix);
     }
 
     const tableName = table.rng.find((rng) => rng.min + '-' + rng.max === rngId).table;
     if (tableName) {
-      //document.getElementById('new-table').value = tableName;
       setNewTable(tableName);
     }
   }
@@ -293,6 +287,7 @@ export default function TableEdit(props) {
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
           <TextField 
+            onChange={(event) => setNewResult(event.target.value)}
             value={newResult} 
             id="new-result" 
             label={newResult? "" : t("Fixed result")}
@@ -306,6 +301,7 @@ export default function TableEdit(props) {
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
           <TextField 
+            onChange={(event) => setNewPrefix(event.target.value)}
             value={newPrefix} 
             id="new-prefix" 
             label={newPrefix? "" : t("Prefix")}
@@ -313,7 +309,8 @@ export default function TableEdit(props) {
             sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>
-          <TextField 
+          <TextField
+            onChange={(event) => setNewTable(event.target.value)}
             value={newTable} 
             id="new-table" 
             label={newTable? "" : t("Table (ID)")}
@@ -322,6 +319,7 @@ export default function TableEdit(props) {
         </Grid>
         <Grid item xs={12}>
           <TextField 
+            onChange={(event) => setNewPostfix(event.target.value)}
             value={newPostfix} 
             id="new-postfix" 
             label={newPostfix? "" : t("Postfix")}
