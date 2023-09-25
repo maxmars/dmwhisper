@@ -1,6 +1,14 @@
 # Changelog Template progetto DM Whisper
 
 
+    24 Sep 2023
+    -----------
+    - 1.8.0 On content tree UX, tables are now chosen with an autocomplete.
+
+    23 Sep 2023
+    -----------
+    - 1.7.0 Cut, copy, paste menu items.
+
     22 Sep 2023
     -----------
     - 1.6.0 Menus can now be rearranged. Small UI improvements.

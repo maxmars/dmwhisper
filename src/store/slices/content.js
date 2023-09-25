@@ -299,7 +299,9 @@ export const initialState = {
                 },
             ]
         },
-    ]
+    ],
+    copiedContent: null, // contains the path to copy
+    clipboardAction: null, // can be null, "copy" or "cut"
 };
 
 
@@ -309,6 +311,17 @@ const content = createSlice({
     name: 'content',
     initialState,
     reducers: {
+        setClipboardAction(state, action) {
+            const { copiedContent, clipboardAction } = action.payload;
+
+            if (clipboardAction === "clear") {
+                state.copiedContent = null;
+                state.clipboardAction = null;
+            } else {
+                state.copiedContent = copiedContent;
+                state.clipboardAction = clipboardAction;
+            }
+        },
         setContent(state, action) {
             const { tree, tables } = action.payload;
 
@@ -353,26 +366,56 @@ const content = createSlice({
             state.tables = tables;
         },
         addMenuItem(state, action) {
+            try {
             const { newMenuItem, path } = action.payload;
 
             if (path === undefined || path === null || path === "") {
+                state.tree = state.tree.filter((item) => item.id !== newMenuItem.id);
                 state.tree.push(newMenuItem);
+            } else {
+
+                const pathArray = path.split(".");
+
+                let content = state.tree;
+                for (let i = 0; i < pathArray.length - 1; i++) {
+                    content = content.find(item => item.id === pathArray[i]).data.children;
+                }
+
+                content = content.find(item => item.id === pathArray[pathArray.length - 1]).data;
+                if (content.children) {
+                    content.children = content.children.filter((item) => item.id !== newMenuItem.id);
+                    content.children.push(newMenuItem);
+                } else {
+                    content.children = [];
+                    content.children.push(newMenuItem);
+                }
+            }
+            } catch (e) {
+                console.log(e);
+            }
+        },
+        deleteMenuItem(state, action) {
+            const { path } = action.payload;
+
+            if (path === undefined || path === null || path === "") {
                 return;
             }
 
             const pathArray = path.split(".");
 
+            if (pathArray.length === 1) {
+                state.tree = state.tree.filter((item) => item.id !== pathArray[0]);
+                return;
+            }
+
             let content = state.tree;
-            for (let i = 0; i < pathArray.length - 1; i++) {
+            for (let i = 0; i < pathArray.length - 2; i++) {
                 content = content.find(item => item.id === pathArray[i]).data.children;
             }
 
-            content = content.find(item => item.id === pathArray[pathArray.length - 1]).data;
+            content = content.find(item => item.id === pathArray[pathArray.length - 2]).data;
             if (content.children) {
-                content.children.push(newMenuItem);
-            } else {
-                content.children = [];
-                content.children.push(newMenuItem);
+                content.children = content.children.filter((item) => item.id !== pathArray[pathArray.length - 1]);
             }
         },
         updateContent(state, action) {
@@ -581,4 +624,6 @@ export const getTable = (state, idTable) => {
 
 export default content.reducer;
 
-export const { setContent, clearContent, addTable, removeTable, updateTableHeader, updateTableRng, updateContent, updateContentHeader, addMenuItem, updateContentType } = content.actions;
+export const { setContent, clearContent, addTable, removeTable, updateTableHeader,
+    updateTableRng, updateContent, updateContentHeader, addMenuItem, updateContentType,
+    setClipboardAction, deleteMenuItem } = content.actions;

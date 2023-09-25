@@ -60,7 +60,7 @@ const ContentTree = () => {
     };
 
     return (
-        <div style={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center', verticalAlign: 'center' }}>
+        <div style={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             {selectedContent === null ?
 
                 <div style={{ height: '90%', width: '100%' }}>
