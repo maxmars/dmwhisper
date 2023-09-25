@@ -327,6 +327,8 @@ const content = createSlice({
 
             state.tree = tree;
             state.tables = tables;
+            state.copiedContent = null;
+            state.clipboardAction = null;
         },
         clearContent(state, action) {
             state.tree = initialState.tree;
@@ -367,29 +369,29 @@ const content = createSlice({
         },
         addMenuItem(state, action) {
             try {
-            const { newMenuItem, path } = action.payload;
+                const { newMenuItem, path } = action.payload;
 
-            if (path === undefined || path === null || path === "") {
-                state.tree = state.tree.filter((item) => item.id !== newMenuItem.id);
-                state.tree.push(newMenuItem);
-            } else {
-
-                const pathArray = path.split(".");
-
-                let content = state.tree;
-                for (let i = 0; i < pathArray.length - 1; i++) {
-                    content = content.find(item => item.id === pathArray[i]).data.children;
-                }
-
-                content = content.find(item => item.id === pathArray[pathArray.length - 1]).data;
-                if (content.children) {
-                    content.children = content.children.filter((item) => item.id !== newMenuItem.id);
-                    content.children.push(newMenuItem);
+                if (path === undefined || path === null || path === "") {
+                    state.tree = state.tree.filter((item) => item.id !== newMenuItem.id);
+                    state.tree.push(newMenuItem);
                 } else {
-                    content.children = [];
-                    content.children.push(newMenuItem);
+
+                    const pathArray = path.split(".");
+
+                    let content = state.tree;
+                    for (let i = 0; i < pathArray.length - 1; i++) {
+                        content = content.find(item => item.id === pathArray[i]).data.children;
+                    }
+
+                    content = content.find(item => item.id === pathArray[pathArray.length - 1]).data;
+                    if (content.children) {
+                        content.children = content.children.filter((item) => item.id !== newMenuItem.id);
+                        content.children.push(newMenuItem);
+                    } else {
+                        content.children = [];
+                        content.children.push(newMenuItem);
+                    }
                 }
-            }
             } catch (e) {
                 console.log(e);
             }
@@ -521,7 +523,7 @@ export const getContent = (state, path) => {
     return content;
 }
 
-export const getContentMetaData = (state, path) => {
+export const getContentMetaData = (state, path) => {    
 
     if (path === undefined || path === null || path === "") {
         return state;

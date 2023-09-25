@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    25 Sep 2023
+    -----------
+    - 1.9.0 Store / load multiple data files and switch from one to another on the fly.
+
     24 Sep 2023
     -----------
     - 1.8.0 On content tree UX, tables are now chosen with an autocomplete.

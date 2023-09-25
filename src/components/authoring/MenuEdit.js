@@ -352,7 +352,7 @@ const MenuEdit = (props) => {
     if (menuToDelete) {
         return <Grid container sx={{ height: "100%" }} >
             <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Typography>{t("Warning! Menu is about to be deleted")}</Typography>
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
