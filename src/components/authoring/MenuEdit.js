@@ -71,7 +71,7 @@ const MenuEdit = (props) => {
 
     const ckEditorThemeSync = () => {
         setTimeout(() => {
-            const elToApply = document.getElementsByClassName("ck-content")[0];
+            let elToApply = document.getElementsByClassName("ck-content")[0];
             if (elToApply) {
                 if (!mounted.current) {
                     // do componentDidMount logic
@@ -88,6 +88,19 @@ const MenuEdit = (props) => {
                         elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
                     }
                 }
+            }
+
+            elToApply = document.getElementsByTagName("a");
+
+            if (elToApply) {
+                const elArray = Array.from(elToApply);
+                elArray.forEach(element => {
+                    if (theme.palette.mode === "dark") {
+                        element.setAttribute("style", "color: white !important; background-color: black !important;");
+                    } else {
+                        element.setAttribute("style", "color: black !important; background-color: white !important;");
+                    }
+                });
             }
         }, 250);
     }
@@ -492,7 +505,7 @@ const MenuEdit = (props) => {
                                                     onChange={(event, editor) => {
                                                         const data = editor.getData();
                                                         //console.log({ event, editor, data });
-                                                        setCurrentMenuContent(data)
+                                                        setCurrentMenuContent(data);
                                                     }}
                                                     onBlur={(event, editor) => {
                                                         //console.log('Blur.', editor);
@@ -525,7 +538,7 @@ const MenuEdit = (props) => {
                                         <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
                                         <Grid item xs={12}>
                                             <TablesChooser 
-                                                tablesIds={currentMenuTable.split(' ').map((item) => { return { label: item, id: item }})}
+                                                tablesIds={currentMenuTable && currentMenuTable.trim().length() > 0 ? currentMenuTable.trim().split(' ').map((item) => { return { label: item, id: item }}) : null}
                                                 onTablesChange={(tables) => setCurrentMenuTable(tables)} 
                                             />
                                         </Grid>
