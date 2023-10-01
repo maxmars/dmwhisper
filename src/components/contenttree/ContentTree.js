@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { getContent, getContentMetaData, setContent, getContentName, initialState, setTabPath } from '../../store/slices/content';
+import { getContent, getContentMetaData, setContent, getContentName, initialState, setTabPath, clearTabPath } from '../../store/slices/content';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import SelectedContent from './SelectedContent';
@@ -34,10 +34,6 @@ const ContentTree = () => {
         { field: 'label', headerName: t('Content'), flex: 1 },
     ];
 
-    if (!currentContent) {
-        dispatch(setContent(initialState));
-    }
-
     const backOneLevel = () => {
         let newPath = path;
 
@@ -47,7 +43,7 @@ const ContentTree = () => {
         } else {
             newPath = "";
         }
-        
+
         const newCurrentContent = getContentMetaData(tree, newPath);
         setContentName(getContentName(tree, newPath));
 
@@ -58,7 +54,7 @@ const ContentTree = () => {
             setCurrentContent(newCurrentContent);
             setSelectedContent(newCurrentContent);
         }
-        
+
         setPath(newPath);
 
     }
@@ -119,45 +115,54 @@ const ContentTree = () => {
             setCurrentContent(newCurrentContent);
             setSelectedContent(newCurrentContent);
         }
-        
+
         setPath(tabPath);
         setTab(newValue);
     }
 
-    return (
-        <>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', height: '12%' }}>
-                <Tabs value={tab} onChange={handleChange} variant="scrollable">
-                    <Tab icon={<NotesIcon />} label={t("Bookmark ") + "1"} iconPosition="start" />
-                    <Tab icon={<NotesIcon />} label={t("Bookmark ") + "2"} iconPosition="start" />
-                    <Tab icon={<NotesIcon />} label={t("Bookmark ") + "3"} iconPosition="start" />
-                    <Tab icon={<NotesIcon />} label={t("Bookmark ") + "4"} iconPosition="start" />
-                    <Tab icon={<NotesIcon />} label={t("Bookmark ") + "5"} iconPosition="start" />
-                </Tabs>
-            </div>
-            <div style={{ height: '88%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                {selectedContent === null ?
+    if (!currentContent && !selectedContent) {
+        dispatch(clearTabPath());
+        goToHomeMenu();
+    }
 
-                    <div style={{ height: '90%', width: '100%' }}>
-                        <div style={{ height: '10%', width: '100%', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                            <IconButton style={{ marginRight: "7px" }} variant="contained" color="primary" onClick={backOneLevel}><ArrowBackIosNewIcon /></IconButton>
-                            <IconButton style={{ marginLeft: "7px" }} variant="contained" color="primary" onClick={goToHomeMenu}><HomeIcon /></IconButton>
-                            <Typography variant="h6" component="div" style={{ width: '60%', textAlign: 'center' }}>{contentName}</Typography>
+    try {
+        return (
+            <>
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', height: '12%' }}>
+                    <Tabs value={tab} onChange={handleChange} variant="scrollable">
+                        <Tab icon={<NotesIcon />} label={t("Bookmark ") + "1"} iconPosition="start" />
+                        <Tab icon={<NotesIcon />} label={t("Bookmark ") + "2"} iconPosition="start" />
+                        <Tab icon={<NotesIcon />} label={t("Bookmark ") + "3"} iconPosition="start" />
+                        <Tab icon={<NotesIcon />} label={t("Bookmark ") + "4"} iconPosition="start" />
+                        <Tab icon={<NotesIcon />} label={t("Bookmark ") + "5"} iconPosition="start" />
+                    </Tabs>
+                </div>
+                <div style={{ height: '88%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    {selectedContent === null ?
+
+                        <div style={{ height: '90%', width: '100%' }}>
+                            <div style={{ height: '10%', width: '100%', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                                <IconButton style={{ marginRight: "7px" }} variant="contained" color="primary" onClick={backOneLevel}><ArrowBackIosNewIcon /></IconButton>
+                                <IconButton style={{ marginLeft: "7px" }} variant="contained" color="primary" onClick={goToHomeMenu}><HomeIcon /></IconButton>
+                                <Typography variant="h6" component="div" style={{ width: '60%', textAlign: 'center' }}>{contentName}</Typography>
+                            </div>
+                            <DataGrid
+                                sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
+                                rows={currentContent}
+                                columns={columns}
+                                height="100%"
+                                width="100%"
+                                onRowClick={(data) => onClick(data.row.id)}
+                            />
                         </div>
-                        <DataGrid
-                            sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
-                            rows={currentContent}
-                            columns={columns}
-                            height="100%"
-                            width="100%"
-                            onRowClick={(data) => onClick(data.row.id)}
-                        />
-                    </div>
-                    :
-                    <SelectedContent selectedContent={selectedContent} clearSelectedContent={backOneLevel} />}
-            </div>
-        </>
-    );
+                        :
+                        <SelectedContent selectedContent={selectedContent} clearSelectedContent={backOneLevel} />}
+                </div>
+            </>
+        );
+    } catch (e) {
+        return null;
+    }
 
 };
 
