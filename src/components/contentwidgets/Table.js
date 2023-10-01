@@ -63,6 +63,11 @@ const Table = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoUpdate]);
 
+  useEffect(() => {
+    diceRoll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.content.data.table]);
+
   if (currentThrow === null && error === null) {
     diceRoll();
     return null;
