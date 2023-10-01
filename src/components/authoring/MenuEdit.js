@@ -538,7 +538,7 @@ const MenuEdit = (props) => {
                                         <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
                                         <Grid item xs={12}>
                                             <TablesChooser 
-                                                tablesIds={currentMenuTable && currentMenuTable.trim().length() > 0 ? currentMenuTable.trim().split(' ').map((item) => { return { label: item, id: item }}) : null}
+                                                tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => { return { label: item, id: item }}) : null}
                                                 onTablesChange={(tables) => setCurrentMenuTable(tables)} 
                                             />
                                         </Grid>
