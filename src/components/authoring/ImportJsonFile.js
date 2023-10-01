@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Grid, Button, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { setContent } from '../../store/slices/content';
+import { setContent, clearTabPath } from '../../store/slices/content';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTranslation } from 'react-i18next';
 import { MuiFileInput } from 'mui-file-input'
@@ -16,6 +16,7 @@ const ImportJsonFile = (props) => {
   const handleChange = async (newValue) => {
     setJsonFile(newValue);
     const jsonText = await newValue.text();
+    dispatch(clearTabPath());
     dispatch(setContent(JSON.parse(jsonText)));
     props.returnToMenu();
   }

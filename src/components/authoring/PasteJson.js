@@ -1,6 +1,6 @@
 import { Grid, Button, TextField } from '@mui/material';
 import { useDispatch } from 'react-redux';
-import { setContent, initialState } from '../../store/slices/content';
+import { setContent, initialState, clearTabPath } from '../../store/slices/content';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTranslation } from 'react-i18next';
 import Typography from '@mui/material/Typography';
@@ -14,6 +14,7 @@ const PasteJson = (props) => {
     const jsonString = document.getElementById('new-tables').value;
 
     if (jsonString === '') {
+      dispatch(clearTabPath());
       dispatch(setContent(initialState));
       return;
     }
@@ -21,6 +22,7 @@ const PasteJson = (props) => {
     const newTables = JSON.parse(jsonString);
 
     if (newTables.tree && newTables.tables) {
+      dispatch(clearTabPath());
       dispatch(setContent(newTables));
     }
 

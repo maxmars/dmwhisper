@@ -15,15 +15,19 @@ const SelectedContent = (props) => {
 
   const getProperWidget = () => {
 
-    switch (props.selectedContent.type) {
-      case "information":
-        return <Information content={props.selectedContent} />;
+    try {
+      switch (props.selectedContent.type) {
+        case "information":
+          return <Information content={props.selectedContent} />;
 
-      case "table":
-        return <Table content={props.selectedContent} />;
+        case "table":
+          return <Table content={props.selectedContent} />;
 
-      default:
-        return null;
+        default:
+          return null;
+      }
+    } catch (e) {
+      return null;
     }
 
   }
@@ -43,7 +47,7 @@ const SelectedContent = (props) => {
           color: 'white',
           display: 'flex',
           alignItems: 'center',
-      }}
+        }}
       >
         <Grid item xs={1}>
           <IconButton style={{ marginRight: "7px" }} variant="contained" onClick={props.clearSelectedContent}>
@@ -51,7 +55,7 @@ const SelectedContent = (props) => {
           </IconButton>
         </Grid>
         <Grid item xs={11}>
-          <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{props.selectedContent.label}</Typography>
+          <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{props.selectedContent ? props.selectedContent.label : ""}</Typography>
         </Grid>
       </Grid>
       <Grid

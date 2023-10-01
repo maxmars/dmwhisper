@@ -12,7 +12,7 @@ import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { get, getMany, set, del } from 'idb-keyval';
 import { useSelector } from 'react-redux';
-import { setContent } from '../../store/slices/content';
+import { setContent, clearTabPath } from '../../store/slices/content';
 import { useDispatch } from 'react-redux';
 
 
@@ -32,6 +32,7 @@ const ContentsList = () => {
   const loadContent = async (id) => {
     const content = await get("content" + id);
     if (content) {
+      dispatch(clearTabPath());
       dispatch(setContent(content));
       setMessage(t('Content loaded'));
     } else {

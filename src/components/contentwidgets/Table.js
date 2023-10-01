@@ -89,7 +89,7 @@ const Table = (props) => {
           <Stack spacing={2} direction="column"
             justifyContent="space-evenly"
             alignItems="center">
-            <div dangerouslySetInnerHTML={{__html: props.content.data.textContent}} />
+            <div dangerouslySetInnerHTML={{ __html: props.content && props.content.data ? props.content.data.textContent : "" }} />
             <div>{currentThrow}</div>
             <br />
             <div style={{ width: '100%' }}>
@@ -112,35 +112,39 @@ const Table = (props) => {
       </Box>
     );
   } else {
-    const table = getTable(content, props.content.data.table);
-    const items = table.rng.map(item => {
-      return <>
-        <Grid item xs={3} key={"dice" + item.min + "-" + item.max} style={{display: "flex", justifyContent: "flex-end"}} >
-          <div style={{marginRight: "1em"}}>{item.min}-{item.max}</div>
-        </Grid>
-        <Grid item xs={9} key={"result" + item.min + "-" + item.max}>
-          <div>{item.result ? item.result : item.table}</div>
-        </Grid>
-      </>
-    });
+    try {
+      const table = getTable(content, props.content.data.table);
+      const items = table.rng.map(item => {
+        return <>
+          <Grid item xs={3} key={"dice" + item.min + "-" + item.max} style={{ display: "flex", justifyContent: "flex-end" }} >
+            <div style={{ marginRight: "1em" }}>{item.min}-{item.max}</div>
+          </Grid>
+          <Grid item xs={9} key={"result" + item.min + "-" + item.max}>
+            <div>{item.result ? item.result : item.table}</div>
+          </Grid>
+        </>
+      });
 
-    return <>
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={3} style={{display: "flex", justifyContent: "flex-end"}} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText}>
-          <div style={{marginRight: "1em"}}>{t("Roll")}</div>
+      return <>
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid item xs={12}>&nbsp;</Grid>
+          <Grid item xs={3} style={{ display: "flex", justifyContent: "flex-end" }} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText}>
+            <div style={{ marginRight: "1em" }}>{t("Roll")}</div>
+          </Grid>
+          <Grid item xs={9} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText}>
+            <div>{t("Description")}</div>
+          </Grid>
+          {items}
+          <Grid item xs={12}>&nbsp;</Grid>
+          <Grid item xs={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+            <Button onClick={() => setMode("rockandroll")} startIcon={<CasinoIcon />} variant='contained'>{t("Return to rolling mode")}</Button>
+          </Grid>
+          <Grid item xs={12}>&nbsp;</Grid>
         </Grid>
-        <Grid item xs={9} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText}>
-          <div>{t("Description")}</div>
-        </Grid>
-        {items}
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-          <Button onClick={() => setMode("rockandroll")} startIcon={<CasinoIcon />} variant='contained'>{t("Return to rolling mode")}</Button>
-        </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-      </Grid>
-    </>;
+      </>;
+    } catch (e) {
+      return null;
+    }
   }
 
 };

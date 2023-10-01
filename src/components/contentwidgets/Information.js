@@ -28,7 +28,7 @@ const ckEditorThemeSync = () => {
 }
 
   return (
-    <div style={{ width: '100%', height: '100%' }} dangerouslySetInnerHTML={{__html: props.content.data.textContent}} />
+    <div style={{ width: '100%', height: '100%' }} dangerouslySetInnerHTML={{__html: props.content && props.content.data ? props.content.data.textContent : ""}} />
   );
 
 };

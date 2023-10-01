@@ -522,51 +522,63 @@ const content = createSlice({
 // Path is in the form of "id1.id2.id3"
 export const getContent = (state, path) => {
 
-    if (path === undefined || path === null || path === "") {
-        return state;
-    }
+    try {
+        if (path === undefined || path === null || path === "") {
+            return state;
+        }
 
-    const pathArray = path.split(".");
+        const pathArray = path.split(".");
 
-    let content = state;
-    for (let i = 0; i < pathArray.length; i++) {
-        content = content.find(item => item.id === pathArray[i]).data.children;
+        let content = state;
+        for (let i = 0; i < pathArray.length; i++) {
+            content = content.find(item => item.id === pathArray[i]).data.children;
+        }
+        return content;
+    } catch (e) {
+        return null;
     }
-    return content;
 }
 
-export const getContentMetaData = (state, path) => {    
+export const getContentMetaData = (state, path) => {
 
-    if (path === undefined || path === null || path === "") {
-        return state;
+    try {
+        if (path === undefined || path === null || path === "") {
+            return state;
+        }
+
+        const pathArray = path.split(".");
+
+        let content = state;
+        for (let i = 0; i < pathArray.length - 1; i++) {
+            content = content.find(item => item.id === pathArray[i]).data.children;
+        }
+        content = content.find(item => item.id === pathArray[pathArray.length - 1])
+        return content;
+    } catch (e) {
+        return null;
     }
-
-    const pathArray = path.split(".");
-
-    let content = state;
-    for (let i = 0; i < pathArray.length - 1; i++) {
-        content = content.find(item => item.id === pathArray[i]).data.children;
-    }
-    content = content.find(item => item.id === pathArray[pathArray.length - 1])
-    return content;
 }
 
 export const getContentName = (state, path) => {
 
-    if (path === undefined || path === null || path === "") {
-        return "Home menu";
-    }
+    try {
+        if (path === undefined || path === null || path === "") {
+            return "Home menu";
+        }
 
-    const pathArray = path.split(".");
+        const pathArray = path.split(".");
 
-    let content = state;
-    let contentName = "";
-    for (let i = 0; i < pathArray.length; i++) {
-        const nodo = content.find(item => item.id === pathArray[i]);
-        content = nodo.data.children;
-        contentName = nodo.label;
+        let content = state;
+        let contentName = "";
+        for (let i = 0; i < pathArray.length; i++) {
+            const nodo = content.find(item => item.id === pathArray[i]);
+            content = nodo.data.children;
+            contentName = nodo.label;
+        }
+        return contentName;
+    } catch (e) {
+        return null;
     }
-    return contentName;
 }
 
 export const diceThrow = (state, idTable) => {
