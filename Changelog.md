@@ -1,6 +1,10 @@
 # Changelog Template progetto DM Whisper
 
 
+    01 Ott 2023
+    -----------
+    - 1.10.0 User can now browse content with a tabbed interface.
+
     27 Sep 2023
     -----------
     - 1.9.1 Small corrections (link colors, table ghost item).

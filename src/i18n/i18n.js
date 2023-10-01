@@ -137,6 +137,7 @@ i18n
           "Or, load content from a slot:": "Or, load content from a slot:",
           "List of contents": "List of contents",
           "Content label": "Content label",
+          "Bookmark ": "Bookmark ",
         }
       },
       it: {
@@ -259,6 +260,7 @@ i18n
           "Or, load content from a slot:": "Oppure, carica il contenuto da uno slot:",
           "List of contents": "Lista dei contenuti",
           "Content label": "Etichetta del contenuto",
+          "Bookmark ": "Segnalibro ",
         }
       },
       es: {
@@ -380,6 +382,7 @@ i18n
           "Or, load content from a slot:": "O, cargar contenido desde una ranura:",
           "List of contents": "Lista de contenidos",
           "Content label": "Etiqueta de contenido",
+          "Bookmark ": "Marcador ",
         },
       },
       fr: {
@@ -501,6 +504,7 @@ i18n
           "Or, load content from a slot:": "Ou, chargez le contenu d'une fente:",
           "List of contents": "Liste des contenus",
           "Content label": "Étiquette de contenu",
+          "Bookmark ": "Signet ",
         },
       },
       de: {
@@ -622,6 +626,7 @@ i18n
           "Or, load content from a slot:": "Oder laden Sie den Inhalt aus einem Steckplatz:",
           "List of contents": "Liste der Inhalte",
           "Content label": "Inhaltsetikett",
+          "Bookmark ": "Lesezeichen ",
         }
       },
       pt: {
@@ -743,6 +748,7 @@ i18n
           "Or, load content from a slot:": "Ou carregue o conteúdo de um slot:",
           "List of contents": "Lista de conteúdos",
           "Content label": "Etiqueta de conteúdo",
+          "Bookmark ": "Marcador ",
         }
       },
       gr: {
@@ -864,6 +870,7 @@ i18n
           "Or, load content from a slot:": "Ή, φορτώστε περιεχόμενο από μια υποδοχή:",
           "List of contents": "Λίστα περιεχομένων",
           "Content label": "Ετικέτα περιεχομένου",
+          "Bookmark ": "Σελιδοδείκτης ",
         }
       },
       se: {
@@ -985,6 +992,7 @@ i18n
           "Or, load content from a slot:": "Eller ladda innehåll från en lucka:",
           "List of contents": "Lista över innehåll",
           "Content label": "Innehållsetikett",
+          "Bookmark ": "Bokmärke ",
         }
       },
       uk: {
@@ -1106,6 +1114,7 @@ i18n
           "Or, load content from a slot:": "Або завантажте вміст зі слота:",
           "List of contents": "Список вмісту",
           "Content label": "Мітка вмісту",
+          "Bookmark ": "Закладка ",
         }
       },
       he: {
@@ -1227,6 +1236,7 @@ i18n
           "Or, load content from a slot:": "או, טען תוכן מחריץ:",
           "List of contents": "רשימת תוכן",
           "Content label": "תווית תוכן",
+          "Bookmark ": "סימניה ",
         }
       },
       no: {
@@ -1348,6 +1358,7 @@ i18n
           "Or, load content from a slot:": "Eller last inn innhold fra et spor:",
           "List of contents": "Liste over innhold",
           "Content label": "Innholdsetikett",
+          "Bookmark ": "Bokmerke ",
         }
       },
       nl: {
@@ -1469,6 +1480,7 @@ i18n
           "Or, load content from a slot:": "Of laad inhoud van een slot:",
           "List of contents": "Lijst met inhoud",
           "Content label": "Inhoudslabel",
+          "Bookmark ": "Bladwijzer ",
         }
       },
       pl: {
@@ -1590,6 +1602,7 @@ i18n
           "Or, load content from a slot:": "Lub załaduj zawartość z gniazda:",
           "List of contents": "Lista treści",
           "Content label": "Etykieta zawartości",
+          "Bookmark ": "Zakładka ",
         }
       },
       hu: {
@@ -1711,6 +1724,7 @@ i18n
           "Or, load content from a slot:": "Vagy töltse be a tartalmat egy foglalatból:",
           "List of contents": "Tartalomjegyzék",
           "Content label": "Tartalom címke",
+          "Bookmark ": "Könyvjelző ",
         }
       },
       bg: {
@@ -1832,6 +1846,7 @@ i18n
           "Or, load content from a slot:": "Или заредете съдържание от слот:",
           "List of contents": "Списък със съдържание",
           "Content label": "Етикет на съдържанието",
+          "Bookmark ": "Отметка ",
         }
       },
       fi: {
@@ -1953,6 +1968,7 @@ i18n
           "Or, load content from a slot:": "Tai lataa sisältöpaikasta:",
           "List of contents": "Sisältöluettelo",
           "Content label": "Sisältö etiketti",
+          "Bookmark ": "Kirjanmerkki ",
         }
       },
       da: {
@@ -2074,6 +2090,7 @@ i18n
           "Or, load content from a slot:": "Eller indlæs indhold fra et slot:",
           "List of contents": "Liste over indhold",
           "Content label": "Indholdsetiket",
+          "Bookmark ": "Bogmærke ",
         }
       },
       ro: {
@@ -2195,6 +2212,7 @@ i18n
           "Or, load content from a slot:": "Sau încărcați conținut dintr-un slot:",
           "List of contents": "Lista de conținut",
           "Content label": "Eticheta conținutului",
+          "Bookmark ": "Marcați ",
         }
       },
       cs: {
@@ -2316,6 +2334,7 @@ i18n
           "Or, load content from a slot:": "Nebo načtěte obsah ze slotu:",
           "List of contents": "Seznam obsahu",
           "Content label": "Obsahová štítek",
+          "Bookmark ": "Záložka ",
         }
       },
       is: {
@@ -2437,6 +2456,7 @@ i18n
           "Or, load content from a slot:": "Eða hlaðið efni úr rifa:",
           "List of contents": "Listi yfir efni",
           "Content label": "Efni merki",
+          "Bookmark ": "Bókamerki ",
         }
       }
     }

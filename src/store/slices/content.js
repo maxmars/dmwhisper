@@ -302,6 +302,7 @@ export const initialState = {
     ],
     copiedContent: null, // contains the path to copy
     clipboardAction: null, // can be null, "copy" or "cut"
+    tabPaths: ["", "", "", "", ""]
 };
 
 
@@ -502,8 +503,19 @@ const content = createSlice({
             } else {
                 delete content.data.children;
             }
-        }
+        },
+        setTabPath(state, action) {
+            const { tab, path } = action.payload;
 
+            if (!state.tabPaths) {
+                state.tabPaths = ["", "", "", "", ""];
+            }
+
+            state.tabPaths[tab] = path;
+        },
+        clearTabPath(state, action) {
+            state.tabPaths = ["", "", "", "", ""];
+        }
     }
 });
 
@@ -628,4 +640,4 @@ export default content.reducer;
 
 export const { setContent, clearContent, addTable, removeTable, updateTableHeader,
     updateTableRng, updateContent, updateContentHeader, addMenuItem, updateContentType,
-    setClipboardAction, deleteMenuItem } = content.actions;
+    setClipboardAction, deleteMenuItem, setTabPath, clearTabPath } = content.actions;
