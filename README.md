@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    02 Ott 2023
+    -----------
+    - 1.10.1 Tables choice autocomplete must allow choosing the same table multiple times (e.g. NOUN VERB NOUN).
+
     01 Ott 2023
     -----------
     - 1.10.0 User can now browse content with a tabbed interface.

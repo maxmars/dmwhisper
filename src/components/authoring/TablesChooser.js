@@ -49,10 +49,6 @@ export default function TablesChooser(props) {
 
   const addTableId = (tableId) => {
 
-    if (tableIds.find((item) => item.id === tableId)) {
-      return;
-    }
-
     const newTableIds = [...tableIds, {
       id: tableId,
       label: tableId
