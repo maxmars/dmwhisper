@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { getContent, getContentMetaData, setContent, getContentName, initialState, setTabPath, clearTabPath } from '../../store/slices/content';
+import { getContent, getContentMetaData, getContentName, setTabPath, clearTabPath } from '../../store/slices/content';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import SelectedContent from './SelectedContent';
@@ -72,10 +72,10 @@ const ContentTree = () => {
         const newCurrentContent = getContentMetaData(tree, newPath);
 
         setContentName(getContentName(tree, newPath));
+        setPath(newPath);
 
         if (!contentType || contentType === "menu") {
             setCurrentContent(getContent(tree, newPath));
-            setPath(newPath);
             setSelectedContent(null);
             return;
         }
