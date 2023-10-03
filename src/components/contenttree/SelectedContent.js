@@ -7,6 +7,7 @@ import Table from '../contentwidgets/Table';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTranslation } from 'react-i18next';
+import './SelectedContent.css';
 
 
 const SelectedContent = (props) => {
