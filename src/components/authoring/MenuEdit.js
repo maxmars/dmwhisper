@@ -246,6 +246,16 @@ const MenuEdit = (props) => {
             updatedContentHeader: updatedContentHeader,
             path: path,
         }));
+
+        let tempPath = null;
+
+        if (path.indexOf(".") > -1) {
+            tempPath = path.substring(0, path.lastIndexOf(".")) + "." + currentMenuId;
+        } else {
+            tempPath = currentMenuId;
+        }
+
+        setPath(tempPath);
     }
 
     const deleteMenu = (menuToDelete) => {
@@ -434,7 +444,7 @@ const MenuEdit = (props) => {
                                     path.length > 0 ?
                                         <TextField
                                             value={currentMenuId}
-                                            onChange={(event) => setCurrentMenuId(event.target.value)}
+                                            onChange={(event) => setCurrentMenuId(event.target.value.trim().replace(/\./g, "-"))}
                                             id="content-id"
                                             variant="outlined"
                                             sx={{ width: "100%" }} />
@@ -537,9 +547,9 @@ const MenuEdit = (props) => {
                                         <Grid item xs={12}>&nbsp;</Grid>
                                         <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
                                         <Grid item xs={12}>
-                                            <TablesChooser 
-                                                tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => { return { label: item, id: item }}) : null}
-                                                onTablesChange={(tables) => setCurrentMenuTable(tables)} 
+                                            <TablesChooser
+                                                tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => { return { label: item, id: item } }) : null}
+                                                onTablesChange={(tables) => setCurrentMenuTable(tables)}
                                             />
                                         </Grid>
                                     </> : null
