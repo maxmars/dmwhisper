@@ -594,7 +594,7 @@ const MenuEdit = (props) => {
                                 <Grid item xs={12}>
                                     <TextField
                                         value={newContentId}
-                                        onChange={(event) => setNewContentId(event.target.value)}
+                                        onChange={(event) => setNewContentId(event.target.value.trim().replace(/\./g, "-"))}
                                         id="new-content-id"
                                         variant="outlined"
                                         sx={{ width: "100%" }} />
