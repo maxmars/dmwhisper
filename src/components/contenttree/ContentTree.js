@@ -53,8 +53,6 @@ const ContentTree = () => {
         // If there's a dot in the path, remove the last part
         if (path.indexOf(".") > -1) {
             newPath = path.substring(path.lastIndexOf(".") + 1);
-        } else {
-            newPath = "";
         }
 
         return newPath;
