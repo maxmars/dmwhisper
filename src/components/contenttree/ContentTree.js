@@ -196,6 +196,24 @@ const ContentTree = () => {
         return null;
     }
 
+    const goToContent = (newPath) => {
+        let nextPath = null;
+
+        if (path.length > 0) {
+            nextPath = path + "." + newPath;
+        } else {
+            nextPath = newPath;
+        }
+
+        const nextCurrentContent = getContentMetaData(tree, nextPath);
+        setContentName(getContentName(tree, nextPath));
+        setPath(nextPath);
+        setCurrentContent(nextCurrentContent);
+        setSelectedContent(nextCurrentContent);
+
+        return null;
+    }
+
     try {
         return (
             <>
@@ -227,7 +245,11 @@ const ContentTree = () => {
                             />
                         </div>
                         :
-                        <SelectedContent selectedContent={selectedContent} clearSelectedContent={backOneLevel} goToPreviousContent={goToPreviousContent} goToNextContent={goToNextContent} />}
+                        <SelectedContent selectedContent={selectedContent} 
+                                         clearSelectedContent={backOneLevel} 
+                                         goToPreviousContent={goToPreviousContent} 
+                                         goToNextContent={goToNextContent}
+                                         goToContent={goToContent} />}
                 </div>
             </>
         );

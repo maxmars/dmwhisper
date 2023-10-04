@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Information from '../contentwidgets/Information';
 import Table from '../contentwidgets/Table';
+import Menu from '../contentwidgets/Menu';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTranslation } from 'react-i18next';
@@ -27,7 +28,7 @@ const SelectedContent = (props) => {
           return <Table content={props.selectedContent} />;
 
         default:
-          return null;
+          return <Menu content={props.selectedContent} goToContent={props.goToContent} />
       }
     } catch (e) {
       return null;
@@ -75,7 +76,7 @@ const SelectedContent = (props) => {
           justifyContent: 'center',
         }}
       >
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{height: "100%"}}>
           {getProperWidget()}
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
