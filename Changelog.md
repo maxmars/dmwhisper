@@ -1,6 +1,10 @@
 # Changelog Template progetto DM Whisper
 
 
+    04 Ott 2023
+    -----------
+    - 1.11.0 Added navigation between peer contents.
+
     03 Ott 2023
     -----------
     - 1.10.2 Bugfixes (Menu Edit UI).

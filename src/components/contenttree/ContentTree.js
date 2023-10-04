@@ -34,7 +34,7 @@ const ContentTree = () => {
         { field: 'label', headerName: t('Content'), flex: 1 },
     ];
 
-    const backOneLevel = () => {
+    const upperPath = () => {
         let newPath = path;
 
         // If there's a dot in the path, remove the last part
@@ -43,6 +43,25 @@ const ContentTree = () => {
         } else {
             newPath = "";
         }
+
+        return newPath
+    }
+
+    const pathLeaf = () => {
+        let newPath = path;
+
+        // If there's a dot in the path, remove the last part
+        if (path.indexOf(".") > -1) {
+            newPath = path.substring(path.lastIndexOf(".") + 1);
+        } else {
+            newPath = "";
+        }
+
+        return newPath;
+    }
+
+    const backOneLevel = () => {
+        let newPath = upperPath();
 
         const newCurrentContent = getContentMetaData(tree, newPath);
         setContentName(getContentName(tree, newPath));
@@ -125,6 +144,58 @@ const ContentTree = () => {
         goToHomeMenu();
     }
 
+    const goToPreviousContent = () => {
+        const newPath = upperPath();
+        const newCurrentContent = getContent(tree, newPath);
+        const myPathLeaf = pathLeaf();
+
+        if (newCurrentContent) {
+            newCurrentContent.find((item, index) => {
+                if (item.id === myPathLeaf) {
+                    const previousItem = newCurrentContent[index - 1];
+                    if (previousItem) {
+                        const previousPath = newPath + "." + previousItem.id;
+                        const previousCurrentContent = getContentMetaData(tree, previousPath);
+                        setContentName(getContentName(tree, previousPath));
+                        setPath(previousPath);
+                        setCurrentContent(previousCurrentContent);
+                        setSelectedContent(previousCurrentContent);
+                    }
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        return null;
+    }
+
+    const goToNextContent = () => {
+        const newPath = upperPath();
+        const newCurrentContent = getContent(tree, newPath);
+        const myPathLeaf = pathLeaf();
+
+        if (newCurrentContent) {
+            newCurrentContent.find((item, index) => {
+                if (item.id === myPathLeaf) {
+                    const nextItem = newCurrentContent[index + 1];
+                    if (nextItem) {
+                        const nextPath = newPath + "." + nextItem.id;
+                        const nextCurrentContent = getContentMetaData(tree, nextPath);
+                        setContentName(getContentName(tree, nextPath));
+                        setPath(nextPath);
+                        setCurrentContent(nextCurrentContent);
+                        setSelectedContent(nextCurrentContent);
+                    }
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        return null;
+    }
+
     try {
         return (
             <>
@@ -156,7 +227,7 @@ const ContentTree = () => {
                             />
                         </div>
                         :
-                        <SelectedContent selectedContent={selectedContent} clearSelectedContent={backOneLevel} />}
+                        <SelectedContent selectedContent={selectedContent} clearSelectedContent={backOneLevel} goToPreviousContent={goToPreviousContent} goToNextContent={goToNextContent} />}
                 </div>
             </>
         );
