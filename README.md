@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    06 Ott 2023
+    -----------
+    - 1.12.0 New menu system.
+
     04 Ott 2023
     -----------
     - 1.11.0 Added navigation between peer contents.

@@ -20,12 +20,23 @@ const AuthoringMenu = () => {
     case 'menu':
       return (
         <Grid container sx={{ overflow: 'scroll', height: '100%' }}>
+          <Grid item xs={12}>&nbsp;</Grid>
+          <Grid item xs={12}>&nbsp;</Grid>
+          <Grid item xs={12}>&nbsp;</Grid>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button sx={{width: '80%'}} startIcon={<AccountTreeIcon />} onClick={() => setPageMode('menuedit')} variant="contained" color="primary">{t("Edit content tree")}</Button>
           </Grid>
+          <Grid item xs={12}>&nbsp;</Grid>
+          <Grid item xs={12}>&nbsp;</Grid>
+          <Grid item xs={12}>&nbsp;</Grid>
+          <Grid item xs={12}>&nbsp;</Grid>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button sx={{width: '80%'}} startIcon={<TableChartIcon />} onClick={() => setPageMode('tablesedit')} variant="contained" color="primary">{t("Edit content tables")}</Button>
           </Grid>
+          <Grid item xs={12}>&nbsp;</Grid>
+          <Grid item xs={12}>&nbsp;</Grid>
+          <Grid item xs={12}>&nbsp;</Grid>
+          <Grid item xs={12}>&nbsp;</Grid>
         </Grid>
       );
 

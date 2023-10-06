@@ -1,4 +1,3 @@
-import { Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 import ResultsList from './results/SavedRolls';
 import ContentTree from './contenttree/ContentTree';
@@ -11,16 +10,26 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import DataObjectIcon from '@mui/icons-material/DataObject';
 import TableChartIcon from '@mui/icons-material/TableChart';
-import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import InfoIcon from '@mui/icons-material/Info';
 import Info from './info/Info';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setContent, initialState } from '../store/slices/content';
+import { setContent, clearTabPath } from '../store/slices/content';
 import { useTranslation } from 'react-i18next';
 import InputIcon from '@mui/icons-material/Input';
 import OutputIcon from '@mui/icons-material/Output';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Drawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import StarRateIcon from '@mui/icons-material/StarRate';
+
 
 const DMWhisper = () => {
 
@@ -42,12 +51,9 @@ const DMWhisper = () => {
   });
 
   // By default, user is on the "Browse content" tab
-  const [tab, setTab] = useState(5);
+  const [tab, setTab] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
   const throws = useSelector((st) => st.throws);
-
-  const handleChange = (event, newValue) => {
-    setTab(newValue);
-  };
 
   React.useEffect(() => {
     async function fetchContent() {
@@ -64,7 +70,7 @@ const DMWhisper = () => {
 
           if (datafile && datafile.ok) {
             const datafileJsonString = await datafile.text();
-            
+
             if (dispatch) {
               try {
                 dispatch(setContent(JSON.parse(datafileJsonString)));
@@ -82,35 +88,106 @@ const DMWhisper = () => {
     fetchContent();
   }, [dispatch]);
 
+  const leftMenu = () => (
+    <Box
+      sx={{ width: 300 }}
+      role="presentation"
+      onClick={() => setMenuOpen(!menuOpen)}
+      onKeyDown={() => setMenuOpen(!menuOpen)}
+    >
+      <List>
+        <ListItem key="browse" disablePadding>
+          <ListItemButton onClick={() => setTab(0)}>
+            <ListItemIcon>
+              <TableChartIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("Browse")} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key="saved" disablePadding>
+          <ListItemButton onClick={() => setTab(1)}>
+            <ListItemIcon>
+              <StarRateIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("Saved") + " (" + throws.sequence.length + ")"} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key="edit_content" disablePadding>
+          <ListItemButton onClick={() => setTab(2)}>
+            <ListItemIcon>
+              <DataObjectIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("Edit content")} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key="list_of_contents" disablePadding>
+          <ListItemButton onClick={() => setTab(3)}>
+            <ListItemIcon>
+              <FormatListBulletedIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("List of contents")} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key="input" disablePadding>
+          <ListItemButton onClick={() => setTab(4)}>
+            <ListItemIcon>
+              <InputIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("Import data")} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key="output" disablePadding>
+          <ListItemButton onClick={() => setTab(5)}>
+            <ListItemIcon>
+              <OutputIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("Export data")} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key="info" disablePadding>
+          <ListItemButton onClick={() => setTab(6)}>
+            <ListItemIcon>
+              <InfoIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("Info")} />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Box>
+  );
+
   try {
     return (
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', height: '12vh' }}>
-          <Tabs value={tab} onChange={handleChange} variant="scrollable">
-            <Tab icon={<InfoIcon />} label={t("Info")} iconPosition="start" />
-            <Tab icon={<InputIcon />} label={t("Import data")} iconPosition="start" />
-            <Tab icon={<OutputIcon />} label={t("Export data")} iconPosition="start" />
-            <Tab icon={<FormatListBulletedIcon />} label={t("List of contents")} iconPosition="start" />
-            <Tab icon={<DataObjectIcon />} label={t("Edit content")} iconPosition="start" />
-            <Tab icon={<TableChartIcon />} label={t("Browse")} iconPosition="start" />
-            <Tab icon={<BookmarksIcon />} label={t("Saved") + " (" + throws.sequence.length + ")"} iconPosition="start" />
-          </Tabs>
+        <div key="left" style={{ paddingLeft: "2em" }}>
+          <IconButton aria-label="Menu" onClick={() => setMenuOpen(!menuOpen)} edge="start" color="inherit" >
+            <MenuIcon />
+          </IconButton>
+          <br />
+          <br />
+          <Drawer
+            anchor="left"
+            open={menuOpen}
+            onClose={() => setMenuOpen(!menuOpen)}
+          >
+            {leftMenu()}
+          </Drawer>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'scroll', height: '88vh', width: '100%' }}>
-          {tab === 0 && <Info />}
-          {tab === 1 && <InputMenu />}
-          {tab === 2 && <OutputMenu />}
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'scroll', width: '100%', height: '100%' }}>
+          {tab === 0 && <ContentTree />}
+          {tab === 1 && <ResultsList />}
+          {tab === 2 && <AuthoringMenu />}
           {tab === 3 && <ContentsList />}
-          {tab === 4 && <AuthoringMenu />}
-          {tab === 5 && <ContentTree />}
-          {tab === 6 && <ResultsList />}
+          {tab === 4 && <InputMenu />}
+          {tab === 5 && <OutputMenu />}
+          {tab === 6 && <Info />}
         </div>
       </ThemeProvider>
 
     );
   } catch (error) {
-    dispatch(setContent(initialState));
+    dispatch(clearTabPath());
     document.location.href = document.location.href.substring(0, document.location.href.indexOf('?'));
     return null;
   }

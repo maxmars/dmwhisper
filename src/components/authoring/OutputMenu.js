@@ -26,12 +26,24 @@ const OutputMenu = () => {
 
   return (
     <Grid container sx={{ overflow: 'scroll', height: '100%' }}>
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button sx={{width: '80%'}} startIcon={<DownloadIcon />} onClick={downloadJson} variant="contained" color="primary">{t("Download content as JSON")}</Button>
+        <Button sx={{ width: '80%' }} startIcon={<DownloadIcon />} onClick={downloadJson} variant="contained" color="primary">{t("Download content as JSON")}</Button>
       </Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button sx={{width: '80%'}} startIcon={<ContentCopyIcon />} onClick={copyContentToClipboard} variant="contained" color="primary">{t("Copy content as JSON to clipboard")}</Button>
+        <Button sx={{ width: '80%' }} startIcon={<ContentCopyIcon />} onClick={copyContentToClipboard} variant="contained" color="primary">{t("Copy content as JSON to clipboard")}</Button>
       </Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid item xs={12}>&nbsp;</Grid>
     </Grid>
   );
 };

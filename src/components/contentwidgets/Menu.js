@@ -17,7 +17,7 @@ const Menu = (props) => {
         return (
             <>
                 <br />
-                <div id="datagridhome" style={{ height: "100%", width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <div id="datagridhome" style={{ height: "70vh", width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <DataGrid
                         sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
                         rows={props.content.data.children}
