@@ -53,8 +53,6 @@ const ContentTree = () => {
         // If there's a dot in the path, remove the last part
         if (path.indexOf(".") > -1) {
             newPath = path.substring(path.lastIndexOf(".") + 1);
-        } else {
-            newPath = "";
         }
 
         return newPath;
@@ -154,7 +152,7 @@ const ContentTree = () => {
                 if (item.id === myPathLeaf) {
                     const previousItem = newCurrentContent[index - 1];
                     if (previousItem) {
-                        const previousPath = newPath + "." + previousItem.id;
+                        const previousPath = newPath + (newPath && newPath.length > 0 ? "." : "") + previousItem.id;
                         const previousCurrentContent = getContentMetaData(tree, previousPath);
                         setContentName(getContentName(tree, previousPath));
                         setPath(previousPath);
@@ -180,7 +178,7 @@ const ContentTree = () => {
                 if (item.id === myPathLeaf) {
                     const nextItem = newCurrentContent[index + 1];
                     if (nextItem) {
-                        const nextPath = newPath + "." + nextItem.id;
+                        const nextPath = newPath + (newPath && newPath.length > 0 ? "." : "") + nextItem.id;
                         const nextCurrentContent = getContentMetaData(tree, nextPath);
                         setContentName(getContentName(tree, nextPath));
                         setPath(nextPath);
