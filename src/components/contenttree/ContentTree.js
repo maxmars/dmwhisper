@@ -72,6 +72,11 @@ const ContentTree = () => {
             setSelectedContent(newCurrentContent);
         }
 
+        dispatch(setTabPath({
+            tab: tab,
+            path: newPath
+        }));
+
         setPath(newPath);
 
     }
@@ -115,7 +120,12 @@ const ContentTree = () => {
             setSelectedContent(newCurrentContent);
         }
 
-        setPath("");
+        dispatch(setTabPath({
+            tab: tab,
+            path: newPath
+        }));
+
+        setPath(newPath);
     };
 
     const handleChange = (event, newValue) => {
@@ -158,6 +168,10 @@ const ContentTree = () => {
                         setPath(previousPath);
                         setCurrentContent(previousCurrentContent);
                         setSelectedContent(previousCurrentContent);
+                        dispatch(setTabPath({
+                            tab: tab,
+                            path: newPath
+                        }));
                     }
                     return true;
                 }
@@ -184,6 +198,10 @@ const ContentTree = () => {
                         setPath(nextPath);
                         setCurrentContent(nextCurrentContent);
                         setSelectedContent(nextCurrentContent);
+                        dispatch(setTabPath({
+                            tab: tab,
+                            path: newPath
+                        }));
                     }
                     return true;
                 }
@@ -208,22 +226,39 @@ const ContentTree = () => {
         setPath(nextPath);
         setCurrentContent(nextCurrentContent);
         setSelectedContent(nextCurrentContent);
+        dispatch(setTabPath({
+            tab: tab,
+            path: nextPath
+        }));
 
         return null;
     }
 
     try {
+        let tabName1 = tab === 0 ? contentName : (wholeContent.tabPaths && wholeContent.tabPaths[0] ? getContentMetaData(tree, wholeContent.tabPaths[0]).label : t("Home"));
+        let tabName2 = tab === 1 ? contentName : (wholeContent.tabPaths && wholeContent.tabPaths[1] ? getContentMetaData(tree, wholeContent.tabPaths[1]).label : t("Home"));
+        let tabName3 = tab === 2 ? contentName : (wholeContent.tabPaths && wholeContent.tabPaths[2] ? getContentMetaData(tree, wholeContent.tabPaths[2]).label : t("Home"));
+        let tabName4 = tab === 3 ? contentName : (wholeContent.tabPaths && wholeContent.tabPaths[3] ? getContentMetaData(tree, wholeContent.tabPaths[3]).label : t("Home"));
+        let tabName5 = tab === 4 ? contentName : (wholeContent.tabPaths && wholeContent.tabPaths[4] ? getContentMetaData(tree, wholeContent.tabPaths[4]).label : t("Home"));
+
+        if (tab !== 0 && tabName1.length > 12) tabName1 = tabName1.substring(0, 10) + "..";
+        if (tab !== 1 && tabName2.length > 12) tabName2 = tabName2.substring(0, 10) + "..";
+        if (tab !== 2 && tabName3.length > 12) tabName3 = tabName3.substring(0, 10) + "..";
+        if (tab !== 3 && tabName4.length > 12) tabName4 = tabName4.substring(0, 10) + "..";
+        if (tab !== 4 && tabName5.length > 12) tabName5 = tabName5.substring(0, 10) + "..";
+
         return (
             <div style={{height: '100%'}}>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', height: '12%' }}>
                     <Tabs value={tab} onChange={handleChange} variant="scrollable">
-                        <Tab icon={<BookmarksIcon />} label={t("Bookmark ") + "1"} iconPosition="start" />
-                        <Tab icon={<BookmarksIcon />} label={t("Bookmark ") + "2"} iconPosition="start" />
-                        <Tab icon={<BookmarksIcon />} label={t("Bookmark ") + "3"} iconPosition="start" />
-                        <Tab icon={<BookmarksIcon />} label={t("Bookmark ") + "4"} iconPosition="start" />
-                        <Tab icon={<BookmarksIcon />} label={t("Bookmark ") + "5"} iconPosition="start" />
+                        <Tab icon={<BookmarksIcon />} label={tabName1} iconPosition="start" />
+                        <Tab icon={<BookmarksIcon />} label={tabName2} iconPosition="start" />
+                        <Tab icon={<BookmarksIcon />} label={tabName3} iconPosition="start" />
+                        <Tab icon={<BookmarksIcon />} label={tabName4} iconPosition="start" />
+                        <Tab icon={<BookmarksIcon />} label={tabName5} iconPosition="start" />
                     </Tabs>
                 </div>
+                <br />
                 <div style={{ height: '88%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     {selectedContent === null ?
                         <div style={{ height: '88vh', width: '100%'}}>

@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    07 Ott 2023
+    -----------
+    - 1.13.0 Bookmarks now have names.
+
     06 Ott 2023
     -----------
     - 1.12.0 New menu system.
