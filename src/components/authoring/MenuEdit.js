@@ -105,7 +105,13 @@ const MenuEdit = (props) => {
         }, 250);
     }
 
-    require('ckeditor5-custom-build/build/translations/' + navigator.language.substring(0, 2) + '.js');
+    let lng = navigator.language.substring(0, 2).toLocaleLowerCase();
+    
+    if (lng === "en") {
+        lng = "en-gb";
+    }
+
+    require('ckeditor5-custom-build/build/translations/' + lng + '.js');
 
     const dispatch = useDispatch();
 
