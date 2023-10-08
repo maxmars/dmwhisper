@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    08 Ott 2023
+    -----------
+    - 1.14.0 An English user manual has been added.
+
     07 Ott 2023
     -----------
     - 1.13.0 Bookmarks now have names.

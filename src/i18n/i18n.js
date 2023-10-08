@@ -138,6 +138,7 @@ i18n
           "List of contents": "List of contents",
           "Content label": "Content label",
           "Bookmark ": "Bookmark ",
+          "User manual": "User manual",
         }
       },
       it: {
@@ -261,6 +262,7 @@ i18n
           "List of contents": "Lista dei contenuti",
           "Content label": "Etichetta del contenuto",
           "Bookmark ": "Segnalibro ",
+          "User manual": "Manuale utente",
         }
       },
       es: {
@@ -383,6 +385,7 @@ i18n
           "List of contents": "Lista de contenidos",
           "Content label": "Etiqueta de contenido",
           "Bookmark ": "Marcador ",
+          "User manual": "Manual de usuario",
         },
       },
       fr: {
@@ -505,6 +508,7 @@ i18n
           "List of contents": "Liste des contenus",
           "Content label": "Étiquette de contenu",
           "Bookmark ": "Signet ",
+          "User manual": "Manuel utilisateur",
         },
       },
       de: {
@@ -627,6 +631,7 @@ i18n
           "List of contents": "Liste der Inhalte",
           "Content label": "Inhaltsetikett",
           "Bookmark ": "Lesezeichen ",
+          "User manual": "Benutzerhandbuch",
         }
       },
       pt: {
@@ -749,6 +754,7 @@ i18n
           "List of contents": "Lista de conteúdos",
           "Content label": "Etiqueta de conteúdo",
           "Bookmark ": "Marcador ",
+          "User manual": "Manual do usuário",
         }
       },
       gr: {
@@ -871,6 +877,7 @@ i18n
           "List of contents": "Λίστα περιεχομένων",
           "Content label": "Ετικέτα περιεχομένου",
           "Bookmark ": "Σελιδοδείκτης ",
+          "User manual": "Εγχειρίδιο χρήστη",
         }
       },
       se: {
@@ -993,6 +1000,7 @@ i18n
           "List of contents": "Lista över innehåll",
           "Content label": "Innehållsetikett",
           "Bookmark ": "Bokmärke ",
+          "User manual": "Användarhandbok",
         }
       },
       uk: {
@@ -1115,6 +1123,7 @@ i18n
           "List of contents": "Список вмісту",
           "Content label": "Мітка вмісту",
           "Bookmark ": "Закладка ",
+          "User manual": "Посібник користувача",
         }
       },
       he: {
@@ -1237,6 +1246,7 @@ i18n
           "List of contents": "רשימת תוכן",
           "Content label": "תווית תוכן",
           "Bookmark ": "סימניה ",
+          "User manual": "מדריך למשתמש",
         }
       },
       no: {
@@ -1359,6 +1369,7 @@ i18n
           "List of contents": "Liste over innhold",
           "Content label": "Innholdsetikett",
           "Bookmark ": "Bokmerke ",
+          "User manual": "Brukerhåndbok",
         }
       },
       nl: {
@@ -1481,6 +1492,7 @@ i18n
           "List of contents": "Lijst met inhoud",
           "Content label": "Inhoudslabel",
           "Bookmark ": "Bladwijzer ",
+          "User manual": "Gebruikershandleiding",
         }
       },
       pl: {
@@ -1603,6 +1615,7 @@ i18n
           "List of contents": "Lista treści",
           "Content label": "Etykieta zawartości",
           "Bookmark ": "Zakładka ",
+          "User manual": "Instrukcja obsługi",
         }
       },
       hu: {
@@ -1725,6 +1738,7 @@ i18n
           "List of contents": "Tartalomjegyzék",
           "Content label": "Tartalom címke",
           "Bookmark ": "Könyvjelző ",
+          "User manual": "Felhasználói kézikönyv",
         }
       },
       bg: {
@@ -1847,6 +1861,7 @@ i18n
           "List of contents": "Списък със съдържание",
           "Content label": "Етикет на съдържанието",
           "Bookmark ": "Отметка ",
+          "User manual": "Ръководство за потребителя",
         }
       },
       fi: {
@@ -1969,6 +1984,7 @@ i18n
           "List of contents": "Sisältöluettelo",
           "Content label": "Sisältö etiketti",
           "Bookmark ": "Kirjanmerkki ",
+          "User manual": "Käyttöopas",
         }
       },
       da: {
@@ -2091,6 +2107,7 @@ i18n
           "List of contents": "Liste over indhold",
           "Content label": "Indholdsetiket",
           "Bookmark ": "Bogmærke ",
+          "User manual": "Brugervejledning",
         }
       },
       ro: {
@@ -2213,6 +2230,7 @@ i18n
           "List of contents": "Lista de conținut",
           "Content label": "Eticheta conținutului",
           "Bookmark ": "Marcați ",
+          "User manual": "Manual de utilizare",
         }
       },
       cs: {
@@ -2335,6 +2353,7 @@ i18n
           "List of contents": "Seznam obsahu",
           "Content label": "Obsahová štítek",
           "Bookmark ": "Záložka ",
+          "User manual": "Uživatelský manuál",
         }
       },
       is: {
@@ -2457,6 +2476,7 @@ i18n
           "List of contents": "Listi yfir efni",
           "Content label": "Efni merki",
           "Bookmark ": "Bókamerki ",
+          "User manual": "Notendahandbók",
         }
       }
     }

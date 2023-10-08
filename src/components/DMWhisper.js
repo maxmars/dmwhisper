@@ -29,6 +29,7 @@ import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import StarRateIcon from '@mui/icons-material/StarRate';
+import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 
 
 const DMWhisper = () => {
@@ -142,6 +143,14 @@ const DMWhisper = () => {
               <OutputIcon />
             </ListItemIcon>
             <ListItemText primary={t("Export data")} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key="user_manual" disablePadding>
+          <ListItemButton onClick={() => window.open("https://marsiglietti.it/DMWhisper-manual-1.13.0.pdf", "_blank", null)}>
+            <ListItemIcon>
+              <ImportContactsIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("User manual")} />
           </ListItemButton>
         </ListItem>
         <ListItem key="info" disablePadding>
