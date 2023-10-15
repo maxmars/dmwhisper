@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem, GridToolbar } from '@mui/x-data-grid';
 import { useSelector } from 'react-redux';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -11,10 +11,13 @@ import Grid from '@mui/material/Grid';
 import Alert from '@mui/material/Alert';
 import { useDispatch } from 'react-redux';
 import { addTable, removeTable } from '../../store/slices/content';
+import { setTablesFilter } from '../../store/slices/defaults';
 import useTheme from '@mui/private-theming/useTheme';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
+import InputAdornment from '@mui/material/InputAdornment';
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 export default function TablesList(props) {
 
@@ -25,6 +28,7 @@ export default function TablesList(props) {
 
   const dispatch = useDispatch();
 
+  const tablesFilter = useSelector((st) => st.defaults.tablesFilter);
   const rows = useSelector((st) => st.content.tables).map((table) => {
     return {
       id: table.id,
@@ -84,27 +88,44 @@ export default function TablesList(props) {
     return (
       <Grid container >
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{display: 'flex', justifyContent: 'center'}}>
+        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
           <Typography>{t("List of Tables")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <Typography>{t("Click on a table to edit/delete it")}</Typography>
+          <TextField
+            id="table-filter"
+            value={tablesFilter}
+            onChange={(event) => dispatch(setTablesFilter(event.target.value))}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <FilterListIcon />
+                </InputAdornment>
+              ),
+            }}
+            variant="standard"
+          />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
           <DataGrid
             sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
             onRowClick={(params, event, details) => props.selectTable(params.row.id)}
-            rows={rows}
+            rows={rows.filter((row) => row.id.toLowerCase().includes(tablesFilter.toLowerCase()))}
             columns={columns}
             hideFooterPagination={true}
             paginationModel={{ page: 1, pageSize: 1000 }}
+            slots={{ toolbar: GridToolbar }}
           />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>
+          <Typography>{t("Click on a table to edit/delete it")}</Typography>
+        </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{display: 'flex', justifyContent: 'center'}}>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
           <Typography>{t("Add a new table:")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -135,7 +156,7 @@ export default function TablesList(props) {
   } else {
     return <Grid container >
       <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Typography>{t("Warning! Table is about to be deleted")}</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
@@ -145,10 +166,10 @@ export default function TablesList(props) {
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={6} style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Button onClick={() => deleteTable(tableIdToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
       </Grid>
-      <Grid item xs={6} style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Button onClick={() => setTableIdToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>

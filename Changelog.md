@@ -3,6 +3,7 @@
 
     15 Ott 2023
     -----------
+    - 1.16.0 You can now filter tables in the tables editing section list.
     - 1.15.0 Now table rolls can be outputted in the descriptive rich text content through @@XY macros (see initial content for examples).
 
     08 Ott 2023

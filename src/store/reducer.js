@@ -4,6 +4,7 @@ import { persistReducer } from 'redux-persist';
 
 // project imports
 import throwsReducer from './slices/throws';
+import defaultsReducer from './slices/defaults';
 import contentReducer from './slices/content';
 
 
@@ -11,6 +12,7 @@ import contentReducer from './slices/content';
 
 const flatReducer = combineReducers({
     throws: throwsReducer,
+    defaults: defaultsReducer,
     content: contentReducer,
 });
 
