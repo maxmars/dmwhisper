@@ -37,6 +37,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import TablesChooser from './TablesChooser';
 import './style.css';
+import { uuidv4 } from '../../utils/index.js';
 
 
 const MenuEdit = (props) => {
@@ -554,7 +555,7 @@ const MenuEdit = (props) => {
                                         <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
                                         <Grid item xs={12}>
                                             <TablesChooser
-                                                tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => { return { label: item, id: item } }) : null}
+                                                tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => { return { label: item, id: uuidv4() } }) : null}
                                                 onTablesChange={(tables) => setCurrentMenuTable(tables)}
                                             />
                                         </Grid>

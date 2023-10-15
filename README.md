@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    15 Ott 2023
+    -----------
+    - 1.15.0 Now table rolls can be outputted in the descriptive rich text content through @@XY macros (see initial content for examples).
+
     08 Ott 2023
     -----------
     - 1.14.0 An English user manual has been added.

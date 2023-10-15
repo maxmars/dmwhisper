@@ -14,6 +14,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import { uuidv4 } from '../../utils/index.js';
 
 
 export default function TablesChooser(props) {
@@ -40,7 +41,7 @@ export default function TablesChooser(props) {
 
     const emitTablesChange = () => {
       if (props.onTablesChange) {
-        const newTablesIdsArray = tableIds.map((item) => item.id);
+        const newTablesIdsArray = tableIds.map((item) => item.label);
         props.onTablesChange(newTablesIdsArray.join(' ').trim());
       }
     };
@@ -50,7 +51,7 @@ export default function TablesChooser(props) {
   const addTableId = (tableId) => {
 
     const newTableIds = [...tableIds, {
-      id: tableId,
+      id: uuidv4(),
       label: tableId
     }];
 

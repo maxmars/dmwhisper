@@ -16,6 +16,7 @@ import CasinoIcon from '@mui/icons-material/Casino';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import useTheme from '@mui/private-theming/useTheme';
 import { useTranslation } from 'react-i18next';
+import { padLeft } from '../../utils';
 
 const Table = (props) => {
 
@@ -23,6 +24,7 @@ const Table = (props) => {
   const content = useSelector((st) => st.content);
   const [mode, setMode] = useState("rockandroll");
   const [currentThrow, setCurrentThrow] = useState(null);
+  const [currentHtmlContent, setCurrentHtmlContent] = useState(props.content && props.content.data ? props.content.data.textContent : "");
   const [error, setError] = useState(null);
   const [autoUpdate, setAutoUpdate] = useState(false);
   const dispatch = useDispatch();
@@ -38,12 +40,30 @@ const Table = (props) => {
   };
 
   const diceRoll = () => {
-    const prefix = props.content.data.prefix ? props.content.data.prefix + " " : "";
-    const postfix = props.content.data.postfix ? " " + props.content.data.postfix : "";
-    try {
-      setCurrentThrow(prefix + diceThrow(content, props.content.data.table) + postfix);
-    } catch (e) {
-      setError(e.message);
+
+    if (props.content && props.content.data && props.content.data.textContent && props.content.data.textContent.indexOf("@@") > -1) {
+
+      let tables = props.content.data.table.trim().split(" ");
+
+      tables = tables.map((table) => {
+          return diceThrow(content, table);
+      });
+
+      let htmlContent = props.content.data.textContent;
+      tables.forEach((table, index) => {
+        htmlContent = htmlContent.replace("@@" + padLeft(index + 1, 2), table);
+      });
+      setCurrentHtmlContent(htmlContent);
+      setCurrentThrow("");
+
+    } else {
+      const prefix = props.content.data.prefix ? props.content.data.prefix + " " : "";
+      const postfix = props.content.data.postfix ? " " + props.content.data.postfix : "";
+      try {
+        setCurrentThrow(prefix + diceThrow(content, props.content.data.table.trim()) + postfix);
+      } catch (e) {
+        setError(e.message);
+      }
     }
   };
 
@@ -89,8 +109,8 @@ const Table = (props) => {
           <Stack spacing={2} direction="column"
             justifyContent="space-evenly"
             alignItems="center">
-            <div dangerouslySetInnerHTML={{ __html: props.content && props.content.data ? props.content.data.textContent : "" }} />
-            <div>{currentThrow}</div>
+            <div dangerouslySetInnerHTML={{ __html: currentHtmlContent }} />
+            {currentThrow && currentThrow.length > 0 ? <div>{currentThrow}</div> : null}
             <br />
             <div style={{ width: '100%' }}>
               <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -113,7 +133,7 @@ const Table = (props) => {
     );
   } else {
     try {
-      const table = getTable(content, props.content.data.table);
+      const table = getTable(content, props.content.data.table.trim());
       const items = table.rng.map(item => {
         return <>
           <Grid item xs={3} key={"dice" + item.min + "-" + item.max} style={{ display: "flex", justifyContent: "flex-end" }} >
