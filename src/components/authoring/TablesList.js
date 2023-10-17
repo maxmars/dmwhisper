@@ -85,6 +85,8 @@ export default function TablesList(props) {
   }
 
   if (tableIdToDelete === null) {
+    const contentsList = rows.filter((row) => row.id.toLowerCase().includes(tablesFilter.toLowerCase()));
+
     return (
       <Grid container >
         <Grid item xs={12}>&nbsp;</Grid>
@@ -108,11 +110,11 @@ export default function TablesList(props) {
           />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
+        <Grid item xs={12} style={{ height: (contentsList ? (contentsList.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
           <DataGrid
             sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
             onRowClick={(params, event, details) => props.selectTable(params.row.id)}
-            rows={rows.filter((row) => row.id.toLowerCase().includes(tablesFilter.toLowerCase()))}
+            rows={contentsList}
             columns={columns}
             hideFooterPagination={true}
             paginationModel={{ page: 1, pageSize: 1000 }}

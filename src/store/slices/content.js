@@ -278,6 +278,13 @@ export const getContentName = (state, path) => {
     }
 }
 
+function cryptoRand()
+{
+    const randomBuffer = new Uint32Array(1);
+    (window.crypto || window.msCrypto).getRandomValues(randomBuffer);
+    return ( randomBuffer[0] / (0xffffffff + 1) );
+}
+
 export const diceThrow = (state, idTable) => {
 
     if (idTable.indexOf(" ") > -1) {
@@ -306,7 +313,7 @@ export const diceThrow = (state, idTable) => {
         }
     });
 
-    const result = Math.floor(Math.random() * (max - min + 1)) + min;
+    const result = Math.floor(cryptoRand() * (max - min + 1)) + min;
     const rng = table.rng.find((rng) => result >= rng.min && result <= rng.max);
 
     const prefix = rng.prefix ? rng.prefix + " " : "";

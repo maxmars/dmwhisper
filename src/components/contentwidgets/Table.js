@@ -29,7 +29,7 @@ const Table = (props) => {
   const [autoUpdate, setAutoUpdate] = useState(false);
   const dispatch = useDispatch();
   const theme = useTheme();
-  const multipleTables = props.content.data.table.indexOf(" ") > -1;
+  const multipleTables = props.content && props.content.data && props.content.data.table ? props.content.data.table.indexOf(" ") > -1 : false;
 
   const saveRoll = () => {
     dispatch(addThrow({ result: currentThrow, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
@@ -46,7 +46,7 @@ const Table = (props) => {
       let tables = props.content.data.table.trim().split(" ");
 
       tables = tables.map((table) => {
-          return diceThrow(content, table);
+        return diceThrow(content, table);
       });
 
       let htmlContent = props.content.data.textContent;
@@ -166,7 +166,6 @@ const Table = (props) => {
       return null;
     }
   }
-
 };
 
 
