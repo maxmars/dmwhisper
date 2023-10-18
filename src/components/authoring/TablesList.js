@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-import { DataGrid, GridActionsCellItem, GridToolbar } from '@mui/x-data-grid';
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import { useSelector } from 'react-redux';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -118,7 +118,6 @@ export default function TablesList(props) {
             columns={columns}
             hideFooterPagination={true}
             paginationModel={{ page: 1, pageSize: 1000 }}
-            slots={{ toolbar: GridToolbar }}
           />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>

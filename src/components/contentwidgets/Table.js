@@ -61,6 +61,8 @@ const Table = (props) => {
       const postfix = props.content.data.postfix ? " " + props.content.data.postfix : "";
       try {
         setCurrentThrow(prefix + diceThrow(content, props.content.data.table.trim()) + postfix);
+        let htmlContent = props.content.data.textContent;
+        setCurrentHtmlContent(htmlContent);
       } catch (e) {
         setError(e.message);
       }
