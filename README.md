@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    31 Ott 2023
+    -----------
+    - 1.16.1 You cannot save a menu item without an id anymore.
+
     15 Ott 2023
     -----------
     - 1.16.0 You can now filter tables in the tables editing section list.

@@ -217,6 +217,10 @@ const MenuEdit = (props) => {
     }
 
     const addNewSubmenu = () => {
+        if (newContentId.trim().length === 0) {
+            return;
+        }
+
         const newContent = {
             id: newContentId,
             label: newContentLabel,
