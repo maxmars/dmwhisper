@@ -32,7 +32,8 @@ const Table = (props) => {
   const multipleTables = props.content && props.content.data && props.content.data.table ? props.content.data.table.indexOf(" ") > -1 : false;
 
   const saveRoll = () => {
-    dispatch(addThrow({ result: currentThrow, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
+    const contentToSave = currentThrow && currentThrow.length > 0 ? currentThrow : currentHtmlContent;
+    dispatch(addThrow({ result: contentToSave, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
   };
 
   const resetError = () => {

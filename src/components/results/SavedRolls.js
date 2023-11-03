@@ -21,7 +21,7 @@ const ResultsList = () => {
           {throws.sequence.map((throwResult, index) => {
             return (
               <ListItem key={"ris" + index}>
-                <ListItemText primary={throwResult.result} secondary={throwResult.timestamp} />
+                <ListItemText primary={<div dangerouslySetInnerHTML={{ __html: throwResult.result }} />} secondary={throwResult.timestamp} />
               </ListItem>
             );
           })}

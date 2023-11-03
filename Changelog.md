@@ -1,6 +1,10 @@
 # Changelog Template progetto DM Whisper
 
 
+    03 Nov 2023
+    -----------
+    - 1.16.2 Descriptive rich text content can now be saved (until now it showed up as blank when saved).
+
     31 Ott 2023
     -----------
     - 1.16.1 You cannot save a menu item without an id anymore.
