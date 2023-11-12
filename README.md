@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    12 Nov 2023
+    -----------
+    - 1.16.3 Fixed a problem with content not updating when using the bottom navigation arrows.
+
     03 Nov 2023
     -----------
     - 1.16.2 Descriptive rich text content can now be saved (until now it showed up as blank when saved).
