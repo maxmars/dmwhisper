@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    23 Nov 2023
+    -----------
+    - 1.17.0 It's now possible to mix tables and fixed text for the table id field; precedently it was either a single table id to roll on, or several table ids separated by spaces.
+
     12 Nov 2023
     -----------
     - 1.16.3 Fixed a problem with content not updating when using the bottom navigation arrows.

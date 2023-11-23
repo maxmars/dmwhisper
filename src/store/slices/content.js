@@ -278,11 +278,10 @@ export const getContentName = (state, path) => {
     }
 }
 
-function cryptoRand()
-{
+function cryptoRand() {
     const randomBuffer = new Uint32Array(1);
     (window.crypto || window.msCrypto).getRandomValues(randomBuffer);
-    return ( randomBuffer[0] / (0xffffffff + 1) );
+    return (randomBuffer[0] / (0xffffffff + 1));
 }
 
 export const diceThrow = (state, idTable) => {
@@ -320,13 +319,25 @@ export const diceThrow = (state, idTable) => {
     const postfix = rng.postfix ? " " + rng.postfix : "";
 
     if (rng.table) {
-        let tables = rng.table.split(" ");
+        let tables = rng.table.trim().split(" ");
+        
+        if (rng.table.indexOf("@@") > -1) {
+            tables = tables.map((table) => {
+                if (table.startsWith("@@")) {
+                    return diceThrow(state, table.substring(2));
+                } else {
+                    return table;
+                }
+            });
 
-        tables = tables.map((table) => {
-            return diceThrow(state, table);
-        });
+            tables = tables.join(" ");
+        } else {
+            tables = tables.map((table) => {
+                return diceThrow(state, table);
+            });
 
-        tables = tables.join(" ");
+            tables = tables.join(" ");
+        }
 
         return prefix + tables + postfix;
     } else {
