@@ -1,7 +1,9 @@
 {
   "name": "dmwhisper",
   "version": "1.18.0",
-  "homepage": "/dmwhisper",
+  "homepage": "/",
+  "app_homepage": "/",
+  "web_homepage": "/dmwhisper",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.22.10",
@@ -45,8 +47,8 @@
     "build": "react-scripts build",
     "builda": "react-scripts build",
     "buildtocdv": "react-scripts build;rm -fr ../cordova/dmwhisper/www/*;cp -r build/* ../cordova/dmwhisper/www",
-    "cdvbuildapk": "react-scripts build;rm -fr ../cordova/dmwhisper/www/*;cp -r build/* ../cordova/dmwhisper/www;cd ../cordova/dmwhisper;./maxbook_android_build.sh",
-    "cdvrunapk": "react-scripts build;rm -fr ../cordova/dmwhisper/www/*;cp -r build/* ../cordova/dmwhisper/www;cd ../cordova/dmwhisper;./maxbook_android_run.sh",
+    "cdvbuildapk": "react-scripts build;rm -fr ../cordova/dmwhisper/www/*;cp -r build/* ../cordova/dmwhisper/www;cd ../cordova/dmwhisper;./android_build.sh",
+    "cdvrunapk": "react-scripts build;rm -fr ../cordova/dmwhisper/www/*;cp -r build/* ../cordova/dmwhisper/www;cd ../cordova/dmwhisper;./android_run.sh",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

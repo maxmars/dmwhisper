@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.maxmars.dmwhisper" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>DMWhisper</name>
+    <description>An RpG Utility for DMs</description>
+    <author email="maxmars@gmail.com" href="https://cordova.apache.org">
+        Max Marsiglietti
+    </author>
+    <content src="index.html" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <platform name="android">
+        <icon density="hdpi" src="res/android/drawable-hdpi/icon.png" />                           
+        <icon density="ldpi" src="res/android/drawable-ldpi/icon.png" />                           
+        <icon density="mdpi" src="res/android/drawable-mdpi/icon.png" />                           
+        <icon density="xhdpi" src="res/android/drawable-xhdpi/icon.png" />                           
+        <icon density="xxhdpi" src="res/android/drawable-xxhdpi/icon.png" />                           
+        <icon density="xxxhdpi" src="res/android/drawable-xxxhdpi/icon.png" />   
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="/home/maxmars/Documenti/src/maxmars/cordova/dmwhisper/res/dmwhisper-4096.png" />
+    </platform>    
+</widget>
