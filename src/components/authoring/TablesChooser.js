@@ -126,7 +126,7 @@ export default function TablesChooser(props) {
       <Grid item xs={9} sx={{ display: 'flex', alignItems: 'center' }}>
         <Autocomplete
           disablePortal
-          id="combo-box-demo"
+          id="tableIDs"
           options={tableNames}
           sx={{ width: '100%' }}
           onChange={(event, newValue) => {

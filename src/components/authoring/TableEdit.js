@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
+import { useMemo } from 'react';
+import Autocomplete from '@mui/material/Autocomplete';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -52,8 +54,16 @@ export default function TableEdit(props) {
     }
   });
 
-
   const dispatch = useDispatch();
+
+  const tableNames = useMemo(
+    () => tables.map((item) => {
+      return {
+        label: item.id,
+      }
+    }),
+    [tables],
+  );
 
   const updateHeader = () => {
 
@@ -191,6 +201,10 @@ export default function TableEdit(props) {
     }
   }
 
+  const addTableToTablesList = (tableName) => {
+    setNewTable((newTable && newTable.trim().length > 0) ? newTable.trim() + ' @@' + tableName : '@@' + tableName);
+  }
+
   if (rngToDelete === null) {
 
     return (
@@ -261,23 +275,23 @@ export default function TableEdit(props) {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <TextField 
-            onChange={(event) => setNewMin(event.target.value)} 
-            value={newMin} 
-            id="new-min" 
-            label={newMin? "" : t("Min value")} 
-            type='number' 
-            variant="outlined" 
+          <TextField
+            onChange={(event) => setNewMin(event.target.value)}
+            value={newMin}
+            id="new-min"
+            label={newMin ? "" : t("Min value")}
+            type='number'
+            variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>
-          <TextField 
+          <TextField
             onChange={(event) => setNewMax(event.target.value)}
-            value={newMax} 
-            id="new-max" 
-            label={newMax? "" : t("Max value")}
-            type='number' 
-            variant="outlined" 
+            value={newMax}
+            id="new-max"
+            label={newMax ? "" : t("Max value")}
+            type='number'
+            variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -286,12 +300,12 @@ export default function TableEdit(props) {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <TextField 
+          <TextField
             onChange={(event) => setNewResult(event.target.value)}
-            value={newResult} 
-            id="new-result" 
-            label={newResult? "" : t("Fixed result")}
-            variant="outlined" 
+            value={newResult}
+            id="new-result"
+            label={newResult ? "" : t("Fixed result")}
+            variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -300,30 +314,42 @@ export default function TableEdit(props) {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <TextField 
+          <TextField
             onChange={(event) => setNewPrefix(event.target.value)}
-            value={newPrefix} 
-            id="new-prefix" 
-            label={newPrefix? "" : t("Prefix")}
-            variant="outlined" 
+            value={newPrefix}
+            id="new-prefix"
+            label={newPrefix ? "" : t("Prefix")}
+            variant="outlined"
+            sx={{ width: "100%" }} />
+        </Grid>
+        <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center' }}>
+          <Autocomplete
+            disablePortal
+            id="tableIDs"
+            options={tableNames}
+            sx={{ width: '100%' }}
+            onChange={(event, newValue) => {
+              addTableToTablesList(newValue.label);
+            }}
+            renderInput={(params) => <TextField {...params} label={t("Table Id..")} />}
+          />
+        </Grid>
+        <Grid item xs={8}>
+          <TextField
+            onChange={(event) => setNewTable(event.target.value)}
+            value={newTable}
+            id="new-table"
+            label={newTable ? "" : t("Table (ID)")}
+            variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>
           <TextField
-            onChange={(event) => setNewTable(event.target.value)}
-            value={newTable} 
-            id="new-table" 
-            label={newTable? "" : t("Table (ID)")}
-            variant="outlined" 
-            sx={{ width: "100%" }} />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField 
             onChange={(event) => setNewPostfix(event.target.value)}
-            value={newPostfix} 
-            id="new-postfix" 
-            label={newPostfix? "" : t("Postfix")}
-            variant="outlined" 
+            value={newPostfix}
+            id="new-postfix"
+            label={newPostfix ? "" : t("Postfix")}
+            variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
