@@ -8,7 +8,7 @@ import UpdateDisabledIcon from '@mui/icons-material/UpdateDisabled';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { diceThrow, getTable } from '../../store/slices/content';
+import { diceThrow, getTable, setLastTableContent } from '../../store/slices/content';
 import { addThrow } from '../../store/slices/throws';
 import { format } from 'date-fns';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -24,7 +24,7 @@ const Table = (props) => {
   const content = useSelector((st) => st.content);
   const [mode, setMode] = useState("rockandroll");
   const [currentThrow, setCurrentThrow] = useState(null);
-  const [currentHtmlContent, setCurrentHtmlContent] = useState(props.content && props.content.data ? props.content.data.textContent : "");
+  const [currentHtmlContent, setCurrentHtmlContent] = useState(null);
   const [error, setError] = useState(null);
   const [autoUpdate, setAutoUpdate] = useState(false);
   const dispatch = useDispatch();
@@ -40,34 +40,56 @@ const Table = (props) => {
     setError(null);
   };
 
-  const diceRoll = () => {
+  const getCurrentContents = () => {
+    if (props.content && props.content.data) {
+      if (props.content.data.textContent && props.content.data.textContent.indexOf("@@") > -1) {
 
-    if (props.content && props.content.data && props.content.data.textContent && props.content.data.textContent.indexOf("@@") > -1) {
+        let tables = props.content.data.table.trim().split(" ");
 
-      let tables = props.content.data.table.trim().split(" ");
+        tables = tables.map((table) => {
+          return diceThrow(content, table);
+        });
 
-      tables = tables.map((table) => {
-        return diceThrow(content, table);
-      });
-
-      let htmlContent = props.content.data.textContent;
-      tables.forEach((table, index) => {
-        htmlContent = htmlContent.replace("@@" + padLeft(index + 1, 2), table);
-      });
-      setCurrentHtmlContent(htmlContent);
-      setCurrentThrow("");
-
-    } else {
-      const prefix = props.content.data.prefix ? props.content.data.prefix + " " : "";
-      const postfix = props.content.data.postfix ? " " + props.content.data.postfix : "";
-      try {
-        setCurrentThrow(prefix + diceThrow(content, props.content.data.table.trim()) + postfix);
         let htmlContent = props.content.data.textContent;
-        setCurrentHtmlContent(htmlContent);
-      } catch (e) {
-        setError(e.message);
+        tables.forEach((table, index) => {
+          htmlContent = htmlContent.replace("@@" + padLeft(index + 1, 2), table);
+        });
+
+        return {
+          throw: "",
+          htmlContent: htmlContent
+        };
+
+      } else {
+        const prefix = props.content.data.prefix ? props.content.data.prefix + " " : "";
+        const postfix = props.content.data.postfix ? " " + props.content.data.postfix : "";
+        try {
+          let htmlContent = props.content.data.textContent;
+
+          return {
+            throw: prefix + diceThrow(content, props.content.data.table.trim()) + postfix,
+            htmlContent: htmlContent
+          };
+        } catch (e) {
+          setError(e.message);
+        }
       }
     }
+  }
+
+  const diceRoll = () => {
+
+    const currentContents = getCurrentContents();
+
+    dispatch(setLastTableContent({
+      contentId: props.content.id + "TAB" + props.currentTab,
+      diceThrow: currentContents.throw,
+      htmlContent: currentContents.htmlContent
+    }));
+
+    setCurrentThrow(currentContents.throw);
+    setCurrentHtmlContent(currentContents.htmlContent);
+
   };
 
   useEffect(() => {
@@ -86,13 +108,34 @@ const Table = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [autoUpdate]);
 
+  const getLastContentOrRoll = () => {
+    try {
+      const cleanedId = props.content.id.replace(/[^a-zA-Z]/g, '') + "TAB" + props.currentTab;
+      const lastTableContent = content.lastTableContent[cleanedId] ? content.lastTableContent[cleanedId] : null;
+
+      if (lastTableContent) {
+        setCurrentThrow(lastTableContent.diceThrow);
+        setCurrentHtmlContent(lastTableContent.htmlContent);
+      } else {
+        diceRoll();
+      }
+    } catch (e) {
+      diceRoll();
+    }
+  }
+
   useEffect(() => {
-    diceRoll();
+    getLastContentOrRoll();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.content.id, props.content.data.table]);
+  }, [props.content.id, props.content.data.table, props.currentTab]);
+
+  useEffect(() => {
+    getLastContentOrRoll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);  
 
   if (currentThrow === null && error === null) {
-    diceRoll();
+    getLastContentOrRoll();
     return null;
   }
 

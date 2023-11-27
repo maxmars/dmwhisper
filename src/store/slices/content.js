@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import initialContent from './initialContent';
 
-export const initialState = initialContent;
+export const initialState = { ...initialContent, lastTableContent: {} };
 
 // ==============================|| SLICE - THROWS ||============================== //
 
@@ -31,6 +31,24 @@ const content = createSlice({
         clearContent(state, action) {
             state.tree = initialState.tree;
             state.tables = initialState.tables;
+        },
+        setLastTableContent(state, action) {
+            const { contentId, diceThrow, htmlContent } = action.payload;
+
+            try {
+                if (!state.lastTableContent) {
+                    state.lastTableContent = {};
+                }
+                
+                const cleanedId = contentId.replace(/[^0-9a-zA-Z]/g, '');
+
+                state.lastTableContent[cleanedId] = {
+                    diceThrow: diceThrow,
+                    htmlContent: htmlContent
+                };
+            } catch (e) {
+                console.log(e);
+            }
         },
         addTable(state, action) {
             const newTable = action.payload;
@@ -278,13 +296,23 @@ export const getContentName = (state, path) => {
     }
 }
 
-function cryptoRand() {
-    const randomBuffer = new Uint32Array(1);
-    (window.crypto || window.msCrypto).getRandomValues(randomBuffer);
-    return (randomBuffer[0] / (0xffffffff + 1));
+function cryptoRands() {
+    let randomBuffer = new Uint32Array(5000);
+    window.crypto.getRandomValues(randomBuffer);
+
+    const randomFloatBuffer = Array.from(randomBuffer).map((value) => {
+        return value / (0xffffffff + 1);
+    });
+
+    return randomFloatBuffer;
 }
 
+let globalRandomValues = cryptoRands();
 export const diceThrow = (state, idTable) => {
+
+    if (globalRandomValues.length < 1) {
+        globalRandomValues = cryptoRands();
+    }
 
     if (idTable.indexOf(" ") > -1) {
         let tables = idTable.split(" ");
@@ -312,7 +340,8 @@ export const diceThrow = (state, idTable) => {
         }
     });
 
-    const result = Math.floor(cryptoRand() * (max - min + 1)) + min;
+    const result = Math.floor(globalRandomValues.pop() * (max - min + 1)) + min;
+
     const rng = table.rng.find((rng) => result >= rng.min && result <= rng.max);
 
     const prefix = rng.prefix ? rng.prefix + " " : "";
@@ -320,7 +349,7 @@ export const diceThrow = (state, idTable) => {
 
     if (rng.table) {
         let tables = rng.table.trim().split(" ");
-        
+
         if (rng.table.indexOf("@@") > -1) {
             tables = tables.map((table) => {
                 if (table.startsWith("@@")) {
@@ -365,6 +394,6 @@ export const getTable = (state, idTable) => {
 
 export default content.reducer;
 
-export const { setContent, clearContent, addTable, removeTable, updateTableHeader,
+export const { setContent, clearContent, setLastTableContent, addTable, removeTable, updateTableHeader,
     updateTableRng, updateContent, updateContentHeader, addMenuItem, updateContentType,
     setClipboardAction, deleteMenuItem, setTabPath, clearTabPath } = content.actions;

@@ -22,13 +22,13 @@ const SelectedContent = (props) => {
     try {
       switch (props.selectedContent.type) {
         case "information":
-          return <Information content={props.selectedContent} />;
+          return <Information currentTab={props.currentTab} content={props.selectedContent} />;
 
         case "table":
-          return <Table content={props.selectedContent} />;
+          return <Table currentTab={props.currentTab} content={props.selectedContent} />;
 
         default:
-          return <Menu content={props.selectedContent} goToContent={props.goToContent} />
+          return <Menu currentTab={props.currentTab} content={props.selectedContent} goToContent={props.goToContent} />
       }
     } catch (e) {
       return null;

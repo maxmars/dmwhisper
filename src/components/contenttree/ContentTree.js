@@ -279,7 +279,8 @@ const ContentTree = () => {
                             </div>
                         </div>
                         :
-                        <SelectedContent selectedContent={selectedContent}
+                        <SelectedContent currentTab={tab}
+                            selectedContent={selectedContent}
                             clearSelectedContent={backOneLevel}
                             goToPreviousContent={goToPreviousContent}
                             goToNextContent={goToNextContent}
