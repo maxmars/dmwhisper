@@ -212,6 +212,14 @@ const ContentTree = () => {
         return null;
     }
 
+    const tabName = (tabNum) => {
+        try {
+            return (wholeContent.tabPaths && wholeContent.tabPaths[tabNum] ? getContentMetaData(tree, wholeContent.tabPaths[tabNum]).label : t("Home"));
+        } catch (e) {
+            return t("Home");
+        }
+    }
+
     const goToContent = (newPath) => {
         let nextPath = null;
 
@@ -235,11 +243,11 @@ const ContentTree = () => {
     }
 
     try {
-        let tabName1 = tab === 0 ? contentName : (wholeContent.tabPaths && wholeContent.tabPaths[0] ? getContentMetaData(tree, wholeContent.tabPaths[0]).label : t("Home"));
-        let tabName2 = tab === 1 ? contentName : (wholeContent.tabPaths && wholeContent.tabPaths[1] ? getContentMetaData(tree, wholeContent.tabPaths[1]).label : t("Home"));
-        let tabName3 = tab === 2 ? contentName : (wholeContent.tabPaths && wholeContent.tabPaths[2] ? getContentMetaData(tree, wholeContent.tabPaths[2]).label : t("Home"));
-        let tabName4 = tab === 3 ? contentName : (wholeContent.tabPaths && wholeContent.tabPaths[3] ? getContentMetaData(tree, wholeContent.tabPaths[3]).label : t("Home"));
-        let tabName5 = tab === 4 ? contentName : (wholeContent.tabPaths && wholeContent.tabPaths[4] ? getContentMetaData(tree, wholeContent.tabPaths[4]).label : t("Home"));
+        let tabName1 = tab === 0 ? contentName : tabName(0);
+        let tabName2 = tab === 1 ? contentName : tabName(1);
+        let tabName3 = tab === 2 ? contentName : tabName(2);
+        let tabName4 = tab === 3 ? contentName : tabName(3);
+        let tabName5 = tab === 4 ? contentName : tabName(4);
 
         if (tab !== 0 && tabName1.length > 12) tabName1 = tabName1.substring(0, 10) + "..";
         if (tab !== 1 && tabName2.length > 12) tabName2 = tabName2.substring(0, 10) + "..";
@@ -248,7 +256,7 @@ const ContentTree = () => {
         if (tab !== 4 && tabName5.length > 12) tabName5 = tabName5.substring(0, 10) + "..";
 
         return (
-            <div style={{height: '100%'}}>
+            <div style={{ height: '100%' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', height: '12%' }}>
                     <Tabs value={tab} onChange={handleChange} variant="scrollable">
                         <Tab icon={<BookmarksIcon />} label={tabName1} iconPosition="start" />
@@ -261,7 +269,7 @@ const ContentTree = () => {
                 <br />
                 <div style={{ height: '88%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     {selectedContent === null ?
-                        <div style={{ height: '88vh', width: '100%'}}>
+                        <div style={{ height: '88vh', width: '100%' }}>
                             <div style={{ height: '10%', width: '100%', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
                                 <IconButton style={{ marginRight: "7px" }} variant="contained" color="primary" onClick={backOneLevel}><ArrowBackIosNewIcon /></IconButton>
                                 <IconButton style={{ marginLeft: "7px" }} variant="contained" color="primary" onClick={goToHomeMenu}><HomeIcon /></IconButton>

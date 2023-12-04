@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    04 Dic 2023
+    -----------
+    - 1.19.1 Fixed a bug that caused an endless loop.
+
     27 Nov 2023
     -----------
     - 1.19.0 Content is not automatically reset anymore when you switch tabs; improved random number generation.
