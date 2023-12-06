@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    06 Dic 2023
+    -----------
+    - 1.19.2 Fixed a cosmetic bug when showing table content.
+
     04 Dic 2023
     -----------
     - 1.19.1 Fixed a bug that caused an endless loop.

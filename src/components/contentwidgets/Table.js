@@ -113,6 +113,8 @@ const Table = (props) => {
       const cleanedId = props.content.id.replace(/[^a-zA-Z]/g, '') + "TAB" + props.currentTab;
       const lastTableContent = content.lastTableContent[cleanedId] ? content.lastTableContent[cleanedId] : null;
 
+      setMode("rockandroll");
+
       if (lastTableContent) {
         setCurrentThrow(lastTableContent.diceThrow);
         setCurrentHtmlContent(lastTableContent.htmlContent);
