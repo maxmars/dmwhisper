@@ -3,6 +3,7 @@
 
     06 Dic 2023
     -----------
+    - 1.19.3 Fixed a small but nasty bug that made content reset on tab switch, only for certain content ids.
     - 1.19.2 Fixed a cosmetic bug when showing table content.
 
     04 Dic 2023

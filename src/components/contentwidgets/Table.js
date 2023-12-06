@@ -110,7 +110,7 @@ const Table = (props) => {
 
   const getLastContentOrRoll = () => {
     try {
-      const cleanedId = props.content.id.replace(/[^a-zA-Z]/g, '') + "TAB" + props.currentTab;
+      const cleanedId = props.content.id.replace(/[^0-9a-zA-Z]/g, '') + "TAB" + props.currentTab;
       const lastTableContent = content.lastTableContent[cleanedId] ? content.lastTableContent[cleanedId] : null;
 
       setMode("rockandroll");
