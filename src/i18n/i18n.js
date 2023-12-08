@@ -139,6 +139,7 @@ i18n
           "Content label": "Content label",
           "Bookmark ": "Bookmark ",
           "User manual": "User manual",
+          "There is unsaved content. Do you want to save?": "There is unsaved content. Do you want to save?",
         }
       },
       it: {
@@ -263,6 +264,7 @@ i18n
           "Content label": "Etichetta del contenuto",
           "Bookmark ": "Segnalibro ",
           "User manual": "Manuale utente",
+          "There is unsaved content. Do you want to save?": "Ci sono contenuti non salvati. Vuoi salvare?",
         }
       },
       es: {
@@ -386,6 +388,7 @@ i18n
           "Content label": "Etiqueta de contenido",
           "Bookmark ": "Marcador ",
           "User manual": "Manual de usuario",
+          "There is unsaved content. Do you want to save?": "Hay contenido sin guardar. ¿Quieres salvar?",
         },
       },
       fr: {
@@ -509,6 +512,7 @@ i18n
           "Content label": "Étiquette de contenu",
           "Bookmark ": "Signet ",
           "User manual": "Manuel utilisateur",
+          "There is unsaved content. Do you want to save?": "Il y a du contenu non enregistré. Voulez-vous enregistrer?",
         },
       },
       de: {
@@ -632,6 +636,7 @@ i18n
           "Content label": "Inhaltsetikett",
           "Bookmark ": "Lesezeichen ",
           "User manual": "Benutzerhandbuch",
+          "There is unsaved content. Do you want to save?": "Es gibt ungespeicherten Inhalt. Möchten Sie speichern?",
         }
       },
       pt: {
@@ -755,6 +760,7 @@ i18n
           "Content label": "Etiqueta de conteúdo",
           "Bookmark ": "Marcador ",
           "User manual": "Manual do usuário",
+          "There is unsaved content. Do you want to save?": "Há conteúdo não salvo. Você quer salvar?",
         }
       },
       gr: {
@@ -878,6 +884,7 @@ i18n
           "Content label": "Ετικέτα περιεχομένου",
           "Bookmark ": "Σελιδοδείκτης ",
           "User manual": "Εγχειρίδιο χρήστη",
+          "There is unsaved content. Do you want to save?": "Υπάρχει μη αποθηκευμένο περιεχόμενο. Θέλετε να αποθηκεύσετε;",
         }
       },
       se: {
@@ -1001,6 +1008,7 @@ i18n
           "Content label": "Innehållsetikett",
           "Bookmark ": "Bokmärke ",
           "User manual": "Användarhandbok",
+          "There is unsaved content. Do you want to save?": "Det finns osparat innehåll. Vill du spara?",
         }
       },
       uk: {
@@ -1124,6 +1132,7 @@ i18n
           "Content label": "Мітка вмісту",
           "Bookmark ": "Закладка ",
           "User manual": "Посібник користувача",
+          "There is unsaved content. Do you want to save?": "Є незбережений вміст. Ви хочете зберегти?",
         }
       },
       he: {
@@ -1247,6 +1256,7 @@ i18n
           "Content label": "תווית תוכן",
           "Bookmark ": "סימניה ",
           "User manual": "מדריך למשתמש",
+          "There is unsaved content. Do you want to save?": "יש תוכן שלא נשמר. ברצונך לשמור?",
         }
       },
       no: {
@@ -1370,6 +1380,7 @@ i18n
           "Content label": "Innholdsetikett",
           "Bookmark ": "Bokmerke ",
           "User manual": "Brukerhåndbok",
+          "There is unsaved content. Do you want to save?": "Det er ikke lagret innhold. Vil du lagre?",
         }
       },
       nl: {
@@ -1493,6 +1504,7 @@ i18n
           "Content label": "Inhoudslabel",
           "Bookmark ": "Bladwijzer ",
           "User manual": "Gebruikershandleiding",
+          "There is unsaved content. Do you want to save?": "Er is niet-opgeslagen inhoud. Wil je opslaan?",
         }
       },
       pl: {
@@ -1616,6 +1628,7 @@ i18n
           "Content label": "Etykieta zawartości",
           "Bookmark ": "Zakładka ",
           "User manual": "Instrukcja obsługi",
+          "There is unsaved content. Do you want to save?": "Istnieje niezapisana zawartość. Czy chcesz zapisać?",
         }
       },
       hu: {
@@ -1739,6 +1752,7 @@ i18n
           "Content label": "Tartalom címke",
           "Bookmark ": "Könyvjelző ",
           "User manual": "Felhasználói kézikönyv",
+          "There is unsaved content. Do you want to save?": "Van nem mentett tartalom. Akarod menteni?",
         }
       },
       bg: {
@@ -1862,6 +1876,7 @@ i18n
           "Content label": "Етикет на съдържанието",
           "Bookmark ": "Отметка ",
           "User manual": "Ръководство за потребителя",
+          "There is unsaved content. Do you want to save?": "Има незапазено съдържание. Искате ли да запазите?",
         }
       },
       fi: {
@@ -1985,6 +2000,7 @@ i18n
           "Content label": "Sisältö etiketti",
           "Bookmark ": "Kirjanmerkki ",
           "User manual": "Käyttöopas",
+          "There is unsaved content. Do you want to save?": "Sisältöä tallentamatta. Haluatko tallentaa?",
         }
       },
       da: {
@@ -2108,6 +2124,7 @@ i18n
           "Content label": "Indholdsetiket",
           "Bookmark ": "Bogmærke ",
           "User manual": "Brugervejledning",
+          "There is unsaved content. Do you want to save?": "Der er ikke gemt indhold. Vil du gemme?",
         }
       },
       ro: {
@@ -2231,6 +2248,7 @@ i18n
           "Content label": "Eticheta conținutului",
           "Bookmark ": "Marcați ",
           "User manual": "Manual de utilizare",
+          "There is unsaved content. Do you want to save?": "Există conținut nesalvat. Vrei să salvezi?",
         }
       },
       cs: {
@@ -2354,6 +2372,7 @@ i18n
           "Content label": "Obsahová štítek",
           "Bookmark ": "Záložka ",
           "User manual": "Uživatelský manuál",
+          "There is unsaved content. Do you want to save?": "Existuje neuložený obsah. Chcete uložit?",
         }
       },
       is: {
@@ -2477,6 +2496,7 @@ i18n
           "Content label": "Efni merki",
           "Bookmark ": "Bókamerki ",
           "User manual": "Notendahandbók",
+          "There is unsaved content. Do you want to save?": "Það er óvistað efni. Viltu vista?",
         }
       }
     }

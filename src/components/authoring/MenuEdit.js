@@ -43,6 +43,7 @@ import { uuidv4 } from '../../utils/index.js';
 const MenuEdit = (props) => {
 
     const { t } = useTranslation();
+    const [unsavedContent, setUnsavedContent] = useState("no");
     const [errorMessage, setErrorMessage] = useState(null);
     const [newContentId, setNewContentId] = useState("");
     const [newContentLabel, setNewContentLabel] = useState("");
@@ -69,6 +70,11 @@ const MenuEdit = (props) => {
     useEffect(() => {
         ckEditorThemeSync();
     });
+
+    useEffect(() => {
+        setUnsavedContent("no");
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [contentMetaData]);
 
     const ckEditorThemeSync = () => {
         setTimeout(() => {
@@ -107,7 +113,7 @@ const MenuEdit = (props) => {
     }
 
     let lng = navigator.language.substring(0, 2).toLocaleLowerCase();
-    
+
     if (lng === "en") {
         lng = "en-gb";
     }
@@ -151,6 +157,14 @@ const MenuEdit = (props) => {
         },
     ];
 
+    const backToRootMenuCheck = () => {
+        if (unsavedContent === "yes") {
+            setUnsavedContent("andbacktoroot");
+            return;
+        }
+        backToRootMenu();
+    }
+
     const backToRootMenu = () => {
         setCurrentMenuId(undefined);
         setCurrentMenuLabel(undefined);
@@ -159,6 +173,14 @@ const MenuEdit = (props) => {
         setCurrentMenuTable(undefined);
         setHeaderInfoOpen(false);
         setPath("");
+    }
+
+    const backOneLevelCheck = () => {
+        if (unsavedContent === "yes") {
+            setUnsavedContent("andbackonelevel");
+            return;
+        }
+        backOneLevel();
     }
 
     const backOneLevel = () => {
@@ -207,12 +229,14 @@ const MenuEdit = (props) => {
                 path: path
             }));
             setCurrentContentType(event.target.value);
+            setUnsavedContent("yes");
         }
     }
 
     const handleNewContentTypeChange = (event) => {
         if (event.target.value !== newContentType) {
             setNewContentType(event.target.value);
+            setUnsavedContent("yes");
         }
     }
 
@@ -267,6 +291,7 @@ const MenuEdit = (props) => {
         }
 
         setPath(tempPath);
+        setUnsavedContent("no");
     }
 
     const deleteMenu = (menuToDelete) => {
@@ -363,6 +388,45 @@ const MenuEdit = (props) => {
         }));
     }
 
+    if (unsavedContent !== "yes" && unsavedContent !== "no") {
+        return <Grid container sx={{ height: "100%" }} >
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Typography>{t("Warning!")}</Typography>
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}>
+                <Typography>{t("There is unsaved content. Do you want to save?")}</Typography>
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid item xs={12} style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
+                <Button onClick={() => {
+                    if (unsavedContent === "andbackonelevel") {
+                        setUnsavedContent("no");
+                        updateMenuHeader();
+                        backOneLevel();
+                    } else {
+                        setUnsavedContent("no");
+                        updateMenuHeader();
+                        backToRootMenu();
+                    }
+                }} variant="contained" color="primary">{t("Yes")}</Button>
+                <Button onClick={() => {
+                    if (unsavedContent === "andbackonelevel") {
+                        setUnsavedContent("no");
+                        backOneLevel();
+                    } else {
+                        setUnsavedContent("no");
+                        backToRootMenu();
+                    }
+                }} variant="contained" color="primary">{t("No")}</Button>
+            </Grid>
+            <Grid item xs={12}>&nbsp;</Grid>
+        </Grid >
+    }
+
     if (errorMessage) {
         return <Grid container sx={{ height: "100%" }} >
             <Grid item xs={12}>&nbsp;</Grid>
@@ -413,10 +477,10 @@ const MenuEdit = (props) => {
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={1}>
-                <IconButton style={{ marginRight: "7px" }} variant="contained" color="primary" onClick={backOneLevel}><ArrowBackIosNewIcon /></IconButton>
+                <IconButton style={{ marginRight: "7px" }} variant="contained" color="primary" onClick={() => backOneLevelCheck()}><ArrowBackIosNewIcon /></IconButton>
             </Grid>
             <Grid item xs={1}>
-                <IconButton style={{ marginLeft: "7px" }} variant="contained" color="primary" onClick={() => backToRootMenu()}><HomeIcon /></IconButton>
+                <IconButton style={{ marginLeft: "7px" }} variant="contained" color="primary" onClick={() => backToRootMenuCheck()}><HomeIcon /></IconButton>
             </Grid>
             <Grid item xs={10}>
                 <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{contentName}</Typography>
@@ -455,7 +519,10 @@ const MenuEdit = (props) => {
                                     path.length > 0 ?
                                         <TextField
                                             value={currentMenuId}
-                                            onChange={(event) => setCurrentMenuId(event.target.value.trim().replace(/\./g, "-"))}
+                                            onChange={(event) => {
+                                                setCurrentMenuId(event.target.value.trim().replace(/\./g, "-"));
+                                                setUnsavedContent("yes");
+                                            }}
                                             id="content-id"
                                             variant="outlined"
                                             sx={{ width: "100%" }} />
@@ -476,7 +543,10 @@ const MenuEdit = (props) => {
                                     path.length > 0 ?
                                         <TextField
                                             value={currentMenuLabel}
-                                            onChange={(event) => setCurrentMenuLabel(event.target.value)}
+                                            onChange={(event) => {
+                                                setCurrentMenuLabel(event.target.value);
+                                                setUnsavedContent("yes");
+                                            }}
                                             id="content-label"
                                             variant="outlined"
                                             sx={{ width: "100%" }} />
@@ -527,6 +597,7 @@ const MenuEdit = (props) => {
                                                         const data = editor.getData();
                                                         //console.log({ event, editor, data });
                                                         setCurrentMenuContent(data);
+                                                        setUnsavedContent("yes");
                                                     }}
                                                     onBlur={(event, editor) => {
                                                         //console.log('Blur.', editor);
@@ -544,7 +615,10 @@ const MenuEdit = (props) => {
                                                     id="text-content"
                                                     variant="outlined"
                                                     sx={{ width: "100%" }}
-                                                    onChange={(event) => setCurrentMenuContent(event.target.value)}
+                                                    onChange={(event) => {
+                                                        setCurrentMenuContent(event.target.value);
+                                                        setUnsavedContent("yes");
+                                                    }}
                                                     multiline
                                                     minRows={3}
                                                     maxRows={8} />
@@ -560,7 +634,12 @@ const MenuEdit = (props) => {
                                         <Grid item xs={12}>
                                             <TablesChooser
                                                 tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => { return { label: item, id: uuidv4() } }) : null}
-                                                onTablesChange={(tables) => setCurrentMenuTable(tables)}
+                                                onTablesChange={(tables) => {
+                                                    if (tables !== currentMenuTable) {
+                                                        setCurrentMenuTable(tables);
+                                                        setUnsavedContent("yes");
+                                                    }
+                                                }}
                                             />
                                         </Grid>
                                     </> : null

@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    08 Dic 2023
+    -----------
+    - 1.20.0 Warnings about unsaved content.
+
     06 Dic 2023
     -----------
     - 1.19.3 Fixed a small but nasty bug that made content reset on tab switch, only for certain content ids.
