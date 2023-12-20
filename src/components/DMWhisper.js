@@ -146,7 +146,7 @@ const DMWhisper = () => {
           </ListItemButton>
         </ListItem>
         <ListItem key="user_manual" disablePadding>
-          <ListItemButton onClick={() => window.open("https://marsiglietti.it/DMWhisper-manual-1.13.0.pdf", "_blank", null)}>
+          <ListItemButton onClick={() => window.open("https://marsiglietti.it/DMWhisper-manual-1.20.0.pdf", "_blank", null)}>
             <ListItemIcon>
               <ImportContactsIcon />
             </ListItemIcon>
