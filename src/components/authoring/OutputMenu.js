@@ -9,7 +9,8 @@ const OutputMenu = () => {
 
   const { t } = useTranslation();
   const content = useSelector((st) => st.content);
-  const contentToExport = JSON.parse(JSON.stringify(content)).lastTableContent = {};
+  const contentToExport = JSON.parse(JSON.stringify(content));
+  contentToExport.lastTableContent = {};
 
   const copyContentToClipboard = () => {
     navigator.clipboard.writeText(JSON.stringify(contentToExport));
