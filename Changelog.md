@@ -1,6 +1,10 @@
 # Changelog Template progetto DM Whisper
 
 
+    26 Dic 2023
+    -----------
+    - 1.20.1 small but important fixes.
+
     08 Dic 2023
     -----------
     - 1.20.0 Warnings about unsaved content.

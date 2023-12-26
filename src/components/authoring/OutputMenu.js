@@ -9,13 +9,16 @@ const OutputMenu = () => {
 
   const { t } = useTranslation();
   const content = useSelector((st) => st.content);
+  const contentToExport = JSON.parse(JSON.stringify(content)).lastTableContent = {};
 
   const copyContentToClipboard = () => {
-    navigator.clipboard.writeText(JSON.stringify(content));
+    content.lastTableContent = {};
+    navigator.clipboard.writeText(JSON.stringify(contentToExport));
   };
 
   const downloadJson = () => {
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(content));
+    content.lastTableContent = {};
+    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(contentToExport));
     var downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href", dataStr);
     downloadAnchorNode.setAttribute("download", "dmwhisper_data.json");
