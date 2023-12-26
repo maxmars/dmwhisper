@@ -12,12 +12,10 @@ const OutputMenu = () => {
   const contentToExport = JSON.parse(JSON.stringify(content)).lastTableContent = {};
 
   const copyContentToClipboard = () => {
-    content.lastTableContent = {};
     navigator.clipboard.writeText(JSON.stringify(contentToExport));
   };
 
   const downloadJson = () => {
-    content.lastTableContent = {};
     var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(contentToExport));
     var downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href", dataStr);
