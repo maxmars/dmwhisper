@@ -6,6 +6,10 @@
     - 1.21.0 You can now have DMWhisper roll dice by adding one or more {{XdY}}, {{XdY+Z}}, {{XdY-Z}} string to your pages of type "table".
              DMWhisper is now more resilient to crashes.
              If you reference the same die roll multiple times in the same page with the @@xy string, ALL strings will be replaced with the die roll and not just the first one.
+             
+    26 Dic 2023
+    -----------
+    - 1.20.1 small but important fixes.
 
     08 Dic 2023
     -----------

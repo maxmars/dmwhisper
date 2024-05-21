@@ -17,7 +17,11 @@ const ImportJsonFile = (props) => {
     setJsonFile(newValue);
     const jsonText = await newValue.text();
     dispatch(clearTabPath());
-    dispatch(setContent(JSON.parse(jsonText)));
+
+    const newDataFile = JSON.parse(jsonText);
+    newDataFile.lastTableContent = {};
+    
+    dispatch(setContent(newDataFile));
     props.returnToMenu();
   }
 
