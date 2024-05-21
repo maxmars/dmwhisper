@@ -46,8 +46,36 @@ const Table = (props) => {
 
         let tables = props.content.data.table.trim().split(" ");
 
+        // TODO: implement distinct values table results
+        const tableDictionary = {};
+        tables.forEach((table, index) => {
+          if (table.endsWith("!")) {
+            tableDictionary[table.replace("!", "")] = [];
+          }
+        });
+
         tables = tables.map((table) => {
-          return diceThrow(content, table);
+          table = table.replace("!", "");
+
+          let result = diceThrow(content, table);
+          if (tableDictionary[table]) {
+            if (tableDictionary[table].indexOf(result) > -1) {
+              let tries = 0;
+
+              do {
+                result = diceThrow(content, table);
+                tries++;
+              } while (tableDictionary[table].indexOf(result) > -1 && tries < 1000);
+
+              if (tableDictionary[table].indexOf(result) === -1) {
+                tableDictionary[table].push(result);
+              }
+            } else {
+              tableDictionary[table].push(result);
+            }
+          }
+
+          return result;
         });
 
         let htmlContent = props.content.data.textContent;

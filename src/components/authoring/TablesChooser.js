@@ -15,18 +15,25 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { uuidv4 } from '../../utils/index.js';
+import { Typography } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
 
 
 export default function TablesChooser(props) {
 
   const { t } = useTranslation();
   const [tableId, setTableId] = useState(null);
+  const [unique, setUnique] = useState(false);
   const [tableIds, setTableIds] = useState(props.tablesIds ? props.tablesIds : []);
   const wholeContent = useSelector((st) => st.content);
   const tables = wholeContent.tables;
   const theme = useTheme();
   const mainColor = theme.palette.primary.main
   const contrastTextColor = theme.palette.primary.contrastText
+
+  const toggleUnique = () => {
+    setUnique(!unique);
+  }
 
   const tableNames = useMemo(
     () => tables.map((item) => {
@@ -48,11 +55,11 @@ export default function TablesChooser(props) {
     emitTablesChange();
   }, [tableIds, props]);
 
-  const addTableId = (tableId) => {
+  const addTableId = (tableId, uniquevalues) => {
 
     const newTableIds = [...tableIds, {
       id: uuidv4(),
-      label: tableId
+      label: tableId + (unique ? "!" : "")
     }];
 
     setTableIds(newTableIds);
@@ -123,7 +130,7 @@ export default function TablesChooser(props) {
   return (
     <Grid container sx={{ width: '100%' }}>
       <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={9} sx={{ display: 'flex', alignItems: 'center' }}>
+      <Grid item xs={5} sx={{ display: 'flex', alignItems: 'center' }}>
         <Autocomplete
           disablePortal
           id="tableIDs"
@@ -135,8 +142,12 @@ export default function TablesChooser(props) {
           renderInput={(params) => <TextField {...params} label={t("Table Id..")} />}
         />
       </Grid>
+      <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', borderLeft: '1em' }}>
+        <Typography variant="body1">{t("Unique values?")}</Typography>
+        <Checkbox checked={unique} onChange={toggleUnique} inputProps={{ 'aria-label': 'controlled' }} />
+      </Grid>
       <Grid item xs={3} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', borderLeft: '1em' }}>
-        <IconButton disabled={!tableId} onClick={() => addTableId(tableId)}><AddIcon /></IconButton>
+        <IconButton disabled={!tableId} onClick={() => addTableId(tableId, unique)}><AddIcon /></IconButton>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} style={{ height: (tableIds ? (tableIds.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>

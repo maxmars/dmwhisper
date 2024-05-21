@@ -140,6 +140,7 @@ i18n
           "Bookmark ": "Bookmark ",
           "User manual": "User manual",
           "There is unsaved content. Do you want to save?": "There is unsaved content. Do you want to save?",
+          "Unique values?" : "Unique values?",
         }
       },
       it: {
@@ -265,6 +266,7 @@ i18n
           "Bookmark ": "Segnalibro ",
           "User manual": "Manuale utente",
           "There is unsaved content. Do you want to save?": "Ci sono contenuti non salvati. Vuoi salvare?",
+          "Unique values?" : "Valori unici?",
         }
       },
       es: {
@@ -389,6 +391,7 @@ i18n
           "Bookmark ": "Marcador ",
           "User manual": "Manual de usuario",
           "There is unsaved content. Do you want to save?": "Hay contenido sin guardar. ¿Quieres salvar?",
+          "Unique values?" : "Valores únicos?",
         },
       },
       fr: {
@@ -513,6 +516,7 @@ i18n
           "Bookmark ": "Signet ",
           "User manual": "Manuel utilisateur",
           "There is unsaved content. Do you want to save?": "Il y a du contenu non enregistré. Voulez-vous enregistrer?",
+          "Unique values?" : "Valeurs uniques?",
         },
       },
       de: {
@@ -637,6 +641,7 @@ i18n
           "Bookmark ": "Lesezeichen ",
           "User manual": "Benutzerhandbuch",
           "There is unsaved content. Do you want to save?": "Es gibt ungespeicherten Inhalt. Möchten Sie speichern?",
+          "Unique values?" : "Einzigartige Werte?",
         }
       },
       pt: {
@@ -761,6 +766,7 @@ i18n
           "Bookmark ": "Marcador ",
           "User manual": "Manual do usuário",
           "There is unsaved content. Do you want to save?": "Há conteúdo não salvo. Você quer salvar?",
+          "Unique values?" : "Valores únicos?",
         }
       },
       gr: {
@@ -885,6 +891,7 @@ i18n
           "Bookmark ": "Σελιδοδείκτης ",
           "User manual": "Εγχειρίδιο χρήστη",
           "There is unsaved content. Do you want to save?": "Υπάρχει μη αποθηκευμένο περιεχόμενο. Θέλετε να αποθηκεύσετε;",
+          "Unique values?" : "Μοναδικές τιμές;",
         }
       },
       se: {
@@ -1009,6 +1016,7 @@ i18n
           "Bookmark ": "Bokmärke ",
           "User manual": "Användarhandbok",
           "There is unsaved content. Do you want to save?": "Det finns osparat innehåll. Vill du spara?",
+          "Unique values?" : "Unika värden?",
         }
       },
       uk: {
@@ -1133,6 +1141,7 @@ i18n
           "Bookmark ": "Закладка ",
           "User manual": "Посібник користувача",
           "There is unsaved content. Do you want to save?": "Є незбережений вміст. Ви хочете зберегти?",
+          "Unique values?" : "Унікальні значення?",
         }
       },
       he: {
@@ -1257,7 +1266,8 @@ i18n
           "Bookmark ": "סימניה ",
           "User manual": "מדריך למשתמש",
           "There is unsaved content. Do you want to save?": "יש תוכן שלא נשמר. ברצונך לשמור?",
-        }
+          "Unique values?" : "ערכים ייחודיים?",
+        }        
       },
       no: {
         translation: {
@@ -1381,6 +1391,7 @@ i18n
           "Bookmark ": "Bokmerke ",
           "User manual": "Brukerhåndbok",
           "There is unsaved content. Do you want to save?": "Det er ikke lagret innhold. Vil du lagre?",
+          "Unique values?" : "Unike verdier?",
         }
       },
       nl: {
@@ -1505,6 +1516,7 @@ i18n
           "Bookmark ": "Bladwijzer ",
           "User manual": "Gebruikershandleiding",
           "There is unsaved content. Do you want to save?": "Er is niet-opgeslagen inhoud. Wil je opslaan?",
+          "Unique values?" : "Unieke waarden?",
         }
       },
       pl: {
@@ -1629,6 +1641,7 @@ i18n
           "Bookmark ": "Zakładka ",
           "User manual": "Instrukcja obsługi",
           "There is unsaved content. Do you want to save?": "Istnieje niezapisana zawartość. Czy chcesz zapisać?",
+          "Unique values?" : "Unikalne wartości?",
         }
       },
       hu: {
@@ -1753,6 +1766,7 @@ i18n
           "Bookmark ": "Könyvjelző ",
           "User manual": "Felhasználói kézikönyv",
           "There is unsaved content. Do you want to save?": "Van nem mentett tartalom. Akarod menteni?",
+          "Unique values?" : "Egyedi értékek?",
         }
       },
       bg: {
@@ -1877,6 +1891,7 @@ i18n
           "Bookmark ": "Отметка ",
           "User manual": "Ръководство за потребителя",
           "There is unsaved content. Do you want to save?": "Има незапазено съдържание. Искате ли да запазите?",
+          "Unique values?" : "Уникални стойности?",
         }
       },
       fi: {
@@ -2001,6 +2016,7 @@ i18n
           "Bookmark ": "Kirjanmerkki ",
           "User manual": "Käyttöopas",
           "There is unsaved content. Do you want to save?": "Sisältöä tallentamatta. Haluatko tallentaa?",
+          "Unique values?" : "Yksilölliset arvot?",
         }
       },
       da: {
@@ -2125,6 +2141,7 @@ i18n
           "Bookmark ": "Bogmærke ",
           "User manual": "Brugervejledning",
           "There is unsaved content. Do you want to save?": "Der er ikke gemt indhold. Vil du gemme?",
+          "Unique values?" : "Unikke værdier?",
         }
       },
       ro: {
@@ -2249,6 +2266,7 @@ i18n
           "Bookmark ": "Marcați ",
           "User manual": "Manual de utilizare",
           "There is unsaved content. Do you want to save?": "Există conținut nesalvat. Vrei să salvezi?",
+          "Unique values?" : "Valori unice?",
         }
       },
       cs: {
@@ -2373,6 +2391,7 @@ i18n
           "Bookmark ": "Záložka ",
           "User manual": "Uživatelský manuál",
           "There is unsaved content. Do you want to save?": "Existuje neuložený obsah. Chcete uložit?",
+          "Unique values?" : "Jedinečné hodnoty?",
         }
       },
       is: {
@@ -2497,6 +2516,7 @@ i18n
           "Bookmark ": "Bókamerki ",
           "User manual": "Notendahandbók",
           "There is unsaved content. Do you want to save?": "Það er óvistað efni. Viltu vista?",
+          "Unique values?" : "Einræð gildi?",
         }
       }
     }
