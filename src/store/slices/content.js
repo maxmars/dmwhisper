@@ -39,7 +39,7 @@ const content = createSlice({
                 if (!state.lastTableContent) {
                     state.lastTableContent = {};
                 }
-                
+
                 const cleanedId = contentId.replace(/[^0-9a-zA-Z]/g, '');
 
                 state.lastTableContent[cleanedId] = {
@@ -308,70 +308,102 @@ function cryptoRands() {
 }
 
 let globalRandomValues = cryptoRands();
-export const diceThrow = (state, idTable) => {
+export const diceThrow = (state, idTable, tableDictionary) => {
 
-    if (globalRandomValues.length < 1) {
-        globalRandomValues = cryptoRands();
-    }
+    try {
+        if (globalRandomValues.length < 1) {
+            globalRandomValues = cryptoRands();
+        }
 
-    if (idTable.indexOf(" ") > -1) {
-        let tables = idTable.split(" ");
+        // If the table is a list of tables, we need to get a value for each one
+        if (idTable.indexOf(" ") > -1) {
+            let tables = idTable.split(" ");
 
-        tables = tables.map((table) => {
-            return diceThrow(state, table);
+            tables = tables.map((table) => {
+                return getUniqueValue(state, table, tableDictionary);
+            });
+
+            tables = tables.join(" ");
+
+            return tables;
+        }
+
+        const table = state.tables.find((table) => table.id === idTable);
+        let min = 1000;
+        let max = 0;
+
+        table.rng.forEach((rng) => {
+            if (rng.min < min) {
+                min = rng.min;
+            }
+
+            if (rng.max > max) {
+                max = rng.max;
+            }
         });
 
-        tables = tables.join(" ");
+        const result = Math.floor(globalRandomValues.pop() * (max - min + 1)) + min;
 
-        return tables;
-    }
+        const rng = table.rng.find((rng) => result >= rng.min && result <= rng.max);
 
-    const table = state.tables.find((table) => table.id === idTable);
-    let min = 1000;
-    let max = 0;
+        const prefix = rng.prefix ? rng.prefix + " " : "";
+        const postfix = rng.postfix ? " " + rng.postfix : "";
 
-    table.rng.forEach((rng) => {
-        if (rng.min < min) {
-            min = rng.min;
-        }
+        if (rng.table) {
+            // The result contains sub-tables, we need to get a value for each one
+            let tables = rng.table.trim().split(" ");
 
-        if (rng.max > max) {
-            max = rng.max;
-        }
-    });
+            if (rng.table.indexOf("@@") > -1) {
+                tables = tables.map((table) => {
+                    if (table.startsWith("@@")) {
 
-    const result = Math.floor(globalRandomValues.pop() * (max - min + 1)) + min;
+                        table = table.substring(2)
+                        return getUniqueValue(state, table, tableDictionary);
+                    } else {
+                        return table;
+                    }
+                });
 
-    const rng = table.rng.find((rng) => result >= rng.min && result <= rng.max);
+                tables = tables.join(" ");
+            } else {
+                tables = tables.map((table) => {
+                    return getUniqueValue(state, table, tableDictionary);
+                });
 
-    const prefix = rng.prefix ? rng.prefix + " " : "";
-    const postfix = rng.postfix ? " " + rng.postfix : "";
+                tables = tables.join(" ");
+            }
 
-    if (rng.table) {
-        let tables = rng.table.trim().split(" ");
-
-        if (rng.table.indexOf("@@") > -1) {
-            tables = tables.map((table) => {
-                if (table.startsWith("@@")) {
-                    return diceThrow(state, table.substring(2));
-                } else {
-                    return table;
-                }
-            });
-
-            tables = tables.join(" ");
+            return prefix + tables + postfix;
         } else {
-            tables = tables.map((table) => {
-                return diceThrow(state, table);
-            });
-
-            tables = tables.join(" ");
+            // The result is a simple string
+            return prefix + rng.result + postfix;
         }
-
-        return prefix + tables + postfix;
-    } else {
-        return prefix + rng.result + postfix;
+    } catch (e) {
+        return "Error!";
     }
+}
+
+
+export const getUniqueValue = (state, table, tableDictionary) => {
+    let result = diceThrow(state, table, tableDictionary);
+    if (tableDictionary[table]) {
+        if (tableDictionary[table].indexOf(result) > -1) {
+            let tries = 0;
+
+            do {
+                result = diceThrow(state, table, tableDictionary);
+                tries++;
+            } while (tableDictionary[table].indexOf(result) > -1 && tries < 1000);
+
+            if (tableDictionary[table].indexOf(result) === -1) {
+                tableDictionary[table].push(result);
+            }
+        } else {
+            tableDictionary[table].push(result);
+        }
+    }
+
+    return result;
 }
 
 

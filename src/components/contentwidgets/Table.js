@@ -8,7 +8,7 @@ import UpdateDisabledIcon from '@mui/icons-material/UpdateDisabled';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { diceThrow, getTable, setLastTableContent } from '../../store/slices/content';
+import { diceThrow, getTable, setLastTableContent, getUniqueValue } from '../../store/slices/content';
 import { addThrow } from '../../store/slices/throws';
 import { format } from 'date-fns';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -46,7 +46,6 @@ const Table = (props) => {
 
         let tables = props.content.data.table.trim().split(" ");
 
-        // TODO: implement distinct values table results
         const tableDictionary = {};
         tables.forEach((table, index) => {
           if (table.endsWith("!")) {
@@ -55,27 +54,7 @@ const Table = (props) => {
         });
 
         tables = tables.map((table) => {
-          table = table.replace("!", "");
-
-          let result = diceThrow(content, table);
-          if (tableDictionary[table]) {
-            if (tableDictionary[table].indexOf(result) > -1) {
-              let tries = 0;
-
-              do {
-                result = diceThrow(content, table);
-                tries++;
-              } while (tableDictionary[table].indexOf(result) > -1 && tries < 1000);
-
-              if (tableDictionary[table].indexOf(result) === -1) {
-                tableDictionary[table].push(result);
-              }
-            } else {
-              tableDictionary[table].push(result);
-            }
-          }
-
-          return result;
+          return getUniqueValue(content, table.replace("!", ""), tableDictionary);
         });
 
         let htmlContent = props.content.data.textContent;

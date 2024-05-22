@@ -1,6 +1,10 @@
 # Changelog Template progetto DM Whisper
 
 
+    22 Mag 2024
+    -----------
+    - 1.23.0 Extra robustness + error handling, now unique table results are unique even for inner tables.
+
     21 Mag 2024
     -----------
     - 1.22.0 It is now possible to request unique values when rolling results on a table. Please use the "unique?" checkbox when adding tables to a page.
