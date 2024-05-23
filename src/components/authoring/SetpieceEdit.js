@@ -17,11 +17,14 @@ import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
+import TablesChooser from './TablesChooser';
+import { uuidv4 } from '../../utils/index.js';
 
 
 export default function SetpieceEdit(props) {
 
   const { t } = useTranslation();
+  // const [unsavedContent, setUnsavedContent] = useState("no");
   const [rngToDelete, setRNGToDelete] = useState(null);
   const [editedSetpieceId, setEditedSetpieceId] = useState(props.setpieceId);
   const setpieces = useSelector((st) => st.content.setpieces);
@@ -30,6 +33,7 @@ export default function SetpieceEdit(props) {
   const theme = useTheme();
   const [alert, setAlert] = useState(null);
   const [rngAlert, setRngAlert] = useState(null);
+  const [currentMenuTable, setCurrentMenuTable] = useState(''); // (cttbl);
 
   const [newMin, setNewMin] = useState(null);
   const [newMax, setNewMax] = useState(null);
@@ -123,7 +127,7 @@ export default function SetpieceEdit(props) {
       description: document.getElementById('new-result').value,
       // TODO
       textContent: '',
-      table: '',
+      table: currentMenuTable,
       // TODO Unused ATM
       minAppears: 0,
       maxAppears: 1000,
@@ -258,6 +262,19 @@ export default function SetpieceEdit(props) {
             label={newResult ? "" : t("Fixed result")}
             variant="outlined"
             sx={{ width: "100%" }} />
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
+        <Grid item xs={12}>
+          <TablesChooser
+            tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => { return { label: item, id: uuidv4() } }) : null}
+            onTablesChange={(tables) => {
+              if (tables !== currentMenuTable) {
+                setCurrentMenuTable(tables);
+                // setUnsavedContent("yes");
+              }
+            }}
+          />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         {rngAlert ?
