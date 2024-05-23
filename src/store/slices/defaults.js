@@ -16,9 +16,14 @@ const defaults = createSlice({
 
             state.tablesFilter = filter;
         },
+        setSetpiecesFilter(state, action) {
+            const filter = action.payload;
+
+            state.setpiecesFilter = filter;
+        },
     }
 });
 
 export default defaults.reducer;
 
-export const { setTablesFilter } = defaults.actions;
+export const { setTablesFilter, setSetpiecesFilter } = defaults.actions;

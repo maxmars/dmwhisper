@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { useMemo } from 'react';
-import Autocomplete from '@mui/material/Autocomplete';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -14,21 +12,21 @@ import Alert from '@mui/material/Alert';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { updateTableHeader, updateTableRng } from '../../store/slices/content';
+import { updateSetpieceHeader, updateSetpieceRng } from '../../store/slices/content';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
 
 
-export default function TableEdit(props) {
+export default function SetpieceEdit(props) {
 
   const { t } = useTranslation();
   const [rngToDelete, setRNGToDelete] = useState(null);
-  const [editedTableId, setEditedTableId] = useState(props.tableId);
-  const tables = useSelector((st) => st.content.tables);
-  const table = tables.find((table) => table.id === props.tableId);
-  const [editedTableDescription, setEditedTableDescription] = useState(table.description);
+  const [editedSetpieceId, setEditedSetpieceId] = useState(props.setpieceId);
+  const setpieces = useSelector((st) => st.content.setpieces);
+  const setpiece = setpieces.find((setpiece) => setpiece.id === props.setpieceId);
+  const [editedSetpieceDescription, setEditedSetpieceDescription] = useState(setpiece.description);
   const theme = useTheme();
   const [alert, setAlert] = useState(null);
   const [rngAlert, setRngAlert] = useState(null);
@@ -36,17 +34,9 @@ export default function TableEdit(props) {
   const [newMin, setNewMin] = useState(null);
   const [newMax, setNewMax] = useState(null);
   const [newResult, setNewResult] = useState(null);
-  const [newPrefix, setNewPrefix] = useState(null);
-  const [newTable, setNewTable] = useState(null);
-  const [newPostfix, setNewPostfix] = useState(null);
 
-  const rows = table.rng.map((rng) => {
-    let description = rng.result;
-    if (!rng.result) {
-      const prefix = rng.prefix ? rng.prefix : '';
-      const postfix = rng.postfix ? rng.postfix : '';
-      description = prefix + ' ' + rng.table + ' ' + postfix;
-    }
+  const rows = setpiece.rng.map((rng) => {
+    let description = rng.description;
 
     return {
       id: rng.min + '-' + rng.max,
@@ -56,36 +46,27 @@ export default function TableEdit(props) {
 
   const dispatch = useDispatch();
 
-  const tableNames = useMemo(
-    () => tables.map((item) => {
-      return {
-        label: item.id,
-      }
-    }),
-    [tables],
-  );
-
   const updateHeader = () => {
 
-    if (tables.find((table) => table.id === editedTableId) && editedTableId !== props.tableId) {
-      setAlert(t('Table ID already exists'));
+    if (setpieces.find((setpiece) => setpiece.id === editedSetpieceId) && editedSetpieceId !== props.setpieceId) {
+      setAlert(t('Set piece ID already exists'));
       return;
     }
 
-    if (editedTableId === '') {
-      setAlert(t('Table ID cannot be blank'));
+    if (editedSetpieceId === '') {
+      setAlert(t('Set piece ID cannot be blank'));
       return;
     }
 
-    if (editedTableId === props.tableId && editedTableDescription === props.tableDescription) {
+    if (editedSetpieceId === props.setpieceId && editedSetpieceDescription === props.setpieceDescription) {
       setAlert(t('No changes to save'));
       return;
     }
 
-    dispatch(updateTableHeader({
-      originalTableId: props.tableId,
-      tableId: editedTableId,
-      tableDescription: editedTableDescription,
+    dispatch(updateSetpieceHeader({
+      originalSetpieceId: props.setpieceId,
+      setpieceId: editedSetpieceId,
+      setpieceDescription: editedSetpieceDescription,
     }));
 
     props.endEditing();
@@ -126,18 +107,12 @@ export default function TableEdit(props) {
       return;
     }
 
-    if (document.getElementById('new-result').value === '' &&
-      document.getElementById('new-table').value === '') {
-      setRngAlert(t('Either Fixed result or Table must have a value'));
-      return;
-    }
-
     if (parseInt(document.getElementById('new-min').value) > parseInt(document.getElementById('new-max').value)) {
       setRngAlert(t('Min value cannot be greater than max value'));
       return;
     }
 
-    if (table.rng.find((rng) => rng.min === parseInt(document.getElementById('new-min').value) && rng.max === parseInt(document.getElementById('new-max').value))) {
+    if (setpiece.rng.find((rng) => rng.min === parseInt(document.getElementById('new-min').value) && rng.max === parseInt(document.getElementById('new-max').value))) {
       setRngAlert(t('RNG value already exists'));
       return;
     }
@@ -145,31 +120,34 @@ export default function TableEdit(props) {
     const newRng = {
       min: parseInt(document.getElementById('new-min').value),
       max: parseInt(document.getElementById('new-max').value),
-      prefix: document.getElementById('new-prefix').value,
-      table: document.getElementById('new-table').value,
-      postfix: document.getElementById('new-postfix').value,
-      result: document.getElementById('new-result').value,
+      description: document.getElementById('new-result').value,
+      // TODO
+      textContent: '',
+      table: '',
+      // TODO Unused ATM
+      minAppears: 0,
+      maxAppears: 1000,
+      width: 1,
+      height: 1,
+      imgUrl: '',
     }
 
-    const newRngs = [...table.rng, newRng];
+    const newRngs = [...setpiece.rng, newRng];
 
-    dispatch(updateTableRng({
-      tableId: props.tableId,
+    dispatch(updateSetpieceRng({
+      setpieceId: props.setpieceId,
       rng: newRngs,
     }));
 
     document.getElementById('new-min').value = '';
     document.getElementById('new-max').value = '';
     document.getElementById('new-result').value = '';
-    document.getElementById('new-prefix').value = '';
-    document.getElementById('new-table').value = '';
-    document.getElementById('new-postfix').value = '';
   }
 
   const deleteRng = (rngToDelete) => {
-    const newRng = table.rng.filter((rng) => rng.min + '-' + rng.max !== rngToDelete);
-    dispatch(updateTableRng({
-      tableId: props.tableId,
+    const newRng = setpiece.rng.filter((rng) => rng.min + '-' + rng.max !== rngToDelete);
+    dispatch(updateSetpieceRng({
+      setpieceId: props.setpieceId,
       rng: newRng,
     }));
 
@@ -179,30 +157,7 @@ export default function TableEdit(props) {
   const editRNGValues = (rngId) => {
     setNewMin(rngId.split('-')[0]);
     setNewMax(rngId.split('-')[1]);
-
-    const result = table.rng.find((rng) => rng.min + '-' + rng.max === rngId).result;
-    if (result) {
-      setNewResult(result);
-    }
-
-    const prefix = table.rng.find((rng) => rng.min + '-' + rng.max === rngId).prefix;
-    if (prefix) {
-      setNewPrefix(prefix);
-    }
-
-    const postfix = table.rng.find((rng) => rng.min + '-' + rng.max === rngId).postfix;
-    if (postfix) {
-      setNewPostfix(postfix);
-    }
-
-    const tableName = table.rng.find((rng) => rng.min + '-' + rng.max === rngId).table;
-    if (tableName) {
-      setNewTable(tableName);
-    }
-  }
-
-  const addTableToTablesList = (tableName) => {
-    setNewTable((newTable && newTable.trim().length > 0) ? newTable.trim() + ' @@' + tableName : '@@' + tableName);
+    setNewResult(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).description);
   }
 
   if (rngToDelete === null) {
@@ -210,28 +165,28 @@ export default function TableEdit(props) {
     return (
       <Grid container >
         <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography>{t("Edited table:")} {props.tableId}</Typography>
+          <Typography>{t("Edited setpiece:")} {props.setpieceId}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <TextField id="table-id"
-            label={t("Table ID")}
+          <TextField id="setpiece-id"
+            label={t("Set piece ID")}
             variant="outlined"
             sx={{ width: "100%" }}
-            defaultValue={props.tableId}
-            value={editedTableId ? editedTableId : ''}
-            onChange={(event) => setEditedTableId(event.target.value)}
+            defaultValue={props.setpieceId}
+            value={editedSetpieceId ? editedSetpieceId : ''}
+            onChange={(event) => setEditedSetpieceId(event.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField id="table-description"
-            label={t("Table Description")}
+          <TextField id="setpiece-description"
+            label={t("Set piece Description")}
             variant="outlined"
             sx={{ width: "100%" }}
-            defaultValue={props.tableDescription}
-            value={editedTableDescription ? editedTableDescription : ''}
-            onChange={(event) => setEditedTableDescription(event.target.value)} />
+            defaultValue={props.setpieceDescription}
+            value={editedSetpieceDescription ? editedSetpieceDescription : ''}
+            onChange={(event) => setEditedSetpieceDescription(event.target.value)} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         {alert ?
@@ -296,59 +251,11 @@ export default function TableEdit(props) {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <Typography>{t("Either specify a fixed result:")}</Typography>
-        </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
           <TextField
             onChange={(event) => setNewResult(event.target.value)}
             value={newResult ? newResult : ''}
             id="new-result"
             label={newResult ? "" : t("Fixed result")}
-            variant="outlined"
-            sx={{ width: "100%" }} />
-        </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
-          <Typography>{t("Or specfiy one or more (space separated) tables to roll on, plus optional prefix and postfix:")}</Typography>
-        </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
-          <TextField
-            onChange={(event) => setNewPrefix(event.target.value)}
-            value={newPrefix ? newPrefix : ''}
-            id="new-prefix"
-            label={newPrefix ? "" : t("Prefix")}
-            variant="outlined"
-            sx={{ width: "100%" }} />
-        </Grid>
-        <Grid item xs={4} sx={{ display: 'flex', alignItems: 'center' }}>
-          <Autocomplete
-            disablePortal
-            id="tableIDs"
-            options={tableNames}
-            sx={{ width: '100%' }}
-            onChange={(event, newValue) => {
-              addTableToTablesList(newValue.label);
-            }}
-            renderInput={(params) => <TextField {...params} label={t("Table Id..")} />}
-          />
-        </Grid>
-        <Grid item xs={8}>
-          <TextField
-            onChange={(event) => setNewTable(event.target.value)}
-            value={newTable ? newTable : ''}
-            id="new-table"
-            label={newTable ? "" : t("Table (ID)")}
-            variant="outlined"
-            sx={{ width: "100%" }} />
-        </Grid>
-        <Grid item xs={12}>
-          <TextField
-            onChange={(event) => setNewPostfix(event.target.value)}
-            value={newPostfix ? newPostfix : ''}
-            id="new-postfix"
-            label={newPostfix ? "" : t("Postfix")}
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
@@ -369,14 +276,14 @@ export default function TableEdit(props) {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <Button onClick={props.endEditing} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to tables list")}</Button>
+          <Button onClick={props.endEditing} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to setpieces list")}</Button>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
       </Grid >
     );
   } else {
     // get result from rngToDelete
-    const result = table.rng.find((rng) => rng.min + '-' + rng.max === rngToDelete).result;
+    const result = setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngToDelete).result;
 
     return <Grid container >
       <Grid item xs={12}>&nbsp;</Grid>

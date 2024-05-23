@@ -25,12 +25,14 @@ const content = createSlice({
 
             state.tree = tree;
             state.tables = tables;
+            state.setpieces = initialState.setpieces;
             state.copiedContent = null;
             state.clipboardAction = null;
         },
         clearContent(state, action) {
             state.tree = initialState.tree;
             state.tables = initialState.tables;
+            state.setpieces = initialState.setpieces;
         },
         setLastTableContent(state, action) {
             const { contentId, diceThrow, htmlContent } = action.payload;
@@ -55,10 +57,29 @@ const content = createSlice({
 
             state.tables.push(newTable);
         },
+        addSetpiece(state, action) {
+            const newSetpiece = action.payload;
+
+            if (!state.setpieces) {
+                state.setpieces = [];
+            }
+
+            state.setpieces.push(newSetpiece);
+        },
         removeTable(state, action) {
             const tableId = action.payload;
 
             state.tables = state.tables.filter((table) => table.id !== tableId);
+        },
+        removeSetpiece(state, action) {
+            const setpieceId = action.payload;
+
+            if (!state.setpieces) {
+                state.setpieces = [];
+                return;
+            }
+
+            state.setpieces = state.setpieces.filter((setpiece) => setpiece.id !== setpieceId);
         },
         updateTableHeader(state, action) {
             const { originalTableId, tableId, tableDescription } = action.payload;
@@ -72,6 +93,23 @@ const content = createSlice({
 
             state.tables = tables;
         },
+        updateSetpieceHeader(state, action) {
+            const { originalSetpieceId, setpieceId, setpieceDescription } = action.payload;
+
+            if (!state.setpieces) {
+                console.log("No setpieces to update");
+                return;
+            }
+
+            const setpiece = state.setpieces.find((setpiece) => setpiece.id === originalSetpieceId);
+            const setpieces = state.setpieces.filter((setpiece) => setpiece.id !== originalSetpieceId);
+
+            setpiece.id = setpieceId;
+            setpiece.description = setpieceDescription;
+            setpieces.push(setpiece);
+
+            state.setpieces = setpieces;
+        },
         updateTableRng(state, action) {
             const { tableId, rng } = action.payload;
 
@@ -82,6 +120,22 @@ const content = createSlice({
             tables.push(table);
 
             state.tables = tables;
+        },
+        updateSetpieceRng(state, action) {
+            const { setpieceId, rng } = action.payload;
+
+            if (!state.setpieces) {
+                console.log("No setpieces to update");
+                return;
+            }
+
+            const setpiece = state.setpieces.find((setpiece) => setpiece.id === setpieceId);
+            const setpieces = state.setpieces.filter((setpiece) => setpiece.id !== setpieceId);
+
+            setpiece.rng = rng;
+            setpieces.push(setpiece);
+
+            state.setpieces = setpieces;
         },
         addMenuItem(state, action) {
             try {
@@ -426,6 +480,6 @@ export const getTable = (state, idTable) => {
 
 export default content.reducer;
 
-export const { setContent, clearContent, setLastTableContent, addTable, removeTable, updateTableHeader,
-    updateTableRng, updateContent, updateContentHeader, addMenuItem, updateContentType,
+export const { setContent, clearContent, setLastTableContent, addTable, addSetpiece, removeTable, removeSetpiece, updateTableHeader,
+    updateSetpieceHeader, updateTableRng, updateSetpieceRng, updateContent, updateContentHeader, addMenuItem, updateContentType,
     setClipboardAction, deleteMenuItem, setTabPath, clearTabPath } = content.actions;

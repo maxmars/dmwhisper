@@ -10,8 +10,8 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Alert from '@mui/material/Alert';
 import { useDispatch } from 'react-redux';
-import { addTable, removeTable } from '../../store/slices/content';
-import { setTablesFilter } from '../../store/slices/defaults';
+import { addSetpiece, removeSetpiece } from '../../store/slices/content';
+import { setSetpiecesFilter } from '../../store/slices/defaults';
 import useTheme from '@mui/private-theming/useTheme';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -19,29 +19,29 @@ import { useTranslation } from 'react-i18next';
 import InputAdornment from '@mui/material/InputAdornment';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
-export default function TablesList(props) {
+export default function SetpiecesList(props) {
 
   const { t } = useTranslation();
-  const [tableIdToDelete, setTableIdToDelete] = useState(null);
+  const [setpieceIdToDelete, setSetpieceIdToDelete] = useState(null);
   const [alert, setAlert] = useState(null);
   const theme = useTheme();
 
   const dispatch = useDispatch();
 
-  const tablesFilter = useSelector((st) => {
-    if (st.defaults.tablesFilter) {
-      return st.defaults.tablesFilter;
+  const setpiecesFilter = useSelector((st) => {
+    if (st.defaults.setpiecesFilter) {
+      return st.defaults.setpiecesFilter;
     } else {
       return '';
     }
   });
 
   const rows = useSelector((st) => {
-    if (st.content.tables) {
-      return (st.content.tables).map((table) => {
+    if (st.content.setpieces) {
+      return (st.content.setpieces).map((setpiece) => {
         return {
-          id: table.id,
-          description: table.description,
+          id: setpiece.id,
+          description: setpiece.description,
         }
       });
     } else {
@@ -63,55 +63,55 @@ export default function TablesList(props) {
         <GridActionsCellItem
           icon={<DeleteIcon />}
           label={t("Delete")}
-          onClick={() => setTableIdToDelete(params.id)} />
+          onClick={() => setSetpieceIdToDelete(params.id)} />
       ]
     },
   ];
 
-  const addNewTable = () => {
+  const addNewSetpiece = () => {
 
-    const newTableId = document.getElementById('new-table-id').value;
-    const newTableDescription = document.getElementById('new-table-description').value;
+    const newSetpieceId = document.getElementById('new-setpiece-id').value;
+    const newSetpieceDescription = document.getElementById('new-setpiece-description').value;
 
-    if (newTableId === '') {
-      setAlert(t('Table ID cannot be blank'));
+    if (newSetpieceId === '') {
+      setAlert(t('Set piece ID cannot be blank'));
       return;
-    } else if (rows.find((row) => row.id === newTableId)) {
-      setAlert(t('Table ID already exists'));
+    } else if (rows.find((row) => row.id === newSetpieceId)) {
+      setAlert(t('Set piece ID already exists'));
       return;
     }
 
-    dispatch(addTable({
-      id: newTableId,
-      description: newTableDescription,
+    dispatch(addSetpiece({
+      id: newSetpieceId,
+      description: newSetpieceDescription,
       tags: [],
       rng: []
     }));
 
-    document.getElementById('new-table-id').value = '';
-    document.getElementById('new-table-description').value = '';
+    document.getElementById('new-setpiece-id').value = '';
+    document.getElementById('new-setpiece-description').value = '';
   }
 
-  const deleteTable = (tableId) => {
-    dispatch(removeTable(tableId));
-    setTableIdToDelete(null);
+  const deleteSetpiece = (setpieceId) => {
+    dispatch(removeSetpiece(setpieceId));
+    setSetpieceIdToDelete(null);
   }
 
-  if (tableIdToDelete === null) {
-    const contentsList = rows.filter((row) => row.id.toLowerCase().includes(tablesFilter.toLowerCase()));
+  if (setpieceIdToDelete === null) {
+    const contentsList = rows.filter((row) => row.id.toLowerCase().includes(setpiecesFilter.toLowerCase()));
 
     return (
       <Grid container >
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography>{t("List of Tables")}</Typography>
+          <Typography>{t("List of set pieces")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
           <TextField
-            id="table-filter"
-            value={tablesFilter}
-            onChange={(event) => dispatch(setTablesFilter(event.target.value))}
+            id="setpiece-filter"
+            value={setpiecesFilter}
+            onChange={(event) => dispatch(setSetpiecesFilter(event.target.value))}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -126,7 +126,7 @@ export default function TablesList(props) {
         <Grid item xs={12} style={{ height: (contentsList ? (contentsList.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
           <DataGrid
             sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
-            onRowClick={(params, event, details) => props.selectTable(params.row.id)}
+            onRowClick={(params, event, details) => props.selectSetpiece(params.row.id)}
             rows={contentsList}
             columns={columns}
             hideFooterPagination={true}
@@ -135,19 +135,19 @@ export default function TablesList(props) {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <Typography>{t("Click on a table to edit/delete it")}</Typography>
+          <Typography>{t("Click on a set piece to edit/delete it")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography>{t("Add a new table:")}</Typography>
+          <Typography>{t("Add a new set piece:")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <TextField id="new-table-id" label={t("Table ID")} variant="outlined" sx={{ width: "100%" }} />
+          <TextField id="new-setpiece-id" label={t("Setpiece ID")} variant="outlined" sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>
-          <TextField id="new-table-description" label={t("Table Description")} variant="outlined" sx={{ width: "100%" }} />
+          <TextField id="new-setpiece-description" label={t("Setpiece Description")} variant="outlined" sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         {alert ?
@@ -162,7 +162,7 @@ export default function TablesList(props) {
           :
           null}
         <Grid item xs={12}>
-          <Button onClick={addNewTable} startIcon={<AddIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Add new table")}</Button>
+          <Button onClick={addNewSetpiece} startIcon={<AddIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Add new set piece")}</Button>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
       </Grid >
@@ -171,20 +171,20 @@ export default function TablesList(props) {
     return <Grid container >
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Typography>{t("Warning! Table is about to be deleted")}</Typography>
+        <Typography>{t("Warning! Set piece is about to be deleted")}</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>
-        <Typography>{t("Do you really want to delete table")} {tableIdToDelete}?</Typography>
+        <Typography>{t("Do you really want to delete set piece")} {setpieceIdToDelete}?</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button onClick={() => deleteTable(tableIdToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
+        <Button onClick={() => deleteSetpiece(setpieceIdToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
       </Grid>
       <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button onClick={() => setTableIdToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
+        <Button onClick={() => setSetpieceIdToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
     </Grid >

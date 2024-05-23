@@ -2,18 +2,18 @@ import React from 'react';
 import { useState } from 'react';
 import { Grid, Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import TablesList from './TablesList';
-import TableEdit from './TableEdit';
+import SetpiecesList from './SetpiecesList';
+import SetpieceEdit from './SetpieceEdit';
 import { useTranslation } from 'react-i18next';
 
-const TablesEdit = (props) => {
+const SetpiecesEdit = (props) => {
 
   const { t } = useTranslation();
-  const tablesListPageMode = 'dmwhisper-tables-list';
-  const [pageMode, setPageMode] = useState(tablesListPageMode);
+  const setpiecesListPageMode = 'dmwhisper-setpieces-list';
+  const [pageMode, setPageMode] = useState(setpiecesListPageMode);
   
-  const selectTable = tableId => setPageMode(tableId);
-  const setTablesListMode = () => setPageMode(tablesListPageMode);
+  const selectSetpiece = setpieceId => setPageMode(setpieceId);
+  const setSetpiecesListMode = () => setPageMode(setpiecesListPageMode);
 
   return (
     <Grid container sx={{height: "100%"}} >
@@ -24,10 +24,10 @@ const TablesEdit = (props) => {
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>
         {
-          pageMode === tablesListPageMode ?
-          <TablesList selectTable={selectTable} />
+          pageMode === setpiecesListPageMode ?
+          <SetpiecesList selectSetpiece={selectSetpiece} />
           :
-          <TableEdit tableId={pageMode} endEditing={setTablesListMode} />
+          <SetpieceEdit setpieceId={pageMode} endEditing={setSetpiecesListMode} />
         }
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
@@ -36,4 +36,4 @@ const TablesEdit = (props) => {
 };
 
 
-export default TablesEdit;
+export default SetpiecesEdit;

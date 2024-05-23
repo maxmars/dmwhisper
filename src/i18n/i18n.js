@@ -141,6 +141,7 @@ i18n
           "User manual": "User manual",
           "There is unsaved content. Do you want to save?": "There is unsaved content. Do you want to save?",
           "Unique values?" : "Unique values?",
+          "Edit maps contents": "Edit maps contents",
         }
       },
       it: {
@@ -267,6 +268,7 @@ i18n
           "User manual": "Manuale utente",
           "There is unsaved content. Do you want to save?": "Ci sono contenuti non salvati. Vuoi salvare?",
           "Unique values?" : "Valori unici?",
+          "Edit maps contents": "Modifica contenuti mappe",
         }
       },
       es: {
@@ -392,6 +394,7 @@ i18n
           "User manual": "Manual de usuario",
           "There is unsaved content. Do you want to save?": "Hay contenido sin guardar. ¿Quieres salvar?",
           "Unique values?" : "Valores únicos?",
+          "Edit maps contents": "Editar contenido de mapas",
         },
       },
       fr: {
@@ -517,6 +520,7 @@ i18n
           "User manual": "Manuel utilisateur",
           "There is unsaved content. Do you want to save?": "Il y a du contenu non enregistré. Voulez-vous enregistrer?",
           "Unique values?" : "Valeurs uniques?",
+          "Edit maps contents": "Modifier les contenus des cartes",
         },
       },
       de: {
@@ -642,6 +646,7 @@ i18n
           "User manual": "Benutzerhandbuch",
           "There is unsaved content. Do you want to save?": "Es gibt ungespeicherten Inhalt. Möchten Sie speichern?",
           "Unique values?" : "Einzigartige Werte?",
+          "Edit maps contents": "Karteninhalte bearbeiten",
         }
       },
       pt: {
@@ -767,6 +772,7 @@ i18n
           "User manual": "Manual do usuário",
           "There is unsaved content. Do you want to save?": "Há conteúdo não salvo. Você quer salvar?",
           "Unique values?" : "Valores únicos?",
+          "Edit maps contents": "Editar conteúdo de mapas",
         }
       },
       gr: {
@@ -892,6 +898,7 @@ i18n
           "User manual": "Εγχειρίδιο χρήστη",
           "There is unsaved content. Do you want to save?": "Υπάρχει μη αποθηκευμένο περιεχόμενο. Θέλετε να αποθηκεύσετε;",
           "Unique values?" : "Μοναδικές τιμές;",
+          "Edit maps contents": "Επεξεργασία περιεχομένου χαρτών",
         }
       },
       se: {
@@ -1017,6 +1024,7 @@ i18n
           "User manual": "Användarhandbok",
           "There is unsaved content. Do you want to save?": "Det finns osparat innehåll. Vill du spara?",
           "Unique values?" : "Unika värden?",
+          "Edit maps contents": "Redigera kartinnehåll",
         }
       },
       uk: {
@@ -1142,6 +1150,7 @@ i18n
           "User manual": "Посібник користувача",
           "There is unsaved content. Do you want to save?": "Є незбережений вміст. Ви хочете зберегти?",
           "Unique values?" : "Унікальні значення?",
+          "Edit maps contents": "Редагувати вміст карт",
         }
       },
       he: {
@@ -1267,6 +1276,7 @@ i18n
           "User manual": "מדריך למשתמש",
           "There is unsaved content. Do you want to save?": "יש תוכן שלא נשמר. ברצונך לשמור?",
           "Unique values?" : "ערכים ייחודיים?",
+          "Edit maps contents": "ערוך תוכן מפות",
         }        
       },
       no: {
@@ -1392,6 +1402,7 @@ i18n
           "User manual": "Brukerhåndbok",
           "There is unsaved content. Do you want to save?": "Det er ikke lagret innhold. Vil du lagre?",
           "Unique values?" : "Unike verdier?",
+          "Edit maps contents": "Rediger kartinnhold",
         }
       },
       nl: {
@@ -1517,6 +1528,7 @@ i18n
           "User manual": "Gebruikershandleiding",
           "There is unsaved content. Do you want to save?": "Er is niet-opgeslagen inhoud. Wil je opslaan?",
           "Unique values?" : "Unieke waarden?",
+          "Edit maps contents": "Bewerk kaartinhoud",
         }
       },
       pl: {
@@ -1642,6 +1654,7 @@ i18n
           "User manual": "Instrukcja obsługi",
           "There is unsaved content. Do you want to save?": "Istnieje niezapisana zawartość. Czy chcesz zapisać?",
           "Unique values?" : "Unikalne wartości?",
+          "Edit maps contents": "Edytuj zawartość map",
         }
       },
       hu: {
@@ -1767,6 +1780,7 @@ i18n
           "User manual": "Felhasználói kézikönyv",
           "There is unsaved content. Do you want to save?": "Van nem mentett tartalom. Akarod menteni?",
           "Unique values?" : "Egyedi értékek?",
+          "Edit maps contents": "Térképtartalom szerkesztése",
         }
       },
       bg: {
@@ -1892,6 +1906,7 @@ i18n
           "User manual": "Ръководство за потребителя",
           "There is unsaved content. Do you want to save?": "Има незапазено съдържание. Искате ли да запазите?",
           "Unique values?" : "Уникални стойности?",
+          "Edit maps contents": "Редактиране на съдържанието на картите",
         }
       },
       fi: {
@@ -2017,6 +2032,7 @@ i18n
           "User manual": "Käyttöopas",
           "There is unsaved content. Do you want to save?": "Sisältöä tallentamatta. Haluatko tallentaa?",
           "Unique values?" : "Yksilölliset arvot?",
+          "Edit maps contents": "Muokkaa karttojen sisältöä",
         }
       },
       da: {
@@ -2142,6 +2158,7 @@ i18n
           "User manual": "Brugervejledning",
           "There is unsaved content. Do you want to save?": "Der er ikke gemt indhold. Vil du gemme?",
           "Unique values?" : "Unikke værdier?",
+          "Edit maps contents": "Rediger kortindhold",
         }
       },
       ro: {
@@ -2267,6 +2284,7 @@ i18n
           "User manual": "Manual de utilizare",
           "There is unsaved content. Do you want to save?": "Există conținut nesalvat. Vrei să salvezi?",
           "Unique values?" : "Valori unice?",
+          "Edit maps contents": "Editați conținutul hărților",
         }
       },
       cs: {
@@ -2392,6 +2410,7 @@ i18n
           "User manual": "Uživatelský manuál",
           "There is unsaved content. Do you want to save?": "Existuje neuložený obsah. Chcete uložit?",
           "Unique values?" : "Jedinečné hodnoty?",
+          "Edit maps contents": "Upravit obsah map",
         }
       },
       is: {
@@ -2517,6 +2536,7 @@ i18n
           "User manual": "Notendahandbók",
           "There is unsaved content. Do you want to save?": "Það er óvistað efni. Viltu vista?",
           "Unique values?" : "Einræð gildi?",
+          "Edit maps contents": "Breyta korta efni",
         }
       }
     }

@@ -2,8 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import { Grid, Button } from '@mui/material';
 import TablesEdit from './TablesEdit';
+import SetpiecesEdit from './SetpiecesEdit';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import TableChartIcon from '@mui/icons-material/TableChart';
+import MapIcon from '@mui/icons-material/Map';
 import MenuEdit from './MenuEdit';
 import { useTranslation } from 'react-i18next';
 
@@ -19,26 +21,21 @@ const AuthoringMenu = () => {
   switch (pageMode) {
     case 'menu':
       return (
-        <Grid container sx={{ overflow: 'scroll', height: '100%' }}>
-          <Grid item xs={12}>&nbsp;</Grid>
-          <Grid item xs={12}>&nbsp;</Grid>
-          <Grid item xs={12}>&nbsp;</Grid>
+        <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'scroll', height: '80vh' }}>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Button sx={{width: '80%'}} startIcon={<AccountTreeIcon />} onClick={() => setPageMode('menuedit')} variant="contained" color="primary">{t("Edit content tree")}</Button>
+            <Button sx={{ width: '90%' }} startIcon={<AccountTreeIcon />} onClick={() => setPageMode('menuedit')} variant="contained" color="primary">{t("Edit content tree")}</Button>
           </Grid>
-          <Grid item xs={12}>&nbsp;</Grid>
-          <Grid item xs={12}>&nbsp;</Grid>
-          <Grid item xs={12}>&nbsp;</Grid>
-          <Grid item xs={12}>&nbsp;</Grid>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Button sx={{width: '80%'}} startIcon={<TableChartIcon />} onClick={() => setPageMode('tablesedit')} variant="contained" color="primary">{t("Edit content tables")}</Button>
+            <Button sx={{ width: '90%' }} startIcon={<TableChartIcon />} onClick={() => setPageMode('tablesedit')} variant="contained" color="primary">{t("Edit content tables")}</Button>
           </Grid>
-          <Grid item xs={12}>&nbsp;</Grid>
-          <Grid item xs={12}>&nbsp;</Grid>
-          <Grid item xs={12}>&nbsp;</Grid>
-          <Grid item xs={12}>&nbsp;</Grid>
+          <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Button sx={{ width: '90%' }} startIcon={<MapIcon />} onClick={() => setPageMode('setpiecesedit')} variant="contained" color="primary">{t("Edit maps contents")}</Button>
+          </Grid>
         </Grid>
       );
+
+    case 'setpiecesedit':
+      return <SetpiecesEdit returnToMenu={returnToMenu} />;
 
     case 'tablesedit':
       return <TablesEdit returnToMenu={returnToMenu} />;
