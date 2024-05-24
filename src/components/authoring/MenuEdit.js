@@ -38,6 +38,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import TablesChooser from './TablesChooser';
 import './style.css';
 import { uuidv4 } from '../../utils/index.js';
+import ContentSaveReminder from './ContentSaveReminder';
 
 
 const MenuEdit = (props) => {
@@ -391,42 +392,27 @@ const MenuEdit = (props) => {
     }
 
     if (unsavedContent !== "yes" && unsavedContent !== "no") {
-        return <Grid container sx={{ height: "100%" }} >
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography>{t("Warning!")}</Typography>
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}>
-                <Typography>{t("There is unsaved content. Do you want to save?")}</Typography>
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12} style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                <Button onClick={() => {
-                    if (unsavedContent === "andbackonelevel") {
-                        setUnsavedContent("no");
-                        updateMenuHeader();
-                        backOneLevel();
-                    } else {
-                        setUnsavedContent("no");
-                        updateMenuHeader();
-                        backToRootMenu();
-                    }
-                }} variant="contained" color="primary">{t("Yes")}</Button>
-                <Button onClick={() => {
-                    if (unsavedContent === "andbackonelevel") {
-                        setUnsavedContent("no");
-                        backOneLevel();
-                    } else {
-                        setUnsavedContent("no");
-                        backToRootMenu();
-                    }
-                }} variant="contained" color="primary">{t("No")}</Button>
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-        </Grid >
+
+        return <ContentSaveReminder saveHandler={() => {
+                if (unsavedContent === "andbackonelevel") {
+                    setUnsavedContent("no");
+                    updateMenuHeader();
+                    backOneLevel();
+                } else {
+                    setUnsavedContent("no");
+                    updateMenuHeader();
+                    backToRootMenu();
+                }
+            }} discardHandler={() => {
+                if (unsavedContent === "andbackonelevel") {
+                    setUnsavedContent("no");
+                    backOneLevel();
+                } else {
+                    setUnsavedContent("no");
+                    backToRootMenu();
+                }
+            }} />
+
     }
 
     if (errorMessage) {
