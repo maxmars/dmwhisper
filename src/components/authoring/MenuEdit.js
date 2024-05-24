@@ -580,70 +580,53 @@ const MenuEdit = (props) => {
                                 </Select>
                             </Grid>
                             {
-                                currentContentType ?
+                                currentContentType && (currentContentType === "table" || currentContentType === "information") ?
                                     <>
                                         <Grid item xs={12}>&nbsp;</Grid>
                                         <Grid item xs={12}><Typography>{t("Text content")}</Typography></Grid>
                                         <Grid item xs={12}>
-                                            {path.length > 0 ?
-
-                                                <CKEditor
-                                                    editor={Editor}
-                                                    data={currentMenuContent}
-                                                    config={{ language: { ui: navigator.language.substring(0, 2), content: navigator.language.substring(0, 2) } }}
-                                                    onReady={editor => {
-                                                        // You can store the "editor" and use when it is needed.
-                                                        //console.log('Editor is ready to use!', editor);
-                                                    }}
-                                                    onChange={(event, editor) => {
-                                                        const data = editor.getData();
-                                                        //console.log({ event, editor, data });
-                                                        setCurrentMenuContent(data);
-                                                        setUnsavedContent("yes");
-                                                    }}
-                                                    onBlur={(event, editor) => {
-                                                        //console.log('Blur.', editor);
-                                                        ckEditorThemeSync();
-                                                    }}
-                                                    onFocus={(event, editor) => {
-                                                        //console.log('Focus.', editor);
-                                                        ckEditorThemeSync();
-                                                    }}
-                                                />
-                                                :
-                                                <TextField
-                                                    value={currentMenuContent}
-                                                    disabled
-                                                    id="text-content"
-                                                    variant="outlined"
-                                                    sx={{ width: "100%" }}
-                                                    onChange={(event) => {
-                                                        setCurrentMenuContent(event.target.value);
-                                                        setUnsavedContent("yes");
-                                                    }}
-                                                    multiline
-                                                    minRows={3}
-                                                    maxRows={8} />
-                                            }
-                                        </Grid>
-                                    </> : null
-                            }
-                            {
-                                currentContentType === "table" ?
-                                    <>
-                                        <Grid item xs={12}>&nbsp;</Grid>
-                                        <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
-                                        <Grid item xs={12}>
-                                            <TablesChooser
-                                                tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => { return { label: item, id: uuidv4() } }) : null}
-                                                onTablesChange={(tables) => {
-                                                    if (tables !== currentMenuTable) {
-                                                        setCurrentMenuTable(tables);
-                                                        setUnsavedContent("yes");
-                                                    }
+                                            <CKEditor
+                                                editor={Editor}
+                                                data={currentMenuContent}
+                                                config={{ language: { ui: navigator.language.substring(0, 2), content: navigator.language.substring(0, 2) } }}
+                                                onReady={editor => {
+                                                    // You can store the "editor" and use when it is needed.
+                                                    //console.log('Editor is ready to use!', editor);
+                                                }}
+                                                onChange={(event, editor) => {
+                                                    const data = editor.getData();
+                                                    //console.log({ event, editor, data });
+                                                    setCurrentMenuContent(data);
+                                                    setUnsavedContent("yes");
+                                                }}
+                                                onBlur={(event, editor) => {
+                                                    //console.log('Blur.', editor);
+                                                    ckEditorThemeSync();
+                                                }}
+                                                onFocus={(event, editor) => {
+                                                    //console.log('Focus.', editor);
+                                                    ckEditorThemeSync();
                                                 }}
                                             />
                                         </Grid>
+                                        {
+                                            currentContentType === "table" ?
+                                                <>
+                                                    <Grid item xs={12}>&nbsp;</Grid>
+                                                    <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
+                                                    <Grid item xs={12}>
+                                                        <TablesChooser
+                                                            tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => { return { label: item, id: uuidv4() } }) : null}
+                                                            onTablesChange={(tables) => {
+                                                                if (tables !== currentMenuTable) {
+                                                                    setCurrentMenuTable(tables);
+                                                                    setUnsavedContent("yes");
+                                                                }
+                                                            }}
+                                                        />
+                                                    </Grid>
+                                                </> : null
+                                        }
                                     </> : null
                             }
                             <Grid item xs={12}>&nbsp;</Grid>
@@ -729,5 +712,22 @@ const MenuEdit = (props) => {
 
 };
 
+/* an alternative to the use of CKEditor was to use a simple textarea for the text content
+
+    <TextField
+        value={currentMenuContent}
+        disabled
+        id="text-content"
+        variant="outlined"
+        sx={{ width: "100%" }}
+        onChange={(event) => {
+            setCurrentMenuContent(event.target.value);
+            setUnsavedContent("yes");
+        }}
+        multiline
+        minRows={3}
+        maxRows={8} />
+
+*/
 
 export default MenuEdit;
