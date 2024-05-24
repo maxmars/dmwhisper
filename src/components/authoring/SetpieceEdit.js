@@ -33,7 +33,7 @@ export default function SetpieceEdit(props) {
   const theme = useTheme();
   const [alert, setAlert] = useState(null);
   const [rngAlert, setRngAlert] = useState(null);
-  const [currentMenuTable, setCurrentMenuTable] = useState(''); // (cttbl);
+  const [currentMenuTable, setCurrentMenuTable] = useState(undefined); // (cttbl);
 
   const [newMin, setNewMin] = useState(null);
   const [newMax, setNewMax] = useState(null);
@@ -146,6 +146,7 @@ export default function SetpieceEdit(props) {
     document.getElementById('new-min').value = '';
     document.getElementById('new-max').value = '';
     document.getElementById('new-result').value = '';
+    setCurrentMenuTable(undefined);
   }
 
   const deleteRng = (rngToDelete) => {
@@ -162,6 +163,7 @@ export default function SetpieceEdit(props) {
     setNewMin(rngId.split('-')[0]);
     setNewMax(rngId.split('-')[1]);
     setNewResult(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).description);
+    setCurrentMenuTable(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).table);
   }
 
   if (rngToDelete === null) {
@@ -267,7 +269,12 @@ export default function SetpieceEdit(props) {
         <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
         <Grid item xs={12}>
           <TablesChooser
-            tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => { return { label: item, id: uuidv4() } }) : null}
+            tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => {
+              return {
+                label: item,
+                id: uuidv4()
+              }
+            }) : null}
             onTablesChange={(tables) => {
               if (tables !== currentMenuTable) {
                 setCurrentMenuTable(tables);

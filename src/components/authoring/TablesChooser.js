@@ -5,7 +5,6 @@ import IconButton from '@mui/material/IconButton';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { useState } from 'react';
-import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Grid from '@mui/material/Grid';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
@@ -24,7 +23,6 @@ export default function TablesChooser(props) {
   const { t } = useTranslation();
   const [tableId, setTableId] = useState(null);
   const [unique, setUnique] = useState(false);
-  const [tableIds, setTableIds] = useState(props.tablesIds ? props.tablesIds : []);
   const wholeContent = useSelector((st) => st.content);
   const tables = wholeContent.tables;
   const theme = useTheme();
@@ -44,52 +42,47 @@ export default function TablesChooser(props) {
     [tables],
   );
 
-  useEffect(() => {
-
-    const emitTablesChange = () => {
-      if (props.onTablesChange) {
-        const newTablesIdsArray = tableIds.map((item) => item.label);
-        props.onTablesChange(newTablesIdsArray.join(' ').trim());
-      }
-    };
-    emitTablesChange();
-  }, [tableIds, props]);
-
   const addTableId = (tableId, uniquevalues) => {
 
-    const newTableIds = [...tableIds, {
+    let newTableIds = [];
+
+    if (props.tablesIds) {
+      newTableIds = [...props.tablesIds];
+    }
+
+    newTableIds.push({
       id: uuidv4(),
       label: tableId + (unique ? "!" : "")
-    }];
+    });
 
-    setTableIds(newTableIds);
+    props.onTablesChange(newTableIds.map((item) => item.label).join(" ").trim());
   };
 
   const raiseMenu = (id) => {
-    const index = tableIds.findIndex((item) => item.id === id);
+    const index = props.tablesIds.findIndex((item) => item.id === id);
     if (index > 0) {
-      const newTableIds = [...tableIds];
+      const newTableIds = [...props.tablesIds];
       const temp = newTableIds[index - 1];
       newTableIds[index - 1] = newTableIds[index];
       newTableIds[index] = temp;
-      setTableIds(newTableIds);
+      props.onTablesChange(newTableIds.map((item) => item.label).join(" ").trim());
     }
   };
 
   const lowerMenu = (id) => {
-    const index = tableIds.findIndex((item) => item.id === id);
-    if (index < tableIds.length - 1) {
-      const newTableIds = [...tableIds];
+    const index = props.tablesIds.findIndex((item) => item.id === id);
+    if (index < props.tablesIds.length - 1) {
+      const newTableIds = [...props.tablesIds];
       const temp = newTableIds[index + 1];
       newTableIds[index + 1] = newTableIds[index];
       newTableIds[index] = temp;
-      setTableIds(newTableIds);
+      props.onTablesChange(newTableIds.map((item) => item.label).join(" ").trim());
     }
   };
 
   const setMenuToDelete = (id) => {
-    const newTableIds = tableIds.filter((item) => item.id !== id);
-    setTableIds(newTableIds);
+    const newTableIds = props.tablesIds.filter((item) => item.id !== id);
+    props.onTablesChange(newTableIds.map((item) => item.label).join(" ").trim());
   };
 
   const columns = [
@@ -150,11 +143,11 @@ export default function TablesChooser(props) {
         <IconButton disabled={!tableId} onClick={() => addTableId(tableId, unique)}><AddIcon /></IconButton>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} style={{ height: (tableIds ? (tableIds.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>
+      <Grid item xs={12} style={{ height: (props.tablesIds ? (props.tablesIds.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>
         <DataGrid
           sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: mainColor, color: contrastTextColor } }}
           hideFooter
-          rows={tableIds}
+          rows={props.tablesIds ? props.tablesIds : []}
           columns={columns}
           width="100%"
         />
