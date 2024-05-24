@@ -237,7 +237,6 @@ export default function SetpieceEdit(props) {
             label={t("Set piece ID")}
             variant="outlined"
             sx={{ width: "100%" }}
-            defaultValue={props.setpieceId}
             value={editedSetpieceId ? editedSetpieceId : ''}
             onChange={(event) => setEditedSetpieceId(event.target.value)}
           />
@@ -247,7 +246,6 @@ export default function SetpieceEdit(props) {
             label={t("Set piece Description")}
             variant="outlined"
             sx={{ width: "100%" }}
-            defaultValue={props.setpieceDescription}
             value={editedSetpieceDescription ? editedSetpieceDescription : ''}
             onChange={(event) => setEditedSetpieceDescription(event.target.value)} />
         </Grid>
