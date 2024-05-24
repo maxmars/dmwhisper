@@ -19,6 +19,10 @@ import AddIcon from '@mui/icons-material/Add';
 import { useTranslation } from 'react-i18next';
 import TablesChooser from './TablesChooser';
 import { uuidv4 } from '../../utils/index.js';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import { Editor } from 'ckeditor5-custom-build/build/ckeditor';
+import { useEffect } from 'react';
+import { useRef } from 'react';
 
 
 export default function SetpieceEdit(props) {
@@ -33,11 +37,13 @@ export default function SetpieceEdit(props) {
   const theme = useTheme();
   const [alert, setAlert] = useState(null);
   const [rngAlert, setRngAlert] = useState(null);
-  const [currentMenuTable, setCurrentMenuTable] = useState(undefined); // (cttbl);
+  const [currentMenuTable, setCurrentMenuTable] = useState(undefined);
+  const [currentMenuContent, setCurrentMenuContent] = useState('');
 
   const [newMin, setNewMin] = useState(null);
   const [newMax, setNewMax] = useState(null);
   const [newResult, setNewResult] = useState(null);
+  const mounted = useRef();
 
   const rows = setpiece.rng.map((rng) => {
     let description = rng.description;
@@ -49,6 +55,56 @@ export default function SetpieceEdit(props) {
   });
 
   const dispatch = useDispatch();
+
+  // CKEditor stuff
+  useEffect(() => {
+    ckEditorThemeSync();
+  });
+
+  const ckEditorThemeSync = () => {
+    setTimeout(() => {
+      let elToApply = document.getElementsByClassName("ck-content")[0];
+      if (elToApply) {
+        if (!mounted.current) {
+          // do componentDidMount logic
+          if (theme.palette.mode === "dark") {
+            elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
+          } else {
+            elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
+          }
+          mounted.current = true;
+        } else {
+          if (theme.palette.mode === "dark") {
+            elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
+          } else {
+            elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
+          }
+        }
+      }
+
+      elToApply = document.getElementsByTagName("a");
+
+      if (elToApply) {
+        const elArray = Array.from(elToApply);
+        elArray.forEach(element => {
+          if (theme.palette.mode === "dark") {
+            element.setAttribute("style", "color: white !important; background-color: black !important;");
+          } else {
+            element.setAttribute("style", "color: black !important; background-color: white !important;");
+          }
+        });
+      }
+    }, 250);
+  }
+
+  let lng = navigator.language.substring(0, 2).toLocaleLowerCase();
+
+  if (lng === "en") {
+    lng = "en-gb";
+  }
+
+  require('ckeditor5-custom-build/build/translations/' + lng + '.js');
+  // End CKEditor stuff
 
   const updateHeader = () => {
 
@@ -126,7 +182,7 @@ export default function SetpieceEdit(props) {
       max: parseInt(document.getElementById('new-max').value),
       description: document.getElementById('new-result').value,
       // TODO
-      textContent: '',
+      textContent: currentMenuContent,
       table: currentMenuTable,
       // TODO Unused ATM
       minAppears: 0,
@@ -164,6 +220,7 @@ export default function SetpieceEdit(props) {
     setNewMax(rngId.split('-')[1]);
     setNewResult(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).description);
     setCurrentMenuTable(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).table);
+    setCurrentMenuContent(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).textContent);
   }
 
   if (rngToDelete === null) {
@@ -265,6 +322,32 @@ export default function SetpieceEdit(props) {
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+
+        <CKEditor
+          editor={Editor}
+          data={currentMenuContent}
+          config={{ language: { ui: navigator.language.substring(0, 2), content: navigator.language.substring(0, 2) } }}
+          onReady={editor => {
+            // You can store the "editor" and use when it is needed.
+            //console.log('Editor is ready to use!', editor);
+          }}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            //console.log({ event, editor, data });
+            setCurrentMenuContent(data);
+            //setUnsavedContent("yes");
+          }}
+          onBlur={(event, editor) => {
+            //console.log('Blur.', editor);
+            ckEditorThemeSync();
+          }}
+          onFocus={(event, editor) => {
+            //console.log('Focus.', editor);
+            ckEditorThemeSync();
+          }}
+        />
+
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
         <Grid item xs={12}>

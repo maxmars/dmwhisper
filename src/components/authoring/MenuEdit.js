@@ -68,13 +68,14 @@ const MenuEdit = (props) => {
     const mounted = useRef();
 
     useEffect(() => {
-        ckEditorThemeSync();
-    });
-
-    useEffect(() => {
         setUnsavedContent("no");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [contentMetaData]);
+
+    // CKEditor stuff
+    useEffect(() => {
+        ckEditorThemeSync();
+    });
 
     const ckEditorThemeSync = () => {
         setTimeout(() => {
@@ -119,6 +120,7 @@ const MenuEdit = (props) => {
     }
 
     require('ckeditor5-custom-build/build/translations/' + lng + '.js');
+    // End CKEditor stuff
 
     const dispatch = useDispatch();
 
