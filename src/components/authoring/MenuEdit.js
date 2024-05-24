@@ -21,8 +21,6 @@ import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch } from 'react-redux';
 import useTheme from '@mui/private-theming/useTheme';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -39,9 +37,11 @@ import TablesChooser from './TablesChooser';
 import './style.css';
 import { uuidv4 } from '../../utils/index.js';
 import ContentSaveReminder from './ContentSaveReminder';
+import ErrorMessage from './ErrorMessage';
+import MenuDeletionConfirm from './MenuDeletionConfirm';
 
 
-const MenuEdit = (props) => {
+export default function MenuEdit(props) {
 
     const { t } = useTranslation();
     const [unsavedContent, setUnsavedContent] = useState("no");
@@ -416,46 +416,11 @@ const MenuEdit = (props) => {
     }
 
     if (errorMessage) {
-        return <Grid container sx={{ height: "100%" }} >
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography>{t("Warning!")}</Typography>
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}>
-                <Typography>{t(errorMessage)}</Typography>
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Button onClick={() => setErrorMessage(null)} variant="contained" color="primary">{t("Ok")}</Button>
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-        </Grid >
+        return <ErrorMessage errorMessage={errorMessage} onOkClick={() => setErrorMessage(null)} />        
     }
 
     if (menuToDelete) {
-        return <Grid container sx={{ height: "100%" }} >
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography>{t("Warning! Menu is about to be deleted")}</Typography>
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}>
-                <Typography>{t("Do you really want to delete RNG")} {menuToDelete} ({menuToDelete})?</Typography>
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Button onClick={() => deleteMenu(menuToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
-            </Grid>
-            <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Button onClick={() => setMenuToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-        </Grid >
+        return <MenuDeletionConfirm menuToDelete={menuToDelete} onYesClick={() => deleteMenu(menuToDelete)} onNoClick={() => setMenuToDelete(null)} />
     }
 
     return (
@@ -715,5 +680,3 @@ const MenuEdit = (props) => {
         maxRows={8} />
 
 */
-
-export default MenuEdit;
