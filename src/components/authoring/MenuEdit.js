@@ -39,6 +39,7 @@ import { uuidv4 } from '../../utils/index.js';
 import ContentSaveReminder from './ContentSaveReminder';
 import ErrorMessage from './ErrorMessage';
 import MenuDeletionConfirm from './MenuDeletionConfirm';
+import MapSetup from './MapSetup.js';
 
 
 export default function MenuEdit(props) {
@@ -57,10 +58,18 @@ export default function MenuEdit(props) {
     const contentMetaData = getContentMetaData(tree, path);
     const [currentMenuId, setCurrentMenuId] = useState(contentMetaData.id);
     const [currentMenuLabel, setCurrentMenuLabel] = useState(contentMetaData.label);
+
     const ctcntnt = contentMetaData.data && contentMetaData.data.textContent ? contentMetaData.data.textContent : [];
     const [currentMenuContent, setCurrentMenuContent] = useState(ctcntnt);
+
     const cttbl = contentMetaData.data && contentMetaData.data.table ? contentMetaData.data.table : undefined;
     const [currentMenuTable, setCurrentMenuTable] = useState(cttbl);
+
+    const ctmap = contentMetaData.data && contentMetaData.data.map ? contentMetaData.data.map : { setpiece: "", density: 2, grid: 2 };
+    const [currentMenuSetpiece, setCurrentMenuSetpiece] = useState(ctmap.setpiece);
+    const [currentMenuDensity, setCurrentMenuDensity] = useState(ctmap.density);
+    const [currentMenuGrid, setCurrentMenuGrid] = useState(ctmap.grid);
+
     const contentName = getContentName(tree, path);
     const ctyp = contentMetaData.type ? contentMetaData.type : "menu";
     const [currentContentType, setCurrentContentType] = useState(ctyp);
@@ -174,6 +183,9 @@ export default function MenuEdit(props) {
         setCurrentContentType("menu");
         setCurrentMenuContent([]);
         setCurrentMenuTable(undefined);
+        setCurrentMenuSetpiece("");
+        setCurrentMenuDensity(2);
+        setCurrentMenuGrid(2);
         setHeaderInfoOpen(false);
         setPath("");
     }
@@ -197,6 +209,9 @@ export default function MenuEdit(props) {
             setCurrentContentType(newCtyp);
             setCurrentMenuContent(newContentMetaData.data.textContent);
             setCurrentMenuTable(newContentMetaData.data.table ? newContentMetaData.data.table : "");
+            setCurrentMenuSetpiece(newContentMetaData.data.map ? newContentMetaData.data.map.setpiece : "");
+            setCurrentMenuDensity(newContentMetaData.data.map ? newContentMetaData.data.map.density : 2);
+            setCurrentMenuGrid(newContentMetaData.data.map ? newContentMetaData.data.map.grid : 2);
             setHeaderInfoOpen(newCtyp !== "menu");
             setPath(newPath);
             return;
@@ -207,6 +222,9 @@ export default function MenuEdit(props) {
         setCurrentContentType("menu");
         setCurrentMenuContent([]);
         setCurrentMenuTable(undefined);
+        setCurrentMenuSetpiece("");
+        setCurrentMenuDensity(2);
+        setCurrentMenuGrid(2);
         setHeaderInfoOpen(false);
         setPath("");
     }
@@ -220,6 +238,9 @@ export default function MenuEdit(props) {
         setCurrentContentType(newCtyp);
         setCurrentMenuContent(newContentMetaData.data.textContent);
         setCurrentMenuTable(newContentMetaData.data.table ? newContentMetaData.data.table : "");
+        setCurrentMenuSetpiece(newContentMetaData.data.map ? newContentMetaData.data.map.setpiece : "");
+        setCurrentMenuDensity(newContentMetaData.data.map ? newContentMetaData.data.map.density : 2);
+        setCurrentMenuGrid(newContentMetaData.data.map ? newContentMetaData.data.map.grid : 2);
         setHeaderInfoOpen(newCtyp !== "menu");
         setPath(newPath);
     };
@@ -277,6 +298,7 @@ export default function MenuEdit(props) {
             label: currentMenuLabel,
             textContent: currentMenuContent,
             table: currentMenuTable,
+            map: { setpiece: currentMenuSetpiece, density: currentMenuDensity, grid: currentMenuGrid },
             type: currentContentType,
         };
 
@@ -394,29 +416,29 @@ export default function MenuEdit(props) {
     if (unsavedContent !== "yes" && unsavedContent !== "no") {
 
         return <ContentSaveReminder saveHandler={() => {
-                if (unsavedContent === "andbackonelevel") {
-                    setUnsavedContent("no");
-                    updateMenuHeader();
-                    backOneLevel();
-                } else {
-                    setUnsavedContent("no");
-                    updateMenuHeader();
-                    backToRootMenu();
-                }
-            }} discardHandler={() => {
-                if (unsavedContent === "andbackonelevel") {
-                    setUnsavedContent("no");
-                    backOneLevel();
-                } else {
-                    setUnsavedContent("no");
-                    backToRootMenu();
-                }
-            }} />
+            if (unsavedContent === "andbackonelevel") {
+                setUnsavedContent("no");
+                updateMenuHeader();
+                backOneLevel();
+            } else {
+                setUnsavedContent("no");
+                updateMenuHeader();
+                backToRootMenu();
+            }
+        }} discardHandler={() => {
+            if (unsavedContent === "andbackonelevel") {
+                setUnsavedContent("no");
+                backOneLevel();
+            } else {
+                setUnsavedContent("no");
+                backToRootMenu();
+            }
+        }} />
 
     }
 
     if (errorMessage) {
-        return <ErrorMessage errorMessage={errorMessage} onOkClick={() => setErrorMessage(null)} />        
+        return <ErrorMessage errorMessage={errorMessage} onOkClick={() => setErrorMessage(null)} />
     }
 
     if (menuToDelete) {
@@ -528,6 +550,7 @@ export default function MenuEdit(props) {
                                     <MenuItem value="menu">{t("Menu")}</MenuItem>
                                     <MenuItem value="information">{t("Information")}</MenuItem>
                                     <MenuItem value="table">{t("Table")}</MenuItem>
+                                    <MenuItem value="map">{t("Map")}</MenuItem>
                                 </Select>
                             </Grid>
                             {
@@ -579,6 +602,30 @@ export default function MenuEdit(props) {
                                                 </> : null
                                         }
                                     </> : null
+                            }
+                            {
+                                currentContentType && (currentContentType === "map") ?
+                                    <>
+                                        <Grid item xs={12}>&nbsp;</Grid>
+                                        <MapSetup 
+                                            setpieceId={currentMenuSetpiece} 
+                                            density={currentMenuDensity} 
+                                            gridsize={currentMenuGrid} 
+                                            onSetpieceIdChanged={(newSetpieceId) => {
+                                                setCurrentMenuSetpiece(newSetpieceId);
+                                                setUnsavedContent("yes");
+                                            }}
+                                            onDensityChanged={(newDensity) => {
+                                                setCurrentMenuDensity(newDensity);
+                                                setUnsavedContent("yes");
+                                            }}
+                                            onGridsizeChanged={(newGridsize) => {
+                                                setCurrentMenuGrid(newGridsize);
+                                                setUnsavedContent("yes");
+                                            }}
+                                        />
+                                    </> : null
+
                             }
                             <Grid item xs={12}>&nbsp;</Grid>
                             <Button disabled={!contentMetaData.type} startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => updateMenuHeader()}>{t("Save header data")}</Button>
@@ -649,6 +696,7 @@ export default function MenuEdit(props) {
                                         <MenuItem value="menu">{t("Menu")}</MenuItem>
                                         <MenuItem value="information">{t("Information")}</MenuItem>
                                         <MenuItem value="table">{t("Table")}</MenuItem>
+                                        <MenuItem value="map">{t("Map")}</MenuItem>
                                     </Select>
                                 </Grid>
                                 <Grid item xs={12}>&nbsp;</Grid>

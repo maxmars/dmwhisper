@@ -233,6 +233,10 @@ const content = createSlice({
                 content.data.table = updatedContentHeader.table;
             }
 
+            if (content.type === "map") {
+                content.data.map = updatedContentHeader.map;
+            }
+
             if (content.type === "menu") {
                 if (!(content.data.children)) {
                     content.data.children = [];
@@ -263,6 +267,12 @@ const content = createSlice({
                 content.data.table = "";
             } else {
                 delete content.data.table;
+            }
+
+            if (content.type === "map") {
+                content.data.map = { density: 2, gridsize: 2, setpieceId: "" };
+            } else {
+                delete content.data.map;
             }
 
             if (content.type === "menu") {

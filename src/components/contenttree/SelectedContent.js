@@ -27,6 +27,10 @@ const SelectedContent = (props) => {
         case "table":
           return <Table currentTab={props.currentTab} content={props.selectedContent} />;
 
+        case "map":
+          props.clearSelectedContent();
+          return null;
+
         default:
           return <Menu currentTab={props.currentTab} content={props.selectedContent} goToContent={props.goToContent} />
       }
