@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Information from '../contentwidgets/Information';
 import Table from '../contentwidgets/Table';
+import DungeonMap from '../contentwidgets/DungeonMap';
 import Menu from '../contentwidgets/Menu';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -28,8 +29,7 @@ const SelectedContent = (props) => {
           return <Table currentTab={props.currentTab} content={props.selectedContent} />;
 
         case "map":
-          props.clearSelectedContent();
-          return null;
+          return <DungeonMap currentTab={props.currentTab} content={props.selectedContent} />;
 
         default:
           return <Menu currentTab={props.currentTab} content={props.selectedContent} goToContent={props.goToContent} />
