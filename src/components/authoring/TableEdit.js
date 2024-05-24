@@ -219,7 +219,6 @@ export default function TableEdit(props) {
             label={t("Table ID")}
             variant="outlined"
             sx={{ width: "100%" }}
-            defaultValue={props.tableId}
             value={editedTableId ? editedTableId : ''}
             onChange={(event) => setEditedTableId(event.target.value)}
           />
@@ -229,7 +228,6 @@ export default function TableEdit(props) {
             label={t("Table Description")}
             variant="outlined"
             sx={{ width: "100%" }}
-            defaultValue={props.tableDescription}
             value={editedTableDescription ? editedTableDescription : ''}
             onChange={(event) => setEditedTableDescription(event.target.value)} />
         </Grid>
