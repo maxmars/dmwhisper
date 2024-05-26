@@ -8,7 +8,7 @@ import UpdateDisabledIcon from '@mui/icons-material/UpdateDisabled';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { diceThrow, getTable, setLastTableContent, getUniqueValue } from '../../store/slices/content';
+import { diceThrow, getTable, setLastTableContent, getUniqueValue, rollAndReplace } from '../../store/slices/content';
 import { addThrow } from '../../store/slices/throws';
 import { format } from 'date-fns';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -18,7 +18,7 @@ import useTheme from '@mui/private-theming/useTheme';
 import { useTranslation } from 'react-i18next';
 import { padLeft } from '../../utils';
 
-const Table = (props) => {
+export default function Table(props) {
 
   const { t } = useTranslation();
   const content = useSelector((st) => st.content);
@@ -62,10 +62,19 @@ const Table = (props) => {
           htmlContent = htmlContent.replace(new RegExp("@@" + padLeft(index + 1, 2), 'g'), table);
         });
 
-        return {
-          throw: "",
-          htmlContent: rollDice(htmlContent)
-        };
+        try {
+          return {
+            throw: "",
+            htmlContent: rollAndReplace(htmlContent)
+          };
+        } catch (e) {
+          setError(e.message);
+
+          return {
+            throw: "",
+            htmlContent: ""
+          };
+        }
 
       } else {
         const prefix = props.content.data.prefix ? props.content.data.prefix + " " : "";
@@ -74,60 +83,19 @@ const Table = (props) => {
           let htmlContent = props.content.data.textContent;
 
           return {
-            throw: rollDice(prefix + diceThrow(content, props.content.data.table.trim()) + postfix),
-            htmlContent: rollDice(htmlContent)
+            throw: rollAndReplace(prefix + diceThrow(content, props.content.data.table.trim()) + postfix),
+            htmlContent: rollAndReplace(htmlContent)
           };
         } catch (e) {
           setError(e.message);
+
+          return {
+            throw: "",
+            htmlContent: ""
+          };
         }
       }
     }
-  }
-
-  // Supported formats: {{XdY+Z}}, {{XdY-Z}}, {{XdY}
-  const rollDice = (htmlContent) => {
-    const getDiceThrowResult = (X, Y, Z) => {
-      let result = 0;
-      for (let i = 0; i < X; i++) {
-        result += Math.floor(Math.random() * Y) + 1;
-      }
-      return result + Z;
-    };
-
-    try {
-      const regexCount = (str, regex) => {
-        const matches = str.match(regex);
-        return matches ? matches.length : 0;
-      };
-
-      const count = regexCount(htmlContent, /{{(\d+)d(\d+)\+(\d+)}}/g) +
-        regexCount(htmlContent, /{{(\d+)d(\d+)-(\d+)}}/g) +
-        regexCount(htmlContent, /{{(\d+)d(\d+)}}/g);
-
-      if (count > 0) {
-
-        let regex = /{{(\d+)d(\d+)\+(\d+)}}/g;
-        htmlContent = htmlContent.replace(regex, (match, X, Y, Z) => {
-          return getDiceThrowResult(X, Y, parseInt(Z));
-        });
-
-        regex = /{{(\d+)d(\d+)-(\d+)}}/g;
-        htmlContent = htmlContent.replace(regex, (match, X, Y, Z) => {
-          return getDiceThrowResult(X, Y, parseInt(Z) * -1);
-        });
-
-        regex = /{{(\d+)d(\d+)}}/g;
-        htmlContent = htmlContent.replace(regex, (match, X, Y) => {
-          return getDiceThrowResult(X, Y, 0);
-        });
-
-      };
-
-    } catch (e) {
-      setError(e.message);
-    }
-
-    return htmlContent;
   }
 
   const diceRoll = () => {
@@ -273,6 +241,3 @@ const Table = (props) => {
   }
 
 };
-
-
-export default Table;

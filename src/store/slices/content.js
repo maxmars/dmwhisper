@@ -486,6 +486,46 @@ export const getTable = (state, idTable) => {
     }
 }
 
+// Supported formats: {{XdY+Z}}, {{XdY-Z}}, {{XdY}
+export const rollAndReplace = (textContent) => {
+    const getDiceThrowResult = (X, Y, Z) => {
+        let result = 0;
+        for (let i = 0; i < X; i++) {
+            result += Math.floor(Math.random() * Y) + 1;
+        }
+        return result + Z;
+    };
+
+    const regexCount = (str, regex) => {
+        const matches = str.match(regex);
+        return matches ? matches.length : 0;
+    };
+
+    const count = regexCount(textContent, /{{(\d+)d(\d+)\+(\d+)}}/g) +
+        regexCount(textContent, /{{(\d+)d(\d+)-(\d+)}}/g) +
+        regexCount(textContent, /{{(\d+)d(\d+)}}/g);
+
+    if (count > 0) {
+
+        let regex = /{{(\d+)d(\d+)\+(\d+)}}/g;
+        textContent = textContent.replace(regex, (match, X, Y, Z) => {
+            return getDiceThrowResult(X, Y, parseInt(Z));
+        });
+
+        regex = /{{(\d+)d(\d+)-(\d+)}}/g;
+        textContent = textContent.replace(regex, (match, X, Y, Z) => {
+            return getDiceThrowResult(X, Y, parseInt(Z) * -1);
+        });
+
+        regex = /{{(\d+)d(\d+)}}/g;
+        textContent = textContent.replace(regex, (match, X, Y) => {
+            return getDiceThrowResult(X, Y, 0);
+        });
+
+    };
+
+    return textContent;
+}
 
 
 export default content.reducer;
