@@ -8,7 +8,7 @@ import UpdateDisabledIcon from '@mui/icons-material/UpdateDisabled';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { diceThrow, getTable, setLastTableContent, getUniqueValue, rollAndReplace } from '../../store/slices/content';
+import { diceThrow, getTable, setLastTableContent, rollAndReplace, mergeContentAndTables } from '../../store/slices/content';
 import { addThrow } from '../../store/slices/throws';
 import { format } from 'date-fns';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -16,7 +16,6 @@ import CasinoIcon from '@mui/icons-material/Casino';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import useTheme from '@mui/private-theming/useTheme';
 import { useTranslation } from 'react-i18next';
-import { padLeft } from '../../utils';
 
 export default function Table(props) {
 
@@ -46,26 +45,12 @@ export default function Table(props) {
 
         let tables = props.content.data.table.trim().split(" ");
 
-        const tableDictionary = {};
-        tables.forEach((table, index) => {
-          if (table.endsWith("!")) {
-            tableDictionary[table.replace("!", "")] = [];
-          }
-        });
-
-        tables = tables.map((table) => {
-          return getUniqueValue(content, table.replace("!", ""), tableDictionary);
-        });
-
-        let htmlContent = props.content.data.textContent;
-        tables.forEach((table, index) => {
-          htmlContent = htmlContent.replace(new RegExp("@@" + padLeft(index + 1, 2), 'g'), table);
-        });
-
         try {
+          let htmlContent = mergeContentAndTables(props.content.data.textContent, tables, content);
+
           return {
             throw: "",
-            htmlContent: rollAndReplace(htmlContent)
+            htmlContent: htmlContent
           };
         } catch (e) {
           setError(e.message);

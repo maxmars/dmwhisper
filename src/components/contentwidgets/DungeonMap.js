@@ -1,7 +1,11 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
+import { getRng, mergeContentAndTables } from '../../store/slices/content';
 
 
 export default function DungeonMap(props) {
+
+    const content = useSelector((st) => st.content);
 
     if (!props.content || !props.content.data || !props.content.data.map) {
         return null;
@@ -31,7 +35,49 @@ export default function DungeonMap(props) {
             break;
     }
 
+    let gridrowdensity = 25;
+
+    switch (map.density) {
+        case 1:
+            gridrowdensity = 25;
+            break;
+
+        case 2:
+            gridrowdensity = 50;
+            break;
+
+        case 3:
+            gridrowdensity = 75;
+            break;
+
+        default:
+            gridrowdensity = 50;
+            break;
+    }
+
     const gridcolwidth = 100 / gridrowcells;
+    const cellnumber = gridrowcells * gridrowcells;
+    const setpiece = content.setpieces.find((sp) => sp.id === map.setpiece);
+    let cells = new Array(cellnumber).fill(null);
+
+    cells = cells.map((_, i) => {
+
+        try {
+            if (Math.random() * 100 < gridrowdensity) {
+                const setpiecerng = getRng(setpiece);
+                const tables = setpiecerng.table.trim().split(" ");
+
+                return {
+                    description: setpiecerng.description,
+                    content: mergeContentAndTables(setpiecerng.textContent, tables, content)
+                }
+            } else {
+                return null;
+            }
+        } catch (e) {
+            return "Error!";
+        }
+    });
 
     return (
         <div>
@@ -41,8 +87,8 @@ export default function DungeonMap(props) {
                     <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
                         {[...Array(gridrowcells)].map((_, j) => (
                             <div style={{ display: 'flex', flexBasis: gridcolwidth + '%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'beige', color: 'black' }}>
-                                <br />
-                                <div style={{ display: 'flex', alignItems: 'center' }}>This</div>
+                                <br />                                
+                                <div style={{ display: 'flex', alignItems: 'center' }}>{cells[i * gridrowcells + j] ? cells[i * gridrowcells + j].description : " "}</div>
                                 <br />&nbsp;
                             </div>
                         ))}
@@ -55,9 +101,9 @@ export default function DungeonMap(props) {
                     {[...Array(gridrowcells)].map((_, j) => (
                         <div key={i + ".." + j} style={{ width: '100%' }}>
                             <br />
-                            <div key={i + "-" + j} style={{ display: 'flex', flexBasis: '100%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'beige', color: 'black' }}>
+                            <div key={i + "-" + j} style={{ display: 'flex', flexBasis: '100%', flexGrow: '0', justifyContent: 'left', backgroundColor: 'beige', color: 'black' }}>
                                 <br />
-                                <div style={{ display: 'flex', alignItems: 'center' }}>..</div>
+                                {cells[i * gridrowcells + j] ? <div dangerouslySetInnerHTML={{ __html: cells[i * gridrowcells + j].content }} /> : " "}
                                 <br />&nbsp;
                             </div>
                         </div>

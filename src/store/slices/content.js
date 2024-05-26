@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import initialContent from './initialContent';
+import { padLeft } from '../../utils';
 
 export const initialState = { ...initialContent, lastTableContent: {} };
 
@@ -372,6 +373,46 @@ function cryptoRands() {
 }
 
 let globalRandomValues = cryptoRands();
+export const getRng = (item) => {
+    let min = 1000;
+    let max = 0;
+
+    item.rng.forEach((rng) => {
+        if (rng.min < min) {
+            min = rng.min;
+        }
+
+        if (rng.max > max) {
+            max = rng.max;
+        }
+    });
+
+    const result = Math.floor(globalRandomValues.pop() * (max - min + 1)) + min;
+    return item.rng.find((rng) => result >= rng.min && result <= rng.max);
+
+}
+
+export const mergeContentAndTables = (content, tables, state) => {
+
+    const tableDictionary = {};
+    tables.forEach((table, index) => {
+        if (table.endsWith("!")) {
+            tableDictionary[table.replace("!", "")] = [];
+        }
+    });
+
+    tables = tables.map((table) => {
+        return getUniqueValue(state, table.replace("!", ""), tableDictionary);
+    });
+
+    let htmlContent = content;
+    tables.forEach((table, index) => {
+        htmlContent = htmlContent.replace(new RegExp("@@" + padLeft(index + 1, 2), 'g'), table);
+    });
+
+    return rollAndReplace(htmlContent)
+}
+
 export const diceThrow = (state, idTable, tableDictionary) => {
 
     try {
@@ -393,23 +434,7 @@ export const diceThrow = (state, idTable, tableDictionary) => {
         }
 
         const table = state.tables.find((table) => table.id === idTable);
-        let min = 1000;
-        let max = 0;
-
-        table.rng.forEach((rng) => {
-            if (rng.min < min) {
-                min = rng.min;
-            }
-
-            if (rng.max > max) {
-                max = rng.max;
-            }
-        });
-
-        const result = Math.floor(globalRandomValues.pop() * (max - min + 1)) + min;
-
-        const rng = table.rng.find((rng) => result >= rng.min && result <= rng.max);
-
+        const rng = getRng(table);
         const prefix = rng.prefix ? rng.prefix + " " : "";
         const postfix = rng.postfix ? " " + rng.postfix : "";
 
