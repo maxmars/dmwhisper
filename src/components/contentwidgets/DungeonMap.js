@@ -5,36 +5,41 @@ export default function DungeonMap(props) {
 
     return (
         <div>
-            <br />
-            <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
-                <div style={{ display: 'flex', flexBasis: '20%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'beige', color: 'black' }}>
+            {[...Array(5)].map((_, i) => (
+                <div key={i}>
                     <br />
-                    <div style={{ display: 'flex', alignItems: 'center' }}>This</div>
-                    <br />&nbsp;
+                    <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
+                        <div style={{ display: 'flex', flexBasis: '20%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'beige', color: 'black' }}>
+                            <br />
+                            <div style={{ display: 'flex', alignItems: 'center' }}>This</div>
+                            <br />&nbsp;
+                        </div>
+                        <div style={{ display: 'flex', flexBasis: '20%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'aliceblue', color: 'black' }}>
+                            <br />
+                            <div style={{ display: 'flex', alignItems: 'center' }}>is</div>
+                            <br />&nbsp;
+                        </div>
+                        <div style={{ display: 'flex', flexBasis: '20%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'lightgray', color: 'black' }}>
+                            <br />
+                            <div style={{ display: 'flex', alignItems: 'center' }}>a</div>
+                            <br />&nbsp;
+                        </div>
+                        <div style={{ display: 'flex', flexBasis: '20%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'lightskyblue', color: 'black' }}>
+                            <br />
+                            <div style={{ display: 'flex', alignItems: 'center' }}>rather basic and primitive, but effective, layout and color</div>
+                            <br />&nbsp;
+                        </div>
+                        <div style={{ display: 'flex', flexBasis: '20%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'lightsalmon', color: 'black' }}>
+                            <br />
+                            <div style={{ display: 'flex', alignItems: 'center' }}>test</div>
+                            <br />&nbsp;
+                        </div>
+                    </div>
                 </div>
-                <div style={{ display: 'flex', flexBasis: '20%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'aliceblue', color: 'black' }}>
-                    <br />
-                    <div style={{ display: 'flex', alignItems: 'center' }}>is</div>
-                    <br />&nbsp;
-                </div>
-                <div style={{ display: 'flex', flexBasis: '20%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'lightgray', color: 'black' }}>
-                    <br />
-                    <div style={{ display: 'flex', alignItems: 'center' }}>a</div>
-                    <br />&nbsp;
-                </div>
-                <div style={{ display: 'flex', flexBasis: '20%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'lightskyblue', color: 'black' }}>
-                    <br />
-                    <div style={{ display: 'flex', alignItems: 'center' }}>rather basic and primitive, but effective, layout and color</div>
-                    <br />&nbsp;
-                </div>
-                <div style={{ display: 'flex', flexBasis: '20%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'lightsalmon', color: 'black' }}>
-                    <br />
-                    <div style={{ display: 'flex', alignItems: 'center' }}>test</div>
-                    <br />&nbsp;
-                </div>
-            </div>
+            ))}
         </div>
     );
+}
 
     /*
         <Grid container spacing={2} columns={15}>
@@ -55,4 +60,3 @@ export default function DungeonMap(props) {
             </Grid>
         </Grid>
     */
-};
