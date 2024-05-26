@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { getRng, mergeContentAndTables } from '../../store/slices/content';
+import { uuidv4 } from '../../utils/index.js';
 
 
 export default function DungeonMap(props) {
@@ -69,7 +70,8 @@ export default function DungeonMap(props) {
 
                 return {
                     description: setpiecerng.description,
-                    content: mergeContentAndTables(setpiecerng.textContent, tables, content)
+                    content: mergeContentAndTables(setpiecerng.textContent, tables, content),
+                    id: uuidv4()
                 }
             } else {
                 return null;
@@ -80,15 +82,15 @@ export default function DungeonMap(props) {
     });
 
     return (
-        <div>
+        <div id="topdiv">
             {[...Array(gridrowcells)].map((_, i) => (
-                <div key={i}>
+                <div key={"map" + i}>
                     <br />
                     <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
                         {[...Array(gridrowcells)].map((_, j) => (
-                            <div style={{ display: 'flex', flexBasis: gridcolwidth + '%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'beige', color: 'black' }}>
-                                <br />                                
-                                <div style={{ display: 'flex', alignItems: 'center' }}>{cells[i * gridrowcells + j] ? cells[i * gridrowcells + j].description : " "}</div>
+                            <div key={"cell" + i + "-" + j} style={{ display: 'flex', flexBasis: gridcolwidth + '%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'beige', color: 'black' }}>
+                                <br />
+                                <div style={{ display: 'flex', alignItems: 'center' }}>{cells[i * gridrowcells + j] ? <a href={"#" + cells[i * gridrowcells + j].id}>{cells[i * gridrowcells + j].description}</a> : " "}</div>
                                 <br />&nbsp;
                             </div>
                         ))}
@@ -97,16 +99,22 @@ export default function DungeonMap(props) {
             ))}
             <br />
             {[...Array(gridrowcells)].map((_, i) => (
-                <div key={"l" + i} style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
+                <div key={"content" + i} style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
                     {[...Array(gridrowcells)].map((_, j) => (
-                        <div key={i + ".." + j} style={{ width: '100%' }}>
-                            <br />
-                            <div key={i + "-" + j} style={{ display: 'flex', flexBasis: '100%', flexGrow: '0', justifyContent: 'left', backgroundColor: 'beige', color: 'black' }}>
+                        cells[i * gridrowcells + j] ?
+                            <div key={i + ".." + j} style={{ width: '100%' }}>
                                 <br />
-                                {cells[i * gridrowcells + j] ? <div dangerouslySetInnerHTML={{ __html: cells[i * gridrowcells + j].content }} /> : " "}
-                                <br />&nbsp;
+                                <div key={i + "-" + j} style={{ display: 'block', flexBasis: '100%', flexGrow: '0', justifyContent: 'left', backgroundColor: 'beige', color: 'black' }}>
+                                    <div style={{ width: "100%" }} />
+                                    <div style={{ width: "100%", textAlign: 'left' }} id={cells[i * gridrowcells + j].id} dangerouslySetInnerHTML={{ __html: cells[i * gridrowcells + j].content }} />
+                                    <div style={{ width: "100%" }} />
+                                    <div style={{ width: "100%" }}>
+                                        <a href="#topdiv">Torna in alto</a>
+                                    </div>
+                                    <div style={{ width: "100%" }} />
+                                </div>
                             </div>
-                        </div>
+                            : null
                     ))}
                 </div>
             ))}
