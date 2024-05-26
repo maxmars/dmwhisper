@@ -21,7 +21,7 @@ export default function DungeonMap(props) {
 
     let gridrowcells = 3;
 
-    switch (map.grid) {
+    switch (parseInt(map.grid)) {
         case 1:
             gridrowcells = 3;
             break;
@@ -38,7 +38,7 @@ export default function DungeonMap(props) {
 
     let gridrowdensity = 25;
 
-    switch (map.density) {
+    switch (parseInt(map.density)) {
         case 1:
             gridrowdensity = 25;
             break;
