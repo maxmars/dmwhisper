@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    27 Mag 2024
+    -----------
+    - 1.24.0 Extra robustness + map generator.
+
     22 Mag 2024
     -----------
     - 1.23.0 Extra robustness + error handling, now unique table results are unique even for inner tables.

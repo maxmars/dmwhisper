@@ -3,13 +3,14 @@ import { useSelector } from 'react-redux';
 import { getRng, mergeContentAndTables } from '../../store/slices/content';
 import { uuidv4 } from '../../utils/index.js';
 import useTheme from '@mui/private-theming/useTheme';
-
+import { useTranslation } from 'react-i18next';
 
 export default function DungeonMap(props) {
 
     const content = useSelector((st) => st.content);
     const theme = useTheme();
     const dark = theme.palette.mode === "dark";
+    const { t } = useTranslation();
 
     if (!props.content || !props.content.data || !props.content.data.map) {
         return null;
@@ -109,7 +110,7 @@ export default function DungeonMap(props) {
                                 <br />
                                 <div key={i + "-" + j} style={{ display: 'block', flexBasis: '100%', flexGrow: '0', justifyContent: 'left', border: "2px solid orange" }}>
                                     <div style={{ width: "100%" }} />
-                                    { cells[i * gridrowcells + j].description }
+                                    { "[" + (i+1) + ", " + (j+1) + "] " + t("Description") + ": " + cells[i * gridrowcells + j].description }
                                     <div style={{ width: "100%", textAlign: 'left' }} dangerouslySetInnerHTML={{ __html: cells[i * gridrowcells + j].content }} />
                                     <div style={{ width: "100%" }} />
                                     <div style={{ width: "100%" }}>

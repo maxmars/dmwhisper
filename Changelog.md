@@ -1,5 +1,8 @@
 # Changelog Template progetto DM Whisper
 
+    27 Mag 2024
+    -----------
+    - 1.24.0 Extra robustness + map generator.
 
     22 Mag 2024
     -----------
