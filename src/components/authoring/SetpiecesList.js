@@ -144,10 +144,10 @@ export default function SetpiecesList(props) {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <TextField id="new-setpiece-id" label={t("Setpiece ID")} variant="outlined" sx={{ width: "100%" }} />
+          <TextField id="new-setpiece-id" label={t("Set piece ID")} variant="outlined" sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>
-          <TextField id="new-setpiece-description" label={t("Setpiece Description")} variant="outlined" sx={{ width: "100%" }} />
+          <TextField id="new-setpiece-description" label={t("Set piece Description")} variant="outlined" sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         {alert ?

@@ -316,7 +316,7 @@ export default function SetpieceEdit(props) {
             onChange={(event) => setNewResult(event.target.value)}
             value={newResult ? newResult : ''}
             id="new-result"
-            label={newResult ? "" : t("Fixed result")}
+            label={newResult ? "" : t("Room label")}
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>

@@ -88,9 +88,9 @@ export default function DungeonMap(props) {
                     <br />
                     <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
                         {[...Array(gridrowcells)].map((_, j) => (
-                            <div key={"cell" + i + "-" + j} style={{ display: 'flex', flexBasis: gridcolwidth + '%', flexGrow: '0', justifyContent: 'center', backgroundColor: 'beige', color: 'black' }}>
+                            <div key={"cell" + i + "-" + j} style={{ display: 'flex', flexBasis: gridcolwidth + '%', flexGrow: '0', justifyContent: 'center' }}>
                                 <br />
-                                <div style={{ display: 'flex', alignItems: 'center' }}>{cells[i * gridrowcells + j] ? <a href={"#" + cells[i * gridrowcells + j].id}>{cells[i * gridrowcells + j].description}</a> : " "}</div>
+                                <div style={{ display: 'flex', alignItems: 'center', backgroundColor: cells[i * gridrowcells + j] ? "orange" : "transparent" }}>{cells[i * gridrowcells + j] ? <a href={"#" + cells[i * gridrowcells + j].id}>{cells[i * gridrowcells + j].description}</a> : " "}</div>
                                 <br />&nbsp;
                             </div>
                         ))}
@@ -102,11 +102,12 @@ export default function DungeonMap(props) {
                 <div key={"content" + i} style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
                     {[...Array(gridrowcells)].map((_, j) => (
                         cells[i * gridrowcells + j] ?
-                            <div key={i + ".." + j} style={{ width: '100%' }}>
+                            <div key={i + ".." + j} style={{ width: '100%' }} id={cells[i * gridrowcells + j].id} >
                                 <br />
-                                <div key={i + "-" + j} style={{ display: 'block', flexBasis: '100%', flexGrow: '0', justifyContent: 'left', backgroundColor: 'beige', color: 'black' }}>
+                                <div key={i + "-" + j} style={{ display: 'block', flexBasis: '100%', flexGrow: '0', justifyContent: 'left', border: "2px solid orange" }}>
                                     <div style={{ width: "100%" }} />
-                                    <div style={{ width: "100%", textAlign: 'left' }} id={cells[i * gridrowcells + j].id} dangerouslySetInnerHTML={{ __html: cells[i * gridrowcells + j].content }} />
+                                    { cells[i * gridrowcells + j].description }
+                                    <div style={{ width: "100%", textAlign: 'left' }} dangerouslySetInnerHTML={{ __html: cells[i * gridrowcells + j].content }} />
                                     <div style={{ width: "100%" }} />
                                     <div style={{ width: "100%" }}>
                                         <a href="#topdiv">Torna in alto</a>
