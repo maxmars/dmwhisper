@@ -385,6 +385,7 @@ The first table here contains references to the two tables next to it.
 
     27 Mag 2024
     -----------
+    - 1.25.0 Further map generator stuff.
     - 1.24.0 Extra robustness + map generator.
 
     22 Mag 2024
