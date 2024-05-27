@@ -2,11 +2,14 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { getRng, mergeContentAndTables } from '../../store/slices/content';
 import { uuidv4 } from '../../utils/index.js';
+import useTheme from '@mui/private-theming/useTheme';
 
 
 export default function DungeonMap(props) {
 
     const content = useSelector((st) => st.content);
+    const theme = useTheme();
+    const dark = theme.palette.mode === "dark";
 
     if (!props.content || !props.content.data || !props.content.data.map) {
         return null;
@@ -88,9 +91,9 @@ export default function DungeonMap(props) {
                     <br />
                     <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
                         {[...Array(gridrowcells)].map((_, j) => (
-                            <div key={"cell" + i + "-" + j} style={{ display: 'flex', flexBasis: gridcolwidth + '%', flexGrow: '0', justifyContent: 'center' }}>
+                            <div key={"cell" + i + "-" + j} style={{ display: 'flex', flexBasis: gridcolwidth + '%', border: "2px solid " + (dark ? "black" : "white"), flexGrow: '0', justifyContent: 'center', backgroundColor: cells[i * gridrowcells + j] ? "orange" : "transparent"  }}>
                                 <br />
-                                <div style={{ display: 'flex', alignItems: 'center', backgroundColor: cells[i * gridrowcells + j] ? "orange" : "transparent" }}>{cells[i * gridrowcells + j] ? <a href={"#" + cells[i * gridrowcells + j].id}>{cells[i * gridrowcells + j].description}</a> : " "}</div>
+                                <div style={{ display: 'flex', alignItems: 'center'}}>{cells[i * gridrowcells + j] ? <a href={"#" + cells[i * gridrowcells + j].id} style={{ color: "white"}}>{cells[i * gridrowcells + j].description}</a> : " "}</div>
                                 <br />&nbsp;
                             </div>
                         ))}
@@ -110,7 +113,7 @@ export default function DungeonMap(props) {
                                     <div style={{ width: "100%", textAlign: 'left' }} dangerouslySetInnerHTML={{ __html: cells[i * gridrowcells + j].content }} />
                                     <div style={{ width: "100%" }} />
                                     <div style={{ width: "100%" }}>
-                                        <a href="#topdiv">Torna in alto</a>
+                                        <a href="#topdiv" style={{ color: dark ? "yellow" : "blue" }}>Torna in alto</a>
                                     </div>
                                     <div style={{ width: "100%" }} />
                                 </div>
