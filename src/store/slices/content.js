@@ -22,11 +22,11 @@ const content = createSlice({
             }
         },
         setContent(state, action) {
-            const { tree, tables } = action.payload;
+            const { tree, tables, setpieces } = action.payload;
 
             state.tree = tree;
             state.tables = tables;
-            state.setpieces = initialState.setpieces;
+            state.setpieces = setpieces;
             state.copiedContent = null;
             state.clipboardAction = null;
         },
