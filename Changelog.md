@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    30 Mag 2024
+    -----------
+    - 1.26.0 Further map generator stuff.
+
     27 Mag 2024
     -----------
     - 1.25.0 Further map generator stuff.

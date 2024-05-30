@@ -65,8 +65,8 @@ export default function MapSetup(props) {
           onChange={(event) => props.onGridsizeChanged(event.target.value)}
         >
           <FormControlLabel value="1" control={<Radio />} label="3x3" />
-          <FormControlLabel value="2" control={<Radio />} label="5x5" />
-          <FormControlLabel value="3" control={<Radio />} label="7x7" />
+          <FormControlLabel value="2" control={<Radio />} label="4x4" />
+          <FormControlLabel value="3" control={<Radio />} label="5x5" />
         </RadioGroup>
       </FormControl>
     </Grid>

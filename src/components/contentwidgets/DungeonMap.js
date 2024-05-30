@@ -36,10 +36,10 @@ export default function DungeonMap(props) {
                     mapgridrowcells = 3;
                     break;
                 case 2:
-                    mapgridrowcells = 5;
+                    mapgridrowcells = 4;
                     break;
                 case 3:
-                    mapgridrowcells = 7;
+                    mapgridrowcells = 5;
                     break;
                 default:
                     mapgridrowcells = 5;
@@ -54,15 +54,15 @@ export default function DungeonMap(props) {
                     break;
 
                 case 2:
-                    mapgridrowdensity = 50;
+                    mapgridrowdensity = 40;
                     break;
 
                 case 3:
-                    mapgridrowdensity = 75;
+                    mapgridrowdensity = 65;
                     break;
 
                 default:
-                    mapgridrowdensity = 50;
+                    mapgridrowdensity = 40;
                     break;
             }
 
@@ -181,6 +181,13 @@ export default function DungeonMap(props) {
 
     return (
         <div id="topdiv">
+            <div style={{ width: '100%' }}>
+                <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                    <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
+                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
+                </div>
+            </div>
+            <br />
             {[...Array(gridrowcells)].map((_, i) => (
                 <div key={"map" + i}>
                     <br />
