@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    31 Mag 2024
+    -----------
+    - 1.26.1 Fixed corrupted setpiece saves.
+
     30 Mag 2024
     -----------
     - 1.26.0 Further map generator stuff.

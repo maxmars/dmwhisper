@@ -120,7 +120,8 @@ const ContentsList = () => {
     const savedContent = {
       label: label,
       tree: currentContent.tree,
-      tables: currentContent.tables
+      tables: currentContent.tables,
+      setpieces: currentContent.setpieces
     }
 
     await set("content" + selectedSlot, savedContent);

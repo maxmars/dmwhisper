@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    31 Mag 2024
+    -----------
+    - 1.26.1 Fixed corrupted setpiece saves.
+
     30 Mag 2024
     -----------
     - 1.26.0 Further map generator stuff.
