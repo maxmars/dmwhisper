@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    05 Giu 2024
+    -----------
+    - 1.26.2 Fixed dice roll related bug.
+
     31 Mag 2024
     -----------
     - 1.26.1 Fixed corrupted setpiece saves.

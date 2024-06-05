@@ -66,9 +66,10 @@ export default function Table(props) {
         const postfix = props.content.data.postfix ? " " + props.content.data.postfix : "";
         try {
           let htmlContent = props.content.data.textContent;
+          let tables = props.content.data.table.trim().split(" ");
 
           return {
-            throw: rollAndReplace(prefix + diceThrow(content, props.content.data.table.trim()) + postfix),
+            throw: rollAndReplace(prefix + diceThrow(content, props.content.data.table.trim(), tables) + postfix),
             htmlContent: rollAndReplace(htmlContent)
           };
         } catch (e) {
