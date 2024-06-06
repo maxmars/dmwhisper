@@ -48,7 +48,7 @@ const ResultsList = () => {
                   <div style={{ width: "100%", textAlign: 'left' }} dangerouslySetInnerHTML={{ __html: cells[i * gridrowcells + j].content }} />
                   <div style={{ width: "100%" }} />
                   <div style={{ width: "100%" }}>
-                    <a href={"#topdiv" + mapUuid} style={{ color: dark ? "yellow" : "blue" }}>Torna in alto</a>
+                    <a href={"#topdiv" + mapUuid} style={{ color: dark ? "yellow" : "blue" }}>{t("Back to top")}</a>
                   </div>
                   <div style={{ width: "100%" }} />
                 </div>

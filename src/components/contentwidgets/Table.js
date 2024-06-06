@@ -165,6 +165,12 @@ export default function Table(props) {
             <Stack spacing={2} direction="column"
               justifyContent="space-evenly"
               alignItems="center">
+              <div style={{ width: '100%' }}>
+                <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                  <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
+                  <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
+                </div>
+              </div>
               <div dangerouslySetInnerHTML={{ __html: currentHtmlContent }} />
               {currentThrow && currentThrow.length > 0 ? <div>{currentThrow}</div> : null}
               <br />

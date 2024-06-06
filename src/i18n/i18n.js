@@ -166,6 +166,7 @@ i18n
           "Set piece ID cannot be blank": "Set piece ID cannot be blank",
           "Edited setpiece:": "Edited setpiece:",
           "Room label": "Room label",
+          "Back to top": "Back to top",
         }
       },
       it: {
@@ -317,7 +318,7 @@ i18n
           "Set piece ID cannot be blank": "L'ID di set piece non può essere vuoto",
           "Edited setpiece:": "Setpiece modificato:",
           "Room label": "Etichetta stanza",
-
+          "Back to top": "Torna all'inizio",
         }
       },
       es: {
@@ -468,7 +469,7 @@ i18n
           "Set piece ID cannot be blank": "El ID de la pieza de conjunto no puede estar vacío",
           "Edited setpiece:": "Pieza de conjunto editada:",
           "Room label": "Etiqueta de habitación",
-
+          "Back to top": "Volver arriba",
         },
       },
       fr: {
@@ -619,7 +620,7 @@ i18n
           "Set piece ID cannot be blank": "L'ID de la pièce de jeu ne peut pas être vide",
           "Edited setpiece:": "Pièce de jeu éditée:",
           "Room label": "Étiquette de la pièce",
-
+          "Back to top": "Retour en haut",
         },
       },
       de: {
@@ -770,6 +771,7 @@ i18n
           "Set piece ID cannot be blank": "Die Set-Stück-ID darf nicht leer sein",
           "Edited setpiece:": "Bearbeitetes Set-Stück:",
           "Room label": "Raumetikett",
+          "Back to top": "Zurück nach oben",
         }
       },
       pt: {
@@ -920,6 +922,7 @@ i18n
           "Set piece ID cannot be blank": "O ID da peça não pode estar em branco",
           "Edited setpiece:": "Peça editada:",
           "Room label": "Etiqueta da sala",
+          "Back to top": "Voltar ao topo",
         }
       },
       gr: {
@@ -1070,6 +1073,7 @@ i18n
           "Set piece ID cannot be blank": "Το αναγνωριστικό του κομματιού δεν μπορεί να είναι κενό",
           "Edited setpiece:": "Επεξεργασμένο κομμάτι:",
           "Room label": "Ετικέτα δωματίου",
+          "Back to top": "Πίσω στην κορυφή",
         }
       },
       se: {
@@ -1220,6 +1224,7 @@ i18n
           "Set piece ID cannot be blank": "Bit-ID kan inte vara tomt",
           "Edited setpiece:": "Redigerad bit:",
           "Room label": "Rumsetikett",
+          "Back to top": "Tillbaka till toppen",
         }
       },
       uk: {
@@ -1370,6 +1375,7 @@ i18n
           "Set piece ID cannot be blank": "ID шматка не може бути порожнім",
           "Edited setpiece:": "Відредагований шматок:",
           "Room label": "Мітка кімнати",
+          "Back to top": "Повернутися до верху",
         }
       },
       he: {
@@ -1520,6 +1526,7 @@ i18n
           "Set piece ID cannot be blank": "מזהה חתיכה לא יכול להיות ריק",
           "Edited setpiece:": "חתיכה נערכת:",
           "Room label": "תווית חדר",
+          "Back to top": "חזור לראש",
         }        
       },
       no: {
@@ -1670,6 +1677,7 @@ i18n
           "Set piece ID cannot be blank": "Settstykket ID kan ikke være tomt",
           "Edited setpiece:": "Redigert settstykke:",
           "Room label": "Rom etikett",
+          "Back to top": "Tilbake til toppen",
         }
       },
       nl: {
@@ -1820,6 +1828,7 @@ i18n
           "Set piece ID cannot be blank": "Setstuk-ID mag niet leeg zijn",
           "Edited setpiece:": "Bewerkt setstuk:",
           "Room label": "Kamerlabel",
+          "Back to top": "Terug naar boven",
         }
       },
       pl: {
@@ -1970,6 +1979,7 @@ i18n
           "Set piece ID cannot be blank": "ID elementu zestawu nie może być puste",
           "Edited setpiece:": "Edytowany element zestawu:",
           "Room label": "Etykieta pokoju",
+          "Back to top": "Powrót na górę",
         }
       },
       hu: {
@@ -2120,6 +2130,7 @@ i18n
           "Set piece ID cannot be blank": "A darabazonosító nem lehet üres",
           "Edited setpiece:": "Szerkesztett darab:",
           "Room label": "Szoba címke",
+          "Back to top": "Vissza az elejére",
         }
       },
       bg: {
@@ -2270,6 +2281,7 @@ i18n
           "Set piece ID cannot be blank": "Идентификаторът на парчето не може да бъде празен",
           "Edited setpiece:": "Редактирано парче:",
           "Room label": "Етикет на стаята",
+          "Back to top": "Обратно нагоре",
         }
       },
       fi: {
@@ -2420,6 +2432,7 @@ i18n
           "Set piece ID cannot be blank": "Pala tunnus ei voi olla tyhjä",
           "Edited setpiece:": "Muokattu pala:",
           "Room label": "Huoneen etiketti",
+          "Back to top": "Takaisin ylös",
         }
       },
       da: {
@@ -2570,6 +2583,7 @@ i18n
           "Set piece ID cannot be blank": "Sætstykket ID kan ikke være tomt",
           "Edited setpiece:": "Redigeret sætstykke:",
           "Room label": "Rum etiket",
+          "Back to top": "Tilbage til toppen",
         }
       },
       ro: {
@@ -2720,6 +2734,7 @@ i18n
           "Set piece ID cannot be blank": "ID-ul piesei nu poate fi gol",
           "Edited setpiece:": "Piesa editată:",
           "Room label": "Eticheta camerei",
+          "Back to top": "Înapoi la început",
         }
       },
       cs: {
@@ -2870,6 +2885,7 @@ i18n
           "Set piece ID cannot be blank": "ID kusu nemůže být prázdné",
           "Edited setpiece:": "Upravený kus:",
           "Room label": "Štítek místnosti",
+          "Back to top": "Zpět nahoru",
         }
       },
       is: {
@@ -3020,6 +3036,7 @@ i18n
           "Set piece ID cannot be blank": "Setið ID má ekki vera tómt",
           "Edited setpiece:": "Breytt hluta:",
           "Room label": "Herbergi merki",
+          "Back to top": "Aftur á topp",
         }
       }
     }

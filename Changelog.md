@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    06 Giu 2024
+    -----------
+    - 1.26.3 Fixed the manual and the default data.
+
     05 Giu 2024
     -----------
     - 1.26.2 Fixed dice roll related bug.
