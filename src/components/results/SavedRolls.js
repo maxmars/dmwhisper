@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
-import { Button, Grid, List, ListItem, ListItemText, ListItemAvatar, Avatar } from '@mui/material';
+import { Button, Grid, List, ListItem, ListItemText } from '@mui/material';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Editor } from 'ckeditor5-custom-build/build/ckeditor';
 import { useState } from 'react';
