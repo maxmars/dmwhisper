@@ -176,15 +176,10 @@ const ResultsList = () => {
               } else {
                 return (
                   <ListItem key={"ris" + index}>
-                    <ListItemAvatar>
-                      <Avatar sx={{ backgroundColor: "#ffa726", cursor: "pointer" }} onClick={() => {
+                    <ListItemText primary={<div dangerouslySetInnerHTML={{ __html: throwResult.result }} />} secondary={<div style={{display: 'flex', alignItems: 'center'}}><EditIcon sx={{ borderRadius: '5px', backgroundColor: "#ffa726", cursor: "pointer" }} onClick={() => {
                         setEditedThrow(index);
                         setCurrentEditedContent(throwResult.result);
-                      }}>
-                        <EditIcon />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary={<div dangerouslySetInnerHTML={{ __html: throwResult.result }} />} secondary={throwResult.timestamp} />
+                      }}/>&nbsp;{throwResult.timestamp}</div>} />
                   </ListItem>
                 );
               }
