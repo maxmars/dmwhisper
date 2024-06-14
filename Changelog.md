@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    14 Giu 2024
+    -----------
+    - 1.27.0 You can now edit saved table rolls / information bits (but not maps stuff).
+
     06 Giu 2024
     -----------
     - 1.26.3 Fixed the manual and the default data.

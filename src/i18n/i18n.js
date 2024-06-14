@@ -167,6 +167,7 @@ i18n
           "Edited setpiece:": "Edited setpiece:",
           "Room label": "Room label",
           "Back to top": "Back to top",
+          "Save and Close": "Save and Close",
         }
       },
       it: {
@@ -319,6 +320,7 @@ i18n
           "Edited setpiece:": "Setpiece modificato:",
           "Room label": "Etichetta stanza",
           "Back to top": "Torna all'inizio",
+          "Save and Close": "Salva e chiudi",
         }
       },
       es: {
@@ -470,6 +472,7 @@ i18n
           "Edited setpiece:": "Pieza de conjunto editada:",
           "Room label": "Etiqueta de habitación",
           "Back to top": "Volver arriba",
+          "Save and Close": "Guardar y cerrar",
         },
       },
       fr: {
@@ -621,6 +624,7 @@ i18n
           "Edited setpiece:": "Pièce de jeu éditée:",
           "Room label": "Étiquette de la pièce",
           "Back to top": "Retour en haut",
+          "Save and Close": "Enregistrer et fermer",
         },
       },
       de: {
@@ -772,6 +776,7 @@ i18n
           "Edited setpiece:": "Bearbeitetes Set-Stück:",
           "Room label": "Raumetikett",
           "Back to top": "Zurück nach oben",
+          "Save and Close": "Speichern und schließen",
         }
       },
       pt: {
@@ -923,6 +928,7 @@ i18n
           "Edited setpiece:": "Peça editada:",
           "Room label": "Etiqueta da sala",
           "Back to top": "Voltar ao topo",
+          "Save and Close": "Salvar e fechar",
         }
       },
       gr: {
@@ -1074,6 +1080,7 @@ i18n
           "Edited setpiece:": "Επεξεργασμένο κομμάτι:",
           "Room label": "Ετικέτα δωματίου",
           "Back to top": "Πίσω στην κορυφή",
+          "Save and Close": "Αποθήκευση και κλείσιμο",
         }
       },
       se: {
@@ -1225,6 +1232,7 @@ i18n
           "Edited setpiece:": "Redigerad bit:",
           "Room label": "Rumsetikett",
           "Back to top": "Tillbaka till toppen",
+          "Save and Close": "Spara och stäng",
         }
       },
       uk: {
@@ -1376,6 +1384,7 @@ i18n
           "Edited setpiece:": "Відредагований шматок:",
           "Room label": "Мітка кімнати",
           "Back to top": "Повернутися до верху",
+          "Save and Close": "Зберегти і закрити",
         }
       },
       he: {
@@ -1527,6 +1536,7 @@ i18n
           "Edited setpiece:": "חתיכה נערכת:",
           "Room label": "תווית חדר",
           "Back to top": "חזור לראש",
+          "Save and Close": "שמור וסגור",
         }        
       },
       no: {
@@ -1678,6 +1688,7 @@ i18n
           "Edited setpiece:": "Redigert settstykke:",
           "Room label": "Rom etikett",
           "Back to top": "Tilbake til toppen",
+          "Save and Close": "Lagre og lukk",
         }
       },
       nl: {
@@ -1829,6 +1840,7 @@ i18n
           "Edited setpiece:": "Bewerkt setstuk:",
           "Room label": "Kamerlabel",
           "Back to top": "Terug naar boven",
+          "Save and Close": "Opslaan en sluiten",
         }
       },
       pl: {
@@ -1980,6 +1992,7 @@ i18n
           "Edited setpiece:": "Edytowany element zestawu:",
           "Room label": "Etykieta pokoju",
           "Back to top": "Powrót na górę",
+          "Save and Close": "Zapisz i zamknij",
         }
       },
       hu: {
@@ -2131,6 +2144,7 @@ i18n
           "Edited setpiece:": "Szerkesztett darab:",
           "Room label": "Szoba címke",
           "Back to top": "Vissza az elejére",
+          "Save and Close": "Mentés és bezárás",
         }
       },
       bg: {
@@ -2282,6 +2296,7 @@ i18n
           "Edited setpiece:": "Редактирано парче:",
           "Room label": "Етикет на стаята",
           "Back to top": "Обратно нагоре",
+          "Save and Close": "Запази и затвори",
         }
       },
       fi: {
@@ -2433,6 +2448,7 @@ i18n
           "Edited setpiece:": "Muokattu pala:",
           "Room label": "Huoneen etiketti",
           "Back to top": "Takaisin ylös",
+          "Save and Close": "Tallenna ja sulje",
         }
       },
       da: {
@@ -2584,6 +2600,7 @@ i18n
           "Edited setpiece:": "Redigeret sætstykke:",
           "Room label": "Rum etiket",
           "Back to top": "Tilbage til toppen",
+          "Save and Close": "Gem og luk",
         }
       },
       ro: {
@@ -2735,6 +2752,7 @@ i18n
           "Edited setpiece:": "Piesa editată:",
           "Room label": "Eticheta camerei",
           "Back to top": "Înapoi la început",
+          "Save and Close": "Salvați și închideți",
         }
       },
       cs: {
@@ -2886,6 +2904,7 @@ i18n
           "Edited setpiece:": "Upravený kus:",
           "Room label": "Štítek místnosti",
           "Back to top": "Zpět nahoru",
+          "Save and Close": "Uložit a zavřít",
         }
       },
       is: {
@@ -3037,6 +3056,7 @@ i18n
           "Edited setpiece:": "Breytt hluta:",
           "Room label": "Herbergi merki",
           "Back to top": "Aftur á topp",
+          "Save and Close": "Vista og loka",
         }
       }
     }

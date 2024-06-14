@@ -44,6 +44,7 @@ import MapSetup from './MapSetup.js';
 
 export default function MenuEdit(props) {
 
+    //#region Component initializations
     const { t } = useTranslation();
     const [unsavedContent, setUnsavedContent] = useState("no");
     const [errorMessage, setErrorMessage] = useState(null);
@@ -81,8 +82,9 @@ export default function MenuEdit(props) {
         setUnsavedContent("no");
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [contentMetaData]);
+    //#endregion Component initializations
 
-    // CKEditor stuff
+    //#region CKEditor stuff
     useEffect(() => {
         ckEditorThemeSync();
     });
@@ -130,7 +132,7 @@ export default function MenuEdit(props) {
     }
 
     require('ckeditor5-custom-build/build/translations/' + lng + '.js');
-    // End CKEditor stuff
+    //#endregion CKEditor stuff
 
     const dispatch = useDispatch();
 
