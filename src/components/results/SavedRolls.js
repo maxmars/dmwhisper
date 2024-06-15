@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { clearThrows, updateThrow, deleteThrow } from '../../store/slices/throws';
 import { useTranslation } from 'react-i18next';
-import { uuidv4, copyIntoClipboard } from '../../utils/index.js';
+import { copyIntoClipboard } from '../../utils/index.js';
 import useTheme from '@mui/private-theming/useTheme';
 import { format } from 'date-fns';
 
@@ -95,7 +95,7 @@ const ResultsList = () => {
 
   const throwCopy = async (rowId) => {
     try {
-      const html = throws.sequence[rowId].result;
+      const html = document.getElementById("throwHtmlContent" + rowId).outerHTML; // throws.sequence[rowId].result;
       const text = document.getElementById("throwHtmlContent" + rowId).textContent;
 
       await copyIntoClipboard(html, text);
@@ -107,9 +107,9 @@ const ResultsList = () => {
   //#endregion page events
 
   //#region dungeon map stuff
-  const getDungeonMapHtml = (cells, gridrowcells, gridrowdensity) => {
-    const mapUuid = uuidv4();
-    return <div id={"topdiv" + mapUuid}>
+  const getDungeonMapHtml = (index, cells, gridrowcells, gridrowdensity) => {
+    const mapId = "throwHtmlContent" + index;
+    return <div id={mapId}>
       {[...Array(gridrowcells)].map((_, i) => (
         <div key={"map" + i}>
           <br />
@@ -137,7 +137,7 @@ const ResultsList = () => {
                   <div style={{ width: "100%", textAlign: 'left' }} dangerouslySetInnerHTML={{ __html: cells[i * gridrowcells + j].content }} />
                   <div style={{ width: "100%" }} />
                   <div style={{ width: "100%" }}>
-                    <a href={"#topdiv" + mapUuid} style={{ color: dark ? "yellow" : "blue" }}>{t("Back to top")}</a>
+                    <a href={"#" + mapId} style={{ color: dark ? "yellow" : "blue" }}>{t("Back to top")}</a>
                   </div>
                   <div style={{ width: "100%" }} />
                 </div>
@@ -213,9 +213,9 @@ const ResultsList = () => {
         <Grid item xs={12}>
           <Box sx={{ display: 'flex', alignItems: 'flex-end', width: "100%" }}>
             <SearchIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-            <TextField id="input-with-sx" label="" variant="standard" sx={{width: "100%"}} 
+            <TextField id="input-with-sx" label="" variant="standard" sx={{ width: "100%" }}
               value={searchText}
-              onChange={(event) => {setSearchText(event.target.value)}} />
+              onChange={(event) => { setSearchText(event.target.value) }} />
           </Box>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -238,8 +238,18 @@ const ResultsList = () => {
                 }
 
                 return <ListItem key={"ris" + index}>
-                  <ListItemText primary={getDungeonMapHtml(throwResult.result.cells, throwResult.result.gridrowcells, throwResult.result.gridrowdensity)}
-                    secondary={throwResult.timestamp} />
+                  <ListItemText primary={getDungeonMapHtml(index, throwResult.result.cells, throwResult.result.gridrowcells, throwResult.result.gridrowdensity)}
+                    secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
+                      <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                        setThrowToBeDeleted(index);
+                        setCurrentEditedContent(null);
+                      }} />
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <ContentCopyIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                        throwCopy(index);
+                      }} />
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      {throwResult.timestamp}</div>} />
                 </ListItem>
               } else {
 
@@ -251,20 +261,20 @@ const ResultsList = () => {
                   <ListItem key={"ris" + index}>
                     <ListItemText primary={<div id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} />}
                       secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
-                        <EditIcon sx={{ borderRadius: '5px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                        <EditIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                           setEditedThrow(index);
                           setCurrentEditedContent(throwResult.result);
                         }} />
-                        &nbsp;
-                        <DeleteIcon sx={{ borderRadius: '5px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                           setThrowToBeDeleted(index);
                           setCurrentEditedContent(null);
                         }} />
-                        &nbsp;
-                        <ContentCopyIcon sx={{ borderRadius: '5px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <ContentCopyIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                           throwCopy(index);
                         }} />
-                        &nbsp;
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         {throwResult.timestamp}</div>} />
                   </ListItem>
                 );

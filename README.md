@@ -385,7 +385,7 @@ The first table here contains references to the two tables next to it.
 
     15 Giu 2024
     -----------
-    - 1.28.0 You can now delete and copy to clipboard saved table rolls / information bits (but not maps stuff). All saved content is now searchable.
+    - 1.28.0 You can now filter, delete and copy to clipboard saved content.
 
     14 Giu 2024
     -----------
