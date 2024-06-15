@@ -21,12 +21,17 @@ const throws = createSlice({
 
             state.sequence[index] = { result, timestamp };
         },
+        deleteThrow(state, action) {
+            const { index } = action.payload;
+
+            state.sequence.splice(index, 1);
+        },
         clearThrows(state, action) {
             state.sequence = [];
-        },
+        }
     }
 });
 
 export default throws.reducer;
 
-export const { addThrow, updateThrow, clearThrows } = throws.actions;
+export const { addThrow, updateThrow, deleteThrow, clearThrows } = throws.actions;

@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    15 Giu 2024
+    -----------
+    - 1.28.0 You can now delete and copy to clipboard saved table rolls / information bits (but not maps stuff). All saved content is now searchable.
+
     14 Giu 2024
     -----------
     - 1.27.0 You can now edit saved table rolls / information bits (but not maps stuff).

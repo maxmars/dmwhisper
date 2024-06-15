@@ -1,15 +1,19 @@
 import { useSelector } from 'react-redux';
 import EditIcon from '@mui/icons-material/Edit';
-import { Button, Grid, List, ListItem, ListItemText } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import SearchIcon from '@mui/icons-material/Search';
+import { Button, Grid, List, ListItem, ListItemText, TextField, Box } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Editor } from 'ckeditor5-custom-build/build/ckeditor';
 import { useState } from 'react';
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { clearThrows, updateThrow } from '../../store/slices/throws';
+import { clearThrows, updateThrow, deleteThrow } from '../../store/slices/throws';
 import { useTranslation } from 'react-i18next';
-import { uuidv4 } from '../../utils/index.js';
+import { uuidv4, copyIntoClipboard } from '../../utils/index.js';
 import useTheme from '@mui/private-theming/useTheme';
 import { format } from 'date-fns';
 
@@ -24,6 +28,8 @@ const ResultsList = () => {
   const mounted = useRef();
   const [editedThrow, setEditedThrow] = useState(null);
   const [currentEditedContent, setCurrentEditedContent] = useState("");
+  const [throwToBeDeleted, setThrowToBeDeleted] = useState(null);
+  const [searchText, setSearchText] = useState("");
   //#endregion
 
 
@@ -77,11 +83,30 @@ const ResultsList = () => {
   require('ckeditor5-custom-build/build/translations/' + lng + '.js');
   //#endregion CKEditor stuff
 
-
+  //#region page events
   const onClick = (rowId) => {
     dispatch(clearThrows(rowId));
   };
 
+  const throwDelete = () => {
+    dispatch(deleteThrow({ index: throwToBeDeleted }));
+    setThrowToBeDeleted(null);
+  };
+
+  const throwCopy = async (rowId) => {
+    try {
+      const html = throws.sequence[rowId].result;
+      const text = document.getElementById("throwHtmlContent" + rowId).textContent;
+
+      await copyIntoClipboard(html, text);
+      console.log('HTML fragment copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+  //#endregion page events
+
+  //#region dungeon map stuff
   const getDungeonMapHtml = (cells, gridrowcells, gridrowdensity) => {
     const mapUuid = uuidv4();
     return <div id={"topdiv" + mapUuid}>
@@ -125,8 +150,28 @@ const ResultsList = () => {
 
     </div>
   }
+  //#endregion dungeon map stuff
 
-  if (editedThrow !== null) {
+  //#region render
+  if (throwToBeDeleted !== null) {
+    return (
+      <Grid container sx={{ overflow: 'scroll' }}>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12} sx={{ display: "flex", justifyContent: "space-around" }}>
+          <Typography>{t("Are you sure you want to delete the content in slot")}?</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12} sx={{ display: "flex", justifyContent: "space-around" }}>
+          <Button variant="contained" color="primary" onClick={throwDelete}>{t("Yes")}</Button>
+          <Button variant="contained" color="primary" onClick={() => setThrowToBeDeleted(null)}>{t("No")}</Button>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+      </Grid>
+    );
+  } else if (editedThrow !== null) {
     return (
       <Grid container sx={{ overflow: 'scroll' }}>
         <Grid item xs={12}>
@@ -166,20 +211,61 @@ const ResultsList = () => {
     return (
       <Grid container sx={{ overflow: 'scroll' }}>
         <Grid item xs={12}>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end', width: "100%" }}>
+            <SearchIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+            <TextField id="input-with-sx" label="" variant="standard" sx={{width: "100%"}} 
+              value={searchText}
+              onChange={(event) => {setSearchText(event.target.value)}} />
+          </Box>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>
           <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
             {throws.sequence.map((throwResult, index) => {
               if (throwResult.result.cells) {
+
+                const filtered = throwResult.result.cells.filter(cell => {
+                  if (cell) {
+                    return cell.content.toLowerCase().includes(searchText.toLowerCase());
+                  } else {
+                    return false;
+                  }
+                });
+
+                if (filtered.length === 0) {
+                  return null;
+                }
+
                 return <ListItem key={"ris" + index}>
                   <ListItemText primary={getDungeonMapHtml(throwResult.result.cells, throwResult.result.gridrowcells, throwResult.result.gridrowdensity)}
                     secondary={throwResult.timestamp} />
                 </ListItem>
               } else {
+
+                if (searchText.length > 0 && !throwResult.result.toLowerCase().includes(searchText.toLowerCase())) {
+                  return null;
+                }
+
                 return (
                   <ListItem key={"ris" + index}>
-                    <ListItemText primary={<div dangerouslySetInnerHTML={{ __html: throwResult.result }} />} secondary={<div style={{display: 'flex', alignItems: 'center'}}><EditIcon sx={{ borderRadius: '5px', backgroundColor: "#ffa726", cursor: "pointer" }} onClick={() => {
-                        setEditedThrow(index);
-                        setCurrentEditedContent(throwResult.result);
-                      }}/>&nbsp;{throwResult.timestamp}</div>} />
+                    <ListItemText primary={<div id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} />}
+                      secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
+                        <EditIcon sx={{ borderRadius: '5px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                          setEditedThrow(index);
+                          setCurrentEditedContent(throwResult.result);
+                        }} />
+                        &nbsp;
+                        <DeleteIcon sx={{ borderRadius: '5px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                          setThrowToBeDeleted(index);
+                          setCurrentEditedContent(null);
+                        }} />
+                        &nbsp;
+                        <ContentCopyIcon sx={{ borderRadius: '5px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                          throwCopy(index);
+                        }} />
+                        &nbsp;
+                        {throwResult.timestamp}</div>} />
                   </ListItem>
                 );
               }
@@ -196,6 +282,9 @@ const ResultsList = () => {
       </Grid>
     );
   }
+  //#endregion render
+
+
 };
 
 
