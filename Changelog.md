@@ -2,6 +2,7 @@
 
     16 Giu 2024
     -----------
+    - 1.30.0 You can now shuffle tables values and save the shuffled list.
     - 1.29.0 You can now set min and max values to roll on for table contents (only for single tables); table values in the "browse" mode are now sorted.
 
     15 Giu 2024

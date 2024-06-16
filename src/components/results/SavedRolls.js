@@ -282,6 +282,7 @@ const ResultsList = () => {
             })}
           </List>
         </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
           {
             throws.sequence.length > 0 ?

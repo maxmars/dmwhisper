@@ -170,6 +170,7 @@ i18n
           "Save and Close": "Save and Close",
           "Min": "Min",
           "Max": "Max",
+          "Shuffle": "Shuffle",
         }
       },
       it: {
@@ -325,6 +326,7 @@ i18n
           "Save and Close": "Salva e chiudi",
           "Min": "Min",
           "Max": "Max",
+          "Shuffle": "Mescola",
         }
       },
       es: {
@@ -479,6 +481,7 @@ i18n
           "Save and Close": "Guardar y cerrar",
           "Min": "Mín",
           "Max": "Máx",
+          "Shuffle": "Barajar",
         },
       },
       fr: {
@@ -633,6 +636,7 @@ i18n
           "Save and Close": "Enregistrer et fermer",
           "Min": "Min",
           "Max": "Max",
+          "Shuffle": "Mélanger",
         },
       },
       de: {
@@ -787,6 +791,7 @@ i18n
           "Save and Close": "Speichern und schließen",
           "Min": "Min",
           "Max": "Max",
+          "Shuffle": "Mischen",
         }
       },
       pt: {
@@ -941,6 +946,7 @@ i18n
           "Save and Close": "Salvar e fechar",
           "Min": "Min",
           "Max": "Max",
+          "Shuffle": "Embaralhar",
         }
       },
       gr: {
@@ -1095,6 +1101,7 @@ i18n
           "Save and Close": "Αποθήκευση και κλείσιμο",
           "Min": "Ελάχ",
           "Max": "Μέγ",
+          "Shuffle": "Ανακάτεμα",
         }
       },
       se: {
@@ -1249,6 +1256,7 @@ i18n
           "Save and Close": "Spara och stäng",
           "Min": "Min",
           "Max": "Max",
+          "Shuffle": "Blanda",
         }
       },
       uk: {
@@ -1403,6 +1411,7 @@ i18n
           "Save and Close": "Зберегти і закрити",
           "Min": "Мін",
           "Max": "Макс",
+          "Shuffle": "Перемішати",
         }
       },
       he: {
@@ -1557,6 +1566,7 @@ i18n
           "Save and Close": "שמור וסגור",
           "Min": "מינימום",
           "Max": "מקסימום",
+          "Shuffle": "לְעַרֵב",
         }        
       },
       no: {
@@ -1711,6 +1721,7 @@ i18n
           "Save and Close": "Lagre og lukk",
           "Min": "Min",
           "Max": "Maks",
+          "Shuffle": "Bland",
         }
       },
       nl: {
@@ -1865,6 +1876,7 @@ i18n
           "Save and Close": "Opslaan en sluiten",
           "Min": "Min",
           "Max": "Max",
+          "Shuffle": "Schudden",
         }
       },
       pl: {
@@ -2019,6 +2031,7 @@ i18n
           "Save and Close": "Zapisz i zamknij",
           "Min": "Min",
           "Max": "Maks",
+          "Shuffle": "Tasować",
         }
       },
       hu: {
@@ -2173,6 +2186,7 @@ i18n
           "Save and Close": "Mentés és bezárás",
           "Min": "Min",
           "Max": "Max",
+          "Shuffle": "Keverés",
         }
       },
       bg: {
@@ -2327,6 +2341,7 @@ i18n
           "Save and Close": "Запази и затвори",
           "Min": "Мин",
           "Max": "Макс",
+          "Shuffle": "Разбъркване",
         }
       },
       fi: {
@@ -2481,6 +2496,7 @@ i18n
           "Save and Close": "Tallenna ja sulje",
           "Min": "Min",
           "Max": "Maks",
+          "Shuffle": "Sekoita",
         }
       },
       da: {
@@ -2635,6 +2651,7 @@ i18n
           "Save and Close": "Gem og luk",
           "Min": "Min",
           "Max": "Maks",
+          "Shuffle": "Blande",
         }
       },
       ro: {
@@ -2789,6 +2806,7 @@ i18n
           "Save and Close": "Salvați și închideți",
           "Min": "Min",
           "Max": "Max",
+          "Shuffle": "Amesteca",
         }
       },
       cs: {
@@ -2943,6 +2961,7 @@ i18n
           "Save and Close": "Uložit a zavřít",
           "Min": "Min",
           "Max": "Max",
+          "Shuffle": "Zamíchat",
         }
       },
       is: {
@@ -3097,6 +3116,7 @@ i18n
           "Save and Close": "Vista og loka",
           "Min": "Lágst",
           "Max": "Hámark",
+          "Shuffle": "Blanda",
         }
       }
     }

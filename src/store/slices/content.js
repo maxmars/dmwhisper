@@ -563,6 +563,18 @@ export const rollAndReplace = (textContent) => {
 }
 
 
+export const shuffleArray = (originalArray) => {
+    const array = [...originalArray];
+    
+    for (let i = array.length - 1; i > 0; i--) {
+      // Generate a random index
+      const j = Math.floor(Math.random() * (i + 1));
+      // Swap elements at indices i and j
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
 export default content.reducer;
 
 export const { setContent, clearContent, setLastTableContent, addTable, addSetpiece, removeTable, removeSetpiece, updateTableHeader,

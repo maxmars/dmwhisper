@@ -4,12 +4,13 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import ShuffleIcon from '@mui/icons-material/Shuffle';
 import UpdateIcon from '@mui/icons-material/Update';
 import UpdateDisabledIcon from '@mui/icons-material/UpdateDisabled';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { diceThrow, getTable, setLastTableContent, rollAndReplace, mergeContentAndTables } from '../../store/slices/content';
+import { diceThrow, getTable, setLastTableContent, rollAndReplace, mergeContentAndTables, shuffleArray } from '../../store/slices/content';
 import { addThrow } from '../../store/slices/throws';
 import { format } from 'date-fns';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -34,6 +35,7 @@ export default function Table(props) {
   const multipleTables = props.content && props.content.data && props.content.data.table ? props.content.data.table.indexOf(" ") > -1 : false;
   const [minDieValue, setMinDieValue] = useState(null);
   const [maxDieValue, setMaxDieValue] = useState(null);
+  const [listedValues, setListedValues] = useState([]);
   //#endregion
 
   //#region Component functions
@@ -41,6 +43,15 @@ export default function Table(props) {
     const contentToSave = currentThrow && currentThrow.length > 0 ? currentThrow : currentHtmlContent;
     dispatch(addThrow({ result: contentToSave, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
   };
+
+  const saveShuffledValues = () => {
+    const contentToSave = document.getElementById("listedValuesDiv").outerHTML;
+    dispatch(addThrow({ result: contentToSave, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
+  };
+
+  const shuffleValues = () => {
+    setListedValues(shuffleArray(listedValues));
+  }
 
   const resetError = () => {
     setError(null);
@@ -176,6 +187,7 @@ export default function Table(props) {
         });
 
         setMaxDieValue(maxTempDieValue);
+        setListedValues([...table.rng.toSorted((a, b) => a.min - b.min)]);
 
         return null;
       }
@@ -200,7 +212,7 @@ export default function Table(props) {
               <div style={{ width: '100%' }}>
                 <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around', gap: '5%', alignItems: 'center' }}>
                   <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained' sx={{ width: "30%" }}>{t("Roll")}</Button>
-                  {multipleTables ? <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
+                  {multipleTables ? <Button onClick={saveRoll} startIcon={<SaveAltIcon />} sx={{ width: "30%" }} variant='contained'>{t("Save")}</Button>
                     :
                     <>
                       <Typography sx={{ width: "35%", display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>{t("Min")}:
@@ -255,8 +267,7 @@ export default function Table(props) {
       );
     } else {
       try {
-        const table = getTable(content, props.content.data.table.trim());
-        const items = table.rng.toSorted((a, b) => a.min - b.min).map(item => {
+        const items = listedValues.map(item => {
           return <>
             <Grid item xs={3} key={"dice" + item.min + "-" + item.max} style={{ display: "flex", justifyContent: "flex-end" }} >
               <div style={{ marginRight: "1em" }}>{item.min}-{item.max}</div>
@@ -268,7 +279,7 @@ export default function Table(props) {
         });
 
         return <>
-          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid id="listedValuesDiv" container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={3} style={{ display: "flex", justifyContent: "flex-end" }} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText}>
               <div style={{ marginRight: "1em" }}>{t("Roll")}</div>
@@ -278,11 +289,17 @@ export default function Table(props) {
             </Grid>
             {items}
             <Grid item xs={12}>&nbsp;</Grid>
+          </Grid>
+          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+            <Grid item xs={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+              <Button onClick={shuffleValues} startIcon={<ShuffleIcon />} variant='contained'>{t("Shuffle")}</Button>
+              <Button onClick={saveShuffledValues} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
+            </Grid>
             <Grid item xs={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
               <Button onClick={() => setMode("rockandroll")} startIcon={<CasinoIcon />} variant='contained'>{t("Return to rolling mode")}</Button>
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
-          </Grid>
+          </Grid >
         </>;
       } catch (e) {
         return null;
