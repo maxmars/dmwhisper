@@ -168,6 +168,8 @@ i18n
           "Room label": "Room label",
           "Back to top": "Back to top",
           "Save and Close": "Save and Close",
+          "Min": "Min",
+          "Max": "Max",
         }
       },
       it: {
@@ -321,6 +323,8 @@ i18n
           "Room label": "Etichetta stanza",
           "Back to top": "Torna all'inizio",
           "Save and Close": "Salva e chiudi",
+          "Min": "Min",
+          "Max": "Max",
         }
       },
       es: {
@@ -473,6 +477,8 @@ i18n
           "Room label": "Etiqueta de habitación",
           "Back to top": "Volver arriba",
           "Save and Close": "Guardar y cerrar",
+          "Min": "Mín",
+          "Max": "Máx",
         },
       },
       fr: {
@@ -625,6 +631,8 @@ i18n
           "Room label": "Étiquette de la pièce",
           "Back to top": "Retour en haut",
           "Save and Close": "Enregistrer et fermer",
+          "Min": "Min",
+          "Max": "Max",
         },
       },
       de: {
@@ -777,6 +785,8 @@ i18n
           "Room label": "Raumetikett",
           "Back to top": "Zurück nach oben",
           "Save and Close": "Speichern und schließen",
+          "Min": "Min",
+          "Max": "Max",
         }
       },
       pt: {
@@ -929,6 +939,8 @@ i18n
           "Room label": "Etiqueta da sala",
           "Back to top": "Voltar ao topo",
           "Save and Close": "Salvar e fechar",
+          "Min": "Min",
+          "Max": "Max",
         }
       },
       gr: {
@@ -1081,6 +1093,8 @@ i18n
           "Room label": "Ετικέτα δωματίου",
           "Back to top": "Πίσω στην κορυφή",
           "Save and Close": "Αποθήκευση και κλείσιμο",
+          "Min": "Ελάχ",
+          "Max": "Μέγ",
         }
       },
       se: {
@@ -1233,6 +1247,8 @@ i18n
           "Room label": "Rumsetikett",
           "Back to top": "Tillbaka till toppen",
           "Save and Close": "Spara och stäng",
+          "Min": "Min",
+          "Max": "Max",
         }
       },
       uk: {
@@ -1385,6 +1401,8 @@ i18n
           "Room label": "Мітка кімнати",
           "Back to top": "Повернутися до верху",
           "Save and Close": "Зберегти і закрити",
+          "Min": "Мін",
+          "Max": "Макс",
         }
       },
       he: {
@@ -1537,6 +1555,8 @@ i18n
           "Room label": "תווית חדר",
           "Back to top": "חזור לראש",
           "Save and Close": "שמור וסגור",
+          "Min": "מינימום",
+          "Max": "מקסימום",
         }        
       },
       no: {
@@ -1689,6 +1709,8 @@ i18n
           "Room label": "Rom etikett",
           "Back to top": "Tilbake til toppen",
           "Save and Close": "Lagre og lukk",
+          "Min": "Min",
+          "Max": "Maks",
         }
       },
       nl: {
@@ -1841,6 +1863,8 @@ i18n
           "Room label": "Kamerlabel",
           "Back to top": "Terug naar boven",
           "Save and Close": "Opslaan en sluiten",
+          "Min": "Min",
+          "Max": "Max",
         }
       },
       pl: {
@@ -1993,6 +2017,8 @@ i18n
           "Room label": "Etykieta pokoju",
           "Back to top": "Powrót na górę",
           "Save and Close": "Zapisz i zamknij",
+          "Min": "Min",
+          "Max": "Maks",
         }
       },
       hu: {
@@ -2145,6 +2171,8 @@ i18n
           "Room label": "Szoba címke",
           "Back to top": "Vissza az elejére",
           "Save and Close": "Mentés és bezárás",
+          "Min": "Min",
+          "Max": "Max",
         }
       },
       bg: {
@@ -2297,6 +2325,8 @@ i18n
           "Room label": "Етикет на стаята",
           "Back to top": "Обратно нагоре",
           "Save and Close": "Запази и затвори",
+          "Min": "Мин",
+          "Max": "Макс",
         }
       },
       fi: {
@@ -2449,6 +2479,8 @@ i18n
           "Room label": "Huoneen etiketti",
           "Back to top": "Takaisin ylös",
           "Save and Close": "Tallenna ja sulje",
+          "Min": "Min",
+          "Max": "Maks",
         }
       },
       da: {
@@ -2601,6 +2633,8 @@ i18n
           "Room label": "Rum etiket",
           "Back to top": "Tilbage til toppen",
           "Save and Close": "Gem og luk",
+          "Min": "Min",
+          "Max": "Maks",
         }
       },
       ro: {
@@ -2753,6 +2787,8 @@ i18n
           "Room label": "Eticheta camerei",
           "Back to top": "Înapoi la început",
           "Save and Close": "Salvați și închideți",
+          "Min": "Min",
+          "Max": "Max",
         }
       },
       cs: {
@@ -2905,6 +2941,8 @@ i18n
           "Room label": "Štítek místnosti",
           "Back to top": "Zpět nahoru",
           "Save and Close": "Uložit a zavřít",
+          "Min": "Min",
+          "Max": "Max",
         }
       },
       is: {
@@ -3057,6 +3095,8 @@ i18n
           "Room label": "Herbergi merki",
           "Back to top": "Aftur á topp",
           "Save and Close": "Vista og loka",
+          "Min": "Lágst",
+          "Max": "Hámark",
         }
       }
     }

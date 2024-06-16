@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    16 Giu 2024
+    -----------
+    - 1.29.0 You can now set min and max values to roll on for table contents (only for single tables); table values in the "browse" mode are now sorted.
+
     15 Giu 2024
     -----------
     - 1.28.0 You can now filter, delete and copy to clipboard saved content.

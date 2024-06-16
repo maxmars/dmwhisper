@@ -9,8 +9,6 @@ import Menu from '../contentwidgets/Menu';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTranslation } from 'react-i18next';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import './SelectedContent.css';
 
 
@@ -98,14 +96,8 @@ const SelectedContent = (props) => {
         }}
       >
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={4} sx={{display: 'flex', justifyContent: 'center', verticalAlign: 'center'}}>
-          <Button startIcon={<ArrowBackIcon />} sx={{ width: '90%' }} variant="outlined" onClick={() => props.goToPreviousContent()}>&nbsp;</Button>
-        </Grid>
-        <Grid item xs={4} sx={{display: 'flex', justifyContent: 'center', verticalAlign: 'center'}}>
+        <Grid item xs={12} sx={{display: 'flex', justifyContent: 'center', verticalAlign: 'center'}}>
           <Button sx={{ width: '90%' }} variant="outlined" onClick={() => props.clearSelectedContent()}>{t("Back")}</Button>
-        </Grid>
-        <Grid item xs={4} sx={{display: 'flex', justifyContent: 'center', verticalAlign: 'center'}}>
-          <Button endIcon={<ArrowForwardIcon />} sx={{ width: '99100%' }} variant="outlined" onClick={() => props.goToNextContent()}>&nbsp;</Button>
         </Grid>
       </Grid>
     </div>

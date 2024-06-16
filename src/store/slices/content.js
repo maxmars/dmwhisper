@@ -373,7 +373,7 @@ function cryptoRands() {
 }
 
 let globalRandomValues = cryptoRands();
-export const getRng = (item) => {
+export const getRng = (item, minval, maxval) => {
     let min = 1000;
     let max = 0;
 
@@ -387,12 +387,22 @@ export const getRng = (item) => {
         }
     });
 
+    if (minval && maxval) {
+        if (minval >= min && minval <= max) {
+            min = minval;
+        }
+
+        if (maxval >= min && maxval <= max) {
+            max = maxval;
+        }
+    }
+
     const result = Math.floor(globalRandomValues.pop() * (max - min + 1)) + min;
     return item.rng.find((rng) => result >= rng.min && result <= rng.max);
 
 }
 
-export const mergeContentAndTables = (content, tables, state) => {
+export const mergeContentAndTables = (content, tables, state, minDieValue, maxDieValue) => {
 
     const tableDictionary = {};
     tables.forEach((table, index) => {
@@ -402,7 +412,7 @@ export const mergeContentAndTables = (content, tables, state) => {
     });
 
     tables = tables.map((table) => {
-        return getUniqueValue(state, table.replace("!", ""), tableDictionary);
+        return getUniqueValue(state, table.replace("!", ""), tableDictionary, minDieValue, maxDieValue);
     });
 
     let htmlContent = content;
@@ -413,7 +423,7 @@ export const mergeContentAndTables = (content, tables, state) => {
     return rollAndReplace(htmlContent)
 }
 
-export const diceThrow = (state, idTable, tableDictionary) => {
+export const diceThrow = (state, idTable, tableDictionary, minval, maxval) => {
 
     try {
         if (globalRandomValues.length < 1) {
@@ -434,7 +444,7 @@ export const diceThrow = (state, idTable, tableDictionary) => {
         }
 
         const table = state.tables.find((table) => table.id === idTable);
-        const rng = getRng(table);
+        const rng = getRng(table, minval, maxval);
         const prefix = rng.prefix ? rng.prefix + " " : "";
         const postfix = rng.postfix ? " " + rng.postfix : "";
 
@@ -473,8 +483,8 @@ export const diceThrow = (state, idTable, tableDictionary) => {
 }
 
 
-export const getUniqueValue = (state, table, tableDictionary) => {
-    let result = diceThrow(state, table, tableDictionary);
+export const getUniqueValue = (state, table, tableDictionary, minDieValue, maxDieValue) => {
+    let result = diceThrow(state, table, tableDictionary, minDieValue, maxDieValue);
     if (tableDictionary[table]) {
         if (tableDictionary[table].indexOf(result) > -1) {
             let tries = 0;
