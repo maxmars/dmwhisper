@@ -238,7 +238,7 @@ const ResultsList = () => {
                 }
 
                 return <ListItem key={"ris" + index}>
-                  <ListItemText primary={getDungeonMapHtml(index, throwResult.result.cells, throwResult.result.gridrowcells, throwResult.result.gridrowdensity)}
+                  <ListItemText primary={<div>{getDungeonMapHtml(index, throwResult.result.cells, throwResult.result.gridrowcells, throwResult.result.gridrowdensity)}<br /><br /></div>}
                     secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
                       <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                         setThrowToBeDeleted(index);
@@ -259,7 +259,7 @@ const ResultsList = () => {
 
                 return (
                   <ListItem key={"ris" + index}>
-                    <ListItemText primary={<div id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} />}
+                    <ListItemText primary={<div><div id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} /><br /><br /></div>}
                       secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
                         <EditIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                           setEditedThrow(index);
