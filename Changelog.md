@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    03 Set 2024
+    -----------
+    - 1.31.0 More readable names for map elements.
+
     16 Giu 2024
     -----------
     - 1.30.0 You can now shuffle tables values and save the shuffled list.

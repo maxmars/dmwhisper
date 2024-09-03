@@ -65,9 +65,9 @@ const ResultsList = () => {
         const elArray = Array.from(elToApply);
         elArray.forEach(element => {
           if (theme.palette.mode === "dark") {
-            element.setAttribute("style", "color: white !important; background-color: black !important;");
+            element.setAttribute("style", "color: white !important; background-color: black !important; font-size: 12px !important;");
           } else {
-            element.setAttribute("style", "color: black !important; background-color: white !important;");
+            element.setAttribute("style", "color: black !important; background-color: white !important; font-size: 12px !important;");
           }
         });
       }
@@ -109,18 +109,33 @@ const ResultsList = () => {
   //#region dungeon map stuff
   const getDungeonMapHtml = (index, cells, gridrowcells, gridrowdensity) => {
     const mapId = "throwHtmlContent" + index;
+
     return <div id={mapId}>
       {[...Array(gridrowcells)].map((_, i) => (
         <div key={"map" + i}>
           <br />
           <div style={{ display: 'flex', width: '100%' }}>
-            {[...Array(gridrowcells)].map((_, j) => (
-              <div key={"cell" + i + "-" + j} style={{ display: 'flex', flexBasis: (100 / gridrowcells) + '%', border: "2px solid " + (dark ? "black" : "white"), flexGrow: '0', justifyContent: 'center', backgroundColor: cells[i * gridrowcells + j] ? "orange" : "transparent" }}>
+            {[...Array(gridrowcells)].map((_, j) => {
+              let description = "";
+
+              if (cells[i * gridrowcells + j]) {
+                try {
+                  description = cells[i * gridrowcells + j].content.split("</h1>")[0].substr(4);
+                  if (description.length > 15) {
+                    description = description.substring(0, 13) + "..";
+                  }
+                } catch (error) {
+                  description = cells[i * gridrowcells + j].description;
+                }
+              }
+
+              return (<div key={"cell" + i + "-" + j} style={{ display: 'flex', flexBasis: (100 / gridrowcells) + '%', border: "2px solid " + (dark ? "black" : "white"), flexGrow: '0', justifyContent: 'center', backgroundColor: cells[i * gridrowcells + j] ? "orange" : "transparent" }}>
                 <br />
-                <div style={{ display: 'flex', alignItems: 'center' }}>{cells[i * gridrowcells + j] ? <a href={"#" + cells[i * gridrowcells + j].id} style={{ color: "white" }}>{cells[i * gridrowcells + j].description}</a> : " "}</div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>{cells[i * gridrowcells + j] ? <a href={"#" + cells[i * gridrowcells + j].id} style={{ color: "white", fontSize: "12px !important" }}>{description}</a> : " "}</div>
                 <br />&nbsp;
-              </div>
-            ))}
+              </div>);
+
+            })}
           </div>
         </div>
       ))}
