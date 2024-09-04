@@ -109,7 +109,7 @@ export function DungeonCreateTest() {
     const dungeon = new Dungeon(props.width, props.height, props.roomTypes);
     dungeon.generateRooms(props.roomMinSize, props.roomMaxSize);
     dungeon.generateCorridors();
-    dungeon.printDungeon();
+    // dungeon.printDungeon();
     return dungeon;
 }
 

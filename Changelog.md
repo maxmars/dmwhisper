@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    04 Set 2024
+    -----------
+    - 1.32.0 Added the "test" menu item.
+
     03 Set 2024
     -----------
     - 1.31.0 More readable names for map elements.
