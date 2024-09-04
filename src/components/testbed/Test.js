@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Dungeon } from '../../snippets/Dungeon.js';
 import { use } from 'i18next';
+import { ContactlessOutlined } from '@mui/icons-material';
 
 
 const Test = () => {
@@ -66,11 +67,13 @@ const Test = () => {
 
   useEffect(() => {
     if (noPaths === true) {
+      //console.log("svuota corridoi");
       setDrawnCorridors([]);
     } else {
+      //console.log("riempi corridoi");
       setDrawnCorridors([...Array(dungeon.rooms.length).keys()]);
     }
-  }, [noPaths]);
+  }, [noPaths, dungeon.rooms.length]);
 
   useEffect(() => {
     drawPathIcon();
@@ -122,6 +125,7 @@ const Test = () => {
   // Ri-disegniamo la mappa quando qualcosa cambia
   useEffect(() => {
     if (canvasRef && canvasRef.current) {
+      //console.log('Drawing map');
       drawMap();
     }
   }, [
@@ -130,7 +134,8 @@ const Test = () => {
     mapOffset,
     currentDragDistance,
     windowSize.width,
-    windowSize.height
+    windowSize.height,
+    drawnCorridors
   ]);
 
   const drawAllCorridors = (color) => {
@@ -256,10 +261,11 @@ const Test = () => {
         return;
       }}
       onClick={(e) => {
+        
         // If click is inside the path icon, toggle the path visibility
-        if (currentMousePosition &&
-          currentMousePosition.y > windowSize.height - bottomBarHeight - iconbarHeight &&
-          currentMousePosition.x <= 50) {
+        if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+          e.clientX <= 50) {
+          //console.log('Touched icon');
           setNoPaths(!noPaths);
           return;
         }
@@ -275,17 +281,19 @@ const Test = () => {
       }}
       onTouchEnd={(e) => {
         // If click is inside the path icon, toggle the path visibility
-        if (currentMousePosition &&
-          currentMousePosition.y > windowSize.height - bottomBarHeight - iconbarHeight &&
-          currentMousePosition.x <= 50) {
-          setNoPaths(!noPaths);
-          return;
-        }
         // get the canvas coordinates of the touch
         try {
+          const touch = e.touches[0];
+
+          if (touch.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+            touch.clientX <= 50) {
+            //console.log('Touched icon');
+            setNoPaths(!noPaths);
+            return;
+          }
+
           const canvas = canvasRef.current;
           const bcr = canvas.getBoundingClientRect();
-          const touch = e.touches[0];
           const x = (touch.clientX - bcr.left) / xInc;
           const y = (touch.clientY - bcr.top) / yInc;
 
