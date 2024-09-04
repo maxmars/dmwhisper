@@ -1,9 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Dungeon } from '../../snippets/Dungeon.js';
+import { use } from 'i18next';
 
 
 const Test = () => {
 
+  const bottomBarHeight = 160;
+  const iconbarHeight = 50;
   const DungeonCreate = () => {
     const props = {
       width: 20,
@@ -44,7 +47,34 @@ const Test = () => {
   const [maxCoordinateY, setMaxCoordinateY] = useState(0);
   const [xInc, setXInc] = useState(0);
   const [yInc, setYInc] = useState(0);
+  const [noPaths, setNoPaths] = useState(true);
 
+
+  const drawPathIcon = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+
+    img.onload = () => {
+      ctx.drawImage(img, 0, windowSize.height - bottomBarHeight - iconbarHeight);
+    };
+
+    const pathIconFile = `${process.env.PUBLIC_URL}/path_${noPaths === true ? 'off' : 'on'}.png`;
+    //console.log(pathIconFile);
+    img.src = pathIconFile;
+  }
+
+  useEffect(() => {
+    if (noPaths === true) {
+      setDrawnCorridors([]);
+    } else {
+      setDrawnCorridors([...Array(dungeon.rooms.length).keys()]);
+    }
+  }, [noPaths]);
+
+  useEffect(() => {
+    drawPathIcon();
+  }, [noPaths, windowSize.height, bottomBarHeight, iconbarHeight]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -80,7 +110,7 @@ const Test = () => {
     });
 
     const xInc = windowSize.width / maxCoordinateX;
-    const yInc = (windowSize.height - 170) / maxCoordinateY;
+    const yInc = (windowSize.height - bottomBarHeight - iconbarHeight - 5) / maxCoordinateY;
 
     setMaxCoordinateX(maxCoordinateX);
     setMaxCoordinateY(maxCoordinateY);
@@ -121,11 +151,11 @@ const Test = () => {
         let currCenter = { x: currRoom.x + Math.floor(currRoom.width / 2), y: currRoom.y + Math.floor(currRoom.height / 2) };
 
         if (i % 2 === 0) {
-          context.strokeRect(prevCenter.x * xInc, prevCenter.y * yInc, currCenter.x * xInc - prevCenter.x * xInc, 5);
-          context.strokeRect(currCenter.x * xInc, prevCenter.y * yInc, 5, currCenter.y * yInc - prevCenter.y * yInc);
+          context.strokeRect(prevCenter.x * xInc + 5, prevCenter.y * yInc + 5, currCenter.x * xInc - prevCenter.x * xInc, 5);
+          context.strokeRect(currCenter.x * xInc + 5, prevCenter.y * yInc + 5, 5, currCenter.y * yInc - prevCenter.y * yInc);
         } else {
-          context.strokeRect(prevCenter.x * xInc, prevCenter.y * yInc, 5, currCenter.y * yInc - prevCenter.y * yInc);
-          context.strokeRect(prevCenter.x * xInc, currCenter.y * yInc, currCenter.x * xInc - prevCenter.x * xInc, 5);
+          context.strokeRect(prevCenter.x * xInc + 5, prevCenter.y * yInc + 5, 5, currCenter.y * yInc - prevCenter.y * yInc);
+          context.strokeRect(prevCenter.x * xInc + 5, currCenter.y * yInc + 5, currCenter.x * xInc - prevCenter.x * xInc, 5);
         }
       }
     }
@@ -136,7 +166,7 @@ const Test = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
-    const bcr = canvas.getBoundingClientRect();
+    // const bcr = canvas.getBoundingClientRect();
     // const realX = mapOffset.x - bcr.left;
     // const realY = mapOffset.y - bcr.top;
 
@@ -146,7 +176,10 @@ const Test = () => {
     //   (realY * 20 / 95) * (zoomlevel - 4)  // -200
     // );
 
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    //console.log('Drawing map');
+    context.clearRect(0, 0, canvas.width, canvas.height - iconbarHeight - 5);
+    context.beginPath();
+    drawPathIcon();
 
     // draw the dungeon rooms
     context.fillStyle = 'green';
@@ -161,7 +194,7 @@ const Test = () => {
     // draw borders
     context.strokeStyle = 'yellow';
     context.lineWidth = 5;
-    context.strokeRect(0, 0, canvas.width, canvas.height);
+    context.strokeRect(0, 0, canvas.width, canvas.height - iconbarHeight - 5);
 
     //console.log(bcr);
   }
@@ -208,7 +241,6 @@ const Test = () => {
 
   }
 
-
   return (
     <canvas
       // onMouseDown={(e) => mouseDown(e)}
@@ -224,7 +256,13 @@ const Test = () => {
         return;
       }}
       onClick={(e) => {
-        //mouseClick(e);
+        // If click is inside the path icon, toggle the path visibility
+        if (currentMousePosition &&
+          currentMousePosition.y > windowSize.height - bottomBarHeight - iconbarHeight &&
+          currentMousePosition.x <= 50) {
+          setNoPaths(!noPaths);
+          return;
+        }
         // get the canvas coordinates of the click
         const canvas = canvasRef.current;
         const bcr = canvas.getBoundingClientRect();
@@ -235,22 +273,33 @@ const Test = () => {
 
         return;
       }}
-      onTouchStart={(e) => {
+      onTouchEnd={(e) => {
+        // If click is inside the path icon, toggle the path visibility
+        if (currentMousePosition &&
+          currentMousePosition.y > windowSize.height - bottomBarHeight - iconbarHeight &&
+          currentMousePosition.x <= 50) {
+          setNoPaths(!noPaths);
+          return;
+        }
         // get the canvas coordinates of the touch
-        const canvas = canvasRef.current;
-        const bcr = canvas.getBoundingClientRect();
-        const touch = e.touches[0];
-        const x = (touch.clientX - bcr.left) / xInc;
-        const y = (touch.clientY - bcr.top) / yInc;
-    
-        roomClicked(x, y);
-    
+        try {
+          const canvas = canvasRef.current;
+          const bcr = canvas.getBoundingClientRect();
+          const touch = e.touches[0];
+          const x = (touch.clientX - bcr.left) / xInc;
+          const y = (touch.clientY - bcr.top) / yInc;
+
+          roomClicked(x, y);
+        } catch (e) {
+          // No need to do anything
+        }
+
         return;
       }}
       id="canvas"
       ref={canvasRef}
       width={windowSize.width}
-      height={windowSize.height - 170}
+      height={windowSize.height - bottomBarHeight}
     />
   );
 };
