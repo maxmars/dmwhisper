@@ -25,7 +25,7 @@ const Test = () => {
 
   const canvasRef = useRef(null);
   const mouseDownRef = useRef(false);
-  const zoomlevel = useState(1);
+  const [zoomlevel, setZoomlevel] = useState(1);
   const mouseDragStartRef = useRef({ x: 0, y: 0 });
 
   const [currentDragDistance, setCurrentDragDistance] = useState({
@@ -63,6 +63,22 @@ const Test = () => {
     const pathIconFile = `${process.env.PUBLIC_URL}/path_${noPaths === true ? 'off' : 'on'}.png`;
     //console.log(pathIconFile);
     img.src = pathIconFile;
+
+    const imgZoomOut = new Image();
+    imgZoomOut.onload = () => {
+      ctx.drawImage(imgZoomOut, 60, windowSize.height - bottomBarHeight - iconbarHeight);
+    };
+
+    const zoomOutIconFile = `${process.env.PUBLIC_URL}/zoom_out.png`;
+    imgZoomOut.src = zoomOutIconFile;
+
+    const imgZoomIn = new Image();
+    imgZoomIn.onload = () => {
+      ctx.drawImage(imgZoomIn, 120, windowSize.height - bottomBarHeight - iconbarHeight);
+    };
+
+    const zoomInIconFile = `${process.env.PUBLIC_URL}/zoom_in.png`;
+    imgZoomIn.src = zoomInIconFile;
   }
 
   useEffect(() => {
@@ -112,14 +128,14 @@ const Test = () => {
       }
     });
 
-    const xInc = windowSize.width / maxCoordinateX;
-    const yInc = (windowSize.height - bottomBarHeight - iconbarHeight - 5) / maxCoordinateY;
+    const xInc = windowSize.width / maxCoordinateX * zoomlevel;
+    const yInc = (windowSize.height - bottomBarHeight - iconbarHeight - 5) / maxCoordinateY * zoomlevel;
 
     setMaxCoordinateX(maxCoordinateX);
     setMaxCoordinateY(maxCoordinateY);
     setXInc(xInc);
     setYInc(yInc);
-  }, [dungeon, windowSize, dungeon.rooms]);
+  }, [dungeon, windowSize, dungeon.rooms, zoomlevel, windowSize.width, windowSize.height, bottomBarHeight, iconbarHeight]);
 
 
   // Ri-disegniamo la mappa quando qualcosa cambia
@@ -135,7 +151,9 @@ const Test = () => {
     currentDragDistance,
     windowSize.width,
     windowSize.height,
-    drawnCorridors
+    drawnCorridors,
+    dungeon.rooms,
+    zoomlevel, xInc, yInc
   ]);
 
   const drawCorridors = (color, all) => {
@@ -278,6 +296,25 @@ const Test = () => {
           setNoPaths(!noPaths);
           return;
         }
+ 
+        // If click is inside the zoom out icon, toggle the path visibility
+        if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+          e.clientX <= 110 && e.clientX >= 60) {
+          //console.log('Touched icon');
+          if (zoomlevel > 1)
+          setZoomlevel(zoomlevel - 1);
+          return;
+        }
+
+        // If click is inside the zoom in icon, toggle the path visibility
+        if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+          e.clientX <= 170 && e.clientX >= 120) {
+          //console.log('Touched icon');
+          if (zoomlevel < 4)
+          setZoomlevel(zoomlevel + 1);
+          return;
+        }
+ 
         // get the canvas coordinates of the click
         const canvas = canvasRef.current;
         const bcr = canvas.getBoundingClientRect();
