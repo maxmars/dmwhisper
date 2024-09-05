@@ -52,17 +52,21 @@ const Test = () => {
 
   const mouseUp = (event) => {
 
+    if (mouseDownRef.current === false) {
+      return;
+    }
+
     mouseDownRef.current = false;
 
     // Se l'utente non ha spostato troppo il mouse, sta cliccando per (de)selezionare
-    if (Math.abs(currentDragDistance.x) + Math.abs(currentDragDistance.y) < 3) {
+    // if (Math.abs(currentDragDistance.x) + Math.abs(currentDragDistance.y) < 3) {
 
-      const rect = canvasRef.current.getBoundingClientRect();
-      const x = event.clientX - rect.left;
-      const y = event.clientY - rect.top;
+    //   const rect = canvasRef.current.getBoundingClientRect();
+    //   const x = event.clientX - rect.left;
+    //   const y = event.clientY - rect.top;
 
-      console.log('mouseUp on ' + x + ', ' + y);
-    }
+    //   console.log('mouseUp on ' + x + ', ' + y);
+    // }
 
     let mult = Math.abs(4.0 / zoomlevel);
 
@@ -84,6 +88,9 @@ const Test = () => {
   const drawPathIcon = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
+
+    ctx.clearRect(0, canvas.height - iconbarHeight - 5, canvas.width, iconbarHeight + 5);
+
     const img = new Image();
 
     img.onload = () => {
@@ -221,9 +228,8 @@ const Test = () => {
     context.reset();
 
     //console.log('Drawing map');
-    context.clearRect(0, 0, canvas.width, canvas.height - iconbarHeight - 5);
+    context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();
-    drawPathIcon();
 
     // draw the corridors
     drawCorridors('rgb(90, 90, 0)', true);
@@ -243,6 +249,8 @@ const Test = () => {
     context.strokeStyle = 'yellow';
     context.lineWidth = 5;
     context.strokeRect(0, 0, canvas.width, canvas.height - iconbarHeight - 5);
+
+    drawPathIcon();
   }
 
   const getClickedRoomNumber = (x, y) => {
@@ -250,7 +258,6 @@ const Test = () => {
     for (let i = 0; i < dungeon.rooms.length; i++) {
       const room = dungeon.rooms[i];
       if (x >= room.x && x <= room.x + room.width && y >= room.y && y <= room.y + room.height) {
-        console.log('Clicked on ' + x + ', ' + y + ' and room is ' + room.x + ', ' + room.y + ', ' + room.width + ', ' + room.height);
         return i;
       }
     }
@@ -389,12 +396,38 @@ const Test = () => {
         mouseClicked(e);
         return;
       }}
+      onTouchStart={(e) => {
+        try {
+          const touch = e.touches[0];
+          mouseDown(touch);
+        } catch (e) {
+          // No need to do anything
+        }
+        return;
+      }}
       onTouchEnd={(e) => {
+        const touch = e.touches[0];
+        mouseUp(touch);
         screenTapped(e);
         return;
       }}
       onTouchMove={(e) => {
-        mouseMoveOrDrag(e);
+
+        try {
+          // get the canvas coordinates of the touch
+          const touch = e.touches[0];
+
+          const fromDragStartX = touch.pageX - mouseDragStartRef.current.x;
+          const fromDragStartY = touch.pageY - mouseDragStartRef.current.y;
+
+          setCurrentDragDistance({
+            x: fromDragStartX,
+            y: fromDragStartY,
+          });
+        } catch (e) {
+          // No need to do anything
+        }
+
         return;
       }}
       id="canvas"
