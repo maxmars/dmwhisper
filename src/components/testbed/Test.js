@@ -412,7 +412,7 @@ const Test = () => {
           // No need to do anything
         }
 
-        return;
+        return false;
       }}
       id="canvas"
       ref={canvasRef}
