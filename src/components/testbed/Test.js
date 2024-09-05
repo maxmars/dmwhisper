@@ -10,9 +10,9 @@ const Test = () => {
   const iconbarHeight = 50;
   const DungeonCreate = () => {
     const props = {
-      width: 20,
-      height: 20,
-      roomTypes: [{ name: 'kitchen', occurrences: 1 }, { name: 'bedroom', occurrences: 3 }, { name: 'dining room', occurrences: 1 }, { name: 'bathroom', occurrences: 2 }, { name: 'study', occurrences: 2 }],
+      width: 40,
+      height: 40,
+      roomTypes: [{ name: 'kitchen', occurrences: 2 }, { name: 'bedroom', occurrences: 5 }, { name: 'dining room', occurrences: 2 }, { name: 'bathroom', occurrences: 3 }, { name: 'study', occurrences: 4 }],
       roomMinSize: 3,
       roomMaxSize: 4
     };
@@ -138,23 +138,23 @@ const Test = () => {
     drawnCorridors
   ]);
 
-  const drawAllCorridors = (color) => {
+  const drawCorridors = (color, all) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
     // draw the corridors
-    context.strokeStyle = color;
     context.lineWidth = 5;
 
     for (let i = 1; i < dungeon.rooms.length; i++) {
       // Se i è presente nell'array drawnCorridors, allora disegna il corridoio
-      if (drawnCorridors.includes(i)) {
+      if (all === true || drawnCorridors.includes(i)) {
         let prevRoom = dungeon.rooms[i - 1];
         let currRoom = dungeon.rooms[i];
 
         let prevCenter = { x: prevRoom.x + Math.floor(prevRoom.width / 2), y: prevRoom.y + Math.floor(prevRoom.height / 2) };
         let currCenter = { x: currRoom.x + Math.floor(currRoom.width / 2), y: currRoom.y + Math.floor(currRoom.height / 2) };
 
+        context.strokeStyle = color;
         if (i % 2 === 0) {
           context.strokeRect(prevCenter.x * xInc + 5, prevCenter.y * yInc + 5, currCenter.x * xInc - prevCenter.x * xInc, 5);
           context.strokeRect(currCenter.x * xInc + 5, prevCenter.y * yInc + 5, 5, currCenter.y * yInc - prevCenter.y * yInc);
@@ -162,6 +162,11 @@ const Test = () => {
           context.strokeRect(prevCenter.x * xInc + 5, prevCenter.y * yInc + 5, 5, currCenter.y * yInc - prevCenter.y * yInc);
           context.strokeRect(prevCenter.x * xInc + 5, currCenter.y * yInc + 5, currCenter.x * xInc - prevCenter.x * xInc, 5);
         }
+
+        context.strokeStyle = 'yellow';
+        context.strokeRect(prevCenter.x * xInc + 5, prevCenter.y * yInc + 5, 5, 5);
+        context.strokeRect(currCenter.x * xInc + 5, currCenter.y * yInc + 5, 5, 5);
+
       }
     }
 
@@ -186,6 +191,9 @@ const Test = () => {
     context.beginPath();
     drawPathIcon();
 
+    // draw the corridors
+    drawCorridors('rgb(90, 90, 0)', true);
+
     // draw the dungeon rooms
     context.fillStyle = 'green';
     context.lineWidth = 5;
@@ -194,7 +202,8 @@ const Test = () => {
       context.fillRect(room.x * xInc, room.y * yInc, room.width * xInc, room.height * yInc);
     });
 
-    drawAllCorridors('red');
+    // draw selected corridors
+    drawCorridors('red', false);
 
     // draw borders
     context.strokeStyle = 'yellow';
