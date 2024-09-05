@@ -58,25 +58,9 @@ const Test = () => {
 
     mouseDownRef.current = false;
 
-    // Se l'utente non ha spostato troppo il mouse, sta cliccando per (de)selezionare
-    // if (Math.abs(currentDragDistance.x) + Math.abs(currentDragDistance.y) < 3) {
-
-    //   const rect = canvasRef.current.getBoundingClientRect();
-    //   const x = event.clientX - rect.left;
-    //   const y = event.clientY - rect.top;
-
-    //   console.log('mouseUp on ' + x + ', ' + y);
-    // }
-
-    let mult = Math.abs(4.0 / zoomlevel);
-
-    if (mult < 0.3) {
-      mult = 0.3;
-    }
-
     setMapOffset({
-      x: mapOffset.x + currentDragDistance.x * mult,
-      y: mapOffset.y + currentDragDistance.y * mult,
+      x: mapOffset.x + currentDragDistance.x,
+      y: mapOffset.y + currentDragDistance.y,
     });
 
     setCurrentDragDistance({
@@ -185,8 +169,8 @@ const Test = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
-    const realX = mapOffset.x; //mapOffset.x - bcr.left;
-    const realY = mapOffset.y; //mapOffset.y - bcr.top;
+    const realX = mapOffset.x + currentDragDistance.x; //mapOffset.x - bcr.left;
+    const realY = mapOffset.y + currentDragDistance.y; //mapOffset.y - bcr.top;
 
     // draw the corridors
     context.lineWidth = 5;
@@ -222,8 +206,8 @@ const Test = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
-    const realX = mapOffset.x;
-    const realY = mapOffset.y;
+    const realX = mapOffset.x + currentDragDistance.x;
+    const realY = mapOffset.y + currentDragDistance.y;
 
     context.reset();
 
