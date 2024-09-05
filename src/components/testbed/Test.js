@@ -33,7 +33,7 @@ const Test = () => {
     y: 0,
   });
   const [lastClicked, setLastClicked] = useState({ x: -1, y: -1 });
-  const [mapOffset, setMapOffset] = useState({ x: -100, y: -700 });
+  const [mapOffset, setMapOffset] = useState({ x: 0, y: 0 });
   const [currentMousePosition, setCurrentMousePosition] = useState(null);
 
   const [windowSize, setWindowSize] = useState({
@@ -50,6 +50,53 @@ const Test = () => {
   const [yInc, setYInc] = useState(0);
   const [noPaths, setNoPaths] = useState(true);
 
+
+  const mouseDown = (event) => {
+    mouseDownRef.current = true;
+    mouseDragStartRef.current = { x: event.pageX, y: event.pageY };
+  };
+
+  const mouseUp = (event) => {
+    mouseDownRef.current = false;
+
+    // Se l'utente non ha spostato troppo il mouse, sta cliccando per (de)selezionare
+    if (Math.abs(currentDragDistance.x) + Math.abs(currentDragDistance.y) < 3) {
+      const canvas = canvasRef.current;
+
+      const rect = canvasRef.current.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      //mouseClicked(event);
+      //console.log('3 Clicked on ' + x + ', ' + y);
+      // setLastClicked((lastClicked) => {
+      //   return {
+      //     ...lastClicked,
+      //     x: x,
+      //     y: y,
+      //   };
+      // });
+
+    }
+
+    let mult = Math.abs(4.0 / zoomlevel);
+
+    if (mult < 0.3) {
+      mult = 0.3;
+    }
+
+    setMapOffset({
+      x: mapOffset.x + currentDragDistance.x * mult,
+      y: mapOffset.y + currentDragDistance.y * mult,
+    });
+
+    setCurrentDragDistance({
+      x: 0,
+      y: 0,
+    });
+
+    // console.log(mapOffset.x + ', ' + mapOffset.y);
+  };
 
   const drawPathIcon = () => {
     const canvas = canvasRef.current;
@@ -148,7 +195,8 @@ const Test = () => {
     canvasRef,
     zoomlevel,
     mapOffset,
-    currentDragDistance,
+    currentDragDistance.x,
+    currentDragDistance.y,
     windowSize.width,
     windowSize.height,
     drawnCorridors,
@@ -159,6 +207,10 @@ const Test = () => {
   const drawCorridors = (color, all) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
+
+    const bcr = canvas.getBoundingClientRect();
+    const realX = mapOffset.x - bcr.left;
+    const realY = mapOffset.y - bcr.top;
 
     // draw the corridors
     context.lineWidth = 5;
@@ -174,16 +226,16 @@ const Test = () => {
 
         context.strokeStyle = color;
         if (i % 2 === 0) {
-          context.strokeRect(prevCenter.x * xInc + 5, prevCenter.y * yInc + 5, currCenter.x * xInc - prevCenter.x * xInc, 5);
-          context.strokeRect(currCenter.x * xInc + 5, prevCenter.y * yInc + 5, 5, currCenter.y * yInc - prevCenter.y * yInc);
+          context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
+          context.strokeRect(currCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
         } else {
-          context.strokeRect(prevCenter.x * xInc + 5, prevCenter.y * yInc + 5, 5, currCenter.y * yInc - prevCenter.y * yInc);
-          context.strokeRect(prevCenter.x * xInc + 5, currCenter.y * yInc + 5, currCenter.x * xInc - prevCenter.x * xInc, 5);
+          context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
+          context.strokeRect(prevCenter.x * xInc + 5 + realX, currCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
         }
 
         context.strokeStyle = 'yellow';
-        context.strokeRect(prevCenter.x * xInc + 5, prevCenter.y * yInc + 5, 5, 5);
-        context.strokeRect(currCenter.x * xInc + 5, currCenter.y * yInc + 5, 5, 5);
+        context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, 5);
+        context.strokeRect(currCenter.x * xInc + 5 + realX, currCenter.y * yInc + 5 + realY, 5, 5);
 
       }
     }
@@ -194,9 +246,9 @@ const Test = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
-    // const bcr = canvas.getBoundingClientRect();
-    // const realX = mapOffset.x - bcr.left;
-    // const realY = mapOffset.y - bcr.top;
+    const bcr = canvas.getBoundingClientRect();
+    const realX = mapOffset.x - bcr.left;
+    const realY = mapOffset.y - bcr.top;
 
     context.reset();
     // context.translate(
@@ -217,7 +269,7 @@ const Test = () => {
     context.lineWidth = 5;
 
     dungeon.rooms.forEach((room) => {
-      context.fillRect(room.x * xInc, room.y * yInc, room.width * xInc, room.height * yInc);
+      context.fillRect(room.x * xInc + realX, room.y * yInc + realY, room.width * xInc, room.height * yInc);
     });
 
     // draw selected corridors
@@ -232,10 +284,14 @@ const Test = () => {
   }
 
   const getClickedRoomNumber = (x, y) => {
+
     for (let i = 0; i < dungeon.rooms.length; i++) {
       const room = dungeon.rooms[i];
       if (x >= room.x && x <= room.x + room.width && y >= room.y && y <= room.y + room.height) {
+        console.log('Clicked on ' + x + ', ' + y + ' and room is ' + room.x + ', ' + room.y + ', ' + room.width + ', ' + room.height);
         return i;
+      } else {
+        console.log('Clicked on ' + x + ', ' + y + ' but room is ' + room.x + ', ' + room.y + ', ' + room.width + ', ' + room.height);
       }
     }
     return -1;
@@ -273,13 +329,69 @@ const Test = () => {
 
   }
 
+  const mouseMoveOrDrag = (event) => {
+
+    if (mouseDownRef.current === true) {
+      const fromDragStartX = event.pageX - mouseDragStartRef.current.x;
+      const fromDragStartY = event.pageY - mouseDragStartRef.current.y;
+
+      setCurrentDragDistance({
+        x: fromDragStartX,
+        y: fromDragStartY,
+      });
+
+    } else {
+
+      drawMap();
+
+    }
+  };
+
+  const mouseClicked = (e) => {
+    // If click is inside the path icon, toggle the path visibility
+    if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+      e.clientX <= 50) {
+      //console.log('Touched icon');
+      setNoPaths(!noPaths);
+      return;
+    }
+
+    // If click is inside the zoom out icon, toggle the path visibility
+    if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+      e.clientX <= 110 && e.clientX >= 60) {
+      //console.log('Touched icon');
+      if (zoomlevel > 1)
+        setZoomlevel(zoomlevel - 1);
+      return;
+    }
+
+    // If click is inside the zoom in icon, toggle the path visibility
+    if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+      e.clientX <= 170 && e.clientX >= 120) {
+      //console.log('Touched icon');
+      if (zoomlevel < 4)
+        setZoomlevel(zoomlevel + 1);
+      return;
+    }
+
+    // get the canvas coordinates of the click
+    const canvas = canvasRef.current;
+    const bcr = canvas.getBoundingClientRect();
+    const x = (e.clientX - bcr.left) / xInc;
+    const y = (e.clientY - bcr.top) / yInc;
+
+    console.log('Clicked/2 on ' + x + ', ' + y);
+    roomClicked(x, y);
+
+  }
+
   return (
     <canvas
-      // onMouseDown={(e) => mouseDown(e)}
-      // onMouseUp={(e) => mouseUp(e)}
+      onMouseDown={(e) => mouseDown(e)}
+      onMouseUp={(e) => mouseUp(e)}
       onMouseMove={(e) => {
         setCurrentMousePosition({ x: e.pageX, y: e.pageY });
-        //mouseMoveOrDrag(e);
+        mouseMoveOrDrag(e);
         return;
       }}
       onMouseOut={(e) => {
@@ -288,41 +400,8 @@ const Test = () => {
         return;
       }}
       onClick={(e) => {
-        
-        // If click is inside the path icon, toggle the path visibility
-        if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
-          e.clientX <= 50) {
-          //console.log('Touched icon');
-          setNoPaths(!noPaths);
-          return;
-        }
- 
-        // If click is inside the zoom out icon, toggle the path visibility
-        if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
-          e.clientX <= 110 && e.clientX >= 60) {
-          //console.log('Touched icon');
-          if (zoomlevel > 1)
-          setZoomlevel(zoomlevel - 1);
-          return;
-        }
 
-        // If click is inside the zoom in icon, toggle the path visibility
-        if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
-          e.clientX <= 170 && e.clientX >= 120) {
-          //console.log('Touched icon');
-          if (zoomlevel < 4)
-          setZoomlevel(zoomlevel + 1);
-          return;
-        }
- 
-        // get the canvas coordinates of the click
-        const canvas = canvasRef.current;
-        const bcr = canvas.getBoundingClientRect();
-        const x = (e.clientX - bcr.left) / xInc;
-        const y = (e.clientY - bcr.top) / yInc;
-
-        roomClicked(x, y);
-
+        mouseClicked(e);
         return;
       }}
       onTouchEnd={(e) => {
@@ -338,8 +417,27 @@ const Test = () => {
             return;
           }
 
+          // If click is inside the zoom out icon, toggle the path visibility
+          if (touch.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+            touch.clientX <= 110 && touch.clientX >= 60) {
+            //console.log('Touched icon');
+            if (zoomlevel > 1)
+              setZoomlevel(zoomlevel - 1);
+            return;
+          }
+
+          // If click is inside the zoom in icon, toggle the path visibility
+          if (touch.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+            touch.clientX <= 170 && touch.clientX >= 120) {
+            //console.log('Touched icon');
+            if (zoomlevel < 4)
+              setZoomlevel(zoomlevel + 1);
+            return;
+          }
+
           const canvas = canvasRef.current;
           const bcr = canvas.getBoundingClientRect();
+
           const x = (touch.clientX - bcr.left) / xInc;
           const y = (touch.clientY - bcr.top) / yInc;
 
