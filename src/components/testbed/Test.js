@@ -1,7 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Dungeon } from '../../snippets/Dungeon.js';
-import { use } from 'i18next';
-import { ContactlessOutlined } from '@mui/icons-material';
 
 
 const Test = () => {
@@ -32,20 +30,16 @@ const Test = () => {
     x: 0,
     y: 0,
   });
-  const [lastClicked, setLastClicked] = useState({ x: -1, y: -1 });
   const [mapOffset, setMapOffset] = useState({ x: 0, y: 0 });
-  const [currentMousePosition, setCurrentMousePosition] = useState(null);
 
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
   });
 
-  const [dungeon, setDungeon] = useState(DungeonCreate());
+  const [dungeon] = useState(DungeonCreate());
   const [drawnCorridors, setDrawnCorridors] = useState([]);
 
-  const [maxCoordinateX, setMaxCoordinateX] = useState(0);
-  const [maxCoordinateY, setMaxCoordinateY] = useState(0);
   const [xInc, setXInc] = useState(0);
   const [yInc, setYInc] = useState(0);
   const [noPaths, setNoPaths] = useState(true);
@@ -57,26 +51,17 @@ const Test = () => {
   };
 
   const mouseUp = (event) => {
+
     mouseDownRef.current = false;
 
     // Se l'utente non ha spostato troppo il mouse, sta cliccando per (de)selezionare
     if (Math.abs(currentDragDistance.x) + Math.abs(currentDragDistance.y) < 3) {
-      const canvas = canvasRef.current;
 
       const rect = canvasRef.current.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
 
-      //mouseClicked(event);
-      //console.log('3 Clicked on ' + x + ', ' + y);
-      // setLastClicked((lastClicked) => {
-      //   return {
-      //     ...lastClicked,
-      //     x: x,
-      //     y: y,
-      //   };
-      // });
-
+      console.log('mouseUp on ' + x + ', ' + y);
     }
 
     let mult = Math.abs(4.0 / zoomlevel);
@@ -94,8 +79,6 @@ const Test = () => {
       x: 0,
       y: 0,
     });
-
-    // console.log(mapOffset.x + ', ' + mapOffset.y);
   };
 
   const drawPathIcon = () => {
@@ -108,7 +91,6 @@ const Test = () => {
     };
 
     const pathIconFile = `${process.env.PUBLIC_URL}/path_${noPaths === true ? 'off' : 'on'}.png`;
-    //console.log(pathIconFile);
     img.src = pathIconFile;
 
     const imgZoomOut = new Image();
@@ -130,16 +112,15 @@ const Test = () => {
 
   useEffect(() => {
     if (noPaths === true) {
-      //console.log("svuota corridoi");
       setDrawnCorridors([]);
     } else {
-      //console.log("riempi corridoi");
       setDrawnCorridors([...Array(dungeon.rooms.length).keys()]);
     }
   }, [noPaths, dungeon.rooms.length]);
 
   useEffect(() => {
     drawPathIcon();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [noPaths, windowSize.height, bottomBarHeight, iconbarHeight]);
 
   useEffect(() => {
@@ -178,8 +159,6 @@ const Test = () => {
     const xInc = windowSize.width / maxCoordinateX * zoomlevel;
     const yInc = (windowSize.height - bottomBarHeight - iconbarHeight - 5) / maxCoordinateY * zoomlevel;
 
-    setMaxCoordinateX(maxCoordinateX);
-    setMaxCoordinateY(maxCoordinateY);
     setXInc(xInc);
     setYInc(yInc);
   }, [dungeon, windowSize, dungeon.rooms, zoomlevel, windowSize.width, windowSize.height, bottomBarHeight, iconbarHeight]);
@@ -188,29 +167,19 @@ const Test = () => {
   // Ri-disegniamo la mappa quando qualcosa cambia
   useEffect(() => {
     if (canvasRef && canvasRef.current) {
-      //console.log('Drawing map');
       drawMap();
     }
-  }, [
-    canvasRef,
-    zoomlevel,
-    mapOffset,
-    currentDragDistance.x,
-    currentDragDistance.y,
-    windowSize.width,
-    windowSize.height,
-    drawnCorridors,
-    dungeon.rooms,
-    zoomlevel, xInc, yInc
-  ]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [canvasRef, zoomlevel, mapOffset, currentDragDistance, currentDragDistance.x,
+    currentDragDistance.y, windowSize.width, windowSize.height,
+    drawnCorridors, dungeon.rooms, xInc, yInc]);
 
   const drawCorridors = (color, all) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
-    const bcr = canvas.getBoundingClientRect();
-    const realX = mapOffset.x - bcr.left;
-    const realY = mapOffset.y - bcr.top;
+    const realX = mapOffset.x; //mapOffset.x - bcr.left;
+    const realY = mapOffset.y; //mapOffset.y - bcr.top;
 
     // draw the corridors
     context.lineWidth = 5;
@@ -246,15 +215,10 @@ const Test = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
-    const bcr = canvas.getBoundingClientRect();
-    const realX = mapOffset.x - bcr.left;
-    const realY = mapOffset.y - bcr.top;
+    const realX = mapOffset.x;
+    const realY = mapOffset.y;
 
     context.reset();
-    // context.translate(
-    //   (realX * 20 / 95) * (zoomlevel - 4), // -250
-    //   (realY * 20 / 95) * (zoomlevel - 4)  // -200
-    // );
 
     //console.log('Drawing map');
     context.clearRect(0, 0, canvas.width, canvas.height - iconbarHeight - 5);
@@ -279,8 +243,6 @@ const Test = () => {
     context.strokeStyle = 'yellow';
     context.lineWidth = 5;
     context.strokeRect(0, 0, canvas.width, canvas.height - iconbarHeight - 5);
-
-    //console.log(bcr);
   }
 
   const getClickedRoomNumber = (x, y) => {
@@ -290,8 +252,6 @@ const Test = () => {
       if (x >= room.x && x <= room.x + room.width && y >= room.y && y <= room.y + room.height) {
         console.log('Clicked on ' + x + ', ' + y + ' and room is ' + room.x + ', ' + room.y + ', ' + room.width + ', ' + room.height);
         return i;
-      } else {
-        console.log('Clicked on ' + x + ', ' + y + ' but room is ' + room.x + ', ' + room.y + ', ' + room.width + ', ' + room.height);
       }
     }
     return -1;
@@ -299,7 +259,6 @@ const Test = () => {
 
   const roomClicked = (x, y) => {
     let clickedRoomNumber = getClickedRoomNumber(x, y);
-    //console.log(clickedRoomNumber);
 
     if (clickedRoomNumber === 0) {
       clickedRoomNumber = 1;
@@ -339,19 +298,14 @@ const Test = () => {
         x: fromDragStartX,
         y: fromDragStartY,
       });
-
-    } else {
-
-      drawMap();
-
     }
   };
 
   const mouseClicked = (e) => {
+
     // If click is inside the path icon, toggle the path visibility
     if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
       e.clientX <= 50) {
-      //console.log('Touched icon');
       setNoPaths(!noPaths);
       return;
     }
@@ -359,7 +313,6 @@ const Test = () => {
     // If click is inside the zoom out icon, toggle the path visibility
     if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
       e.clientX <= 110 && e.clientX >= 60) {
-      //console.log('Touched icon');
       if (zoomlevel > 1)
         setZoomlevel(zoomlevel - 1);
       return;
@@ -368,7 +321,6 @@ const Test = () => {
     // If click is inside the zoom in icon, toggle the path visibility
     if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
       e.clientX <= 170 && e.clientX >= 120) {
-      //console.log('Touched icon');
       if (zoomlevel < 4)
         setZoomlevel(zoomlevel + 1);
       return;
@@ -377,75 +329,72 @@ const Test = () => {
     // get the canvas coordinates of the click
     const canvas = canvasRef.current;
     const bcr = canvas.getBoundingClientRect();
-    const x = (e.clientX - bcr.left) / xInc;
-    const y = (e.clientY - bcr.top) / yInc;
+    const x = (e.clientX - mapOffset.x - bcr.left) / xInc;
+    const y = (e.clientY - mapOffset.y - bcr.top) / yInc;
 
-    console.log('Clicked/2 on ' + x + ', ' + y);
     roomClicked(x, y);
 
   }
+
+  const screenTapped = (e) => {
+    try {
+      // get the canvas coordinates of the touch
+      const touch = e.touches[0];
+
+      // If click is inside the path icon, toggle the path visibility
+      if (touch.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+        touch.clientX <= 50) {
+        setNoPaths(!noPaths);
+        return;
+      }
+
+      // If click is inside the zoom out icon, toggle the path visibility
+      if (touch.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+        touch.clientX <= 110 && touch.clientX >= 60) {
+        if (zoomlevel > 1)
+          setZoomlevel(zoomlevel - 1);
+        return;
+      }
+
+      // If click is inside the zoom in icon, toggle the path visibility
+      if (touch.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+        touch.clientX <= 170 && touch.clientX >= 120) {
+        if (zoomlevel < 4)
+          setZoomlevel(zoomlevel + 1);
+        return;
+      }
+
+      const canvas = canvasRef.current;
+      const bcr = canvas.getBoundingClientRect();
+
+      const x = (e.clientX - mapOffset.x - bcr.left) / xInc;
+      const y = (e.clientY - mapOffset.y - bcr.top) / yInc;
+
+      roomClicked(x, y);
+    } catch (e) {
+      // No need to do anything
+    }
+  }
+
 
   return (
     <canvas
       onMouseDown={(e) => mouseDown(e)}
       onMouseUp={(e) => mouseUp(e)}
       onMouseMove={(e) => {
-        setCurrentMousePosition({ x: e.pageX, y: e.pageY });
         mouseMoveOrDrag(e);
         return;
       }}
-      onMouseOut={(e) => {
-        setCurrentMousePosition(null);
-        //mouseUp(e);
-        return;
-      }}
       onClick={(e) => {
-
         mouseClicked(e);
         return;
       }}
       onTouchEnd={(e) => {
-        // If click is inside the path icon, toggle the path visibility
-        // get the canvas coordinates of the touch
-        try {
-          const touch = e.touches[0];
-
-          if (touch.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
-            touch.clientX <= 50) {
-            //console.log('Touched icon');
-            setNoPaths(!noPaths);
-            return;
-          }
-
-          // If click is inside the zoom out icon, toggle the path visibility
-          if (touch.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
-            touch.clientX <= 110 && touch.clientX >= 60) {
-            //console.log('Touched icon');
-            if (zoomlevel > 1)
-              setZoomlevel(zoomlevel - 1);
-            return;
-          }
-
-          // If click is inside the zoom in icon, toggle the path visibility
-          if (touch.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
-            touch.clientX <= 170 && touch.clientX >= 120) {
-            //console.log('Touched icon');
-            if (zoomlevel < 4)
-              setZoomlevel(zoomlevel + 1);
-            return;
-          }
-
-          const canvas = canvasRef.current;
-          const bcr = canvas.getBoundingClientRect();
-
-          const x = (touch.clientX - bcr.left) / xInc;
-          const y = (touch.clientY - bcr.top) / yInc;
-
-          roomClicked(x, y);
-        } catch (e) {
-          // No need to do anything
-        }
-
+        screenTapped(e);
+        return;
+      }}
+      onTouchMove={(e) => {
+        mouseMoveOrDrag(e);
         return;
       }}
       id="canvas"
