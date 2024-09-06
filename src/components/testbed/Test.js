@@ -39,7 +39,7 @@ const Test = () => {
 
   const [dungeon] = useState(DungeonCreate());
   const [drawnCorridors, setDrawnCorridors] = useState([]);
-
+  const [selectedRoom, setSelectedRoom] = useState(0);
   const [xInc, setXInc] = useState(0);
   const [yInc, setYInc] = useState(0);
   const [noPaths, setNoPaths] = useState(true);
@@ -163,7 +163,7 @@ const Test = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [canvasRef, zoomlevel, mapOffset, currentDragDistance, currentDragDistance.x,
     currentDragDistance.y, windowSize.width, windowSize.height,
-    drawnCorridors, dungeon.rooms, xInc, yInc]);
+    drawnCorridors, dungeon.rooms, xInc, yInc, selectedRoom]);
 
   const drawCorridors = (color, all) => {
     const canvas = canvasRef.current;
@@ -219,11 +219,24 @@ const Test = () => {
     drawCorridors('rgb(90, 90, 0)', true);
 
     // draw the dungeon rooms
-    context.fillStyle = 'green';
     context.lineWidth = 5;
 
-    dungeon.rooms.forEach((room) => {
+    dungeon.rooms.forEach((room, index, array) => {
+
+      if (index === 0) {
+        context.fillStyle = 'rgb(119, 253, 128)';
+      } else if (index === array.length - 1) {
+        context.fillStyle = 'rgb(233, 146, 99)';
+      } else {
+        context.fillStyle = 'rgb(39, 147, 46)';
+      }
+
       context.fillRect(room.x * xInc + realX, room.y * yInc + realY, room.width * xInc, room.height * yInc);
+
+      if (index === selectedRoom) {
+        context.strokeStyle = 'yellow';
+        context.strokeRect(room.x * xInc + realX, room.y * yInc + realY, room.width * xInc, room.height * yInc);
+      }
     });
 
     // draw selected corridors
@@ -250,6 +263,8 @@ const Test = () => {
 
   const roomClicked = (x, y) => {
     let clickedRoomNumber = getClickedRoomNumber(x, y);
+
+    setSelectedRoom(clickedRoomNumber);
 
     if (clickedRoomNumber === 0) {
       clickedRoomNumber = 1;
