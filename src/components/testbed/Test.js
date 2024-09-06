@@ -384,7 +384,7 @@ const Test = () => {
 
 
   return (
-    <canvas
+    <canvas style={{ touchAction: 'none' }}
       onMouseDown={(e) => mouseDown(e)}
       onMouseUp={(e) => mouseUp(e)}
       onMouseMove={(e) => {
@@ -426,7 +426,6 @@ const Test = () => {
         } catch (e) {
           // No need to do anything
         }
-
         return false;
       }}
       id="canvas"
