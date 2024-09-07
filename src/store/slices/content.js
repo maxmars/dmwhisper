@@ -67,6 +67,51 @@ const content = createSlice({
 
             state.setpieces.push(newSetpiece);
         },
+        addDungeonMonster(state, action) {
+            const newItem = action.payload;
+
+            if (!state.dungeonMonsters) {
+                state.dungeonMonsters = [];
+            }
+
+            state.dungeonMonsters.push(newItem);
+        },
+        addDungeonTreasures(state, action) {
+            const newItem = action.payload;
+
+            if (!state.dungeonTreasures) {
+                state.dungeonTreasures = [];
+            }
+
+            state.dungeonTreasures.push(newItem);
+        },
+        addDungeonTraps(state, action) {
+            const newItem = action.payload;
+
+            if (!state.dungeonTraps) {
+                state.dungeonTraps = [];
+            }
+
+            state.dungeonTraps.push(newItem);
+        },
+        addDungeonSetpieces(state, action) {
+            const newItem = action.payload;
+
+            if (!state.dungeonSietpieces) {
+                state.dungeonSietpieces = [];
+            }
+
+            state.dungeonSietpieces.push(newItem);
+        },
+        addDungeonPuzzles(state, action) {
+            const newItem = action.payload;
+
+            if (!state.dungeonPuzzles) {
+                state.dungeonPuzzles = [];
+            }
+
+            state.dungeonPuzzles.push(newItem);
+        },
         removeTable(state, action) {
             const tableId = action.payload;
 
@@ -81,6 +126,56 @@ const content = createSlice({
             }
 
             state.setpieces = state.setpieces.filter((setpiece) => setpiece.id !== setpieceId);
+        },
+        removeDungeonMonsters(state, action) {
+            const dungeonMonsterId = action.payload;
+
+            if (!state.dungeonMonsters) {
+                state.dungeonMonsters = [];
+                return;
+            }
+
+            state.dungeonMonsters = state.dungeonMonsters.filter((dungeonMonster) => dungeonMonster.id !== dungeonMonsterId);
+        },
+        removeDungeonTreasures(state, action) {
+            const dungeonTreasureId = action.payload;
+
+            if (!state.dungeonTreasures) {
+                state.dungeonTreasures = [];
+                return;
+            }
+
+            state.dungeonTreasures = state.dungeonTreasures.filter((dungeonTreasure) => dungeonTreasure.id !== dungeonTreasureId);
+        },
+        removeDungeonTrap(state, action) {
+            const dungeonTrapId = action.payload;
+
+            if (!state.dungeonTraps) {
+                state.dungeonTraps = [];
+                return;
+            }
+
+            state.dungeonTraps = state.dungeonTraps.filter((dungeonTrap) => dungeonTrap.id !== dungeonTrapId);
+        },
+        removeDungeonSetpiece(state, action) {
+            const dungeonSetpieceId = action.payload;
+
+            if (!state.dungeonSetpieces) {
+                state.dungeonSetpieces = [];
+                return;
+            }
+
+            state.dungeonSetpieces = state.dungeonSetpieces.filter((dungeonSetpiece) => dungeonSetpiece.id !== dungeonSetpieceId);
+        },
+        removeDungeonPuzzles(state, action) {
+            const dungeonPuzzleId = action.payload;
+
+            if (!state.dungeonPuzzles) {
+                state.dungeonPuzzles = [];
+                return;
+            }
+
+            state.dungeonPuzzles = state.dungeonPuzzles.filter((dungeonPuzzle) => dungeonPuzzle.id !== dungeonPuzzleId);
         },
         updateTableHeader(state, action) {
             const { originalTableId, tableId, tableDescription } = action.payload;
@@ -111,6 +206,91 @@ const content = createSlice({
 
             state.setpieces = setpieces;
         },
+        updateDungeonMonsterHeader(state, action) {
+            const { originalDungeonMonsterId, dungeonMonsterId, dungeonMonsterDescription } = action.payload;
+
+            if (!state.dungeonMonsters) {
+                console.log("No dungeon Monsters to update");
+                return;
+            }
+
+            const dungeonMonster = state.dungeonMonsters.find((dungeonMonster) => dungeonMonster.id === originalDungeonMonsterId);
+            const dungeonMonsters = state.dungeonMonsters.filter((dungeonMonster) => dungeonMonster.id !== originalDungeonMonsterId);
+
+            dungeonMonster.id = dungeonMonsterId;
+            dungeonMonster.description = dungeonMonsterDescription;
+            dungeonMonsters.push(dungeonMonster);
+
+            state.dungeonMonsters = dungeonMonsters;
+        },
+        updateDungeonTreasureHeader(state, action) {
+            const { originalDungeonTreasureId, dungeonTreasureId, dungeonTreasureDescription } = action.payload;
+
+            if (!state.dungeonTreasures) {
+                console.log("No dungeon treasures to update");
+                return;
+            }
+
+            const dungeonTreasure = state.dungeonTreasures.find((dungeonTreasure) => dungeonTreasure.id === originalDungeonTreasureId);
+            const dungeonTreasures = state.dungeonTreasures.filter((dungeonTreasure) => dungeonTreasure.id !== originalDungeonTreasureId);
+
+            dungeonTreasure.id = dungeonTreasureId;
+            dungeonTreasure.description = dungeonTreasureDescription;
+            dungeonTreasures.push(dungeonTreasure);
+
+            state.dungeonTreasures = dungeonTreasures;
+        },
+        updateDungeonTrapHeader(state, action) {
+            const { originalDungeonTrapId, dungeonTrapId, dungeonTrapDescription } = action.payload;
+
+            if (!state.dungeonTraps) {
+                console.log("No dungeon traps to update");
+                return;
+            }
+
+            const dungeonTrap = state.dungeonTraps.find((dungeonTrap) => dungeonTrap.id === originalDungeonTrapId);
+            const dungeonTraps = state.dungeonTraps.filter((dungeonTrap) => dungeonTrap.id !== originalDungeonTrapId);
+
+            dungeonTrap.id = dungeonTrapId;
+            dungeonTrap.description = dungeonTrapDescription;
+            dungeonTraps.push(dungeonTrap);
+
+            state.dungeonTraps = dungeonTraps;
+        },
+        updateDungeonSetpieceHeader(state, action) {
+            const { originalDungeonSetpieceId, dungeonSetpieceId, dungeonSetpieceDescription } = action.payload;
+
+            if (!state.dungeonSetpieces) {
+                console.log("No dungeon setpieces to update");
+                return;
+            }
+
+            const dungeonSetpiece = state.dungeonSetpieces.find((setpiece) => setpiece.id === originalDungeonSetpieceId);
+            const dungeonSetpieces = state.dungeonSetpieces.filter((setpiece) => setpiece.id !== originalDungeonSetpieceId);
+
+            dungeonSetpiece.id = dungeonSetpieceId;
+            dungeonSetpiece.description = dungeonSetpieceDescription;
+            dungeonSetpieces.push(dungeonSetpiece);
+
+            state.dungeonSetpieces = dungeonSetpieces;
+        },
+        updateDungeonPuzzleHeader(state, action) {
+            const { originalDungeonPuzzleId, dungeonPuzzleId, dungeonPuzzleDescription } = action.payload;
+
+            if (!state.dungeonPuzzles) {
+                console.log("No dungeon puzzles to update");
+                return;
+            }
+
+            const dungeonPuzzle = state.dungeonPuzzles.find((dungeonPuzzle) => dungeonPuzzle.id === originalDungeonPuzzleId);
+            const dungeonPuzzles = state.dungeonPuzzles.filter((dungeonPuzzle) => dungeonPuzzle.id !== originalDungeonPuzzleId);
+
+            dungeonPuzzle.id = dungeonPuzzleId;
+            dungeonPuzzle.description = dungeonPuzzleDescription;
+            dungeonPuzzles.push(dungeonPuzzle);
+
+            state.dungeonPuzzles = dungeonPuzzles;
+        },
         updateTableRng(state, action) {
             const { tableId, rng } = action.payload;
 
@@ -137,6 +317,22 @@ const content = createSlice({
             setpieces.push(setpiece);
 
             state.setpieces = setpieces;
+        },
+        updateDungeonSetpieceItem(state, action) {
+            const { dungeonSetpieceId, item } = action.payload;
+
+            if (!state.dungeonSetpieces) {
+                console.log("No dungeon setpieces to update");
+                return;
+            }
+
+            const dungeonSetpiece = state.dungeonSetpieces.find((dungeonSetpiece) => dungeonSetpiece.id === dungeonSetpieceId);
+            const dungeonSetpieces = state.dungeonSetpieces.filter((dungeonSetpiece) => dungeonSetpiece.id !== dungeonSetpieceId);
+
+            dungeonSetpiece.rng = item;
+            dungeonSetpieces.push(dungeonSetpiece);
+
+            state.dungeonSetpieces = dungeonSetpieces;
         },
         addMenuItem(state, action) {
             try {
