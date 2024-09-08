@@ -315,7 +315,7 @@ export default function TrapEdit(props) {
             onChange={(event) => setNewResult(event.target.value)}
             value={newResult ? newResult : ''}
             id="new-result"
-            label={newResult ? "" : t("Trap description")}
+            label={newResult ? "" : t("Trap label")}
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
