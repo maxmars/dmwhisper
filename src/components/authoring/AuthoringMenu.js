@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Grid, Button } from '@mui/material';
 import TablesEdit from './tables/TablesEdit';
-import SetpiecesEdit from './maps/SetpiecesEdit';
+import SetpiecesEdit from './maps/setpieces/SetpiecesEdit';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import MapIcon from '@mui/icons-material/Map';
