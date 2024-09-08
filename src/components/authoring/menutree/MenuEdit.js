@@ -3,7 +3,7 @@ import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import {
     getContent, getContentMetaData, getContentName, updateContent, addMenuItem,
     updateContentHeader, updateContentType, setClipboardAction, deleteMenuItem
-} from '../../store/slices/content';
+} from '../../../store/slices/content.js';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -33,13 +33,13 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import TablesChooser from './TablesChooser';
+import TablesChooser from '../tables/TablesChooser.js';
 import './style.css';
-import { uuidv4 } from '../../utils/index.js';
-import ContentSaveReminder from './ContentSaveReminder';
-import ErrorMessage from './ErrorMessage';
+import { uuidv4 } from '../../../utils/index.js';
+import ContentSaveReminder from '../ContentSaveReminder.js';
+import ErrorMessage from '../ErrorMessage.js';
 import MenuDeletionConfirm from './MenuDeletionConfirm';
-import MapSetup from './MapSetup.js';
+import MapSetup from '../maps/MapSetup.js';
 
 
 export default function MenuEdit(props) {

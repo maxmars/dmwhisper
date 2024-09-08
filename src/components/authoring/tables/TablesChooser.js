@@ -13,7 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import { uuidv4 } from '../../utils/index.js';
+import { uuidv4 } from '../../../utils/index.js';
 import { Typography } from '@mui/material';
 import Checkbox from '@mui/material/Checkbox';
 

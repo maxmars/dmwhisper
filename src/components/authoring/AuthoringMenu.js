@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { Grid, Button } from '@mui/material';
-import TablesEdit from './TablesEdit';
-import SetpiecesEdit from './SetpiecesEdit';
+import TablesEdit from './tables/TablesEdit';
+import SetpiecesEdit from './maps/SetpiecesEdit';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import MapIcon from '@mui/icons-material/Map';
-import MenuEdit from './MenuEdit';
+import MenuEdit from './menutree/MenuEdit';
 import { useTranslation } from 'react-i18next';
 
 const AuthoringMenu = () => {
