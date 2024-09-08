@@ -76,7 +76,7 @@ const content = createSlice({
 
             state.dungeonMonsters.push(newItem);
         },
-        addDungeonTreasures(state, action) {
+        addDungeonTreasure(state, action) {
             const newItem = action.payload;
 
             if (!state.dungeonTreasures) {
@@ -85,16 +85,16 @@ const content = createSlice({
 
             state.dungeonTreasures.push(newItem);
         },
-        addDungeonTraps(state, action) {
+        addDungeonTrapSet(state, action) {
             const newItem = action.payload;
 
-            if (!state.dungeonTraps) {
-                state.dungeonTraps = [];
+            if (!state.dungeonTrapSets) {
+                state.dungeonTrapSets = [];
             }
 
-            state.dungeonTraps.push(newItem);
+            state.dungeonTrapSets.push(newItem);
         },
-        addDungeonSetpieces(state, action) {
+        addDungeonSetpiece(state, action) {
             const newItem = action.payload;
 
             if (!state.dungeonSietpieces) {
@@ -103,7 +103,7 @@ const content = createSlice({
 
             state.dungeonSietpieces.push(newItem);
         },
-        addDungeonPuzzles(state, action) {
+        addDungeonPuzzle(state, action) {
             const newItem = action.payload;
 
             if (!state.dungeonPuzzles) {
@@ -127,7 +127,7 @@ const content = createSlice({
 
             state.setpieces = state.setpieces.filter((setpiece) => setpiece.id !== setpieceId);
         },
-        removeDungeonMonsters(state, action) {
+        removeDungeonMonster(state, action) {
             const dungeonMonsterId = action.payload;
 
             if (!state.dungeonMonsters) {
@@ -137,7 +137,7 @@ const content = createSlice({
 
             state.dungeonMonsters = state.dungeonMonsters.filter((dungeonMonster) => dungeonMonster.id !== dungeonMonsterId);
         },
-        removeDungeonTreasures(state, action) {
+        removeDungeonTreasure(state, action) {
             const dungeonTreasureId = action.payload;
 
             if (!state.dungeonTreasures) {
@@ -147,15 +147,15 @@ const content = createSlice({
 
             state.dungeonTreasures = state.dungeonTreasures.filter((dungeonTreasure) => dungeonTreasure.id !== dungeonTreasureId);
         },
-        removeDungeonTrap(state, action) {
-            const dungeonTrapId = action.payload;
+        removeDungeonTrapSet(state, action) {
+            const dungeonTrapSetId = action.payload;
 
-            if (!state.dungeonTraps) {
-                state.dungeonTraps = [];
+            if (!state.dungeonTrapSets) {
+                state.dungeonTrapSets = [];
                 return;
             }
 
-            state.dungeonTraps = state.dungeonTraps.filter((dungeonTrap) => dungeonTrap.id !== dungeonTrapId);
+            state.dungeonTrapSets = state.dungeonTrapSets.filter((dungeonTrapSet) => dungeonTrapSet.id !== dungeonTrapSetId);
         },
         removeDungeonSetpiece(state, action) {
             const dungeonSetpieceId = action.payload;
@@ -167,7 +167,7 @@ const content = createSlice({
 
             state.dungeonSetpieces = state.dungeonSetpieces.filter((dungeonSetpiece) => dungeonSetpiece.id !== dungeonSetpieceId);
         },
-        removeDungeonPuzzles(state, action) {
+        removeDungeonPuzzle(state, action) {
             const dungeonPuzzleId = action.payload;
 
             if (!state.dungeonPuzzles) {
@@ -240,22 +240,22 @@ const content = createSlice({
 
             state.dungeonTreasures = dungeonTreasures;
         },
-        updateDungeonTrapHeader(state, action) {
-            const { originalDungeonTrapId, dungeonTrapId, dungeonTrapDescription } = action.payload;
+        updateDungeonTrapSetHeader(state, action) {
+            const { originalDungeonTrapSetId, dungeonTrapSetId, dungeonTrapSetDescription } = action.payload;
 
-            if (!state.dungeonTraps) {
+            if (!state.dungeonTrapSets) {
                 console.log("No dungeon traps to update");
                 return;
             }
 
-            const dungeonTrap = state.dungeonTraps.find((dungeonTrap) => dungeonTrap.id === originalDungeonTrapId);
-            const dungeonTraps = state.dungeonTraps.filter((dungeonTrap) => dungeonTrap.id !== originalDungeonTrapId);
+            const dungeonTrapSet = state.dungeonTrapSets.find((dungeonTrapSet) => dungeonTrapSet.id === originalDungeonTrapSetId);
+            const dungeonTrapSets = state.dungeonTrapSets.filter((dungeonTrapSet) => dungeonTrapSet.id !== originalDungeonTrapSetId);
 
-            dungeonTrap.id = dungeonTrapId;
-            dungeonTrap.description = dungeonTrapDescription;
-            dungeonTraps.push(dungeonTrap);
+            dungeonTrapSet.id = dungeonTrapSetId;
+            dungeonTrapSet.description = dungeonTrapSetDescription;
+            dungeonTrapSets.push(dungeonTrapSet);
 
-            state.dungeonTraps = dungeonTraps;
+            state.dungeonTrapSets = dungeonTrapSets;
         },
         updateDungeonSetpieceHeader(state, action) {
             const { originalDungeonSetpieceId, dungeonSetpieceId, dungeonSetpieceDescription } = action.payload;
@@ -350,21 +350,21 @@ const content = createSlice({
 
             state.dungeonTreasures = dungeonTreasures;
         },
-        updateDungeonTrapItem(state, action) {
-            const { dungeonTrapId, item } = action.payload;
+        updateDungeonTrapSetItem(state, action) {
+            const { dungeonTrapSetId, item } = action.payload;
 
-            if (!state.dungeonTraps) {
+            if (!state.dungeonTrapSets) {
                 console.log("No dungeon traps to update");
                 return;
             }
 
-            const dungeonTrap = state.dungeonTraps.find((dungeonTrap) => dungeonTrap.id === dungeonTrapId);
-            const dungeonTraps = state.dungeonTraps.filter((dungeonTrap) => dungeonTrap.id !== dungeonTrapId);
+            const dungeonTrapSet = state.dungeonTrapSets.find((dungeonTrapSet) => dungeonTrapSet.id === dungeonTrapSetId);
+            const dungeonTrapSets = state.dungeonTrapSets.filter((dungeonTrapSet) => dungeonTrapSet.id !== dungeonTrapSetId);
 
-            dungeonTrap.rng = item;
-            dungeonTraps.push(dungeonTrap);
+            dungeonTrapSet.rng = item;
+            dungeonTrapSets.push(dungeonTrapSet);
 
-            state.dungeonTraps = dungeonTraps;
+            state.dungeonTrapSets = dungeonTrapSets;
         },
         updateDungeonSetpieceItem(state, action) {
             const { dungeonSetpieceId, item } = action.payload;
@@ -838,10 +838,10 @@ export const shuffleArray = (originalArray) => {
 export default content.reducer;
 
 export const { setContent, clearContent, setLastTableContent, addTable, removeTable, updateTableHeader, updateTableRng, 
-    addSetpiece, addDungeonMonster, addDungeonPuzzles, addDungeonSetpieces, addDungeonTraps, addDungeonTreasures,
-    removeSetpiece, removeDungeonMonsters, removeDungeonPuzzles, removeDungeonSetpiece, removeDungeonTrap, removeDungeonTreasures,
+    addSetpiece, addDungeonMonster, addDungeonPuzzle, addDungeonSetpiece, addDungeonTrapSet, addDungeonTreasure,
+    removeSetpiece, removeDungeonMonster, removeDungeonPuzzle, removeDungeonSetpiece, removeDungeonTrapSet, removeDungeonTreasure,
     updateSetpieceHeader, updateSetpieceRng, updateDungeonMonsterHeader, updateDungeonPuzzleHeader, 
-    updateDungeonSetpieceHeader, updateDungeonTrapHeader, updateDungeonTreasureHeader,
-    updateDungeonMonsterItem, updateDungeonPuzzleItem, updateDungeonSetpieceItem, updateDungeonTrapItem, 
+    updateDungeonSetpieceHeader, updateDungeonTrapSetHeader, updateDungeonTreasureHeader,
+    updateDungeonMonsterItem, updateDungeonPuzzleItem, updateDungeonSetpieceItem, updateDungeonTrapSetItem, 
     updateDungeonTreasure, updateContent, updateContentHeader, addMenuItem, updateContentType,
     setClipboardAction, deleteMenuItem, setTabPath, clearTabPath } = content.actions;
