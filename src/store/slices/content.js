@@ -837,6 +837,11 @@ export const shuffleArray = (originalArray) => {
 
 export default content.reducer;
 
-export const { setContent, clearContent, setLastTableContent, addTable, addSetpiece, removeTable, removeSetpiece, updateTableHeader,
-    updateSetpieceHeader, updateTableRng, updateSetpieceRng, updateContent, updateContentHeader, addMenuItem, updateContentType,
+export const { setContent, clearContent, setLastTableContent, addTable, removeTable, updateTableHeader, updateTableRng, 
+    addSetpiece, addDungeonMonster, addDungeonPuzzles, addDungeonSetpieces, addDungeonTraps, addDungeonTreasures,
+    removeSetpiece, removeDungeonMonsters, removeDungeonPuzzles, removeDungeonSetpiece, removeDungeonTrap, removeDungeonTreasures,
+    updateSetpieceHeader, updateSetpieceRng, updateDungeonMonsterHeader, updateDungeonPuzzleHeader, 
+    updateDungeonSetpieceHeader, updateDungeonTrapHeader, updateDungeonTreasureHeader,
+    updateDungeonMonsterItem, updateDungeonPuzzleItem, updateDungeonSetpieceItem, updateDungeonTrapItem, 
+    updateDungeonTreasure, updateContent, updateContentHeader, addMenuItem, updateContentType,
     setClipboardAction, deleteMenuItem, setTabPath, clearTabPath } = content.actions;
