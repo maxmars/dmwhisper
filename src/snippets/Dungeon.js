@@ -37,6 +37,43 @@ export class Dungeon {
                 }
             }
         });
+
+        this.rooms = this.ordinaPuntiPerVicinanza(this.rooms);
+    }
+
+    calcolaDistanza(punto1, punto2) {
+        let deltaX = punto2.x - punto1.x;
+        let deltaY = punto2.y - punto1.y;
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    }
+    
+    // Funzione per ordinare i punti in modo che ogni coppia di punti consecutivi sia più vicina della prossima coppia
+    ordinaPuntiPerVicinanza(punti) {
+        if (punti.length < 2) return punti;
+    
+        let puntiOrdinati = [];
+        let puntoCorrente = punti[0];
+        puntiOrdinati.push(puntoCorrente);
+        punti.splice(0, 1);
+    
+        while (punti.length > 0) {
+            let distanzaMinima = Infinity;
+            let indicePuntoPiuVicino = -1;
+    
+            for (let i = 0; i < punti.length; i++) {
+                let distanza = this.calcolaDistanza(puntoCorrente, punti[i]);
+                if (distanza < distanzaMinima) {
+                    distanzaMinima = distanza;
+                    indicePuntoPiuVicino = i;
+                }
+            }
+    
+            puntoCorrente = punti[indicePuntoPiuVicino];
+            puntiOrdinati.push(puntoCorrente);
+            punti.splice(indicePuntoPiuVicino, 1);
+        }
+    
+        return puntiOrdinati;
     }
 
     roomsOverlap(room1, room2) {
@@ -63,6 +100,26 @@ export class Dungeon {
             }
         }
     }
+
+    generateCorridors2() {
+        // Ordina le stanze per posizione x
+        this.rooms.sort((a, b) => a.x - b.x);
+
+        for (let i = 0; i < this.rooms.length - 1; i++) {
+            let roomA = this.rooms[i];
+            let roomB = this.rooms[i + 1];
+
+            // Collegamento orizzontale
+            let x1 = roomA.x + Math.floor(roomA.width / 2);
+            let y1 = roomA.y + Math.floor(roomA.height / 2);
+            let x2 = roomB.x + Math.floor(roomB.width / 2);
+            let y2 = roomB.y + Math.floor(roomB.height / 2);
+
+            this.createHorizontalCorridor(x1, x2, y1);
+            this.createVerticalCorridor(y1, y2, x2);
+
+        }
+    }    
 
     createHorizontalCorridor(x1, x2, y) {
         for (let x = Math.min(x1, x2); x <= Math.max(x1, x2); x++) {
@@ -92,7 +149,7 @@ export class Dungeon {
 export default function DungeonCreate(props) {
     const dungeon = new Dungeon(props.width, props.height, props.roomTypes);
     dungeon.generateRooms(props.roomMinSize, props.roomMaxSize);
-    dungeon.generateCorridors();
+    dungeon.generateCorridors2();
 
     return dungeon;
 }
@@ -108,7 +165,7 @@ export function DungeonCreateTest() {
 
     const dungeon = new Dungeon(props.width, props.height, props.roomTypes);
     dungeon.generateRooms(props.roomMinSize, props.roomMaxSize);
-    dungeon.generateCorridors();
+    dungeon.generateCorridors2();
     // dungeon.printDungeon();
     return dungeon;
 }

@@ -6,6 +6,7 @@ import SetpiecesEdit from './maps/setpieces/SetpiecesEdit';
 import TrapSetsEdit from './dungeons/sets/traps/TrapSetsEdit';
 import MonsterSetsEdit from './dungeons/sets/monsters/MonsterSetsEdit';
 import PuzzleSetsEdit from './dungeons/sets/puzzles/PuzzleSetsEdit';
+import TreasureSetsEdit from './dungeons/sets/treasures/TreasureSetsEdit';
 import ListIcon from '@mui/icons-material/List';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import TableChartIcon from '@mui/icons-material/TableChart';
@@ -48,7 +49,7 @@ const AuthoringMenu = () => {
             <Button sx={{ width: '90%' }} startIcon={<AccountTreeIcon />} onClick={() => setPageMode('monstersedit')} variant="contained" color="primary">{t("Edit monsters")}</Button>
           </Grid>
           <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-            <Button sx={{ width: '90%' }} startIcon={<AccountTreeIcon />} onClick={() => setPageMode('menuedit')} variant="contained" color="primary">{t("Edit treasures")}</Button>
+            <Button sx={{ width: '90%' }} startIcon={<AccountTreeIcon />} onClick={() => setPageMode('treasuresedit')} variant="contained" color="primary">{t("Edit treasures")}</Button>
           </Grid>
           <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button sx={{ width: '90%' }} startIcon={<AccountTreeIcon />} onClick={() => setPageMode('puzzlesedit')} variant="contained" color="primary">{t("Edit puzzles")}</Button>
@@ -64,6 +65,9 @@ const AuthoringMenu = () => {
 
     case 'puzzlesedit':
       return <PuzzleSetsEdit returnToMenu={returnToMenu} />;
+
+    case 'treasuresedit':
+      return <TreasureSetsEdit returnToMenu={returnToMenu} />;
 
     case 'setpiecesedit':
       return <SetpiecesEdit returnToMenu={returnToMenu} />;

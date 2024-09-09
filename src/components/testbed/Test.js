@@ -185,13 +185,13 @@ const Test = () => {
         let currCenter = { x: currRoom.x + Math.floor(currRoom.width / 2), y: currRoom.y + Math.floor(currRoom.height / 2) };
 
         context.strokeStyle = color;
-        if (i % 2 === 0) {
+        // if (i % 2 === 0) {
           context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
           context.strokeRect(currCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
-        } else {
-          context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
-          context.strokeRect(prevCenter.x * xInc + 5 + realX, currCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
-        }
+        // } else {
+        //   context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
+        //   context.strokeRect(prevCenter.x * xInc + 5 + realX, currCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
+        // }
 
         context.strokeStyle = 'yellow';
         context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, 5);
@@ -309,15 +309,18 @@ const Test = () => {
 
   const mouseClicked = (e) => {
 
+    const canvas = canvasRef.current;
+    const bcr = canvas.getBoundingClientRect();
+
     // If click is inside the path icon, toggle the path visibility
-    if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+    if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
       e.clientX <= 50) {
       setNoPaths(!noPaths);
       return;
     }
 
     // If click is inside the zoom out icon, toggle the path visibility
-    if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+    if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
       e.clientX <= 110 && e.clientX >= 60) {
       if (zoomlevel > 1)
         setZoomlevel(zoomlevel - 1);
@@ -325,7 +328,7 @@ const Test = () => {
     }
 
     // If click is inside the zoom in icon, toggle the path visibility
-    if (e.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+    if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
       e.clientX <= 170 && e.clientX >= 120) {
       if (zoomlevel < 4)
         setZoomlevel(zoomlevel + 1);
@@ -333,8 +336,6 @@ const Test = () => {
     }
 
     // get the canvas coordinates of the click
-    const canvas = canvasRef.current;
-    const bcr = canvas.getBoundingClientRect();
     const x = (e.clientX - mapOffset.x - bcr.left) / xInc;
     const y = (e.clientY - mapOffset.y - bcr.top) / yInc;
 
@@ -347,15 +348,18 @@ const Test = () => {
       // get the canvas coordinates of the touch
       const touch = e.touches[0];
 
+      const canvas = canvasRef.current;
+      const bcr = canvas.getBoundingClientRect();
+
       // If click is inside the path icon, toggle the path visibility
-      if (touch.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+      if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
         touch.clientX <= 50) {
         setNoPaths(!noPaths);
         return;
       }
 
       // If click is inside the zoom out icon, toggle the path visibility
-      if (touch.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+      if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
         touch.clientX <= 110 && touch.clientX >= 60) {
         if (zoomlevel > 1)
           setZoomlevel(zoomlevel - 1);
@@ -363,15 +367,12 @@ const Test = () => {
       }
 
       // If click is inside the zoom in icon, toggle the path visibility
-      if (touch.clientY > windowSize.height - bottomBarHeight - iconbarHeight &&
+      if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
         touch.clientX <= 170 && touch.clientX >= 120) {
         if (zoomlevel < 4)
           setZoomlevel(zoomlevel + 1);
         return;
       }
-
-      const canvas = canvasRef.current;
-      const bcr = canvas.getBoundingClientRect();
 
       const x = (e.clientX - mapOffset.x - bcr.left) / xInc;
       const y = (e.clientY - mapOffset.y - bcr.top) / yInc;
