@@ -38,7 +38,7 @@ export class Dungeon {
             }
         });
 
-        this.rooms = this.ordinaPuntiPerVicinanza(this.rooms);
+        this.rooms = this.ordinaStanzePerVicinanza(this.rooms);
     }
 
     calcolaDistanza(punto1, punto2) {
@@ -48,7 +48,7 @@ export class Dungeon {
     }
     
     // Funzione per ordinare i punti in modo che ogni coppia di punti consecutivi sia più vicina della prossima coppia
-    ordinaPuntiPerVicinanza(punti) {
+    ordinaStanzePerVicinanza(punti) {
         if (punti.length < 2) return punti;
     
         let puntiOrdinati = [];
