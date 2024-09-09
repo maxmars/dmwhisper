@@ -41,7 +41,8 @@ export default function TrapEdit(props) {
 
   const [newMin, setNewMin] = useState(null);
   const [newMax, setNewMax] = useState(null);
-  const [newResult, setNewResult] = useState(null);
+  const [newLabel, setNewLabel] = useState(null);
+  const [newMaxOccurrences, setNewMaxOccurrences] = useState(null);
   const mounted = useRef();
 
   const rows = trapSet.rng.map((rng) => {
@@ -179,13 +180,13 @@ export default function TrapEdit(props) {
     const newRng = {
       min: parseInt(document.getElementById('new-min').value),
       max: parseInt(document.getElementById('new-max').value),
-      description: document.getElementById('new-result').value,
+      description: document.getElementById('new-label').value,
       // TODO
       textContent: currentMenuContent,
       table: currentMenuTable,
       // TODO Unused ATM
       minAppears: 0,
-      maxAppears: 1000,
+      maxAppears: document.getElementById('new-max-occurrences').value,
       width: 1,
       height: 1,
       imgUrl: '',
@@ -217,7 +218,8 @@ export default function TrapEdit(props) {
   const editRNGValues = (rngId) => {
     setNewMin(rngId.split('-')[0]);
     setNewMax(rngId.split('-')[1]);
-    setNewResult(trapSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).description);
+    setNewLabel(trapSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).description);
+    setNewMaxOccurrences(trapSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).maxAppears);
     setCurrentMenuTable(trapSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).table);
     setCurrentMenuContent(trapSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).textContent);
   }
@@ -312,10 +314,20 @@ export default function TrapEdit(props) {
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
           <TextField
-            onChange={(event) => setNewResult(event.target.value)}
-            value={newResult ? newResult : ''}
-            id="new-result"
-            label={newResult ? "" : t("Trap label")}
+            onChange={(event) => setNewLabel(event.target.value)}
+            value={newLabel ? newLabel : ''}
+            id="new-label"
+            label={newLabel ? "" : t("Trap label")}
+            variant="outlined"
+            sx={{ width: "100%" }} />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            type="number"
+            onChange={(event) => setNewMaxOccurrences(event.target.value)}
+            value={newMaxOccurrences ? newMaxOccurrences : ''}
+            id="new-max-occurrences"
+            label={newMaxOccurrences ? "" : t("Max occurrences")}
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
