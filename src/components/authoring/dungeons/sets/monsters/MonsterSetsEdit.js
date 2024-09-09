@@ -2,14 +2,14 @@ import React from 'react';
 import { useState } from 'react';
 import { Grid, Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import TrapSetsList from './TrapSetsList';
-import TrapSetEdit from './TrapSetEdit';
+import MonsterSetsList from './MonsterSetsList';
+import MonsterSetEdit from './MonsterSetEdit';
 import { useTranslation } from 'react-i18next';
 
-const TrapSetsEdit = (props) => {
+const MonsterSetsEdit = (props) => {
 
   const { t } = useTranslation();
-  const trapsListPageMode = 'dmwhisper-traps-list';
+  const trapsListPageMode = 'dmwhisper-monsters-list';
   const [pageMode, setPageMode] = useState(trapsListPageMode);
   
   const selectTrapSet = itemId => setPageMode(itemId);
@@ -25,9 +25,9 @@ const TrapSetsEdit = (props) => {
       <Grid item xs={12}>
         {
           pageMode === trapsListPageMode ?
-          <TrapSetsList selectItem={selectTrapSet} />
+          <MonsterSetsList selectItem={selectTrapSet} />
           :
-          <TrapSetEdit itemId={pageMode} endEditing={setTrapSetsListMode} />
+          <MonsterSetEdit itemId={pageMode} endEditing={setTrapSetsListMode} />
         }
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
@@ -35,4 +35,4 @@ const TrapSetsEdit = (props) => {
   );
 };
 
-export default TrapSetsEdit;
+export default MonsterSetsEdit;

@@ -10,8 +10,8 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Alert from '@mui/material/Alert';
 import { useDispatch } from 'react-redux';
-import { addDungeonTrapSet, removeDungeonTrapSet } from '../../../../../store/slices/content';
-import { setDungeonTrapSetsFilter } from '../../../../../store/slices/defaults';
+import { addDungeonMonsterSet, removeDungeonMonsterSet } from '../../../../../store/slices/content';
+import { setDungeonMonsterSetsFilter } from '../../../../../store/slices/defaults';
 import useTheme from '@mui/private-theming/useTheme';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -19,8 +19,7 @@ import { useTranslation } from 'react-i18next';
 import InputAdornment from '@mui/material/InputAdornment';
 import FilterListIcon from '@mui/icons-material/FilterList';
 
-
-const TrapSetsList = (props) => {
+const MonsterSetsList = (props) => {
 
   const { t } = useTranslation();
   const [itemIdToDelete, setItemIdToDelete] = useState(null);
@@ -30,16 +29,16 @@ const TrapSetsList = (props) => {
   const dispatch = useDispatch();
 
   const itemsFilter = useSelector((st) => {
-    if (st.defaults.dungeonTrapSetsFilter) {
-      return st.defaults.dungeonTrapSetsFilter;
+    if (st.defaults.dungeonMonsterSetsFilter) {
+      return st.defaults.dungeonMonsterSetsFilter;
     } else {
       return '';
     }
   });
 
   const rows = useSelector((st) => {
-    if (st.content.dungeonTrapSets) {
-      return (st.content.dungeonTrapSets).map((item) => {
+    if (st.content.dungeonMonsterSets) {
+      return (st.content.dungeonMonsterSets).map((item) => {
         return {
           id: item.id,
           description: item.description,
@@ -75,14 +74,14 @@ const TrapSetsList = (props) => {
     const newItemDescription = document.getElementById('new-item-description').value;
 
     if (newItemId === '') {
-      setAlert(t('Trap ID cannot be blank'));
+      setAlert(t('Monster ID cannot be blank'));
       return;
     } else if (rows.find((row) => row.id === newItemId)) {
-      setAlert(t('Trap ID already exists'));
+      setAlert(t('Monster ID already exists'));
       return;
     }
 
-    dispatch(addDungeonTrapSet({
+    dispatch(addDungeonMonsterSet({
       id: newItemId,
       description: newItemDescription,
       tags: [],
@@ -94,7 +93,7 @@ const TrapSetsList = (props) => {
   }
 
   const deleteItem = (itemId) => {
-    dispatch(removeDungeonTrapSet(itemId));
+    dispatch(removeDungeonMonsterSet(itemId));
     setItemIdToDelete(null);
   }
 
@@ -105,14 +104,14 @@ const TrapSetsList = (props) => {
       <Grid container >
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography>{t("List of trap sets")}</Typography>
+          <Typography>{t("List of monster sets")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
           <TextField
-            id="trap-filter"
+            id="monster-filter"
             value={itemsFilter}
-            onChange={(event) => dispatch(setDungeonTrapSetsFilter(event.target.value))}
+            onChange={(event) => dispatch(setDungeonMonsterSetsFilter(event.target.value))}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -136,19 +135,19 @@ const TrapSetsList = (props) => {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <Typography>{t("Click on a trap set to edit/delete it")}</Typography>
+          <Typography>{t("Click on a monster set to edit/delete it")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography>{t("Add a new trap set:")}</Typography>
+          <Typography>{t("Add a new monster set:")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <TextField id="new-item-id" label={t("Trap Set ID")} variant="outlined" sx={{ width: "100%" }} />
+          <TextField id="new-item-id" label={t("Monster Set ID")} variant="outlined" sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>
-          <TextField id="new-item-description" label={t("Trap Set Description")} variant="outlined" sx={{ width: "100%" }} />
+          <TextField id="new-item-description" label={t("Monster Set Description")} variant="outlined" sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         {alert ?
@@ -163,7 +162,7 @@ const TrapSetsList = (props) => {
           :
           null}
         <Grid item xs={12}>
-          <Button onClick={addNewItem} startIcon={<AddIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Add new trap set")}</Button>
+          <Button onClick={addNewItem} startIcon={<AddIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Add new monster set")}</Button>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
       </Grid >
@@ -172,12 +171,12 @@ const TrapSetsList = (props) => {
     return <Grid container >
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Typography>{t("Warning! Trap set is about to be deleted")}</Typography>
+        <Typography>{t("Warning! Monster set is about to be deleted")}</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>
-        <Typography>{t("Do you really want to delete trap set")} {itemIdToDelete}?</Typography>
+        <Typography>{t("Do you really want to delete monster set")} {itemIdToDelete}?</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
@@ -192,4 +191,4 @@ const TrapSetsList = (props) => {
   }
 }
 
-export default TrapSetsList;
+export default MonsterSetsList;

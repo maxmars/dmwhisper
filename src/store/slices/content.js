@@ -67,23 +67,23 @@ const content = createSlice({
 
             state.setpieces.push(newSetpiece);
         },
-        addDungeonMonster(state, action) {
+        addDungeonMonsterSet(state, action) {
             const newItem = action.payload;
 
-            if (!state.dungeonMonsters) {
-                state.dungeonMonsters = [];
+            if (!state.dungeonMonsterSets) {
+                state.dungeonMonsterSets = [];
             }
 
-            state.dungeonMonsters.push(newItem);
+            state.dungeonMonsterSets.push(newItem);
         },
-        addDungeonTreasure(state, action) {
+        addDungeonTreasureSet(state, action) {
             const newItem = action.payload;
 
-            if (!state.dungeonTreasures) {
-                state.dungeonTreasures = [];
+            if (!state.dungeonTreasureSets) {
+                state.dungeonTreasureSets = [];
             }
 
-            state.dungeonTreasures.push(newItem);
+            state.dungeonTreasureSets.push(newItem);
         },
         addDungeonTrapSet(state, action) {
             const newItem = action.payload;
@@ -103,14 +103,14 @@ const content = createSlice({
 
             state.dungeonSietpieces.push(newItem);
         },
-        addDungeonPuzzle(state, action) {
+        addDungeonPuzzleSet(state, action) {
             const newItem = action.payload;
 
-            if (!state.dungeonPuzzles) {
-                state.dungeonPuzzles = [];
+            if (!state.dungeonPuzzleSets) {
+                state.dungeonPuzzleSets = [];
             }
 
-            state.dungeonPuzzles.push(newItem);
+            state.dungeonPuzzleSets.push(newItem);
         },
         removeTable(state, action) {
             const tableId = action.payload;
@@ -127,25 +127,25 @@ const content = createSlice({
 
             state.setpieces = state.setpieces.filter((setpiece) => setpiece.id !== setpieceId);
         },
-        removeDungeonMonster(state, action) {
+        removeDungeonMonsterSet(state, action) {
             const dungeonMonsterId = action.payload;
 
-            if (!state.dungeonMonsters) {
-                state.dungeonMonsters = [];
+            if (!state.dungeonMonsterSets) {
+                state.dungeonMonsterSets = [];
                 return;
             }
 
-            state.dungeonMonsters = state.dungeonMonsters.filter((dungeonMonster) => dungeonMonster.id !== dungeonMonsterId);
+            state.dungeonMonsterSets = state.dungeonMonsterSets.filter((dungeonMonster) => dungeonMonster.id !== dungeonMonsterId);
         },
-        removeDungeonTreasure(state, action) {
+        removeDungeonTreasureSet(state, action) {
             const dungeonTreasureId = action.payload;
 
-            if (!state.dungeonTreasures) {
-                state.dungeonTreasures = [];
+            if (!state.dungeonTreasureSets) {
+                state.dungeonTreasureSets = [];
                 return;
             }
 
-            state.dungeonTreasures = state.dungeonTreasures.filter((dungeonTreasure) => dungeonTreasure.id !== dungeonTreasureId);
+            state.dungeonTreasureSets = state.dungeonTreasureSets.filter((dungeonTreasure) => dungeonTreasure.id !== dungeonTreasureId);
         },
         removeDungeonTrapSet(state, action) {
             const dungeonTrapSetId = action.payload;
@@ -167,15 +167,15 @@ const content = createSlice({
 
             state.dungeonSetpieces = state.dungeonSetpieces.filter((dungeonSetpiece) => dungeonSetpiece.id !== dungeonSetpieceId);
         },
-        removeDungeonPuzzle(state, action) {
+        removeDungeonPuzzleSet(state, action) {
             const dungeonPuzzleId = action.payload;
 
-            if (!state.dungeonPuzzles) {
-                state.dungeonPuzzles = [];
+            if (!state.dungeonPuzzleSets) {
+                state.dungeonPuzzleSets = [];
                 return;
             }
 
-            state.dungeonPuzzles = state.dungeonPuzzles.filter((dungeonPuzzle) => dungeonPuzzle.id !== dungeonPuzzleId);
+            state.dungeonPuzzleSets = state.dungeonPuzzleSets.filter((dungeonPuzzle) => dungeonPuzzle.id !== dungeonPuzzleId);
         },
         updateTableHeader(state, action) {
             const { originalTableId, tableId, tableDescription } = action.payload;
@@ -206,39 +206,39 @@ const content = createSlice({
 
             state.setpieces = setpieces;
         },
-        updateDungeonMonsterHeader(state, action) {
-            const { originalDungeonMonsterId, dungeonMonsterId, dungeonMonsterDescription } = action.payload;
+        updateDungeonMonsterSetHeader(state, action) {
+            const { originalDungeonMonsterSetId, dungeonMonsterSetId, dungeonMonsterSetDescription } = action.payload;
 
-            if (!state.dungeonMonsters) {
-                console.log("No dungeon Monsters to update");
+            if (!state.dungeonMonsterSets) {
+                console.log("No dungeon Monster Sets to update");
                 return;
             }
 
-            const dungeonMonster = state.dungeonMonsters.find((dungeonMonster) => dungeonMonster.id === originalDungeonMonsterId);
-            const dungeonMonsters = state.dungeonMonsters.filter((dungeonMonster) => dungeonMonster.id !== originalDungeonMonsterId);
+            const dungeonMonsterSet = state.dungeonMonsterSets.find((dungeonMonsterSet) => dungeonMonsterSet.id === originalDungeonMonsterSetId);
+            const dungeonMonsterSets = state.dungeonMonsterSets.filter((dungeonMonsterSet) => dungeonMonsterSet.id !== originalDungeonMonsterSetId);
 
-            dungeonMonster.id = dungeonMonsterId;
-            dungeonMonster.description = dungeonMonsterDescription;
-            dungeonMonsters.push(dungeonMonster);
+            dungeonMonsterSet.id = dungeonMonsterSetId;
+            dungeonMonsterSet.description = dungeonMonsterSetDescription;
+            dungeonMonsterSets.push(dungeonMonsterSet);
 
-            state.dungeonMonsters = dungeonMonsters;
+            state.dungeonMonsterSets = dungeonMonsterSets;
         },
-        updateDungeonTreasureHeader(state, action) {
-            const { originalDungeonTreasureId, dungeonTreasureId, dungeonTreasureDescription } = action.payload;
+        updateDungeonTreasureSetHeader(state, action) {
+            const { originalDungeonTreasureSetId, dungeonTreasureSetId, dungeonTreasureSetDescription } = action.payload;
 
-            if (!state.dungeonTreasures) {
-                console.log("No dungeon treasures to update");
+            if (!state.dungeonTreasureSets) {
+                console.log("No dungeon treasure sets to update");
                 return;
             }
 
-            const dungeonTreasure = state.dungeonTreasures.find((dungeonTreasure) => dungeonTreasure.id === originalDungeonTreasureId);
-            const dungeonTreasures = state.dungeonTreasures.filter((dungeonTreasure) => dungeonTreasure.id !== originalDungeonTreasureId);
+            const dungeonTreasureSet = state.dungeonTreasureSets.find((dungeonTreasureSet) => dungeonTreasureSet.id === originalDungeonTreasureSetId);
+            const dungeonTreasureSets = state.dungeonTreasureSets.filter((dungeonTreasureSet) => dungeonTreasureSet.id !== originalDungeonTreasureSetId);
 
-            dungeonTreasure.id = dungeonTreasureId;
-            dungeonTreasure.description = dungeonTreasureDescription;
-            dungeonTreasures.push(dungeonTreasure);
+            dungeonTreasureSet.id = dungeonTreasureSetId;
+            dungeonTreasureSet.description = dungeonTreasureSetDescription;
+            dungeonTreasureSets.push(dungeonTreasureSet);
 
-            state.dungeonTreasures = dungeonTreasures;
+            state.dungeonTreasureSets = dungeonTreasureSets;
         },
         updateDungeonTrapSetHeader(state, action) {
             const { originalDungeonTrapSetId, dungeonTrapSetId, dungeonTrapSetDescription } = action.payload;
@@ -274,22 +274,22 @@ const content = createSlice({
 
             state.dungeonSetpieces = dungeonSetpieces;
         },
-        updateDungeonPuzzleHeader(state, action) {
-            const { originalDungeonPuzzleId, dungeonPuzzleId, dungeonPuzzleDescription } = action.payload;
+        updateDungeonPuzzleSetHeader(state, action) {
+            const { originalDungeonPuzzleSetId, dungeonPuzzleSetId, dungeonPuzzleSetDescription } = action.payload;
 
-            if (!state.dungeonPuzzles) {
-                console.log("No dungeon puzzles to update");
+            if (!state.dungeonSetPuzzles) {
+                console.log("No dungeon puzzle sets to update");
                 return;
             }
 
-            const dungeonPuzzle = state.dungeonPuzzles.find((dungeonPuzzle) => dungeonPuzzle.id === originalDungeonPuzzleId);
-            const dungeonPuzzles = state.dungeonPuzzles.filter((dungeonPuzzle) => dungeonPuzzle.id !== originalDungeonPuzzleId);
+            const dungeonPuzzleSet = state.dungeonPuzzleSets.find((dungeonPuzzleSet) => dungeonPuzzleSet.id === originalDungeonPuzzleSetId);
+            const dungeonPuzzleSets = state.dungeonPuzzleSets.filter((dungeonPuzzleSet) => dungeonPuzzleSet.id !== originalDungeonPuzzleSetId);
 
-            dungeonPuzzle.id = dungeonPuzzleId;
-            dungeonPuzzle.description = dungeonPuzzleDescription;
-            dungeonPuzzles.push(dungeonPuzzle);
+            dungeonPuzzleSet.id = dungeonPuzzleSetId;
+            dungeonPuzzleSet.description = dungeonPuzzleSetDescription;
+            dungeonPuzzleSets.push(dungeonPuzzleSet);
 
-            state.dungeonPuzzles = dungeonPuzzles;
+            state.dungeonPuzzleSets = dungeonPuzzleSets;
         },
         updateTableRng(state, action) {
             const { tableId, rng } = action.payload;
@@ -318,37 +318,37 @@ const content = createSlice({
 
             state.setpieces = setpieces;
         },
-        updateDungeonMonsterItem(state, action) {
-            const { dungeonMonsterId, item } = action.payload;
+        updateDungeonMonsterSetItem(state, action) {
+            const { dungeonMonsterSetId, item } = action.payload;
 
-            if (!state.dungeonMonsters) {
-                console.log("No dungeon monsters to update");
+            if (!state.dungeonMonsterSets) {
+                console.log("No dungeon monster sets to update");
                 return;
             }
 
-            const dungeonMonster = state.dungeonMonsters.find((dungeonMonster) => dungeonMonster.id === dungeonMonsterId);
-            const dungeonMonsters = state.dungeonMonsters.filter((dungeonMonster) => dungeonMonster.id !== dungeonMonsterId);
+            const dungeonMonsterSet = state.dungeonMonsterSets.find((dungeonMonsterSet) => dungeonMonsterSet.id === dungeonMonsterSetId);
+            const dungeonMonsterSets = state.dungeonMonsterSets.filter((dungeonMonsterSet) => dungeonMonsterSet.id !== dungeonMonsterSetId);
 
-            dungeonMonster.rng = item;
-            dungeonMonsters.push(dungeonMonsters);
+            dungeonMonsterSet.rng = item;
+            dungeonMonsterSets.push(dungeonMonsterSet);
 
-            state.dungeonMonsters = dungeonMonsters;
+            state.dungeonMonsterSets = dungeonMonsterSets;
         },
-        updateDungeonTreasureItem(state, action) {
-            const { dungeonTreasureId, item } = action.payload;
+        updateDungeonTreasureSetItem(state, action) {
+            const { dungeonTreasureSetId, item } = action.payload;
 
-            if (!state.dungeonTreasures) {
-                console.log("No dungeon treasures to update");
+            if (!state.dungeonTreasureSets) {
+                console.log("No dungeon treasure sets to update");
                 return;
             }
 
-            const dungeonTreasure = state.dungeonTreasures.find((dungeonTreasure) => dungeonTreasure.id === dungeonTreasureId);
-            const dungeonTreasures = state.dungeonTreasures.filter((dungeonTreasure) => dungeonTreasure.id !== dungeonTreasureId);
+            const dungeonTreasureSet = state.dungeonTreasureSets.find((dungeonTreasureSet) => dungeonTreasureSet.id === dungeonTreasureSetId);
+            const dungeonTreasureSets = state.dungeonTreasureSets.filter((dungeonTreasureSet) => dungeonTreasureSet.id !== dungeonTreasureSetId);
 
-            dungeonTreasure.rng = item;
-            dungeonTreasures.push(dungeonTreasure);
+            dungeonTreasureSet.rng = item;
+            dungeonTreasureSets.push(dungeonTreasureSet);
 
-            state.dungeonTreasures = dungeonTreasures;
+            state.dungeonTreasureSets = dungeonTreasureSets;
         },
         updateDungeonTrapSetItem(state, action) {
             const { dungeonTrapSetId, item } = action.payload;
@@ -382,21 +382,21 @@ const content = createSlice({
 
             state.dungeonSetpieces = dungeonSetpieces;
         },
-        updateDungeonPuzzleItem(state, action) {
-            const { dungeonPuzzleId, item } = action.payload;
+        updateDungeonPuzzleSetItem(state, action) {
+            const { dungeonPuzzleSetId, item } = action.payload;
 
-            if (!state.dungeonPuzzles) {
-                console.log("No dungeon puzzles to update");
+            if (!state.dungeonPuzzleSets) {
+                console.log("No dungeon puzzle sets to update");
                 return;
             }
 
-            const dungeonPuzzle = state.dungeonPuzzles.find((dungeonPuzzle) => dungeonPuzzle.id === dungeonPuzzleId);
-            const dungeonPuzzles = state.dungeonPuzzles.filter((dungeonPuzzle) => dungeonPuzzle.id !== dungeonPuzzleId);
+            const dungeonPuzzleSet = state.dungeonPuzzleSets.find((dungeonPuzzleSet) => dungeonPuzzleSet.id === dungeonPuzzleSetId);
+            const dungeonPuzzleSets = state.dungeonPuzzleSets.filter((dungeonPuzzleSet) => dungeonPuzzleSet.id !== dungeonPuzzleSetId);
 
-            dungeonPuzzle.rng = item;
-            dungeonPuzzles.push(dungeonPuzzle);
+            dungeonPuzzleSet.rng = item;
+            dungeonPuzzleSets.push(dungeonPuzzleSet);
 
-            state.dungeonPuzzles = dungeonPuzzles;
+            state.dungeonPuzzleSets = dungeonPuzzleSets;
         },
         addMenuItem(state, action) {
             try {
@@ -838,10 +838,10 @@ export const shuffleArray = (originalArray) => {
 export default content.reducer;
 
 export const { setContent, clearContent, setLastTableContent, addTable, removeTable, updateTableHeader, updateTableRng, 
-    addSetpiece, addDungeonMonster, addDungeonPuzzle, addDungeonSetpiece, addDungeonTrapSet, addDungeonTreasure,
-    removeSetpiece, removeDungeonMonster, removeDungeonPuzzle, removeDungeonSetpiece, removeDungeonTrapSet, removeDungeonTreasure,
-    updateSetpieceHeader, updateSetpieceRng, updateDungeonMonsterHeader, updateDungeonPuzzleHeader, 
-    updateDungeonSetpieceHeader, updateDungeonTrapSetHeader, updateDungeonTreasureHeader,
-    updateDungeonMonsterItem, updateDungeonPuzzleItem, updateDungeonSetpieceItem, updateDungeonTrapSetItem, 
-    updateDungeonTreasure, updateContent, updateContentHeader, addMenuItem, updateContentType,
+    addSetpiece, addDungeonMonsterSet, addDungeonPuzzleSet, addDungeonSetpiece, addDungeonTrapSet, addDungeonTreasureSet,
+    removeSetpiece, removeDungeonMonsterSet, removeDungeonPuzzleSet, removeDungeonSetpiece, removeDungeonTrapSet, removeDungeonTreasureSet,
+    updateSetpieceHeader, updateSetpieceRng, updateDungeonMonsterSetHeader, updateDungeonPuzzleSetHeader, 
+    updateDungeonSetpieceHeader, updateDungeonTrapSetHeader, updateDungeonTreasureSetHeader,
+    updateDungeonMonsterSetItem, updateDungeonPuzzleSetItem, updateDungeonSetpieceItem, updateDungeonTrapSetItem, 
+    updateDungeonTreasureSetItem, updateContent, updateContentHeader, addMenuItem, updateContentType,
     setClipboardAction, deleteMenuItem, setTabPath, clearTabPath } = content.actions;

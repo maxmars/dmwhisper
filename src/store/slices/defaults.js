@@ -5,10 +5,10 @@ const initialState = {
     tablesFilter: "",
     setpiecesFilter: "",
     dungeonTrapSetsFilter: "",
-    dungeonMonstersFilter: "",
+    dungeonMonsterSetsFilter: "",
     dungeonSetpiecesFilter: "",
-    dungeonTreasuresFilter: "",
-    dungeonPuzzlesFilter: "",
+    dungeonTreasureSetsFilter: "",
+    dungeonPuzzleSetsFilter: "",
 };
 
 // ==============================|| SLICE - THROWS ||============================== //
@@ -32,25 +32,25 @@ const defaults = createSlice({
 
             state.dungeonTrapSetsFilter = filter;
         },
-        setDungeonMonstersFilter(state, action) {
+        setDungeonMonsterSetsFilter(state, action) {
             const filter = action.payload;
 
-            state.dungeonMonstersFilter = filter;
+            state.dungeonMonsterSetsFilter = filter;
         },
         setDungeonSetpiecesFilter(state, action) {
             const filter = action.payload;
 
             state.dungeonSetpiecesFilter = filter;
         },
-        setDungeonTreasuresFilter(state, action) {
+        setDungeonTreasureSetsFilter(state, action) {
             const filter = action.payload;
 
-            state.dungeonTreasuressFilter = filter;
+            state.dungeonTreasureSetsFilter = filter;
         },
-        setDungeonPuzzlesFilter(state, action) {
+        setDungeonPuzzleSetsFilter(state, action) {
             const filter = action.payload;
 
-            state.dungeonPuzzlesFilter = filter;
+            state.dungeonPuzzleSetsFilter = filter;
         },
     }
 });
@@ -58,6 +58,6 @@ const defaults = createSlice({
 export default defaults.reducer;
 
 export const { setTablesFilter, setSetpiecesFilter, setDungeonTrapSetsFilter,
-    setDungeonMonstersFilter, setDungeonSetpiecesFilter, setDungeonTreasuresFilter,
-    setDungeonPuzzlesFilter
+    setDungeonMonsterSetsFilter, setDungeonSetpiecesFilter, setDungeonTreasureSetsFilter,
+    setDungeonPuzzleSetsFilter
  } = defaults.actions;

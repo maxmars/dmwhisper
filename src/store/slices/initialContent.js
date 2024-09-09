@@ -25,11 +25,11 @@ const initialContent = {
     "tabPaths": ["farm", "", "", "", ""],
     "lastTableContent": {},
     "setpieces": [{ "id": "farm-setpiece", "description": "Places in the farm", "tags": [], "rng": [{ "min": 1, "max": 1, "description": "Courtyard", "textContent": "<h1>Courtyard</h1><p>In this courtyard you find the following animals:</p><ul><li>@@01</li><li>@@02</li><li>@@03</li></ul>", "table": "farm-animals! farm-animals! farm-animals!", "minAppears": 0, "maxAppears": 1000, "width": 1, "height": 1, "imgUrl": "" }, { "min": 2, "max": 2, "description": "Booth", "textContent": "<h1>Booth</h1><p>In this booth you find:</p><ul><li>@@01</li><li>@@02</li></ul>", "table": "farm-animals! farm-npc!", "minAppears": 0, "maxAppears": 1000, "width": 1, "height": 1, "imgUrl": "" }, { "min": 3, "max": 3, "description": "Orchard", "textContent": "<h1>Orchard</h1><p>In this orchard you find an animal, @@01&nbsp;</p><p>There is also an intruder from the city: @@02</p>", "table": "farm-animals! city-npc!", "minAppears": 0, "maxAppears": 1000, "width": 1, "height": 1, "imgUrl": "" }] }],
-    "dungeonMonsters": [],
-    "dungeonTreasures": [],
+    "dungeonMonsterSets": [],
+    "dungeonTreasureSets": [],
     "dungeonTrapSets": [],
     "dungeonSetpieces": [],
-    "dungeonPuzzles": [],
+    "dungeonPuzzleSets": [],
 }
 
 export default initialContent;

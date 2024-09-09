@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateDungeonTrapSetHeader, updateDungeonTrapSetItem } from '../../../../../store/slices/content.js';
+import { updateDungeonMonsterSetHeader, updateDungeonMonsterSetItem } from '../../../../../store/slices/content.js';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
@@ -24,15 +24,15 @@ import { useEffect } from 'react';
 import { useRef } from 'react';
 
 
-const TrapSetEdit = (props) => {
+const MonsterSetEdit = (props) => {
 
   const { t } = useTranslation();
   // const [unsavedContent, setUnsavedContent] = useState("no");
   const [itemToDelete, setItemToDelete] = useState(null);
-  const [editedTrapSetId, setEditedTrapSetId] = useState(props.itemId);
-  const trapSets = useSelector((st) => st.content.dungeonTrapSets);
-  const trapSet = trapSets.find((trap) => trap.id === props.itemId);
-  const [editedTrapSetDescription, setEditedTrapDescription] = useState(trapSet.description);
+  const [editedMonsterSetId, setEditedMonsterSetId] = useState(props.itemId);
+  const monsterSets = useSelector((st) => st.content.dungeonMonsterSets);
+  const monsterSet = monsterSets.find((monster) => monster.id === props.itemId);
+  const [editedMonsterSetDescription, setEditedMonsterDescription] = useState(monsterSet.description);
   const theme = useTheme();
   const [alert, setAlert] = useState(null);
   const [itemAlert, setItemAlert] = useState(null);
@@ -45,7 +45,7 @@ const TrapSetEdit = (props) => {
   const [newMaxOccurrences, setNewMaxOccurrences] = useState(100);
   const mounted = useRef();
 
-  const rows = trapSet.rng.map((rng) => {
+  const rows = monsterSet.rng.map((rng) => {
     let description = rng.description;
 
     return {
@@ -108,25 +108,25 @@ const TrapSetEdit = (props) => {
 
   const updateHeader = () => {
 
-    if (trapSets.find((trap) => trap.id === editedTrapSetId) && editedTrapSetId !== props.itemId) {
-      setAlert(t('Trap Set ID already exists'));
+    if (monsterSets.find((monster) => monster.id === editedMonsterSetId) && editedMonsterSetId !== props.itemId) {
+      setAlert(t('Monster Set ID already exists'));
       return;
     }
 
-    if (editedTrapSetId === '') {
-      setAlert(t('Trap Set ID cannot be blank'));
+    if (editedMonsterSetId === '') {
+      setAlert(t('Monster Set ID cannot be blank'));
       return;
     }
 
-    if (editedTrapSetId === props.itemId && editedTrapSetDescription === props.itemDescription) {
+    if (editedMonsterSetId === props.itemId && editedMonsterSetDescription === props.itemDescription) {
       setAlert(t('No changes to save'));
       return;
     }
 
-    dispatch(updateDungeonTrapSetHeader({
-      originalDungeonTrapSetId: props.itemId,
-      dungeonTrapSetId: editedTrapSetId,
-      dungeonTrapSetDescription: editedTrapSetDescription,
+    dispatch(updateDungeonMonsterSetHeader({
+      originalDungeonMonsterSetId: props.itemId,
+      dungeonMonsterSetId: editedMonsterSetId,
+      dungeonMonsterSetDescription: editedMonsterSetDescription,
     }));
 
     props.endEditing();
@@ -172,7 +172,7 @@ const TrapSetEdit = (props) => {
       return;
     }
 
-    if (trapSet.rng.find((rng) => rng.min === parseInt(document.getElementById('new-min').value) && rng.max === parseInt(document.getElementById('new-max').value))) {
+    if (monsterSet.rng.find((rng) => rng.min === parseInt(document.getElementById('new-min').value) && rng.max === parseInt(document.getElementById('new-max').value))) {
       setItemAlert(t('RNG value already exists'));
       return;
     }
@@ -192,10 +192,10 @@ const TrapSetEdit = (props) => {
       imgUrl: '',
     }
 
-    const newRngs = [...trapSet.rng, newRng];
+    const newRngs = [...monsterSet.rng, newRng];
 
-    dispatch(updateDungeonTrapSetItem({
-      dungeonTrapSetId: props.itemId,
+    dispatch(updateDungeonMonsterSetItem({
+      dungeonMonsterSetId: props.itemId,
       item: newRngs,
     }));
 
@@ -206,9 +206,9 @@ const TrapSetEdit = (props) => {
   }
 
   const deleteRng = (itemToDelete) => {
-    const newRng = trapSet.rng.filter((rng) => rng.min + '-' + rng.max !== itemToDelete);
-    dispatch(updateDungeonTrapSetItem({
-      dungeonTrapSetId: props.itemId,
+    const newRng = monsterSet.rng.filter((rng) => rng.min + '-' + rng.max !== itemToDelete);
+    dispatch(updateDungeonMonsterSetItem({
+      dungeonMonsterSetId: props.itemId,
       item: newRng,
     }));
 
@@ -218,10 +218,10 @@ const TrapSetEdit = (props) => {
   const editRNGValues = (rngId) => {
     setNewMin(rngId.split('-')[0]);
     setNewMax(rngId.split('-')[1]);
-    setNewLabel(trapSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).description);
-    setNewMaxOccurrences(trapSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).maxAppears);
-    setCurrentMenuTable(trapSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).table);
-    setCurrentMenuContent(trapSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).textContent);
+    setNewLabel(monsterSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).description);
+    setNewMaxOccurrences(monsterSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).maxAppears);
+    setCurrentMenuTable(monsterSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).table);
+    setCurrentMenuContent(monsterSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).textContent);
   }
 
   if (itemToDelete === null) {
@@ -229,26 +229,26 @@ const TrapSetEdit = (props) => {
     return (
       <Grid container >
         <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography>{t("Edited trap set:")} {props.itemId}</Typography>
+          <Typography>{t("Edited monster set:")} {props.itemId}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <TextField id="trap-set-id"
-            label={t("Trap Set ID")}
+          <TextField id="monster-set-id"
+            label={t("Monster Set ID")}
             variant="outlined"
             sx={{ width: "100%" }}
-            value={editedTrapSetId ? editedTrapSetId : ''}
-            onChange={(event) => setEditedTrapSetId(event.target.value)}
+            value={editedMonsterSetId ? editedMonsterSetId : ''}
+            onChange={(event) => setEditedMonsterSetId(event.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
-          <TextField id="trap-set-description"
-            label={t("Trap Set Description")}
+          <TextField id="monster-set-description"
+            label={t("Monster Set Description")}
             variant="outlined"
             sx={{ width: "100%" }}
-            value={editedTrapSetDescription ? editedTrapSetDescription : ''}
-            onChange={(event) => setEditedTrapDescription(event.target.value)} />
+            value={editedMonsterSetDescription ? editedMonsterSetDescription : ''}
+            onChange={(event) => setEditedMonsterDescription(event.target.value)} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         {alert ?
@@ -317,7 +317,7 @@ const TrapSetEdit = (props) => {
             onChange={(event) => setNewLabel(event.target.value)}
             value={newLabel ? newLabel : ''}
             id="new-label"
-            label={newLabel ? "" : t("Trap label")}
+            label={newLabel ? "" : t("Monster label")}
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
@@ -392,14 +392,14 @@ const TrapSetEdit = (props) => {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <Button onClick={props.endEditing} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to trap sets list")}</Button>
+          <Button onClick={props.endEditing} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to monster sets list")}</Button>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
       </Grid >
     );
   } else {
     // get result from itemToDelete
-    const result = trapSet.rng.find((rng) => rng.min + '-' + rng.max === itemToDelete).result;
+    const result = monsterSet.rng.find((rng) => rng.min + '-' + rng.max === itemToDelete).result;
 
     return <Grid container >
       <Grid item xs={12}>&nbsp;</Grid>
@@ -425,4 +425,4 @@ const TrapSetEdit = (props) => {
 
 }
 
-export default TrapSetEdit;
+export default MonsterSetEdit;
