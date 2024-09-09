@@ -42,7 +42,7 @@ export default function TrapEdit(props) {
   const [newMin, setNewMin] = useState(null);
   const [newMax, setNewMax] = useState(null);
   const [newLabel, setNewLabel] = useState(null);
-  const [newMaxOccurrences, setNewMaxOccurrences] = useState(null);
+  const [newMaxOccurrences, setNewMaxOccurrences] = useState(100);
   const mounted = useRef();
 
   const rows = trapSet.rng.map((rng) => {
