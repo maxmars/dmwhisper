@@ -249,23 +249,3 @@ export default function DungeonMap(props) {
         </div>
     );
 }
-
-/*
-    <Grid container spacing={2} columns={15}>
-        <Grid item xs={3} sx={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <Paper elevation={3}>Entrata del dungeon</Paper>
-        </Grid>
-        <Grid item xs={3}>
-            <Paper elevation={3}>Camera da letto</Paper>
-        </Grid>
-        <Grid item xs={3}>
-            <Paper elevation={3}>Edificio di 7 piani, con sicurezza</Paper>
-        </Grid>
-        <Grid item xs={3}>
-            <Paper elevation={3}>Sala da the</Paper>
-        </Grid>
-        <Grid item xs={3}>
-            <Paper elevation={3}>Cripta</Paper>
-        </Grid>
-    </Grid>
-*/
