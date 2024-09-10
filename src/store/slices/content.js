@@ -498,6 +498,10 @@ const content = createSlice({
                 content.data.map = updatedContentHeader.map;
             }
 
+            if (content.type === "dungeon") {
+                content.data.dungeon = updatedContentHeader.dungeon;
+            }
+
             if (content.type === "menu") {
                 if (!(content.data.children)) {
                     content.data.children = [];

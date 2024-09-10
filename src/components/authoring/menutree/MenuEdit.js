@@ -40,6 +40,7 @@ import ContentSaveReminder from '../ContentSaveReminder.js';
 import ErrorMessage from '../ErrorMessage.js';
 import MenuDeletionConfirm from './MenuDeletionConfirm';
 import MapSetup from '../maps/MapSetup.js';
+import DungeonSetup from '../dungeons/DungeonSetup.js';
 
 
 export default function MenuEdit(props) {
@@ -70,6 +71,14 @@ export default function MenuEdit(props) {
     const [currentMenuSetpiece, setCurrentMenuSetpiece] = useState(ctmap.setpiece);
     const [currentMenuDensity, setCurrentMenuDensity] = useState(ctmap.density);
     const [currentMenuGrid, setCurrentMenuGrid] = useState(ctmap.grid);
+
+    const ctdungeon = contentMetaData.data && contentMetaData.data.dungeon ? contentMetaData.data.dungeon : { setpiece: "", monsterSet: "", trapSet: "", treasureSet: "", puzzleSet: "", rooms: 10 };
+    const [currentMenuDungeonSetpiece, setCurrentMenuDungeonSetpiece] = useState(ctdungeon.setpiece);
+    const [currentMenuDungeonMonsterSet, setCurrentMenuDungeonMonsterSet] = useState(ctdungeon.monsterSet);
+    const [currentMenuDungeonTrapSet, setCurrentMenuDungeonTrapSet] = useState(ctdungeon.trapSet);
+    const [currentMenuDungeonTreasureSet, setCurrentMenuDungeonTreasureSet] = useState(ctdungeon.treasureSet);
+    const [currentMenuDungeonPuzzleSet, setCurrentMenuDungeonPuzzleSet] = useState(ctdungeon.puzzleSet);
+    const [currentMenuDungeonRooms, setCurrentMenuDungeonRooms] = useState(ctdungeon.rooms);
 
     const contentName = getContentName(tree, path);
     const ctyp = contentMetaData.type ? contentMetaData.type : "menu";
@@ -188,6 +197,12 @@ export default function MenuEdit(props) {
         setCurrentMenuSetpiece("");
         setCurrentMenuDensity(2);
         setCurrentMenuGrid(2);
+        setCurrentMenuDungeonMonsterSet("");
+        setCurrentMenuDungeonTrapSet("");
+        setCurrentMenuDungeonTreasureSet("");
+        setCurrentMenuDungeonPuzzleSet("");
+        setCurrentMenuDungeonSetpiece("");
+        setCurrentMenuDungeonRooms(10);
         setHeaderInfoOpen(false);
         setPath("");
     }
@@ -214,6 +229,12 @@ export default function MenuEdit(props) {
             setCurrentMenuSetpiece(newContentMetaData.data.map ? newContentMetaData.data.map.setpiece : "");
             setCurrentMenuDensity(newContentMetaData.data.map ? newContentMetaData.data.map.density : 2);
             setCurrentMenuGrid(newContentMetaData.data.map ? newContentMetaData.data.map.grid : 2);
+            setCurrentMenuDungeonMonsterSet(newContentMetaData.data.dungeon ? newContentMetaData.data.dungeon.monsterSet : "");
+            setCurrentMenuDungeonTrapSet(newContentMetaData.data.dungeon ? newContentMetaData.data.dungeon.trapSet : "");
+            setCurrentMenuDungeonTreasureSet(newContentMetaData.data.dungeon ? newContentMetaData.data.dungeon.treasureSet : "");
+            setCurrentMenuDungeonPuzzleSet(newContentMetaData.data.dungeon ? newContentMetaData.data.dungeon.puzzleSet : "");
+            setCurrentMenuDungeonSetpiece(newContentMetaData.data.dungeon ? newContentMetaData.data.dungeon.setpiece : "");
+            setCurrentMenuDungeonRooms(newContentMetaData.data.dungeon ? newContentMetaData.data.dungeon.rooms : 10);
             setHeaderInfoOpen(newCtyp !== "menu");
             setPath(newPath);
             return;
@@ -227,6 +248,12 @@ export default function MenuEdit(props) {
         setCurrentMenuSetpiece("");
         setCurrentMenuDensity(2);
         setCurrentMenuGrid(2);
+        setCurrentMenuDungeonMonsterSet("");
+        setCurrentMenuDungeonTrapSet("");
+        setCurrentMenuDungeonTreasureSet("");
+        setCurrentMenuDungeonPuzzleSet("");
+        setCurrentMenuDungeonSetpiece("");
+        setCurrentMenuDungeonRooms(10);
         setHeaderInfoOpen(false);
         setPath("");
     }
@@ -243,6 +270,12 @@ export default function MenuEdit(props) {
         setCurrentMenuSetpiece(newContentMetaData.data.map ? newContentMetaData.data.map.setpiece : "");
         setCurrentMenuDensity(newContentMetaData.data.map ? newContentMetaData.data.map.density : 2);
         setCurrentMenuGrid(newContentMetaData.data.map ? newContentMetaData.data.map.grid : 2);
+        setCurrentMenuDungeonMonsterSet(newContentMetaData.data.dungeon ? newContentMetaData.data.dungeon.monsterSet : "");
+        setCurrentMenuDungeonTrapSet(newContentMetaData.data.dungeon ? newContentMetaData.data.dungeon.trapSet : "");
+        setCurrentMenuDungeonTreasureSet(newContentMetaData.data.dungeon ? newContentMetaData.data.dungeon.treasureSet : "");
+        setCurrentMenuDungeonPuzzleSet(newContentMetaData.data.dungeon ? newContentMetaData.data.dungeon.puzzleSet : "");
+        setCurrentMenuDungeonSetpiece(newContentMetaData.data.dungeon ? newContentMetaData.data.dungeon.setpiece : "");
+        setCurrentMenuDungeonRooms(newContentMetaData.data.dungeon ? newContentMetaData.data.dungeon.rooms : 10);
         setHeaderInfoOpen(newCtyp !== "menu");
         setPath(newPath);
     };
@@ -301,6 +334,14 @@ export default function MenuEdit(props) {
             textContent: currentMenuContent,
             table: currentMenuTable,
             map: { setpiece: currentMenuSetpiece, density: currentMenuDensity, grid: currentMenuGrid },
+            dungeon: {
+                setpiece: currentMenuDungeonSetpiece,
+                monsterSet: currentMenuDungeonMonsterSet,
+                trapSet: currentMenuDungeonTrapSet,
+                treasureSet: currentMenuDungeonTreasureSet,
+                puzzleSet: currentMenuDungeonPuzzleSet,
+                rooms: currentMenuDungeonRooms
+            },
             type: currentContentType,
         };
 
@@ -553,6 +594,7 @@ export default function MenuEdit(props) {
                                     <MenuItem value="information">{t("Information")}</MenuItem>
                                     <MenuItem value="table">{t("Table")}</MenuItem>
                                     <MenuItem value="map">{t("Map")}</MenuItem>
+                                    <MenuItem value="dungeon">{t("Dungeon")}</MenuItem>
                                 </Select>
                             </Grid>
                             {
@@ -629,6 +671,45 @@ export default function MenuEdit(props) {
                                     </> : null
 
                             }
+                            {
+                                currentContentType && (currentContentType === "dungeon") ?
+                                    <>
+                                        <Grid item xs={12}>&nbsp;</Grid>
+                                        <DungeonSetup 
+                                            setpieceId={currentMenuDungeonSetpiece} 
+                                            monsterSetId={currentMenuDungeonMonsterSet}
+                                            trapSetId={currentMenuDungeonTrapSet}
+                                            treasureSetId={currentMenuDungeonTreasureSet}
+                                            puzzleSetId={currentMenuDungeonPuzzleSet}
+                                            rooms={currentMenuDungeonRooms}
+                                            onDungeonSetpieceIdChanged={(newDungeonSetpieceId) => {
+                                                setCurrentMenuDungeonSetpiece(newDungeonSetpieceId);
+                                                setUnsavedContent("yes");
+                                            }}
+                                            onDungeonMonsterSetIdChanged={(newDungeonMonsterSetId) => {
+                                                setCurrentMenuDungeonMonsterSet(newDungeonMonsterSetId);
+                                                setUnsavedContent("yes");
+                                            }}
+                                            onDungeonTrapSetIdChanged={(newDungeonTrapSetId) => {
+                                                setCurrentMenuDungeonTrapSet(newDungeonTrapSetId);
+                                                setUnsavedContent("yes");
+                                            }}
+                                            onDungeonTreasureSetIdChanged={(newDungeonTreasureSetId) => {
+                                                setCurrentMenuDungeonTreasureSet(newDungeonTreasureSetId);
+                                                setUnsavedContent("yes");
+                                            }}
+                                            onDungeonPuzzleSetIdChanged={(newDungeonPuzzleSetId) => {
+                                                setCurrentMenuDungeonPuzzleSet(newDungeonPuzzleSetId);
+                                                setUnsavedContent("yes");
+                                            }}
+                                            onDungeonRoomsChanged={(newDungeonRooms) => {
+                                                setCurrentMenuDungeonRooms(newDungeonRooms);
+                                                setUnsavedContent("yes");
+                                            }}
+                                        />
+                                    </> : null
+
+                            }
                             <Grid item xs={12}>&nbsp;</Grid>
                             <Button disabled={!contentMetaData.type} startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => updateMenuHeader()}>{t("Save header data")}</Button>
                         </Grid>
@@ -699,6 +780,7 @@ export default function MenuEdit(props) {
                                         <MenuItem value="information">{t("Information")}</MenuItem>
                                         <MenuItem value="table">{t("Table")}</MenuItem>
                                         <MenuItem value="map">{t("Map")}</MenuItem>
+                                        <MenuItem value="dungeon">{t("Dungeon")}</MenuItem>
                                     </Select>
                                 </Grid>
                                 <Grid item xs={12}>&nbsp;</Grid>
