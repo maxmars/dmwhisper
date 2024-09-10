@@ -12,8 +12,8 @@ const MonsterSetsEdit = (props) => {
   const trapsListPageMode = 'dmwhisper-monsters-list';
   const [pageMode, setPageMode] = useState(trapsListPageMode);
   
-  const selectTrapSet = itemId => setPageMode(itemId);
-  const setTrapSetsListMode = () => setPageMode(trapsListPageMode);
+  const selectMonsterSet = itemId => setPageMode(itemId);
+  const setMonsterSetsListMode = () => setPageMode(trapsListPageMode);
 
   return (
     <Grid container sx={{height: "100%"}} >
@@ -25,9 +25,9 @@ const MonsterSetsEdit = (props) => {
       <Grid item xs={12}>
         {
           pageMode === trapsListPageMode ?
-          <MonsterSetsList selectItem={selectTrapSet} />
+          <MonsterSetsList selectItem={selectMonsterSet} />
           :
-          <MonsterSetEdit itemId={pageMode} endEditing={setTrapSetsListMode} />
+          <MonsterSetEdit itemId={pageMode} endEditing={setMonsterSetsListMode} />
         }
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>

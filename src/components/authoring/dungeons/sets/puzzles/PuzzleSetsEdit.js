@@ -12,8 +12,8 @@ const PuzzleSetsEdit = (props) => {
   const trapsListPageMode = 'dmwhisper-puzzles-list';
   const [pageMode, setPageMode] = useState(trapsListPageMode);
   
-  const selectTrapSet = itemId => setPageMode(itemId);
-  const setTrapSetsListMode = () => setPageMode(trapsListPageMode);
+  const selectPuzzleSet = itemId => setPageMode(itemId);
+  const setPuzzleSetsListMode = () => setPageMode(trapsListPageMode);
 
   return (
     <Grid container sx={{height: "100%"}} >
@@ -25,9 +25,9 @@ const PuzzleSetsEdit = (props) => {
       <Grid item xs={12}>
         {
           pageMode === trapsListPageMode ?
-          <PuzzleSetsList selectItem={selectTrapSet} />
+          <PuzzleSetsList selectItem={selectPuzzleSet} />
           :
-          <PuzzleSetEdit itemId={pageMode} endEditing={setTrapSetsListMode} />
+          <PuzzleSetEdit itemId={pageMode} endEditing={setPuzzleSetsListMode} />
         }
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>

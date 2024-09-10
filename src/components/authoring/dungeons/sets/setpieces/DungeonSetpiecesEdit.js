@@ -2,18 +2,18 @@ import React from 'react';
 import { useState } from 'react';
 import { Grid, Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import TreasureSetsList from './TreasureSetsList';
-import TreasureSetEdit from './TreasureSetEdit';
+import SetpiecesList from './SetpiecesList';
+import SetpieceEdit from './SetpieceEdit';
 import { useTranslation } from 'react-i18next';
 
-const TreasureSetsEdit = (props) => {
+const DungeonSetpiecesEdit = (props) => {
 
   const { t } = useTranslation();
-  const trapsListPageMode = 'dmwhisper-treasures-list';
+  const trapsListPageMode = 'dmwhisper-setpieces-list';
   const [pageMode, setPageMode] = useState(trapsListPageMode);
   
-  const selectTreasureSet = itemId => setPageMode(itemId);
-  const setTreasureSetsListMode = () => setPageMode(trapsListPageMode);
+  const selectSetpiece = itemId => setPageMode(itemId);
+  const setSetpiecesListMode = () => setPageMode(trapsListPageMode);
 
   return (
     <Grid container sx={{height: "100%"}} >
@@ -25,9 +25,9 @@ const TreasureSetsEdit = (props) => {
       <Grid item xs={12}>
         {
           pageMode === trapsListPageMode ?
-          <TreasureSetsList selectItem={selectTreasureSet} />
+          <SetpiecesList selectItem={selectSetpiece} />
           :
-          <TreasureSetEdit itemId={pageMode} endEditing={setTreasureSetsListMode} />
+          <SetpieceEdit itemId={pageMode} endEditing={setSetpiecesListMode} />
         }
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
@@ -35,4 +35,4 @@ const TreasureSetsEdit = (props) => {
   );
 };
 
-export default TreasureSetsEdit;
+export default DungeonSetpiecesEdit;
