@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Information from '../contentwidgets/Information';
 import Table from '../contentwidgets/Table';
+import AreaMap from '../contentwidgets/AreaMap';
 import DungeonMap from '../contentwidgets/DungeonMap';
 import Menu from '../contentwidgets/Menu';
 import IconButton from '@mui/material/IconButton';
@@ -27,6 +28,9 @@ const SelectedContent = (props) => {
           return <Table currentTab={props.currentTab} content={props.selectedContent} />;
 
         case "map":
+          return <AreaMap currentTab={props.currentTab} content={props.selectedContent} />;
+
+        case "dungeon":
           return <DungeonMap currentTab={props.currentTab} content={props.selectedContent} />;
 
         default:
@@ -78,7 +82,7 @@ const SelectedContent = (props) => {
           justifyContent: 'center',
         }}
       >
-        <Grid item xs={12} sx={{height: "100%"}}>
+        <Grid item xs={12} sx={{ height: "100%" }}>
           {getProperWidget()}
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -96,7 +100,7 @@ const SelectedContent = (props) => {
         }}
       >
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} sx={{display: 'flex', justifyContent: 'center', verticalAlign: 'center'}}>
+        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', verticalAlign: 'center' }}>
           <Button sx={{ width: '90%' }} variant="outlined" onClick={() => props.clearSelectedContent()}>{t("Back")}</Button>
         </Grid>
       </Grid>
