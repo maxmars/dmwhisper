@@ -2,8 +2,8 @@ import React from 'react';
 import { useState } from 'react';
 import { Grid, Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import SetpiecesList from './SetpiecesList';
-import SetpieceEdit from './SetpieceEdit';
+import SetpiecesList from './DungeonSetpiecesList';
+import SetpieceEdit from './DungeonSetpieceEdit';
 import { useTranslation } from 'react-i18next';
 
 const DungeonSetpiecesEdit = (props) => {

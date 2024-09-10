@@ -97,11 +97,11 @@ const content = createSlice({
         addDungeonSetpiece(state, action) {
             const newItem = action.payload;
 
-            if (!state.dungeonSietpieces) {
-                state.dungeonSietpieces = [];
+            if (!state.dungeonSetpieces) {
+                state.dungeonSetpieces = [];
             }
 
-            state.dungeonSietpieces.push(newItem);
+            state.dungeonSetpieces.push(newItem);
         },
         addDungeonPuzzleSet(state, action) {
             const newItem = action.payload;

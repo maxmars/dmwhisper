@@ -1,27 +1,23 @@
 import * as React from 'react';
 import { useState } from 'react';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import useTheme from '@mui/private-theming/useTheme';
-import CheckIcon from '@mui/icons-material/Check';
-import CloseIcon from '@mui/icons-material/Close';
-import TextField from '@mui/material/TextField';
-import Alert from '@mui/material/Alert';
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateDungeonSetpieceHeader, updateDungeonSetpieceItem } from '../../../../../store/slices/content.js';
-import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
-import { useTranslation } from 'react-i18next';
-import TablesChooser from '../../../tables/TablesChooser.js';
-import { uuidv4 } from '../../../../../utils/index.js';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import { Editor } from 'ckeditor5-custom-build/build/ckeditor';
 import { useEffect } from 'react';
 import { useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { FormControl, InputLabel, MenuItem, Select, Button, Grid, Typography, TextField, Alert } from '@mui/material';
+import useTheme from '@mui/private-theming/useTheme';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import CheckIcon from '@mui/icons-material/Check';
+import CloseIcon from '@mui/icons-material/Close';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import { Editor } from 'ckeditor5-custom-build/build/ckeditor';
+import { updateDungeonSetpieceHeader, updateDungeonSetpieceItem } from '../../../../../store/slices/content.js';
+import TablesChooser from '../../../tables/TablesChooser.js';
+import { uuidv4 } from '../../../../../utils/index.js';
 
 
 const DungeonSetpieceEdit = (props) => {
@@ -39,18 +35,19 @@ const DungeonSetpieceEdit = (props) => {
   const [currentMenuTable, setCurrentMenuTable] = useState(undefined);
   const [currentMenuContent, setCurrentMenuContent] = useState('');
 
-  const [newMin, setNewMin] = useState(null);
-  const [newMax, setNewMax] = useState(null);
   const [newLabel, setNewLabel] = useState(null);
+  const [newPositionInDungeon, setNewPositionInDungeon] = useState("any"); // any, start, middle, end
+  const [newRate, setNewRate] = useState("common"); // common (70%), uncommon (25%), rare (5%). Only for "any" and "middle" positions
   const [newMaxOccurrences, setNewMaxOccurrences] = useState(100);
   const mounted = useRef();
 
-  const rows = setpiece.rng.map((rng) => {
+  const rows = setpiece.rng.map((rng, index) => {
     let description = rng.description;
 
     return {
-      id: rng.min + '-' + rng.max,
+      id: index + 1,
       description: description,
+      position: rng.positionInDungeon,
     }
   });
 
@@ -135,13 +132,18 @@ const DungeonSetpieceEdit = (props) => {
   const columns = [
     {
       field: 'id',
-      headerName: t('RNG'),
-      width: window.innerWidth * 0.25,
+      headerName: t('id'),
+      width: window.innerWidth * 0.05,
     },
     {
       field: 'description',
       headerName: t('Description'),
       width: window.innerWidth * 0.6,
+    },
+    {
+      field: 'position',
+      headerName: t('Position in Dungeon'),
+      width: window.innerWidth * 0.2,
     },
     {
       field: 'actions',
@@ -157,36 +159,16 @@ const DungeonSetpieceEdit = (props) => {
   ];
 
   const addRng = () => {
-    if (document.getElementById('new-min').value === '') {
-      setItemAlert(t('Min value cannot be blank'));
-      return;
-    }
-
-    if (document.getElementById('new-max').value === '') {
-      setItemAlert(t('Max value cannot be blank'));
-      return;
-    }
-
-    if (parseInt(document.getElementById('new-min').value) > parseInt(document.getElementById('new-max').value)) {
-      setItemAlert(t('Min value cannot be greater than max value'));
-      return;
-    }
-
-    if (setpiece.rng.find((rng) => rng.min === parseInt(document.getElementById('new-min').value) && rng.max === parseInt(document.getElementById('new-max').value))) {
-      setItemAlert(t('RNG value already exists'));
-      return;
-    }
-
     const newRng = {
-      min: parseInt(document.getElementById('new-min').value),
-      max: parseInt(document.getElementById('new-max').value),
-      description: document.getElementById('new-label').value,
+      description: newLabel,
       // TODO
       textContent: currentMenuContent,
       table: currentMenuTable,
       // TODO Unused ATM
       minAppears: 0,
-      maxAppears: document.getElementById('new-max-occurrences').value,
+      maxAppears: newMaxOccurrences,
+      positionInDungeon: newPositionInDungeon,
+      appearanceRate: newRate,
       width: 1,
       height: 1,
       imgUrl: '',
@@ -199,14 +181,12 @@ const DungeonSetpieceEdit = (props) => {
       item: newRngs,
     }));
 
-    document.getElementById('new-min').value = '';
-    document.getElementById('new-max').value = '';
     document.getElementById('new-result').value = '';
     setCurrentMenuTable(undefined);
   }
 
   const deleteRng = (itemToDelete) => {
-    const newRng = setpiece.rng.filter((rng) => rng.min + '-' + rng.max !== itemToDelete);
+    const newRng = setpiece.rng.filter((rng, index) => index !== itemToDelete - 1);
     dispatch(updateDungeonSetpieceItem({
       dungeonSetpieceId: props.itemId,
       item: newRng,
@@ -216,9 +196,9 @@ const DungeonSetpieceEdit = (props) => {
   }
 
   const editRNGValues = (rngId) => {
-    setNewMin(rngId.split('-')[0]);
-    setNewMax(rngId.split('-')[1]);
     setNewLabel(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).description);
+    setNewPositionInDungeon(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).positionInDungeon);
+    setNewRate(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).appearanceRate);
     setNewMaxOccurrences(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).maxAppears);
     setCurrentMenuTable(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).table);
     setCurrentMenuContent(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).textContent);
@@ -229,7 +209,7 @@ const DungeonSetpieceEdit = (props) => {
     return (
       <Grid container >
         <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography>{t("Edited setpiece set:")} {props.itemId}</Typography>
+          <Typography>{t("Edited setpiece:")} {props.itemId}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -292,24 +272,39 @@ const DungeonSetpieceEdit = (props) => {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <TextField
-            onChange={(event) => setNewMin(event.target.value)}
-            value={newMin ? newMin : ''}
-            id="new-min"
-            label={newMin ? "" : t("Min value")}
-            type='number'
-            variant="outlined"
-            sx={{ width: "100%" }} />
+          <FormControl fullWidth>
+            <InputLabel id="dungeon-position-select-label">{t("Position in dungeon")}</InputLabel>
+            <Select
+              labelId="dungeon-position-select-label"
+              id="dungeon-position-select"
+              value={newPositionInDungeon}
+              label="Position in dungeon"
+              onChange={(event) => setNewPositionInDungeon(event.target.value)}
+            >
+              <MenuItem value={"start"}>Start</MenuItem>
+              <MenuItem value={"middle"}>Middle</MenuItem>
+              <MenuItem value={"end"}>End</MenuItem>
+              <MenuItem value={"any"}>Any</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <TextField
-            onChange={(event) => setNewMax(event.target.value)}
-            value={newMax ? newMax : ''}
-            id="new-max"
-            label={newMax ? "" : t("Max value")}
-            type='number'
-            variant="outlined"
-            sx={{ width: "100%" }} />
+          <FormControl fullWidth>
+            <InputLabel id="appearance-rate-select-label">{t("Appearance Rate")}</InputLabel>
+            <Select
+              labelId="appearance-rate-select-label"
+              id="dappearance-rate-select"
+              value={newRate}
+              label="Appearance Rate"
+              onChange={(event) => setNewRate(event.target.value)}
+              disabled={newPositionInDungeon === "start" || newPositionInDungeon === "end"}
+            >
+              <MenuItem value={"common"}>Common</MenuItem>
+              <MenuItem value={"uncommon"}>Uncommon</MenuItem>
+              <MenuItem value={"rare"}>Rare</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
@@ -392,14 +387,14 @@ const DungeonSetpieceEdit = (props) => {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>
-          <Button onClick={props.endEditing} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to setpiece sets list")}</Button>
+          <Button onClick={props.endEditing} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to setpieces list")}</Button>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
       </Grid >
     );
   } else {
     // get result from itemToDelete
-    const result = setpiece.rng.find((rng) => rng.min + '-' + rng.max === itemToDelete).result;
+    const result = setpiece.rng.find((rng, index) => index === itemToDelete - 1).description;
 
     return <Grid container >
       <Grid item xs={12}>&nbsp;</Grid>
