@@ -1,4 +1,4 @@
-import { store } from '../store';
+import { store } from '../../store';
 
 
 const getDungeonSetRng = (items) => {
@@ -35,7 +35,7 @@ const getDungeonSetRng = (items) => {
 
 }
 
-export const getDungeonRooms = async (setpieceId, numberOfRooms, trapSetId, puzzleSetId, monsterSetId, treasureSetId) => {
+export const getDungeonRooms = (setpieceId, numberOfRooms, trapSetId, puzzleSetId, monsterSetId, treasureSetId) => {
     const content = store.getState().content;
     const setpiece = content.dungeonSetpieces.find(setpiece => setpiece.id === setpieceId);
     let trapSet = content.dungeonTrapSets.find(item => item.id === trapSetId);
@@ -44,7 +44,7 @@ export const getDungeonRooms = async (setpieceId, numberOfRooms, trapSetId, puzz
     let treasureSet = content.dungeonTreasureSets.find(item => item.id === treasureSetId);
 
     const result = {
-        statusMessage: 'init',
+        statusMessage: 'error general error',
         rooms: []
     }
 
@@ -196,6 +196,7 @@ export const getDungeonRooms = async (setpieceId, numberOfRooms, trapSetId, puzz
         result.rooms.push(room);
     });
 
+    result.statusMessage = 'success';
     return result;
 }
 

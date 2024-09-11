@@ -1,12 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Dungeon } from '../../snippets/dungeons/Dungeon.js';
+import { Dungeon } from '../../../snippets/dungeons/Dungeon.js';
 
 
-const Test = () => {
-
-  const bottomBarHeight = 160;
-  const iconbarHeight = 50;
-  const DungeonCreate = () => {
+/*
     const props = {
       width: 40,
       height: 40,
@@ -14,11 +10,18 @@ const Test = () => {
       roomMinSize: 3,
       roomMaxSize: 4
     };
+*/
 
-    const dungeon = new Dungeon(props.width, props.height, props.roomTypes);
-    dungeon.generateRooms(props.roomMinSize, props.roomMaxSize);
-    //dungeon.generateCorridors();
-    return dungeon;
+const DungeonCanvas = (props) => {
+
+  const bottomBarHeight = 160;
+  const iconbarHeight = 50;
+
+  const DungeonCreate = () => {
+
+    const newDungeon = new Dungeon(props.width, props.height, props.roomTypes);
+    newDungeon.generateRooms(props.roomMinSize, props.roomMaxSize);
+    return newDungeon;
   }
 
   const canvasRef = useRef(null);
@@ -37,13 +40,16 @@ const Test = () => {
     height: window.innerHeight,
   });
 
-  const [dungeon] = useState(DungeonCreate());
+  const [dungeon, setDungeon] = useState(DungeonCreate());
   const [drawnCorridors, setDrawnCorridors] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState(0);
   const [xInc, setXInc] = useState(0);
   const [yInc, setYInc] = useState(0);
   const [noPaths, setNoPaths] = useState(true);
 
+  useEffect(() => {
+    setDungeon(DungeonCreate());
+  }, [props.width, props.height, props.roomTypes, props.roomMinSize, props.roomMaxSize]);
 
   const mouseDown = (event) => {
     mouseDownRef.current = true;
@@ -439,4 +445,4 @@ const Test = () => {
 };
 
 
-export default Test;
+export default DungeonCanvas;

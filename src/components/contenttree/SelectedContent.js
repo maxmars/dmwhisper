@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import Information from '../contentwidgets/Information';
 import Table from '../contentwidgets/Table';
 import AreaMap from '../contentwidgets/AreaMap';
-import DungeonMap from '../contentwidgets/DungeonMap';
+import DungeonMap from '../contentwidgets/dungeons/DungeonMap';
 import Menu from '../contentwidgets/Menu';
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
