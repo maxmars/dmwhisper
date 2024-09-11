@@ -1,10 +1,13 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
+import { getDungeonRooms } from '../../snippets/DungeonLib';
 
 
 export default function DungeonMap(props) {
 
-    console.log(props);
+    getDungeonRooms(props.content.data.dungeon.setpiece, props.content.data.dungeon.rooms, 
+        props.content.data.dungeon.trapSet, props.content.data.dungeon.puzzleSet, 
+        props.content.data.dungeon.monsterSet, props.content.data.dungeon.treasureSet);
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
