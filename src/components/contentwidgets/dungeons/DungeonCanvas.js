@@ -49,6 +49,7 @@ const DungeonCanvas = (props) => {
 
   useEffect(() => {
     setDungeon(DungeonCreate());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.width, props.height, props.roomTypes, props.roomMinSize, props.roomMaxSize]);
 
   const mouseDown = (event) => {
@@ -105,6 +106,14 @@ const DungeonCanvas = (props) => {
 
     const zoomInIconFile = `${process.env.PUBLIC_URL}/zoom_in.png`;
     imgZoomIn.src = zoomInIconFile;
+
+    const imgInfo = new Image();
+    imgInfo.onload = () => {
+      ctx.drawImage(imgInfo, 180, windowSize.height - bottomBarHeight - iconbarHeight);
+    };
+
+    const InfoIconFile = `${process.env.PUBLIC_URL}/info.png`;
+    imgInfo.src = InfoIconFile;
   }
 
   useEffect(() => {
