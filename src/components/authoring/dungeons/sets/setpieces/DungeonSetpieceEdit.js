@@ -196,12 +196,12 @@ const DungeonSetpieceEdit = (props) => {
   }
 
   const editRNGValues = (rngId) => {
-    setNewLabel(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).description);
-    setNewPositionInDungeon(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).positionInDungeon);
-    setNewRate(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).appearanceRate);
-    setNewMaxOccurrences(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).maxAppears);
-    setCurrentMenuTable(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).table);
-    setCurrentMenuContent(setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngId).textContent);
+    setNewLabel(setpiece.rng[rngId - 1].description);
+    setNewPositionInDungeon(setpiece.rng[rngId - 1].positionInDungeon);
+    setNewRate(setpiece.rng[rngId - 1].appearanceRate);
+    setNewMaxOccurrences(setpiece.rng[rngId - 1].maxAppears);
+    setCurrentMenuTable(setpiece.rng[rngId - 1].table);
+    setCurrentMenuContent(setpiece.rng[rngId - 1].textContent);
   }
 
   if (itemToDelete === null) {
