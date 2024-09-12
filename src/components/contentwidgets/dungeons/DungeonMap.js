@@ -35,6 +35,7 @@ export default function DungeonMap(props) {
     const [dungeonRooms, setDungeonRooms] = useState(null);
     const [dungeon, setDungeon] = useState(DungeonCreate(null));
     const [roomContentsDialogOpen, setRoomContentsDialogOpen] = useState(false);
+    const [selectedRoom, setSelectedRoom] = useState(0);
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -61,90 +62,106 @@ export default function DungeonMap(props) {
         };
     }) : [];
 
+    const onRoomSelect = (room) => {
+        setSelectedRoom(room);
+    }
+
+    const onInfoClick = () => {
+        setRoomContentsDialogOpen(true);
+    }
+
+    const getRoomInfoDialog = () => {
+        try {
+            return (
+                <Dialog onClose={(e) => setRoomContentsDialogOpen(false)} open={roomContentsDialogOpen}>
+                    <DialogTitle>{dungeonRooms[selectedRoom].description}</DialogTitle>
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ArrowDropDownIcon />}
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                        >
+                            <Typography>{t('Room Description')}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].textContent }} />
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ArrowDropDownIcon />}
+                            aria-controls="panel2-content"
+                            id="panel2-header"
+                        >
+                            <Typography>{t('Monsters') + ': ' + dungeonRooms[selectedRoom].monster.description}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].monster.textContent }} />
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ArrowDropDownIcon />}
+                            aria-controls="panel2-content"
+                            id="panel2-header"
+                        >
+                            <Typography>{t('Traps')}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].trap.textContent }} />
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ArrowDropDownIcon />}
+                            aria-controls="panel2-content"
+                            id="panel2-header"
+                        >
+                            <Typography>{t('Treasures')}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].treasure.textContent }} />
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ArrowDropDownIcon />}
+                            aria-controls="panel2-content"
+                            id="panel2-header"
+                        >
+                            <Typography>{t('Puzzles') + ': ' + dungeonRooms[selectedRoom].puzzle.description}</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Typography>
+                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].puzzle.textContent }} />
+                            </Typography>
+                        </AccordionDetails>
+                    </Accordion>
+                </Dialog>
+            );
+        } catch (e) {
+            return null;
+        }
+    }
+
     return (
         <div>
-            <Dialog onClose={(e) => setRoomContentsDialogOpen(false)} open={roomContentsDialogOpen}>
-                <DialogTitle>{t('Dungeon Room')}</DialogTitle>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ArrowDropDownIcon />}
-                        aria-controls="panel1-content"
-                        id="panel1-header"
-                    >
-                        <Typography>{t('Room contents')}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget.
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ArrowDropDownIcon />}
-                        aria-controls="panel2-content"
-                        id="panel2-header"
-                    >
-                        <Typography>{t('Monsters')}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget.
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>            
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ArrowDropDownIcon />}
-                        aria-controls="panel2-content"
-                        id="panel2-header"
-                    >
-                        <Typography>{t('Traps')}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget.
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>            
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ArrowDropDownIcon />}
-                        aria-controls="panel2-content"
-                        id="panel2-header"
-                    >
-                        <Typography>{t('Treasures')}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget.
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>            
-                <Accordion>
-                    <AccordionSummary
-                        expandIcon={<ArrowDropDownIcon />}
-                        aria-controls="panel2-content"
-                        id="panel2-header"
-                    >
-                        <Typography>{t('Puzzles')}</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                            malesuada lacus ex, sit amet blandit leo lobortis eget.
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion>            
-            </Dialog>
+            {getRoomInfoDialog()}
             <DungeonCanvas
                 dungeon={dungeon}
                 width={props.content.data.dungeon.rooms * 3}
                 height={props.content.data.dungeon.rooms * 4}
+                selectedRoom={selectedRoom}
+                onRoomSelect={onRoomSelect}
+                onInfoClick={onInfoClick}
                 roomTypes={roomTypes}
                 roomMinSize={3} roomMaxSize={4} />
         </div>

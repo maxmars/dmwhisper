@@ -33,7 +33,6 @@ const DungeonCanvas = (props) => {
   });
 
   const [drawnCorridors, setDrawnCorridors] = useState([]);
-  const [selectedRoom, setSelectedRoom] = useState(0);
   const [xInc, setXInc] = useState(0);
   const [yInc, setYInc] = useState(0);
   const [noPaths, setNoPaths] = useState(true);
@@ -164,9 +163,9 @@ const DungeonCanvas = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [canvasRef, zoomlevel, mapOffset, currentDragDistance, currentDragDistance.x,
     currentDragDistance.y, windowSize.width, windowSize.height,
-    drawnCorridors, props.dungeon.rooms, xInc, yInc, selectedRoom]);
+    drawnCorridors, props.dungeon.rooms, xInc, yInc, props.selectedRoom]);
 
-    
+
   const drawCorridors = (color, all) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
@@ -188,8 +187,8 @@ const DungeonCanvas = (props) => {
 
         context.strokeStyle = color;
         // if (i % 2 === 0) {
-          context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
-          context.strokeRect(currCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
+        context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
+        context.strokeRect(currCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
         // } else {
         //   context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
         //   context.strokeRect(prevCenter.x * xInc + 5 + realX, currCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
@@ -235,7 +234,7 @@ const DungeonCanvas = (props) => {
 
       context.fillRect(room.x * xInc + realX, room.y * yInc + realY, room.width * xInc, room.height * yInc);
 
-      if (index === selectedRoom) {
+      if (index === props.selectedRoom) {
         context.strokeStyle = 'yellow';
         context.strokeRect(room.x * xInc + realX, room.y * yInc + realY, room.width * xInc, room.height * yInc);
       }
@@ -266,7 +265,7 @@ const DungeonCanvas = (props) => {
   const roomClicked = (x, y) => {
     let clickedRoomNumber = getClickedRoomNumber(x, y);
 
-    setSelectedRoom(clickedRoomNumber);
+    props.onRoomSelect(clickedRoomNumber);
 
     if (clickedRoomNumber === 0) {
       clickedRoomNumber = 1;
@@ -337,6 +336,13 @@ const DungeonCanvas = (props) => {
       return;
     }
 
+    // If click is inside the info icon, toggle the info visibility
+    if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
+      e.clientX <= 230 && e.clientX >= 180) {
+      props.onInfoClick();
+      return;
+    }
+
     // get the canvas coordinates of the click
     const x = (e.clientX - mapOffset.x - bcr.left) / xInc;
     const y = (e.clientY - mapOffset.y - bcr.top) / yInc;
@@ -373,6 +379,13 @@ const DungeonCanvas = (props) => {
         touch.clientX <= 170 && touch.clientX >= 120) {
         if (zoomlevel < 4)
           setZoomlevel(zoomlevel + 1);
+        return;
+      }
+
+      // If click is inside the info icon, toggle the info visibility
+      if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
+        touch.clientX <= 230 && touch.clientX >= 180) {
+        props.onInfoClick();
         return;
       }
 
