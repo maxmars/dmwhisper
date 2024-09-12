@@ -1,16 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 
 
-/*
-    const props = {
-      width: 40,
-      height: 40,
-      roomTypes: [{ name: 'kitchen', occurrences: 2 }, { name: 'bedroom', occurrences: 5 }, { name: 'dining room', occurrences: 2 }, { name: 'bathroom', occurrences: 3 }, { name: 'study', occurrences: 4 }],
-      roomMinSize: 3,
-      roomMaxSize: 4
-    };
-*/
-
 const DungeonCanvas = (props) => {
 
   const bottomBarHeight = 160;
@@ -18,7 +8,7 @@ const DungeonCanvas = (props) => {
 
   const canvasRef = useRef(null);
   const mouseDownRef = useRef(false);
-  const [zoomlevel, setZoomlevel] = useState(1);
+  const [zoomlevel, setZoomlevel] = useState(0.75);
   const mouseDragStartRef = useRef({ x: 0, y: 0 });
 
   const [currentDragDistance, setCurrentDragDistance] = useState({
@@ -243,11 +233,6 @@ const DungeonCanvas = (props) => {
     // draw selected corridors
     drawCorridors('red', false);
 
-    // draw borders
-    context.strokeStyle = 'yellow';
-    context.lineWidth = 5;
-    context.strokeRect(0, 0, canvas.width, canvas.height - iconbarHeight - 5);
-
     drawPathIcon();
   }
 
@@ -323,8 +308,8 @@ const DungeonCanvas = (props) => {
     // If click is inside the zoom out icon, toggle the path visibility
     if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
       e.clientX <= 110 && e.clientX >= 60) {
-      if (zoomlevel > 1)
-        setZoomlevel(zoomlevel - 1);
+      if (zoomlevel > 0.5)
+        setZoomlevel(zoomlevel - 0.25);
       return;
     }
 
@@ -332,7 +317,7 @@ const DungeonCanvas = (props) => {
     if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
       e.clientX <= 170 && e.clientX >= 120) {
       if (zoomlevel < 4)
-        setZoomlevel(zoomlevel + 1);
+        setZoomlevel(zoomlevel + 0.25);
       return;
     }
 
@@ -369,8 +354,8 @@ const DungeonCanvas = (props) => {
       // If click is inside the zoom out icon, toggle the path visibility
       if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
         touch.clientX <= 110 && touch.clientX >= 60) {
-        if (zoomlevel > 1)
-          setZoomlevel(zoomlevel - 1);
+        if (zoomlevel > 0.5)
+          setZoomlevel(zoomlevel - 0.25);
         return;
       }
 
@@ -378,7 +363,7 @@ const DungeonCanvas = (props) => {
       if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
         touch.clientX <= 170 && touch.clientX >= 120) {
         if (zoomlevel < 4)
-          setZoomlevel(zoomlevel + 1);
+          setZoomlevel(zoomlevel + 0.25);
         return;
       }
 

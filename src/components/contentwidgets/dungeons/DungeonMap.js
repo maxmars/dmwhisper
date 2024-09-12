@@ -164,19 +164,23 @@ export default function DungeonMap(props) {
         }
     }
 
+    try {
     return (
         <div>
             {getRoomInfoDialog()}
             <DungeonCanvas
+                style={{ width: '90%'}}
                 dungeon={dungeon}
-                width={props.content.data.dungeon.rooms * 3}
-                height={props.content.data.dungeon.rooms * 4}
                 selectedRoom={selectedRoom}
                 onRoomSelect={onRoomSelect}
                 onInfoClick={onInfoClick}
                 roomTypes={roomTypes}
                 roomMinSize={3} roomMaxSize={4} />
+            <Typography>{dungeonRooms[selectedRoom].description}</Typography>
         </div>
     );
+    } catch (e) {
+        return null;
+    }
 
 };
