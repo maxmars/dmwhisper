@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { getDungeonRooms } from '../../../snippets/dungeons/DungeonLib';
 import DungeonCanvas from './DungeonCanvas';
 import { Dungeon } from '../../../snippets/dungeons/Dungeon.js';
+import Grid from '@mui/material/Grid';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Typography } from '@mui/material';
@@ -165,20 +166,26 @@ export default function DungeonMap(props) {
     }
 
     try {
-    return (
-        <div>
-            {getRoomInfoDialog()}
-            <DungeonCanvas
-                style={{ width: '90%'}}
-                dungeon={dungeon}
-                selectedRoom={selectedRoom}
-                onRoomSelect={onRoomSelect}
-                onInfoClick={onInfoClick}
-                roomTypes={roomTypes}
-                roomMinSize={3} roomMaxSize={4} />
-            <Typography>{dungeonRooms[selectedRoom].description}</Typography>
-        </div>
-    );
+        return (
+            <Grid container >
+                <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+                    {getRoomInfoDialog()}
+                </Grid>
+                <Grid item xs={12}>
+                    <DungeonCanvas
+                        style={{ width: '90%' }}
+                        dungeon={dungeon}
+                        selectedRoom={selectedRoom}
+                        onRoomSelect={onRoomSelect}
+                        onInfoClick={onInfoClick}
+                        roomTypes={roomTypes}
+                        roomMinSize={3} roomMaxSize={4} />
+                </Grid>
+                <Grid item xs={12} style={{ display: 'flex', justifyContent: 'left' }}>
+                    <Typography>{dungeonRooms && dungeonRooms[selectedRoom] ? dungeonRooms[selectedRoom].description : ""}</Typography>
+                </Grid>
+            </Grid>
+        );
     } catch (e) {
         return null;
     }

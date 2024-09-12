@@ -298,16 +298,18 @@ const DungeonCanvas = (props) => {
     const canvas = canvasRef.current;
     const bcr = canvas.getBoundingClientRect();
 
+    console.log(e.clientX - bcr.left);
+
     // If click is inside the path icon, toggle the path visibility
     if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-      e.clientX <= 50) {
+      e.clientX - bcr.left <= 50) {
       setNoPaths(!noPaths);
       return;
     }
 
     // If click is inside the zoom out icon, toggle the path visibility
     if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-      e.clientX <= 110 && e.clientX >= 60) {
+      e.clientX - bcr.left <= 110 && e.clientX >= 60) {
       if (zoomlevel > 0.5)
         setZoomlevel(zoomlevel - 0.25);
       return;
@@ -315,7 +317,7 @@ const DungeonCanvas = (props) => {
 
     // If click is inside the zoom in icon, toggle the path visibility
     if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-      e.clientX <= 170 && e.clientX >= 120) {
+      e.clientX - bcr.left <= 170 && e.clientX >= 120) {
       if (zoomlevel < 4)
         setZoomlevel(zoomlevel + 0.25);
       return;
@@ -323,7 +325,7 @@ const DungeonCanvas = (props) => {
 
     // If click is inside the info icon, toggle the info visibility
     if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-      e.clientX <= 230 && e.clientX >= 180) {
+      e.clientX - bcr.left <= 230 && e.clientX >= 180) {
       props.onInfoClick();
       return;
     }
@@ -346,14 +348,14 @@ const DungeonCanvas = (props) => {
 
       // If click is inside the path icon, toggle the path visibility
       if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-        touch.clientX <= 50) {
+        touch.clientX - bcr.left <= 50) {
         setNoPaths(!noPaths);
         return;
       }
 
       // If click is inside the zoom out icon, toggle the path visibility
       if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-        touch.clientX <= 110 && touch.clientX >= 60) {
+        touch.clientX - bcr.left <= 110 && touch.clientX >= 60) {
         if (zoomlevel > 0.5)
           setZoomlevel(zoomlevel - 0.25);
         return;
@@ -361,7 +363,7 @@ const DungeonCanvas = (props) => {
 
       // If click is inside the zoom in icon, toggle the path visibility
       if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-        touch.clientX <= 170 && touch.clientX >= 120) {
+        touch.clientX - bcr.left <= 170 && touch.clientX >= 120) {
         if (zoomlevel < 4)
           setZoomlevel(zoomlevel + 0.25);
         return;
@@ -369,7 +371,7 @@ const DungeonCanvas = (props) => {
 
       // If click is inside the info icon, toggle the info visibility
       if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-        touch.clientX <= 230 && touch.clientX >= 180) {
+        touch.clientX - bcr.left <= 230 && touch.clientX >= 180) {
         props.onInfoClick();
         return;
       }
