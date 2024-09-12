@@ -17,19 +17,23 @@ export default function DungeonMap(props) {
 
     const DungeonCreate = (rooms) => {
 
-        const dungeonWidth = props.content.data.dungeon.rooms * 3;
-        const dungeonHeight = props.content.data.dungeon.rooms * 4;
+        try {
+            const dungeonWidth = props.content.data.dungeon.rooms * 3;
+            const dungeonHeight = props.content.data.dungeon.rooms * 4;
 
-        const roomTypes = rooms ? rooms.map((room, index) => {
-            return {
-                name: index,
-                occurrences: 1
-            };
-        }) : [];
+            const roomTypes = rooms ? rooms.map((room, index) => {
+                return {
+                    name: index,
+                    occurrences: 1
+                };
+            }) : [];
 
-        const newDungeon = new Dungeon(dungeonWidth, dungeonHeight, roomTypes);
-        newDungeon.generateRooms(3, 4);
-        return newDungeon;
+            const newDungeon = new Dungeon(dungeonWidth, dungeonHeight, roomTypes);
+            newDungeon.generateRooms(3, 4);
+            return newDungeon;
+        } catch (e) {
+            return null;
+        }
     }
 
     const [dungeonRooms, setDungeonRooms] = useState(null);

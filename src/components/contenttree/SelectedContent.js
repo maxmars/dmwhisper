@@ -28,9 +28,40 @@ const SelectedContent = (props) => {
           return <Table currentTab={props.currentTab} content={props.selectedContent} />;
 
         case "map":
+          const mapData = props.selectedContent;
+          if (!mapData.data || !mapData.data.map ||
+            !mapData.data.map.setpiece || !mapData.data.map.density ||
+            !mapData.data.map.grid) {
+            return (
+              <div>
+                <br />
+                <br />
+                <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                  <Typography>{'Error: Map data missing or incomplete'}</Typography>
+                </div>
+              </div>
+            );
+          }
+
           return <AreaMap currentTab={props.currentTab} content={props.selectedContent} />;
 
         case "dungeon":
+          const dungeonData = props.selectedContent;
+          if (!dungeonData.data || !dungeonData.data.dungeon ||
+            !dungeonData.data.dungeon.rooms || !dungeonData.data.dungeon.setpiece ||
+            !dungeonData.data.dungeon.trapSet || !dungeonData.data.dungeon.puzzleSet ||
+            !dungeonData.data.dungeon.monsterSet || !dungeonData.data.dungeon.treasureSet) {
+            return (
+              <div>
+                <br />
+                <br />
+                <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+                  <Typography>{'Error: Dungeon data missing or incomplete'}</Typography>
+                </div>
+              </div>
+            );
+          }
+
           return <DungeonMap currentTab={props.currentTab} content={props.selectedContent} />;
 
         default:

@@ -10,10 +10,10 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import DataObjectIcon from '@mui/icons-material/DataObject';
 import TableChartIcon from '@mui/icons-material/TableChart';
-import EngineeringIcon from '@mui/icons-material/Engineering';
 import InfoIcon from '@mui/icons-material/Info';
 import Info from './info/Info';
-import Test from './testbed/Test';
+// import EngineeringIcon from '@mui/icons-material/Engineering';
+// import Test from './testbed/Test';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setContent, clearTabPath } from '../store/slices/content';
@@ -163,14 +163,14 @@ const DMWhisper = () => {
             <ListItemText primary={t("Info")} />
           </ListItemButton>
         </ListItem>
-        <ListItem key="test" disablePadding>
+        {/* <ListItem key="test" disablePadding>
           <ListItemButton onClick={() => setTab(7)}>
             <ListItemIcon>
               <EngineeringIcon />
             </ListItemIcon>
             <ListItemText primary={t("Test")} />
           </ListItemButton>
-        </ListItem>
+        </ListItem> */}
       </List>
     </Box>
   );
@@ -201,7 +201,7 @@ const DMWhisper = () => {
           {tab === 4 && <InputMenu />}
           {tab === 5 && <OutputMenu />}
           {tab === 6 && <Info />}
-          {tab === 7 && <Test />}
+          {/* {tab === 7 && <Test />} */}
         </div>
       </ThemeProvider>
 
