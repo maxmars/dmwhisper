@@ -22,11 +22,17 @@ const content = createSlice({
             }
         },
         setContent(state, action) {
-            const { tree, tables, setpieces } = action.payload;
+            const { tree, tables, setpieces, 
+                    dungeonMonsterSets, dungeonPuzzleSets, dungeonTrapSets, dungeonTreasureSets, dungeonSetpieces } = action.payload;
 
             state.tree = tree;
             state.tables = tables;
             state.setpieces = setpieces;
+            state.dungeonMonsterSets = dungeonMonsterSets;
+            state.dungeonPuzzleSets = dungeonPuzzleSets;
+            state.dungeonTrapSets = dungeonTrapSets;
+            state.dungeonTreasureSets = dungeonTreasureSets;
+            state.dungeonSetpieces = dungeonSetpieces;
             state.copiedContent = null;
             state.clipboardAction = null;
         },

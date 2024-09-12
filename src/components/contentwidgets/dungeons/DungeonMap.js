@@ -43,17 +43,25 @@ export default function DungeonMap(props) {
     const { t } = useTranslation();
 
     useEffect(() => {
-        setDungeon(DungeonCreate(dungeonRooms));
+        try {
+            setDungeon(DungeonCreate(dungeonRooms));
+        } catch (e) {
+            console.error(e);
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.content.data.dungeon.rooms, dungeonRooms]);
 
     useEffect(() => {
-        const roomsResult = getDungeonRooms(props.content.data.dungeon.setpiece, props.content.data.dungeon.rooms,
-            props.content.data.dungeon.trapSet, props.content.data.dungeon.puzzleSet,
-            props.content.data.dungeon.monsterSet, props.content.data.dungeon.treasureSet);
+        try {
+            const roomsResult = getDungeonRooms(props.content.data.dungeon.setpiece, props.content.data.dungeon.rooms,
+                props.content.data.dungeon.trapSet, props.content.data.dungeon.puzzleSet,
+                props.content.data.dungeon.monsterSet, props.content.data.dungeon.treasureSet);
 
-        if (roomsResult.statusMessage === 'success') {
-            setDungeonRooms(roomsResult.rooms);
+            if (roomsResult.statusMessage === 'success') {
+                setDungeonRooms(roomsResult.rooms);
+            }
+        } catch (e) {
+            console.error(e);
         }
     }, [props.content.data.dungeon.setpiece, props.content.data.dungeon.rooms,
     props.content.data.dungeon.trapSet, props.content.data.dungeon.puzzleSet,
