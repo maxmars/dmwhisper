@@ -121,7 +121,12 @@ const ContentsList = () => {
       label: label,
       tree: currentContent.tree,
       tables: currentContent.tables,
-      setpieces: currentContent.setpieces
+      setpieces: currentContent.setpieces,
+      dungeonSetpieces: currentContent.dungeonSetpieces,
+      dungeonMonsterSets: currentContent.dungeonMonsterSets,
+      dungeonTreasureSets: currentContent.dungeonTreasureSets,
+      dungeonTrapSets: currentContent.dungeonTrapSets,
+      dungeonPuzzleSets: currentContent.dungeonPuzzleSets
     }
 
     await set("content" + selectedSlot, savedContent);
