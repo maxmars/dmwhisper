@@ -25,7 +25,6 @@ const DungeonCanvas = (props) => {
   const [drawnCorridors, setDrawnCorridors] = useState([]);
   const [xInc, setXInc] = useState(0);
   const [yInc, setYInc] = useState(0);
-  const [noPaths, setNoPaths] = useState(true);
 
   const mouseDown = (event) => {
     mouseDownRef.current = true;
@@ -51,24 +50,15 @@ const DungeonCanvas = (props) => {
     });
   };
 
-  const drawPathIcon = () => {
+  const drawIcons = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
     ctx.clearRect(0, canvas.height - iconbarHeight - 5, canvas.width, iconbarHeight + 5);
 
-    const img = new Image();
-
-    img.onload = () => {
-      ctx.drawImage(img, 0, windowSize.height - bottomBarHeight - iconbarHeight);
-    };
-
-    const pathIconFile = `${process.env.PUBLIC_URL}/path_${noPaths === true ? 'off' : 'on'}.png`;
-    img.src = pathIconFile;
-
     const imgZoomOut = new Image();
     imgZoomOut.onload = () => {
-      ctx.drawImage(imgZoomOut, 60, windowSize.height - bottomBarHeight - iconbarHeight);
+      ctx.drawImage(imgZoomOut, 0, windowSize.height - bottomBarHeight - iconbarHeight);
     };
 
     const zoomOutIconFile = `${process.env.PUBLIC_URL}/zoom_out.png`;
@@ -76,7 +66,7 @@ const DungeonCanvas = (props) => {
 
     const imgZoomIn = new Image();
     imgZoomIn.onload = () => {
-      ctx.drawImage(imgZoomIn, 120, windowSize.height - bottomBarHeight - iconbarHeight);
+      ctx.drawImage(imgZoomIn, 60, windowSize.height - bottomBarHeight - iconbarHeight);
     };
 
     const zoomInIconFile = `${process.env.PUBLIC_URL}/zoom_in.png`;
@@ -84,7 +74,7 @@ const DungeonCanvas = (props) => {
 
     const imgInfo = new Image();
     imgInfo.onload = () => {
-      ctx.drawImage(imgInfo, 180, windowSize.height - bottomBarHeight - iconbarHeight);
+      ctx.drawImage(imgInfo, 120, windowSize.height - bottomBarHeight - iconbarHeight);
     };
 
     const InfoIconFile = `${process.env.PUBLIC_URL}/info.png`;
@@ -92,17 +82,13 @@ const DungeonCanvas = (props) => {
   }
 
   useEffect(() => {
-    if (noPaths === true) {
-      setDrawnCorridors([]);
-    } else {
-      setDrawnCorridors([...Array(props.dungeon.rooms.length).keys()]);
-    }
-  }, [noPaths, props.dungeon.rooms.length]);
+    setDrawnCorridors([...Array(props.dungeon.rooms.length).keys()]);
+  }, [props.dungeon.rooms.length]);
 
   useEffect(() => {
-    drawPathIcon();
+    drawIcons();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [noPaths, windowSize.height, bottomBarHeight, iconbarHeight]);
+  }, [windowSize.height, bottomBarHeight, iconbarHeight]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -176,19 +162,64 @@ const DungeonCanvas = (props) => {
         let currCenter = { x: currRoom.x + Math.floor(currRoom.width / 2), y: currRoom.y + Math.floor(currRoom.height / 2) };
 
         context.strokeStyle = color;
-        // if (i % 2 === 0) {
         context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
         context.strokeRect(currCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
-        // } else {
-        //   context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
-        //   context.strokeRect(prevCenter.x * xInc + 5 + realX, currCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
-        // }
 
         context.strokeStyle = 'yellow';
         context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, 5);
         context.strokeRect(currCenter.x * xInc + 5 + realX, currCenter.y * yInc + 5 + realY, 5, 5);
 
       }
+    }
+
+  }
+
+  const drawSelectedRoomCorridors = (color) => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext('2d');
+
+    const realX = mapOffset.x + currentDragDistance.x; //mapOffset.x - bcr.left;
+    const realY = mapOffset.y + currentDragDistance.y; //mapOffset.y - bcr.top;
+
+    // draw the corridors
+    context.lineWidth = 5;
+
+    if (props.selectedRoom === -1) {
+      return;
+    }
+
+    if (props.selectedRoom > 0) {
+      let prevRoom = props.dungeon.rooms[props.selectedRoom - 1];
+      let currRoom = props.dungeon.rooms[props.selectedRoom];
+
+      let prevCenter = { x: prevRoom.x + Math.floor(prevRoom.width / 2), y: prevRoom.y + Math.floor(prevRoom.height / 2) };
+      let currCenter = { x: currRoom.x + Math.floor(currRoom.width / 2), y: currRoom.y + Math.floor(currRoom.height / 2) };
+
+      context.strokeStyle = color;
+
+      context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
+      context.strokeRect(currCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
+
+      context.strokeStyle = 'yellow';
+      context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, 5);
+      context.strokeRect(currCenter.x * xInc + 5 + realX, currCenter.y * yInc + 5 + realY, 5, 5);
+    }
+
+    if (props.selectedRoom < props.dungeon.rooms.length - 1) {
+      let prevRoom = props.dungeon.rooms[props.selectedRoom];
+      let currRoom = props.dungeon.rooms[props.selectedRoom + 1];
+
+      let prevCenter = { x: prevRoom.x + Math.floor(prevRoom.width / 2), y: prevRoom.y + Math.floor(prevRoom.height / 2) };
+      let currCenter = { x: currRoom.x + Math.floor(currRoom.width / 2), y: currRoom.y + Math.floor(currRoom.height / 2) };
+
+      context.strokeStyle = color;
+
+      context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
+      context.strokeRect(currCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
+
+      context.strokeStyle = 'yellow';
+      context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, 5);
+      context.strokeRect(currCenter.x * xInc + 5 + realX, currCenter.y * yInc + 5 + realY, 5, 5);
     }
 
   }
@@ -231,9 +262,9 @@ const DungeonCanvas = (props) => {
     });
 
     // draw selected corridors
-    drawCorridors('red', false);
+    drawSelectedRoomCorridors('red');
 
-    drawPathIcon();
+    drawIcons();
   }
 
   const getClickedRoomNumber = (x, y) => {
@@ -300,16 +331,9 @@ const DungeonCanvas = (props) => {
 
     console.log(e.clientX - bcr.left);
 
-    // If click is inside the path icon, toggle the path visibility
-    if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-      e.clientX - bcr.left <= 50) {
-      setNoPaths(!noPaths);
-      return;
-    }
-
     // If click is inside the zoom out icon, toggle the path visibility
     if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-      e.clientX - bcr.left <= 110 && e.clientX >= 60) {
+      e.clientX - bcr.left <= 50 && e.clientX >= 0) {
       if (zoomlevel > 0.5)
         setZoomlevel(zoomlevel - 0.25);
       return;
@@ -317,7 +341,7 @@ const DungeonCanvas = (props) => {
 
     // If click is inside the zoom in icon, toggle the path visibility
     if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-      e.clientX - bcr.left <= 170 && e.clientX >= 120) {
+      e.clientX - bcr.left <= 110 && e.clientX >= 60) {
       if (zoomlevel < 4)
         setZoomlevel(zoomlevel + 0.25);
       return;
@@ -325,7 +349,7 @@ const DungeonCanvas = (props) => {
 
     // If click is inside the info icon, toggle the info visibility
     if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-      e.clientX - bcr.left <= 230 && e.clientX >= 180) {
+      e.clientX - bcr.left <= 170 && e.clientX >= 120) {
       props.onInfoClick();
       return;
     }
@@ -346,16 +370,9 @@ const DungeonCanvas = (props) => {
       const canvas = canvasRef.current;
       const bcr = canvas.getBoundingClientRect();
 
-      // If click is inside the path icon, toggle the path visibility
-      if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-        touch.clientX - bcr.left <= 50) {
-        setNoPaths(!noPaths);
-        return;
-      }
-
       // If click is inside the zoom out icon, toggle the path visibility
       if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-        touch.clientX - bcr.left <= 110 && touch.clientX >= 60) {
+        touch.clientX - bcr.left <= 50 && touch.clientX >= 0) {
         if (zoomlevel > 0.5)
           setZoomlevel(zoomlevel - 0.25);
         return;
@@ -363,7 +380,7 @@ const DungeonCanvas = (props) => {
 
       // If click is inside the zoom in icon, toggle the path visibility
       if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-        touch.clientX - bcr.left <= 170 && touch.clientX >= 120) {
+        touch.clientX - bcr.left <= 110 && touch.clientX >= 60) {
         if (zoomlevel < 4)
           setZoomlevel(zoomlevel + 0.25);
         return;
@@ -371,7 +388,7 @@ const DungeonCanvas = (props) => {
 
       // If click is inside the info icon, toggle the info visibility
       if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-        touch.clientX - bcr.left <= 230 && touch.clientX >= 180) {
+        touch.clientX - bcr.left <= 170 && touch.clientX >= 120) {
         props.onInfoClick();
         return;
       }
