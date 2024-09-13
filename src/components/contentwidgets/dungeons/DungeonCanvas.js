@@ -19,7 +19,7 @@ const DungeonCanvas = (props) => {
 
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
-    height: window.innerHeight,
+    height: window.innerHeight - 100,
   });
 
   const [drawnCorridors, setDrawnCorridors] = useState([]);

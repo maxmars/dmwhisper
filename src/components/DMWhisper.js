@@ -12,6 +12,8 @@ import DataObjectIcon from '@mui/icons-material/DataObject';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import InfoIcon from '@mui/icons-material/Info';
 import Info from './info/Info';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import DungeonExplore from './contentwidgets/dungeons/DungeonExplore';
 // import EngineeringIcon from '@mui/icons-material/Engineering';
 // import Test from './testbed/Test';
 import React from 'react';
@@ -115,8 +117,16 @@ const DMWhisper = () => {
             <ListItemText primary={t("Saved") + " (" + throws.sequence.length + ")"} />
           </ListItemButton>
         </ListItem>
-        <ListItem key="edit_content" disablePadding>
+        <ListItem key="dungeon" disablePadding>
           <ListItemButton onClick={() => setTab(2)}>
+            <ListItemIcon>
+              <AccountTreeIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("Dungeon Explore")} />
+          </ListItemButton>
+        </ListItem>
+        <ListItem key="edit_content" disablePadding>
+          <ListItemButton onClick={() => setTab(3)}>
             <ListItemIcon>
               <DataObjectIcon />
             </ListItemIcon>
@@ -124,7 +134,7 @@ const DMWhisper = () => {
           </ListItemButton>
         </ListItem>
         <ListItem key="list_of_contents" disablePadding>
-          <ListItemButton onClick={() => setTab(3)}>
+          <ListItemButton onClick={() => setTab(4)}>
             <ListItemIcon>
               <FormatListBulletedIcon />
             </ListItemIcon>
@@ -132,7 +142,7 @@ const DMWhisper = () => {
           </ListItemButton>
         </ListItem>
         <ListItem key="input" disablePadding>
-          <ListItemButton onClick={() => setTab(4)}>
+          <ListItemButton onClick={() => setTab(5)}>
             <ListItemIcon>
               <InputIcon />
             </ListItemIcon>
@@ -140,7 +150,7 @@ const DMWhisper = () => {
           </ListItemButton>
         </ListItem>
         <ListItem key="output" disablePadding>
-          <ListItemButton onClick={() => setTab(5)}>
+          <ListItemButton onClick={() => setTab(6)}>
             <ListItemIcon>
               <OutputIcon />
             </ListItemIcon>
@@ -156,7 +166,7 @@ const DMWhisper = () => {
           </ListItemButton>
         </ListItem>
         <ListItem key="info" disablePadding>
-          <ListItemButton onClick={() => setTab(6)}>
+          <ListItemButton onClick={() => setTab(7)}>
             <ListItemIcon>
               <InfoIcon />
             </ListItemIcon>
@@ -164,7 +174,7 @@ const DMWhisper = () => {
           </ListItemButton>
         </ListItem>
         {/* <ListItem key="test" disablePadding>
-          <ListItemButton onClick={() => setTab(7)}>
+          <ListItemButton onClick={() => setTab(8)}>
             <ListItemIcon>
               <EngineeringIcon />
             </ListItemIcon>
@@ -196,12 +206,13 @@ const DMWhisper = () => {
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'scroll', width: '100%', height: '100%' }}>
           {tab === 0 && <ContentTree />}
           {tab === 1 && <ResultsList />}
-          {tab === 2 && <AuthoringMenu />}
-          {tab === 3 && <ContentsList />}
-          {tab === 4 && <InputMenu />}
-          {tab === 5 && <OutputMenu />}
-          {tab === 6 && <Info />}
-          {/* {tab === 7 && <Test />} */}
+          {tab === 2 && <DungeonExplore />}
+          {tab === 3 && <AuthoringMenu />}
+          {tab === 4 && <ContentsList />}
+          {tab === 5 && <InputMenu />}
+          {tab === 6 && <OutputMenu />}
+          {tab === 7 && <Info />}
+          {/* {tab === 8 && <Test />} */}
         </div>
       </ThemeProvider>
 
