@@ -72,12 +72,20 @@ export const getDungeonRooms = (setpieceId, numberOfRooms, trapSetId, puzzleSetI
     // Generate starting room
     let startRoom = null;
     if (startRooms.length > 0) {
-        startRoom = startRooms[Math.floor(Math.random() * startRooms.length)];
+        const idx = Math.floor(Math.random() * startRooms.length);
+        startRoom = {
+            ...startRooms[idx],
+            index: idx
+        };
     } else if (anyRooms.length > 0) {
-        startRoom = anyRooms[Math.floor(Math.random() * anyRooms.length)];
-        startRoom.maxAppears--;
-        if (startRoom.maxAppears === 0) {
-            anyRooms = anyRooms.filter(room => room.id !== startRoom.id);
+        const idx = Math.floor(Math.random() * anyRooms.length);
+        startRoom = {
+            ...anyRooms[idx],
+            index: idx
+        };
+        anyRooms[idx].maxAppears--;
+        if (anyRooms[idx].maxAppears === 0) {
+            anyRooms = anyRooms.filter((room, index) => index !== startRoom.index);
         }
     } else {
         result.statusMessage = 'error no start room';
@@ -87,12 +95,20 @@ export const getDungeonRooms = (setpieceId, numberOfRooms, trapSetId, puzzleSetI
     // Generate ending room
     let endRoom = null;
     if (endRooms.length > 0) {
-        endRoom = endRooms[Math.floor(Math.random() * endRooms.length)];
+        const idx = Math.floor(Math.random() * endRooms.length);
+        endRoom = {
+            ...endRooms[idx],
+            index: idx
+        }; 
     } else if (anyRooms.length > 0) {
-        endRoom = anyRooms[Math.floor(Math.random() * anyRooms.length)];
-        endRoom.maxAppears--;
-        if (endRoom.maxAppears === 0) {
-            anyRooms = anyRooms.filter(room => room.id !== endRoom.id);
+        const idx = Math.floor(Math.random() * anyRooms.length);
+        endRoom = {
+            ...anyRooms[idx],
+            index: idx
+        };
+        anyRooms[idx].maxAppears--;
+        if (anyRooms[idx].maxAppears === 0) {
+            anyRooms = anyRooms.filter((room, index) => index !== endRoom.index);
         }
     } else {
         result.statusMessage = 'error no end room';
@@ -136,29 +152,41 @@ export const getDungeonRooms = (setpieceId, numberOfRooms, trapSetId, puzzleSetI
             let random = Math.random();
 
             if (random < 0.7 && commonRooms.length > 0) {
-                middleRoom = commonRooms[Math.floor(Math.random() * commonRooms.length)];
-                middleRoom.maxAppears--;
-                if (middleRoom.maxAppears === 0) {
+                const idx = Math.floor(Math.random() * commonRooms.length);
+                middleRoom = {
+                    ...commonRooms[idx],
+                    index: idx
+                };
+                commonRooms[idx].maxAppears--;
+                if (commonRooms[idx].maxAppears === 0) {
                     // eslint-disable-next-line no-loop-func
-                    commonRooms = commonRooms.filter(room => room.id !== middleRoom.id);
+                    commonRooms = commonRooms.filter((room, index) => index !== middleRoom.index);
                 }
             }
 
             if (random >= 0.7 && random < 0.95 && uncommonRooms.length > 0) {
-                middleRoom = uncommonRooms[Math.floor(Math.random() * uncommonRooms.length)];
-                middleRoom.maxAppears--;
-                if (middleRoom.maxAppears === 0) {
+                const idx = Math.floor(Math.random() * uncommonRooms.length);
+                middleRoom = {
+                    ...uncommonRooms[idx],
+                    index: idx
+                };
+                uncommonRooms[idx].maxAppears--;
+                if (uncommonRooms[idx].maxAppears === 0) {
                     // eslint-disable-next-line no-loop-func
-                    uncommonRooms = uncommonRooms.filter(room => room.id !== middleRoom.id);
+                    uncommonRooms = uncommonRooms.filter((room, index) => index !== middleRoom.index);
                 }
             }
 
             if (random >= 0.95 && rareRooms.length > 0) {
-                middleRoom = rareRooms[Math.floor(Math.random() * rareRooms.length)];
-                middleRoom.maxAppears--;
-                if (middleRoom.maxAppears === 0) {
+                const idx = Math.floor(Math.random() * rareRooms.length);
+                middleRoom = {
+                    ...rareRooms[idx],
+                    index: idx
+                };
+                rareRooms[idx].maxAppears--;
+                if (rareRooms[idx].maxAppears === 0) {
                     // eslint-disable-next-line no-loop-func
-                    rareRooms = rareRooms.filter(room => room.id !== middleRoom.id);
+                    rareRooms = rareRooms.filter((room, index) => index !== middleRoom.index);
                 }
             }
 

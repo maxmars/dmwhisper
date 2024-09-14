@@ -29,11 +29,11 @@ export default function DungeonExplore(props) {
     const [dungeonPuzzleSet, setDungeonPuzzleSet] = useState(null);
 
     const { t } = useTranslation();
-    const dungeonSetpieces = useSelector((st) => st.content.dungeonSetpieces);
-    const dungeonMonsterSets = useSelector((st) => st.content.dungeonMonsterSets);
-    const dungeonTrapSets = useSelector((st) => st.content.dungeonTrapSets);
-    const dungeonTreasureSets = useSelector((st) => st.content.dungeonTreasureSets);
-    const dungeonPuzzleSets = useSelector((st) => st.content.dungeonPuzzleSets);
+    const dungeonSetpieces = useSelector((st) => st.content.dungeonSetpieces ? st.content.dungeonSetpieces : []);
+    const dungeonMonsterSets = useSelector((st) => st.content.dungeonMonsterSets ? st.content.dungeonMonsterSets : []);
+    const dungeonTrapSets = useSelector((st) => st.content.dungeonTrapSets ? st.content.dungeonTrapSets : []);
+    const dungeonTreasureSets = useSelector((st) => st.content.dungeonTreasureSets ? st.content.dungeonTreasureSets : []);
+    const dungeonPuzzleSets = useSelector((st) => st.content.dungeonPuzzleSets ? st.content.dungeonPuzzleSets : []);
 
     const DungeonCreate = (rooms) => {
 
@@ -124,6 +124,7 @@ export default function DungeonExplore(props) {
 
             if (roomsResult.statusMessage === 'success') {
                 setDungeonRooms(roomsResult.rooms);
+                setSelectedRoom(0);
             }
         } catch (e) {
             console.error(e);
