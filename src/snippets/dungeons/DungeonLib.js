@@ -196,8 +196,8 @@ export const getDungeonRooms = (setpieceId, numberOfRooms, trapSetId, puzzleSetI
         }
 
         if (middleRoom === null) {
-            result.statusMessage = 'error not enough middle rooms';
-            return result;
+            console.log('warning not enough middle rooms');
+            break;
         }
 
         numberOfRooms--;
