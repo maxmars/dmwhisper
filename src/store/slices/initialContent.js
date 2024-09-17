@@ -30,6 +30,7 @@ const initialContent = {
     "dungeonTrapSets": [],
     "dungeonSetpieces": [],
     "dungeonPuzzleSets": [],
+    "dungeonExploreDefaults": { setpiece: "", monsterset: "", treasureset: "", trapset: "", puzzleset: "", numberOfRooms: 10 },
 }
 
 export default initialContent;

@@ -10,6 +10,11 @@ const content = createSlice({
     name: 'content',
     initialState,
     reducers: {
+        setDungeonExploreDefaults(state, action) {
+            const { setpiece, monsterset, treasureset, trapset, puzzleset } = action.payload;
+
+            state.dungeonExploreDefaults = { setpiece, monsterset, treasureset, trapset, puzzleset, numberOfRooms: 10 };
+        },
         setClipboardAction(state, action) {
             const { copiedContent, clipboardAction } = action.payload;
 
@@ -35,6 +40,7 @@ const content = createSlice({
             state.dungeonSetpieces = dungeonSetpieces;
             state.copiedContent = null;
             state.clipboardAction = null;
+            state.dungeonExploreDefaults = { setpiece: "", monsterset: "", treasureset: "", trapset: "", puzzleset: "" };
         },
         clearContent(state, action) {
             state.tree = initialState.tree;
@@ -854,4 +860,4 @@ export const { setContent, clearContent, setLastTableContent, addTable, removeTa
     updateDungeonSetpieceHeader, updateDungeonTrapSetHeader, updateDungeonTreasureSetHeader,
     updateDungeonMonsterSetItem, updateDungeonPuzzleSetItem, updateDungeonSetpieceItem, updateDungeonTrapSetItem, 
     updateDungeonTreasureSetItem, updateContent, updateContentHeader, addMenuItem, updateContentType,
-    setClipboardAction, deleteMenuItem, setTabPath, clearTabPath } = content.actions;
+    setClipboardAction, deleteMenuItem, setTabPath, clearTabPath, setDungeonExploreDefaults } = content.actions;
