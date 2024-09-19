@@ -86,9 +86,9 @@ const DungeonCanvas = (props) => {
   }, [props.dungeon.rooms.length]);
 
   useEffect(() => {
-    drawIcons();
+    drawMap();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [windowSize.height, bottomBarHeight, iconbarHeight]);
+  }, [windowSize.height, windowSize.width, bottomBarHeight, iconbarHeight]);
 
   useEffect(() => {
     const handleResize = () => {
