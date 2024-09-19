@@ -426,13 +426,6 @@ export default function DungeonExplore(props) {
     const getDungeonPlayer = () => {
         return (
             <Grid container >
-                <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
-                    {getRoomInfoDialog()}
-                </Grid>
-                <Grid item xs={12}>
-                    <Button onClick={() => setPageMode("setup")} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to dungeon setup")}</Button>
-                </Grid>
-                <Grid item xs={12}>&nbsp;</Grid>
                 <Grid item xs={12}>
                     <DungeonCanvas
                         style={{ width: '90%' }}
@@ -445,6 +438,12 @@ export default function DungeonExplore(props) {
                 </Grid>
                 <Grid item xs={12} style={{ display: 'flex', justifyContent: 'left' }}>
                     <Typography>{dungeonRooms && dungeonRooms[selectedRoom] ? dungeonRooms[selectedRoom].description : ""}</Typography>
+                </Grid>
+                <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+                    {getRoomInfoDialog()}
+                </Grid>
+                <Grid item xs={12}>
+                    <Button onClick={() => setPageMode("setup")} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to dungeon setup")}</Button>
                 </Grid>
             </Grid>
         );
