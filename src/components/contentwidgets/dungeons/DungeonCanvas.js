@@ -1,4 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
+import zoomOutIconFile from './images/zoom_out.png';
+import zoomInIconFile from './images/zoom_in.png';
+import infoIconFile from './images/info.png';
 
 
 const DungeonCanvas = (props) => {
@@ -61,7 +64,6 @@ const DungeonCanvas = (props) => {
       ctx.drawImage(imgZoomOut, 0, windowSize.height - bottomBarHeight - iconbarHeight);
     };
 
-    const zoomOutIconFile = `${process.env.PUBLIC_URL}/zoom_out.png`;
     imgZoomOut.src = zoomOutIconFile;
 
     const imgZoomIn = new Image();
@@ -69,7 +71,6 @@ const DungeonCanvas = (props) => {
       ctx.drawImage(imgZoomIn, 60, windowSize.height - bottomBarHeight - iconbarHeight);
     };
 
-    const zoomInIconFile = `${process.env.PUBLIC_URL}/zoom_in.png`;
     imgZoomIn.src = zoomInIconFile;
 
     const imgInfo = new Image();
@@ -77,8 +78,7 @@ const DungeonCanvas = (props) => {
       ctx.drawImage(imgInfo, 120, windowSize.height - bottomBarHeight - iconbarHeight);
     };
 
-    const InfoIconFile = `${process.env.PUBLIC_URL}/info.png`;
-    imgInfo.src = InfoIconFile;
+    imgInfo.src = infoIconFile;
   }
 
   useEffect(() => {

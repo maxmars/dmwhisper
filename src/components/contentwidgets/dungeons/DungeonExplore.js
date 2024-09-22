@@ -17,10 +17,12 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { setDungeonExploreDefaults } from '../../../store/slices/content.js';
+import { mergeContentAndTables, setDungeonExploreDefaults } from '../../../store/slices/content.js';
 
 
 export default function DungeonExplore(props) {
+
+    const content = useSelector((st) => st.content);
 
     const [numberOfRooms, setNumberOfRooms] =
         useState(useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.numberOfRooms ?
@@ -71,9 +73,17 @@ export default function DungeonExplore(props) {
     }
 
     const [dungeonRooms, setDungeonRooms] = useState(null);
+
     const [dungeon, setDungeon] = useState(DungeonCreate(null));
     const [roomContentsDialogOpen, setRoomContentsDialogOpen] = useState(false);
+
     const [selectedRoom, setSelectedRoom] = useState(0);
+    const [selectedRoomDescription, setSelectedRoomDescription] = useState("");
+    const [selectedRoomMonster, setSelectedRoomMonster] = useState("");
+    const [selectedRoomTrap, setSelectedRoomTrap] = useState("");
+    const [selectedRoomTreasure, setSelectedRoomTreasure] = useState("");
+    const [selectedRoomPuzzle, setSelectedRoomPuzzle] = useState("");
+
     const [pageMode, setPageMode] = useState('setup');
 
     const dungeonSetpiecesNames = useMemo(
@@ -121,6 +131,47 @@ export default function DungeonExplore(props) {
         [dungeonPuzzleSets],
     );
 
+    const setSelectedRoomContents = (room) => {
+        if (selectedRoom < 0 || selectedRoom >= dungeonRooms.length) {
+            return;
+        }
+        
+        if (dungeonRooms[selectedRoom].table) {
+            const tables = dungeonRooms[selectedRoom].table.trim().split(" ");
+            setSelectedRoomDescription(mergeContentAndTables(dungeonRooms[selectedRoom].textContent, tables, content));
+        } else {
+            setSelectedRoomDescription(dungeonRooms[selectedRoom].textContent);
+        }
+
+        if (dungeonRooms[selectedRoom].monster.table) {
+            const tables = dungeonRooms[selectedRoom].monster.table.trim().split(" ");
+            setSelectedRoomMonster(mergeContentAndTables(dungeonRooms[selectedRoom].monster.textContent, tables, content));
+        } else {
+            setSelectedRoomMonster(dungeonRooms[selectedRoom].monster.textContent);
+        }
+
+        if (dungeonRooms[selectedRoom].trap.table) {
+            const tables = dungeonRooms[selectedRoom].trap.table.trim().split(" ");
+            setSelectedRoomTrap(mergeContentAndTables(dungeonRooms[selectedRoom].trap.textContent, tables, content));
+        } else {
+            setSelectedRoomTrap(dungeonRooms[selectedRoom].trap.textContent);
+        }
+
+        if (dungeonRooms[selectedRoom].treasure.table) {
+            const tables = dungeonRooms[selectedRoom].treasure.table.trim().split(" ");
+            setSelectedRoomTreasure(mergeContentAndTables(dungeonRooms[selectedRoom].treasure.textContent, tables, content));
+        } else {
+            setSelectedRoomTreasure(dungeonRooms[selectedRoom].treasure.textContent);
+        }
+
+        if (dungeonRooms[selectedRoom].puzzle.table) {
+            const tables = dungeonRooms[selectedRoom].puzzle.table.trim().split(" ");
+            setSelectedRoomPuzzle(mergeContentAndTables(dungeonRooms[selectedRoom].puzzle.textContent, tables, content));
+        } else {
+            setSelectedRoomPuzzle(dungeonRooms[selectedRoom].puzzle.textContent);
+        }
+    }
+
     useEffect(() => {
         try {
             setDungeon(DungeonCreate(dungeonRooms));
@@ -139,10 +190,12 @@ export default function DungeonExplore(props) {
             if (roomsResult.statusMessage === 'success') {
                 setDungeonRooms(roomsResult.rooms);
                 setSelectedRoom(0);
+                setSelectedRoomContents(0);
             }
         } catch (e) {
             console.error(e);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dungeonSetpiece, numberOfRooms, dungeonTrapSet, dungeonPuzzleSet, dungeonMonsterSet, dungeonTreasureSet]);
 
     const roomTypes = dungeonRooms ? dungeonRooms.map((room, index) => {
@@ -153,7 +206,12 @@ export default function DungeonExplore(props) {
     }) : [];
 
     const onRoomSelect = (room) => {
-        setSelectedRoom(room);
+        if (selectedRoom === room) {
+            setRoomContentsDialogOpen(true);
+        } else {
+            setSelectedRoom(room);
+            setSelectedRoomContents(room);
+        }
     }
 
     const onInfoClick = () => {
@@ -165,7 +223,7 @@ export default function DungeonExplore(props) {
             return (
                 <Dialog onClose={(e) => setRoomContentsDialogOpen(false)} open={roomContentsDialogOpen}>
                     <DialogTitle>{dungeonRooms[selectedRoom].description}</DialogTitle>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ArrowDropDownIcon />}
                             aria-controls="panel1-content"
@@ -175,11 +233,11 @@ export default function DungeonExplore(props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].textContent }} />
+                                <div dangerouslySetInnerHTML={{ __html: selectedRoomDescription }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ArrowDropDownIcon />}
                             aria-controls="panel2-content"
@@ -189,39 +247,39 @@ export default function DungeonExplore(props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].monster.textContent }} />
+                                <div dangerouslySetInnerHTML={{ __html: selectedRoomMonster }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ArrowDropDownIcon />}
                             aria-controls="panel2-content"
                             id="panel2-header"
                         >
-                            <Typography>{t('Traps')}</Typography>
+                            <Typography>{t('Traps') + ': ' + dungeonRooms[selectedRoom].trap.description}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].trap.textContent }} />
+                                <div dangerouslySetInnerHTML={{ __html: selectedRoomTrap }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ArrowDropDownIcon />}
                             aria-controls="panel2-content"
                             id="panel2-header"
                         >
-                            <Typography>{t('Treasures')}</Typography>
+                            <Typography>{t('Treasures') + ': ' + dungeonRooms[selectedRoom].treasure.description}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].treasure.textContent }} />
+                                <div dangerouslySetInnerHTML={{ __html: selectedRoomTreasure }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ArrowDropDownIcon />}
                             aria-controls="panel2-content"
@@ -231,7 +289,7 @@ export default function DungeonExplore(props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].puzzle.textContent }} />
+                                <div dangerouslySetInnerHTML={{ __html: selectedRoomPuzzle }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
@@ -314,13 +372,13 @@ export default function DungeonExplore(props) {
                             try {
                                 setDungeonMonsterSet(newValue.label);
                                 dispatch(setDungeonExploreDefaults(
-                                    { 
-                                        setpiece: dungeonSetpiece, 
-                                        monsterset: newValue.label, 
-                                        treasureset: dungeonTreasureSet, 
-                                        trapset: dungeonTrapSet, 
-                                        puzzleset: dungeonPuzzleSet, 
-                                        numberOfRooms: numberOfRooms 
+                                    {
+                                        setpiece: dungeonSetpiece,
+                                        monsterset: newValue.label,
+                                        treasureset: dungeonTreasureSet,
+                                        trapset: dungeonTrapSet,
+                                        puzzleset: dungeonPuzzleSet,
+                                        numberOfRooms: numberOfRooms
                                     }
                                 ));
                             } catch (e) {
@@ -342,13 +400,13 @@ export default function DungeonExplore(props) {
                             try {
                                 setDungeonTreasureSet(newValue.label);
                                 dispatch(setDungeonExploreDefaults(
-                                    { 
-                                        setpiece: dungeonSetpiece, 
-                                        monsterset: dungeonMonsterSet, 
-                                        treasureset: newValue.label, 
-                                        trapset: dungeonTrapSet, 
-                                        puzzleset: dungeonPuzzleSet, 
-                                        numberOfRooms: numberOfRooms 
+                                    {
+                                        setpiece: dungeonSetpiece,
+                                        monsterset: dungeonMonsterSet,
+                                        treasureset: newValue.label,
+                                        trapset: dungeonTrapSet,
+                                        puzzleset: dungeonPuzzleSet,
+                                        numberOfRooms: numberOfRooms
                                     }
                                 ));
                             } catch (e) {
@@ -370,13 +428,13 @@ export default function DungeonExplore(props) {
                             try {
                                 setDungeonTrapSet(newValue.label);
                                 dispatch(setDungeonExploreDefaults(
-                                    { 
-                                        setpiece: dungeonSetpiece, 
-                                        monsterset: dungeonMonsterSet, 
-                                        treasureset: dungeonTreasureSet, 
-                                        trapset: newValue.label, 
-                                        puzzleset: dungeonPuzzleSet, 
-                                        numberOfRooms: numberOfRooms 
+                                    {
+                                        setpiece: dungeonSetpiece,
+                                        monsterset: dungeonMonsterSet,
+                                        treasureset: dungeonTreasureSet,
+                                        trapset: newValue.label,
+                                        puzzleset: dungeonPuzzleSet,
+                                        numberOfRooms: numberOfRooms
                                     }
                                 ));
                             } catch (e) {
@@ -398,13 +456,13 @@ export default function DungeonExplore(props) {
                             try {
                                 setDungeonPuzzleSet(newValue.label);
                                 dispatch(setDungeonExploreDefaults(
-                                    { 
-                                        setpiece: dungeonSetpiece, 
-                                        monsterset: dungeonMonsterSet, 
-                                        treasureset: dungeonTreasureSet, 
-                                        trapset: dungeonTrapSet, 
-                                        puzzleset: newValue.label, 
-                                        numberOfRooms: numberOfRooms 
+                                    {
+                                        setpiece: dungeonSetpiece,
+                                        monsterset: dungeonMonsterSet,
+                                        treasureset: dungeonTreasureSet,
+                                        trapset: dungeonTrapSet,
+                                        puzzleset: newValue.label,
+                                        numberOfRooms: numberOfRooms
                                     }
                                 ));
                             } catch (e) {
