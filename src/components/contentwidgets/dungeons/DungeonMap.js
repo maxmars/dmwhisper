@@ -12,6 +12,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { mergeContentAndTables } from '../../../store/slices/content.js';
+import { useSelector } from 'react-redux';
 
 
 export default function DungeonMap(props) {
@@ -37,12 +39,66 @@ export default function DungeonMap(props) {
         }
     }
 
+    const content = useSelector((st) => st.content);
     const [dungeonRooms, setDungeonRooms] = useState(null);
     const [dungeon, setDungeon] = useState(DungeonCreate(null));
     const [roomContentsDialogOpen, setRoomContentsDialogOpen] = useState(false);
+
     const [selectedRoom, setSelectedRoom] = useState(0);
+    const [selectedRoomDescription, setSelectedRoomDescription] = useState("");
+    const [selectedRoomMonster, setSelectedRoomMonster] = useState("");
+    const [selectedRoomTrap, setSelectedRoomTrap] = useState("");
+    const [selectedRoomTreasure, setSelectedRoomTreasure] = useState("");
+    const [selectedRoomPuzzle, setSelectedRoomPuzzle] = useState("");
+
     const { t } = useTranslation();
 
+    const setSelectedRoomContents = (room) => {
+        if (!dungeonRooms || room < 0 || room >= dungeonRooms.length) {
+            return;
+        }
+        
+        if (dungeonRooms[room].table) {
+            const tables = dungeonRooms[room].table.trim().split(" ");
+            setSelectedRoomDescription(mergeContentAndTables(dungeonRooms[room].textContent, tables, content));
+        } else {
+            setSelectedRoomDescription(dungeonRooms[room].textContent);
+        }
+
+        if (dungeonRooms[room].monster.table) {
+            const tables = dungeonRooms[room].monster.table.trim().split(" ");
+            setSelectedRoomMonster(mergeContentAndTables(dungeonRooms[room].monster.textContent, tables, content));
+        } else {
+            setSelectedRoomMonster(dungeonRooms[room].monster.textContent);
+        }
+
+        if (dungeonRooms[room].trap.table) {
+            const tables = dungeonRooms[room].trap.table.trim().split(" ");
+            setSelectedRoomTrap(mergeContentAndTables(dungeonRooms[room].trap.textContent, tables, content));
+        } else {
+            setSelectedRoomTrap(dungeonRooms[room].trap.textContent);
+        }
+
+        if (dungeonRooms[room].treasure.table) {
+            const tables = dungeonRooms[room].treasure.table.trim().split(" ");
+            setSelectedRoomTreasure(mergeContentAndTables(dungeonRooms[room].treasure.textContent, tables, content));
+        } else {
+            setSelectedRoomTreasure(dungeonRooms[room].treasure.textContent);
+        }
+
+        if (dungeonRooms[room].puzzle.table) {
+            const tables = dungeonRooms[room].puzzle.table.trim().split(" ");
+            setSelectedRoomPuzzle(mergeContentAndTables(dungeonRooms[room].puzzle.textContent, tables, content));
+        } else {
+            setSelectedRoomPuzzle(dungeonRooms[room].puzzle.textContent);
+        }
+    }
+
+    useEffect(() => {
+        setSelectedRoomContents(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dungeonRooms]);
+    
     useEffect(() => {
         try {
             setDungeon(DungeonCreate(dungeonRooms));
@@ -76,7 +132,12 @@ export default function DungeonMap(props) {
     }) : [];
 
     const onRoomSelect = (room) => {
-        setSelectedRoom(room);
+        if (selectedRoom === room) {
+            setRoomContentsDialogOpen(true);
+        } else {
+            setSelectedRoom(room);
+            setSelectedRoomContents(room);
+        }
     }
 
     const onInfoClick = () => {
@@ -88,7 +149,7 @@ export default function DungeonMap(props) {
             return (
                 <Dialog onClose={(e) => setRoomContentsDialogOpen(false)} open={roomContentsDialogOpen}>
                     <DialogTitle>{dungeonRooms[selectedRoom].description}</DialogTitle>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ArrowDropDownIcon />}
                             aria-controls="panel1-content"
@@ -98,11 +159,11 @@ export default function DungeonMap(props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].textContent }} />
+                                <div dangerouslySetInnerHTML={{ __html: selectedRoomDescription }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ArrowDropDownIcon />}
                             aria-controls="panel2-content"
@@ -112,11 +173,11 @@ export default function DungeonMap(props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].monster.textContent }} />
+                                <div dangerouslySetInnerHTML={{ __html: selectedRoomMonster }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ArrowDropDownIcon />}
                             aria-controls="panel2-content"
@@ -126,11 +187,11 @@ export default function DungeonMap(props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].trap.textContent }} />
+                                <div dangerouslySetInnerHTML={{ __html: selectedRoomTrap }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ArrowDropDownIcon />}
                             aria-controls="panel2-content"
@@ -140,11 +201,11 @@ export default function DungeonMap(props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].treasure.textContent }} />
+                                <div dangerouslySetInnerHTML={{ __html: selectedRoomTreasure }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
-                    <Accordion>
+                    <Accordion defaultExpanded>
                         <AccordionSummary
                             expandIcon={<ArrowDropDownIcon />}
                             aria-controls="panel2-content"
@@ -154,7 +215,7 @@ export default function DungeonMap(props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: dungeonRooms[selectedRoom].puzzle.textContent }} />
+                                <div dangerouslySetInnerHTML={{ __html: selectedRoomPuzzle }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>

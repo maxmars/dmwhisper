@@ -132,43 +132,43 @@ export default function DungeonExplore(props) {
     );
 
     const setSelectedRoomContents = (room) => {
-        if (selectedRoom < 0 || selectedRoom >= dungeonRooms.length) {
+        if (room < 0 || room >= dungeonRooms.length) {
             return;
         }
         
-        if (dungeonRooms[selectedRoom].table) {
-            const tables = dungeonRooms[selectedRoom].table.trim().split(" ");
-            setSelectedRoomDescription(mergeContentAndTables(dungeonRooms[selectedRoom].textContent, tables, content));
+        if (dungeonRooms[room].table) {
+            const tables = dungeonRooms[room].table.trim().split(" ");
+            setSelectedRoomDescription(mergeContentAndTables(dungeonRooms[room].textContent, tables, content));
         } else {
-            setSelectedRoomDescription(dungeonRooms[selectedRoom].textContent);
+            setSelectedRoomDescription(dungeonRooms[room].textContent);
         }
 
-        if (dungeonRooms[selectedRoom].monster.table) {
-            const tables = dungeonRooms[selectedRoom].monster.table.trim().split(" ");
-            setSelectedRoomMonster(mergeContentAndTables(dungeonRooms[selectedRoom].monster.textContent, tables, content));
+        if (dungeonRooms[room].monster.table) {
+            const tables = dungeonRooms[room].monster.table.trim().split(" ");
+            setSelectedRoomMonster(mergeContentAndTables(dungeonRooms[room].monster.textContent, tables, content));
         } else {
-            setSelectedRoomMonster(dungeonRooms[selectedRoom].monster.textContent);
+            setSelectedRoomMonster(dungeonRooms[room].monster.textContent);
         }
 
-        if (dungeonRooms[selectedRoom].trap.table) {
-            const tables = dungeonRooms[selectedRoom].trap.table.trim().split(" ");
-            setSelectedRoomTrap(mergeContentAndTables(dungeonRooms[selectedRoom].trap.textContent, tables, content));
+        if (dungeonRooms[room].trap.table) {
+            const tables = dungeonRooms[room].trap.table.trim().split(" ");
+            setSelectedRoomTrap(mergeContentAndTables(dungeonRooms[room].trap.textContent, tables, content));
         } else {
-            setSelectedRoomTrap(dungeonRooms[selectedRoom].trap.textContent);
+            setSelectedRoomTrap(dungeonRooms[room].trap.textContent);
         }
 
-        if (dungeonRooms[selectedRoom].treasure.table) {
-            const tables = dungeonRooms[selectedRoom].treasure.table.trim().split(" ");
-            setSelectedRoomTreasure(mergeContentAndTables(dungeonRooms[selectedRoom].treasure.textContent, tables, content));
+        if (dungeonRooms[room].treasure.table) {
+            const tables = dungeonRooms[room].treasure.table.trim().split(" ");
+            setSelectedRoomTreasure(mergeContentAndTables(dungeonRooms[room].treasure.textContent, tables, content));
         } else {
-            setSelectedRoomTreasure(dungeonRooms[selectedRoom].treasure.textContent);
+            setSelectedRoomTreasure(dungeonRooms[room].treasure.textContent);
         }
 
-        if (dungeonRooms[selectedRoom].puzzle.table) {
-            const tables = dungeonRooms[selectedRoom].puzzle.table.trim().split(" ");
-            setSelectedRoomPuzzle(mergeContentAndTables(dungeonRooms[selectedRoom].puzzle.textContent, tables, content));
+        if (dungeonRooms[room].puzzle.table) {
+            const tables = dungeonRooms[room].puzzle.table.trim().split(" ");
+            setSelectedRoomPuzzle(mergeContentAndTables(dungeonRooms[room].puzzle.textContent, tables, content));
         } else {
-            setSelectedRoomPuzzle(dungeonRooms[selectedRoom].puzzle.textContent);
+            setSelectedRoomPuzzle(dungeonRooms[room].puzzle.textContent);
         }
     }
 
