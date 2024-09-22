@@ -135,7 +135,7 @@ export default function DungeonExplore(props) {
         if (room < 0 || room >= dungeonRooms.length) {
             return;
         }
-        
+
         if (dungeonRooms[room].table) {
             const tables = dungeonRooms[room].table.trim().split(" ");
             setSelectedRoomDescription(mergeContentAndTables(dungeonRooms[room].textContent, tables, content));
@@ -195,7 +195,7 @@ export default function DungeonExplore(props) {
         } catch (e) {
             console.error(e);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dungeonSetpiece, numberOfRooms, dungeonTrapSet, dungeonPuzzleSet, dungeonMonsterSet, dungeonTreasureSet]);
 
     const roomTypes = dungeonRooms ? dungeonRooms.map((room, index) => {
@@ -207,7 +207,13 @@ export default function DungeonExplore(props) {
 
     const onRoomSelect = (room) => {
         if (selectedRoom === room) {
-            setRoomContentsDialogOpen(true);
+            try {
+                if (selectedRoom >= 0 && selectedRoom < dungeonRooms.length) {
+                    setRoomContentsDialogOpen(true);
+                }
+            } catch (e) {
+                // nothing
+            }
         } else {
             setSelectedRoom(room);
             setSelectedRoomContents(room);

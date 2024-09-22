@@ -1,18 +1,19 @@
 import React, { useRef, useEffect, useState } from 'react';
-import zoomOutIconFile from './images/zoom_out.png';
-import zoomInIconFile from './images/zoom_in.png';
-import infoIconFile from './images/info.png';
+// import zoomOutIconFile from './images/zoom_out.png';
+// import zoomInIconFile from './images/zoom_in.png';
+// import infoIconFile from './images/info.png';
 
 
 const DungeonCanvas = (props) => {
 
-  const bottomBarHeight = 160;
+  const bottomBarHeight = 200;
   const iconbarHeight = 50;
 
   const canvasRef = useRef(null);
   const mouseDownRef = useRef(false);
   const [zoomlevel, setZoomlevel] = useState(0.75);
   const mouseDragStartRef = useRef({ x: 0, y: 0 });
+  const [initialPinchDistance, setInitialPinchDistance] = useState(null);
 
   const [currentDragDistance, setCurrentDragDistance] = useState({
     x: 0,
@@ -53,33 +54,33 @@ const DungeonCanvas = (props) => {
     });
   };
 
-  const drawIcons = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+  // const drawIcons = () => {
+  //   const canvas = canvasRef.current;
+  //   const ctx = canvas.getContext('2d');
 
-    ctx.clearRect(0, canvas.height - iconbarHeight - 5, canvas.width, iconbarHeight + 5);
+  //   ctx.clearRect(0, canvas.height - iconbarHeight - 5, canvas.width, iconbarHeight + 5);
 
-    const imgZoomOut = new Image();
-    imgZoomOut.onload = () => {
-      ctx.drawImage(imgZoomOut, 0, windowSize.height - bottomBarHeight - iconbarHeight);
-    };
+  //   const imgZoomOut = new Image();
+  //   imgZoomOut.onload = () => {
+  //     ctx.drawImage(imgZoomOut, 0, windowSize.height - bottomBarHeight - iconbarHeight);
+  //   };
 
-    imgZoomOut.src = zoomOutIconFile;
+  //   imgZoomOut.src = zoomOutIconFile;
 
-    const imgZoomIn = new Image();
-    imgZoomIn.onload = () => {
-      ctx.drawImage(imgZoomIn, 60, windowSize.height - bottomBarHeight - iconbarHeight);
-    };
+  //   const imgZoomIn = new Image();
+  //   imgZoomIn.onload = () => {
+  //     ctx.drawImage(imgZoomIn, 60, windowSize.height - bottomBarHeight - iconbarHeight);
+  //   };
 
-    imgZoomIn.src = zoomInIconFile;
+  //   imgZoomIn.src = zoomInIconFile;
 
-    const imgInfo = new Image();
-    imgInfo.onload = () => {
-      ctx.drawImage(imgInfo, 120, windowSize.height - bottomBarHeight - iconbarHeight);
-    };
+  //   const imgInfo = new Image();
+  //   imgInfo.onload = () => {
+  //     ctx.drawImage(imgInfo, 120, windowSize.height - bottomBarHeight - iconbarHeight);
+  //   };
 
-    imgInfo.src = infoIconFile;
-  }
+  //   imgInfo.src = infoIconFile;
+  // }
 
   useEffect(() => {
     setDrawnCorridors([...Array(props.dungeon.rooms.length).keys()]);
@@ -124,7 +125,8 @@ const DungeonCanvas = (props) => {
     });
 
     const xInc = windowSize.width / maxCoordinateX * zoomlevel;
-    const yInc = (windowSize.height - bottomBarHeight - iconbarHeight - 5) / maxCoordinateY * zoomlevel;
+    const yInc = (windowSize.height - bottomBarHeight) / maxCoordinateY * zoomlevel;
+    // const yInc = (windowSize.height - bottomBarHeight - iconbarHeight - 5) / maxCoordinateY * zoomlevel;
 
     setXInc(xInc);
     setYInc(yInc);
@@ -264,7 +266,7 @@ const DungeonCanvas = (props) => {
     // draw selected corridors
     drawSelectedRoomCorridors('red');
 
-    drawIcons();
+    //drawIcons();
   }
 
   const getClickedRoomNumber = (x, y) => {
@@ -329,30 +331,28 @@ const DungeonCanvas = (props) => {
     const canvas = canvasRef.current;
     const bcr = canvas.getBoundingClientRect();
 
-    console.log(e.clientX - bcr.left);
-
     // If click is inside the zoom out icon, toggle the path visibility
-    if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-      e.clientX - bcr.left <= 50 && e.clientX >= 0) {
-      if (zoomlevel > 0.5)
-        setZoomlevel(zoomlevel - 0.25);
-      return;
-    }
+    // if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
+    //   e.clientX - bcr.left <= 50 && e.clientX >= 0) {
+    //   if (zoomlevel > 0.5)
+    //     setZoomlevel(zoomlevel - 0.25);
+    //   return;
+    // }
 
     // If click is inside the zoom in icon, toggle the path visibility
-    if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-      e.clientX - bcr.left <= 110 && e.clientX >= 60) {
-      if (zoomlevel < 4)
-        setZoomlevel(zoomlevel + 0.25);
-      return;
-    }
+    // if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
+    //   e.clientX - bcr.left <= 110 && e.clientX >= 60) {
+    //   if (zoomlevel < 4)
+    //     setZoomlevel(zoomlevel + 0.25);
+    //   return;
+    // }
 
     // If click is inside the info icon, toggle the info visibility
-    if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-      e.clientX - bcr.left <= 170 && e.clientX >= 120) {
-      props.onInfoClick();
-      return;
-    }
+    // if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
+    //   e.clientX - bcr.left <= 170 && e.clientX >= 120) {
+    //   props.onInfoClick();
+    //   return;
+    // }
 
     // get the canvas coordinates of the click
     const x = (e.clientX - mapOffset.x - bcr.left) / xInc;
@@ -362,46 +362,75 @@ const DungeonCanvas = (props) => {
 
   }
 
-  const screenTapped = (e) => {
-    try {
-      // get the canvas coordinates of the touch
-      const touch = e.touches[0];
+  // const screenTapped = (e) => {
+  //   try {
+  //     // get the canvas coordinates of the touch
+  //     const touch = e.changedTouches[0];
 
-      const canvas = canvasRef.current;
-      const bcr = canvas.getBoundingClientRect();
+  //     const canvas = canvasRef.current;
+  //     const bcr = canvas.getBoundingClientRect();
 
-      // If click is inside the zoom out icon, toggle the path visibility
-      if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-        touch.clientX - bcr.left <= 50 && touch.clientX >= 0) {
-        if (zoomlevel > 0.5)
-          setZoomlevel(zoomlevel - 0.25);
-        return;
+  //     // If click is inside the zoom out icon, toggle the path visibility
+  //     // if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
+  //     //   touch.clientX - bcr.left <= 50 && touch.clientX >= 0) {
+  //     //   if (zoomlevel > 0.5)
+  //     //     setZoomlevel(zoomlevel - 0.25);
+  //     //   return;
+  //     // }
+
+  //     // If click is inside the zoom in icon, toggle the path visibility
+  //     // if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
+  //     //   touch.clientX - bcr.left <= 110 && touch.clientX >= 60) {
+  //     //   if (zoomlevel < 4)
+  //     //     setZoomlevel(zoomlevel + 0.25);
+  //     //   return;
+  //     // }
+
+  //     // If click is inside the info icon, toggle the info visibility
+  //     // if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
+  //     //   touch.clientX - bcr.left <= 170 && touch.clientX >= 120) {
+  //     //   props.onInfoClick();
+  //     //   return;
+  //     // }
+
+  //     const x = (touch.clientX - mapOffset.x - bcr.left) / xInc;
+  //     const y = (touch.clientY - mapOffset.y - bcr.top) / yInc;
+
+  //     roomClicked(x, y);
+  //   } catch (e) {
+  //     // No need to do anything
+  //   }
+  // }
+
+  const calculateDistance = (touch1, touch2) => {
+    const dx = touch2.pageX - touch1.pageX;
+    const dy = touch2.pageY - touch1.pageY;
+    return Math.sqrt(dx * dx + dy * dy);
+  };
+
+  const handlePinch = (e) => {
+    if (e.touches.length === 2) {
+      const touch1 = e.touches[0];
+      const touch2 = e.touches[1];
+      const distance = calculateDistance(touch1, touch2);
+
+      if (initialPinchDistance === null) {
+        setInitialPinchDistance(distance);
+      } else {
+        if (distance < initialPinchDistance * 0.7) {
+          if (zoomlevel > 0.5) {
+            setZoomlevel(zoomlevel - 0.25);
+            setInitialPinchDistance(distance);
+          }
+        } else if (distance > initialPinchDistance * 1.3) {
+          if (zoomlevel < 4) {
+            setZoomlevel(zoomlevel + 0.25);
+            setInitialPinchDistance(distance);
+          }
+        }
       }
-
-      // If click is inside the zoom in icon, toggle the path visibility
-      if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-        touch.clientX - bcr.left <= 110 && touch.clientX >= 60) {
-        if (zoomlevel < 4)
-          setZoomlevel(zoomlevel + 0.25);
-        return;
-      }
-
-      // If click is inside the info icon, toggle the info visibility
-      if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-        touch.clientX - bcr.left <= 170 && touch.clientX >= 120) {
-        props.onInfoClick();
-        return;
-      }
-
-      const x = (e.clientX - mapOffset.x - bcr.left) / xInc;
-      const y = (e.clientY - mapOffset.y - bcr.top) / yInc;
-
-      roomClicked(x, y);
-    } catch (e) {
-      // No need to do anything
     }
-  }
-
+  };
 
   return (
     <canvas style={{ touchAction: 'none' }}
@@ -417,32 +446,42 @@ const DungeonCanvas = (props) => {
       }}
       onTouchStart={(e) => {
         try {
-          const touch = e.touches[0];
-          mouseDown(touch);
+          if (e.touches.length === 1) {
+            const touch = e.touches[0];
+            mouseDown(touch);
+          } else if (e.touches.length === 2) {
+            handlePinch(e);
+          }
         } catch (e) {
           // No need to do anything
         }
         return;
       }}
       onTouchEnd={(e) => {
-        const touch = e.touches[0];
+        if (e.changedTouches.length === 0) {
+          setInitialPinchDistance(null);
+        }
+        const touch = e.changedTouches[0];
         mouseUp(touch);
-        screenTapped(e);
+        //screenTapped(e);
         return;
       }}
       onTouchMove={(e) => {
-
         try {
-          // get the canvas coordinates of the touch
-          const touch = e.touches[0];
+          if (e.touches.length === 1) {
+            // get the canvas coordinates of the touch
+            const touch = e.touches[0];
 
-          const fromDragStartX = touch.pageX - mouseDragStartRef.current.x;
-          const fromDragStartY = touch.pageY - mouseDragStartRef.current.y;
+            const fromDragStartX = touch.pageX - mouseDragStartRef.current.x;
+            const fromDragStartY = touch.pageY - mouseDragStartRef.current.y;
 
-          setCurrentDragDistance({
-            x: fromDragStartX,
-            y: fromDragStartY,
-          });
+            setCurrentDragDistance({
+              x: fromDragStartX,
+              y: fromDragStartY,
+            });
+          } else if (e.touches.length === 2) {
+            handlePinch(e);
+          }
         } catch (e) {
           // No need to do anything
         }

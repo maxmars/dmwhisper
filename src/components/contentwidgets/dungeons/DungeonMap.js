@@ -57,7 +57,7 @@ export default function DungeonMap(props) {
         if (!dungeonRooms || room < 0 || room >= dungeonRooms.length) {
             return;
         }
-        
+
         if (dungeonRooms[room].table) {
             const tables = dungeonRooms[room].table.trim().split(" ");
             setSelectedRoomDescription(mergeContentAndTables(dungeonRooms[room].textContent, tables, content));
@@ -96,9 +96,9 @@ export default function DungeonMap(props) {
 
     useEffect(() => {
         setSelectedRoomContents(0);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dungeonRooms]);
-    
+
     useEffect(() => {
         try {
             setDungeon(DungeonCreate(dungeonRooms));
@@ -133,7 +133,13 @@ export default function DungeonMap(props) {
 
     const onRoomSelect = (room) => {
         if (selectedRoom === room) {
-            setRoomContentsDialogOpen(true);
+            try {
+                if (selectedRoom >= 0 && selectedRoom < dungeonRooms.length) {
+                    setRoomContentsDialogOpen(true);
+                }
+            } catch (e) {
+                // nothing
+            }
         } else {
             setSelectedRoom(room);
             setSelectedRoomContents(room);
