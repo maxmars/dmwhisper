@@ -133,8 +133,8 @@ const DungeonCanvas = (props) => {
 
     setXInc(xInc);
     setYInc(yInc);
-  }, [props.dungeon, windowSize, props.dungeon.rooms, zoomlevel, 
-    windowSize.width, windowSize.height, bottomBarHeight, iconbarHeight, isTouchDevice]);
+  }, [props.dungeon, windowSize, props.dungeon.rooms, zoomlevel,
+  windowSize.width, windowSize.height, bottomBarHeight, iconbarHeight, isTouchDevice]);
 
 
   // Ri-disegniamo la mappa quando qualcosa cambia
@@ -339,16 +339,30 @@ const DungeonCanvas = (props) => {
       //If click is inside the zoom out icon, toggle the path visibility
       if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
         e.clientX - bcr.left <= 50 && e.clientX >= 0) {
-        if (zoomlevel > 0.5)
+        if (zoomlevel > 0.5) {
+
+          setMapOffset({
+            x: mapOffset.x * 1.25 + (windowSize.width / 2) * 0.25,
+            y: mapOffset.y * 1.25 + (windowSize.height / 2) * 0.25,
+          });
+
           setZoomlevel(zoomlevel - 0.25);
+        }
         return;
       }
 
       //If click is inside the zoom in icon, toggle the path visibility
       if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
         e.clientX - bcr.left <= 110 && e.clientX >= 60) {
-        if (zoomlevel < 4)
+        if (zoomlevel < 4) {
+
+          setMapOffset({
+            x: mapOffset.x * 0.75 - (windowSize.width / 2) * 0.25,
+            y: mapOffset.y * 0.75 - (windowSize.height / 2) * 0.25,
+          });
+
           setZoomlevel(zoomlevel + 0.25);
+        }
         return;
       }
 
@@ -423,14 +437,42 @@ const DungeonCanvas = (props) => {
       if (initialPinchDistance === null) {
         setInitialPinchDistance(distance);
       } else {
-        if (distance < initialPinchDistance * 0.7) {
+        if (distance < initialPinchDistance * 0.75) {
           if (zoomlevel > 0.5) {
-            setZoomlevel(zoomlevel - 0.25);
+
+            const midPoint = {
+              x: (touch1.pageX + touch2.pageX) / 2,
+              y: (touch1.pageY + touch2.pageY) / 2,
+            };
+
+            const newZoomLevel = zoomlevel - 0.25;
+            const scaleFactor = newZoomLevel / zoomlevel;
+            const newMapOffset = {
+              x: mapOffset.x * scaleFactor + midPoint.x * (1 - scaleFactor),
+              y: mapOffset.y * scaleFactor + midPoint.y * (1 - scaleFactor),
+            };
+
+            setZoomlevel(newZoomLevel);
+            setMapOffset(newMapOffset);
             setInitialPinchDistance(distance);
           }
-        } else if (distance > initialPinchDistance * 1.3) {
+        } else if (distance > initialPinchDistance * 1.25) {
           if (zoomlevel < 4) {
-            setZoomlevel(zoomlevel + 0.25);
+
+            const midPoint = {
+              x: (touch1.pageX + touch2.pageX) / 2,
+              y: (touch1.pageY + touch2.pageY) / 2,
+            };
+
+            const newZoomLevel = zoomlevel + 0.25;
+            const scaleFactor = newZoomLevel / zoomlevel;
+            const newMapOffset = {
+              x: mapOffset.x * scaleFactor + midPoint.x * (1 - scaleFactor),
+              y: mapOffset.y * scaleFactor + midPoint.y * (1 - scaleFactor),
+            };
+            
+            setZoomlevel(newZoomLevel);
+            setMapOffset(newMapOffset);
             setInitialPinchDistance(distance);
           }
         }
