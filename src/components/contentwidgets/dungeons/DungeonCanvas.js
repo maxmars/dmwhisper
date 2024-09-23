@@ -1,11 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
-// import zoomOutIconFile from './images/zoom_out.png';
-// import zoomInIconFile from './images/zoom_in.png';
-// import infoIconFile from './images/info.png';
+import zoomOutIconFile from './images/zoom_out.png';
+import zoomInIconFile from './images/zoom_in.png';
+import infoIconFile from './images/info.png';
 
 
 const DungeonCanvas = (props) => {
 
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
   const bottomBarHeight = 200;
   const iconbarHeight = 50;
 
@@ -54,33 +55,35 @@ const DungeonCanvas = (props) => {
     });
   };
 
-  // const drawIcons = () => {
-  //   const canvas = canvasRef.current;
-  //   const ctx = canvas.getContext('2d');
+  const drawIcons = () => {
+    if (!isTouchDevice) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext('2d');
 
-  //   ctx.clearRect(0, canvas.height - iconbarHeight - 5, canvas.width, iconbarHeight + 5);
+      ctx.clearRect(0, canvas.height - iconbarHeight - 5, canvas.width, iconbarHeight + 5);
 
-  //   const imgZoomOut = new Image();
-  //   imgZoomOut.onload = () => {
-  //     ctx.drawImage(imgZoomOut, 0, windowSize.height - bottomBarHeight - iconbarHeight);
-  //   };
+      const imgZoomOut = new Image();
+      imgZoomOut.onload = () => {
+        ctx.drawImage(imgZoomOut, 0, windowSize.height - bottomBarHeight - iconbarHeight);
+      };
 
-  //   imgZoomOut.src = zoomOutIconFile;
+      imgZoomOut.src = zoomOutIconFile;
 
-  //   const imgZoomIn = new Image();
-  //   imgZoomIn.onload = () => {
-  //     ctx.drawImage(imgZoomIn, 60, windowSize.height - bottomBarHeight - iconbarHeight);
-  //   };
+      const imgZoomIn = new Image();
+      imgZoomIn.onload = () => {
+        ctx.drawImage(imgZoomIn, 60, windowSize.height - bottomBarHeight - iconbarHeight);
+      };
 
-  //   imgZoomIn.src = zoomInIconFile;
+      imgZoomIn.src = zoomInIconFile;
 
-  //   const imgInfo = new Image();
-  //   imgInfo.onload = () => {
-  //     ctx.drawImage(imgInfo, 120, windowSize.height - bottomBarHeight - iconbarHeight);
-  //   };
+      const imgInfo = new Image();
+      imgInfo.onload = () => {
+        ctx.drawImage(imgInfo, 120, windowSize.height - bottomBarHeight - iconbarHeight);
+      };
 
-  //   imgInfo.src = infoIconFile;
-  // }
+      imgInfo.src = infoIconFile;
+    }
+  }
 
   useEffect(() => {
     setDrawnCorridors([...Array(props.dungeon.rooms.length).keys()]);
@@ -125,12 +128,13 @@ const DungeonCanvas = (props) => {
     });
 
     const xInc = windowSize.width / maxCoordinateX * zoomlevel;
-    const yInc = (windowSize.height - bottomBarHeight) / maxCoordinateY * zoomlevel;
-    // const yInc = (windowSize.height - bottomBarHeight - iconbarHeight - 5) / maxCoordinateY * zoomlevel;
+    const iconEstate = isTouchDevice ? 0 : iconbarHeight + 5;
+    const yInc = (windowSize.height - bottomBarHeight - iconEstate) / maxCoordinateY * zoomlevel;
 
     setXInc(xInc);
     setYInc(yInc);
-  }, [props.dungeon, windowSize, props.dungeon.rooms, zoomlevel, windowSize.width, windowSize.height, bottomBarHeight, iconbarHeight]);
+  }, [props.dungeon, windowSize, props.dungeon.rooms, zoomlevel, 
+    windowSize.width, windowSize.height, bottomBarHeight, iconbarHeight, isTouchDevice]);
 
 
   // Ri-disegniamo la mappa quando qualcosa cambia
@@ -266,7 +270,7 @@ const DungeonCanvas = (props) => {
     // draw selected corridors
     drawSelectedRoomCorridors('red');
 
-    //drawIcons();
+    drawIcons();
   }
 
   const getClickedRoomNumber = (x, y) => {
@@ -331,28 +335,30 @@ const DungeonCanvas = (props) => {
     const canvas = canvasRef.current;
     const bcr = canvas.getBoundingClientRect();
 
-    // If click is inside the zoom out icon, toggle the path visibility
-    // if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-    //   e.clientX - bcr.left <= 50 && e.clientX >= 0) {
-    //   if (zoomlevel > 0.5)
-    //     setZoomlevel(zoomlevel - 0.25);
-    //   return;
-    // }
+    if (!isTouchDevice) {
+      //If click is inside the zoom out icon, toggle the path visibility
+      if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
+        e.clientX - bcr.left <= 50 && e.clientX >= 0) {
+        if (zoomlevel > 0.5)
+          setZoomlevel(zoomlevel - 0.25);
+        return;
+      }
 
-    // If click is inside the zoom in icon, toggle the path visibility
-    // if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-    //   e.clientX - bcr.left <= 110 && e.clientX >= 60) {
-    //   if (zoomlevel < 4)
-    //     setZoomlevel(zoomlevel + 0.25);
-    //   return;
-    // }
+      //If click is inside the zoom in icon, toggle the path visibility
+      if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
+        e.clientX - bcr.left <= 110 && e.clientX >= 60) {
+        if (zoomlevel < 4)
+          setZoomlevel(zoomlevel + 0.25);
+        return;
+      }
 
-    // If click is inside the info icon, toggle the info visibility
-    // if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
-    //   e.clientX - bcr.left <= 170 && e.clientX >= 120) {
-    //   props.onInfoClick();
-    //   return;
-    // }
+      // If click is inside the info icon, toggle the info visibility
+      if (e.clientY > bcr.height + bcr.top - iconbarHeight &&
+        e.clientX - bcr.left <= 170 && e.clientX >= 120) {
+        props.onInfoClick();
+        return;
+      }
+    }
 
     // get the canvas coordinates of the click
     const x = (e.clientX - mapOffset.x - bcr.left) / xInc;

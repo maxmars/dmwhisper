@@ -132,7 +132,7 @@ export default function DungeonExplore(props) {
     );
 
     const setSelectedRoomContents = (room) => {
-        if (room < 0 || room >= dungeonRooms.length) {
+        if (!dungeonRooms || room < 0 || room >= dungeonRooms.length) {
             return;
         }
 
@@ -501,7 +501,7 @@ export default function DungeonExplore(props) {
                         roomMinSize={3} roomMaxSize={4} />
                 </Grid>
                 <Grid item xs={12} style={{ display: 'flex', justifyContent: 'left' }}>
-                    <Typography>{dungeonRooms && dungeonRooms[selectedRoom] ? dungeonRooms[selectedRoom].description : ""}</Typography>
+                    <Typography>{dungeonRooms && dungeonRooms[selectedRoom] ? dungeonRooms[selectedRoom].description : t("No room selected.")}</Typography>
                 </Grid>
                 <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
                     {getRoomInfoDialog()}
