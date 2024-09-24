@@ -91,16 +91,17 @@ export default function DungeonExplore(props) {
             return {
                 label: item.id,
             }
-        }),
+        }).sort((a, b) => a.label.localeCompare(b.label)),
         [dungeonSetpieces],
     );
 
     const dungeonMonsterSetsNames = useMemo(
-        () => dungeonMonsterSets.map((item) => {
-            return {
-                label: item.id,
-            }
-        }),
+        () => dungeonMonsterSets
+            .map((item) => {
+                return {
+                    label: item.id,
+                }
+            }).sort((a, b) => a.label.localeCompare(b.label)),
         [dungeonMonsterSets],
     );
 
@@ -109,7 +110,7 @@ export default function DungeonExplore(props) {
             return {
                 label: item.id,
             }
-        }),
+        }).sort((a, b) => a.label.localeCompare(b.label)),
         [dungeonTrapSets],
     );
 
@@ -118,7 +119,7 @@ export default function DungeonExplore(props) {
             return {
                 label: item.id,
             }
-        }),
+        }).sort((a, b) => a.label.localeCompare(b.label)),
         [dungeonTreasureSets],
     );
 
@@ -127,7 +128,7 @@ export default function DungeonExplore(props) {
             return {
                 label: item.id,
             }
-        }),
+        }).sort((a, b) => a.label.localeCompare(b.label)),
         [dungeonPuzzleSets],
     );
 

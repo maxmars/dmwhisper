@@ -22,7 +22,7 @@ export default function DungeonSetup(props) {
       return {
         label: item.id,
       }
-    }),
+    }).sort((a, b) => a.label.localeCompare(b.label)),
     [dungeonSetpieces],
   );
 
@@ -31,7 +31,7 @@ export default function DungeonSetup(props) {
       return {
         label: item.id,
       }
-    }),
+    }).sort((a, b) => a.label.localeCompare(b.label)),
     [dungeonMonsterSets],
   );
 
@@ -40,7 +40,7 @@ export default function DungeonSetup(props) {
       return {
         label: item.id,
       }
-    }),
+    }).sort((a, b) => a.label.localeCompare(b.label)),
     [dungeonTrapSets],
   );
 
@@ -49,7 +49,7 @@ export default function DungeonSetup(props) {
       return {
         label: item.id,
       }
-    }),
+    }).sort((a, b) => a.label.localeCompare(b.label)),
     [dungeonTreasureSets],
   );
 
@@ -58,7 +58,7 @@ export default function DungeonSetup(props) {
       return {
         label: item.id,
       }
-    }),
+    }).sort((a, b) => a.label.localeCompare(b.label)),
     [dungeonPuzzleSets],
   );
 
