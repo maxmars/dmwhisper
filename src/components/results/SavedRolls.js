@@ -267,7 +267,7 @@ const ResultsList = () => {
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       {throwResult.timestamp}</div>} />
                 </ListItem>
-              } else if (throwResult.result.dungeonRooms !== null) {
+              } else if (throwResult.result.dungeonRooms) {
                 return (
                   <ListItem key={"dungeon" + index}>
                   <ListItemText primary={<div><div>{throwResult.result.dungeonName}</div><br /><DungeonComponent dungeonRooms={throwResult.result.dungeonRooms} /><br /><br /></div>}
