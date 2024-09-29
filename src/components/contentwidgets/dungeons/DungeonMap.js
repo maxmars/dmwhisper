@@ -4,7 +4,6 @@ import { getDungeonRooms, layoutRooms } from '../../../snippets/dungeons/Dungeon
 import DungeonCanvas from './DungeonCanvas';
 import Button from '@mui/material/Button';
 import CasinoIcon from '@mui/icons-material/Casino';
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import Grid from '@mui/material/Grid';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -16,8 +15,6 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { mergeContentAndTables, setLastTableContent } from '../../../store/slices/content.js';
 import { useSelector, useDispatch } from 'react-redux';
-import { addThrow } from '../../../store/slices/throws.js';
-import { format } from 'date-fns';
 
 
 export default function DungeonMap(props) {
@@ -126,13 +123,6 @@ export default function DungeonMap(props) {
 
         setDungeonRooms(generatedRooms);
         setSelectedRoom(0);
-    }
-
-    const saveRoll = () => {
-        const contentToSave = {
-            dungeonRooms: dungeonRooms
-        };
-        dispatch(addThrow({ result: contentToSave, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
     }
 
     useEffect(() => {
@@ -282,7 +272,6 @@ export default function DungeonMap(props) {
                 </Grid>
                 <Grid item xs={12} style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
                     <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
-                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
                 </Grid>
             </Grid>
         );

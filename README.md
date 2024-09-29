@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    29 Set 2024
+    -----------
+    - 1.40.0 Random dungeon generator! You can now add dungeons to your content and generate them on the fly.
+
     04 Set 2024
     -----------
     - 1.32.0 Added the "test" menu item.
