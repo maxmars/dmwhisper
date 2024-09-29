@@ -4,9 +4,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import { useMemo } from 'react';
-import { getDungeonRooms } from '../../../snippets/dungeons/DungeonLib.js';
+import { getDungeonRooms, layoutRooms } from '../../../snippets/dungeons/DungeonLib.js';
 import DungeonCanvas from './DungeonCanvas.js';
-import { Dungeon } from '../../../snippets/dungeons/Dungeon.js';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Grid from '@mui/material/Grid';
 import Dialog from '@mui/material/Dialog';
@@ -17,31 +16,40 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { mergeContentAndTables, setDungeonExploreDefaults } from '../../../store/slices/content.js';
+import { mergeContentAndTables, setDungeonExploreDefaults, setLastTableContent } from '../../../store/slices/content.js';
 
 
 export default function DungeonExplore(props) {
 
     const content = useSelector((st) => st.content);
 
+    const initialContent = {
+        numberOfRooms: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.numberOfRooms ?
+        st.content.dungeonExploreDefaults.numberOfRooms : 10),
+        dungeonSetpiece: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.setpiece ?
+        st.content.dungeonExploreDefaults.setpiece : ""),
+        dungeonMonsterSet: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.monsterset ?
+        st.content.dungeonExploreDefaults.monsterset : ""),
+        dungeonTrapSet: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.trapset ?
+        st.content.dungeonExploreDefaults.trapset : ""),
+        dungeonTreasureSet: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.treasureset ?
+        st.content.dungeonExploreDefaults.treasureset : ""),
+        dungeonPuzzleSet: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.puzzleset ?
+        st.content.dungeonExploreDefaults.puzzleset : "")
+    }
+
     const [numberOfRooms, setNumberOfRooms] =
-        useState(useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.numberOfRooms ?
-            st.content.dungeonExploreDefaults.numberOfRooms : 10));
+        useState(initialContent.numberOfRooms);
     const [dungeonSetpiece, setDungeonSetpiece] =
-        useState(useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.setpiece ?
-            st.content.dungeonExploreDefaults.setpiece : ""));
+        useState(initialContent.dungeonSetpiece);
     const [dungeonMonsterSet, setDungeonMonsterSet] =
-        useState(useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.monsterset ?
-            st.content.dungeonExploreDefaults.monsterset : ""));
+        useState(initialContent.dungeonMonsterSet);
     const [dungeonTrapSet, setDungeonTrapSet] =
-        useState(useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.trapset ?
-            st.content.dungeonExploreDefaults.trapset : ""));
+        useState(initialContent.dungeonTrapSet);
     const [dungeonTreasureSet, setDungeonTreasureSet] =
-        useState(useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.treasureset ?
-            st.content.dungeonExploreDefaults.treasureset : ""));
+        useState(initialContent.dungeonTreasureSet);
     const [dungeonPuzzleSet, setDungeonPuzzleSet] =
-        useState(useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.puzzleset ?
-            st.content.dungeonExploreDefaults.puzzleset : ""));
+        useState(initialContent.dungeonPuzzleSet);
 
     const dispatch = useDispatch();
     const { t } = useTranslation();
@@ -51,30 +59,50 @@ export default function DungeonExplore(props) {
     const dungeonTreasureSets = useSelector((st) => st.content.dungeonTreasureSets ? st.content.dungeonTreasureSets : []);
     const dungeonPuzzleSets = useSelector((st) => st.content.dungeonPuzzleSets ? st.content.dungeonPuzzleSets : []);
 
-    const DungeonCreate = (rooms) => {
-
+    const generateDungeon = () => {
         try {
-            const dungeonWidth = numberOfRooms * 3;
-            const dungeonHeight = numberOfRooms * 3;
+            const roomsResult = getDungeonRooms(dungeonSetpiece, numberOfRooms,
+                dungeonTrapSet, dungeonPuzzleSet,
+                dungeonMonsterSet, dungeonTreasureSet);
 
-            const roomTypes = rooms ? rooms.map((room, index) => {
-                return {
-                    name: index,
-                    occurrences: 1
-                };
-            }) : [];
+            if (roomsResult.statusMessage === 'success') {
+                try {
+                    const dungeonWidth = numberOfRooms * 3;
+                    const dungeonHeight = numberOfRooms * 3;
+        
+                    const roomTypes = roomsResult.rooms ? roomsResult.rooms.map((room, index) => {
+                        return {
+                            name: index,
+                            occurrences: 1
+                        };
+                    }) : [];
 
-            const newDungeon = new Dungeon(dungeonWidth, dungeonHeight, roomTypes);
-            newDungeon.generateRooms(3, 4);
-            return newDungeon;
+                    const roomsLayout = layoutRooms(roomTypes, 3, 4, dungeonWidth, dungeonHeight);
+
+                    roomsResult.rooms.forEach((room, index) => {
+                        room.x = roomsLayout[index].x;
+                        room.y = roomsLayout[index].y;
+                    });
+                } catch (e) {
+                    return null;
+                }
+        
+                setDungeonRooms(roomsResult.rooms);
+                setSelectedRoom(0);
+                setSelectedRoomContents(0);
+
+                return roomsResult.rooms;
+            }
+
+            return dungeonRooms;
         } catch (e) {
-            return null;
+            console.error(e);
         }
+
     }
 
     const [dungeonRooms, setDungeonRooms] = useState(null);
 
-    const [dungeon, setDungeon] = useState(DungeonCreate(null));
     const [roomContentsDialogOpen, setRoomContentsDialogOpen] = useState(false);
 
     const [selectedRoom, setSelectedRoom] = useState(0);
@@ -175,36 +203,19 @@ export default function DungeonExplore(props) {
 
     useEffect(() => {
         try {
-            setDungeon(DungeonCreate(dungeonRooms));
-        } catch (e) {
-            console.error(e);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [numberOfRooms, dungeonRooms]);
+            const lastTableContent = content.lastTableContent['dungeonExplore'] ? content.lastTableContent['dungeonExplore'] : null;
 
-    useEffect(() => {
-        try {
-            const roomsResult = getDungeonRooms(dungeonSetpiece, numberOfRooms,
-                dungeonTrapSet, dungeonPuzzleSet,
-                dungeonMonsterSet, dungeonTreasureSet);
-
-            if (roomsResult.statusMessage === 'success') {
-                setDungeonRooms(roomsResult.rooms);
-                setSelectedRoom(0);
-                setSelectedRoomContents(0);
+            if (lastTableContent && lastTableContent.diceThrow && lastTableContent.diceThrow.dungeonRooms) {
+                setDungeonRooms(lastTableContent.diceThrow.dungeonRooms);
+            } else {
+                generateDungeon();
             }
+
         } catch (e) {
             console.error(e);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [dungeonSetpiece, numberOfRooms, dungeonTrapSet, dungeonPuzzleSet, dungeonMonsterSet, dungeonTreasureSet]);
-
-    const roomTypes = dungeonRooms ? dungeonRooms.map((room, index) => {
-        return {
-            name: index,
-            occurrences: 1
-        };
-    }) : [];
+    }, []);
 
     const onRoomSelect = (room) => {
         if (selectedRoom === room) {
@@ -307,6 +318,37 @@ export default function DungeonExplore(props) {
         }
     }
 
+    const contentPersist = () => {
+        if (numberOfRooms !== initialContent.numberOfRooms ||
+            dungeonSetpiece !== initialContent.dungeonSetpiece ||
+            dungeonMonsterSet !== initialContent.dungeonMonsterSet ||
+            dungeonTrapSet !== initialContent.dungeonTrapSet ||
+            dungeonTreasureSet !== initialContent.dungeonTreasureSet ||
+            dungeonPuzzleSet !== initialContent.dungeonPuzzleSet) {
+
+                const dungeonRooms = generateDungeon();
+
+                dispatch(setDungeonExploreDefaults(
+                    {
+                        setpiece: dungeonSetpiece,
+                        monsterset: dungeonMonsterSet,
+                        treasureset: dungeonTreasureSet,
+                        trapset: dungeonTrapSet,
+                        puzzleset: dungeonPuzzleSet,
+                        numberOfRooms: numberOfRooms
+                    }
+                ));
+                dispatch(setLastTableContent({
+                    contentId: 'dungeonExplore',
+                    diceThrow: {
+                        dungeonRooms: dungeonRooms,
+                    },
+                    htmlContent: null
+                }));
+    
+            }
+    }
+
     const getDungeonSetup = () => {
         return (
             <Grid container sx={{ width: '100%' }}>
@@ -323,16 +365,6 @@ export default function DungeonExplore(props) {
                         onChange={(event, newValue) => {
                             try {
                                 setDungeonSetpiece(newValue.label);
-                                dispatch(setDungeonExploreDefaults(
-                                    {
-                                        setpiece: newValue.label,
-                                        monsterset: dungeonMonsterSet,
-                                        treasureset: dungeonTreasureSet,
-                                        trapset: dungeonTrapSet,
-                                        puzzleset: dungeonPuzzleSet,
-                                        numberOfRooms: numberOfRooms
-                                    }
-                                ));
                             } catch (e) {
                                 // nothing
                             }
@@ -347,16 +379,6 @@ export default function DungeonExplore(props) {
                         onChange={(event) => {
                             try {
                                 setNumberOfRooms(event.target.value);
-                                dispatch(setDungeonExploreDefaults(
-                                    {
-                                        setpiece: dungeonSetpiece,
-                                        monsterset: dungeonMonsterSet,
-                                        treasureset: dungeonTreasureSet,
-                                        trapset: dungeonTrapSet,
-                                        puzzleset: dungeonPuzzleSet,
-                                        numberOfRooms: event.target.value
-                                    }
-                                ));
                             } catch (e) {
                                 // nothing
                             }
@@ -378,16 +400,6 @@ export default function DungeonExplore(props) {
                         onChange={(event, newValue) => {
                             try {
                                 setDungeonMonsterSet(newValue.label);
-                                dispatch(setDungeonExploreDefaults(
-                                    {
-                                        setpiece: dungeonSetpiece,
-                                        monsterset: newValue.label,
-                                        treasureset: dungeonTreasureSet,
-                                        trapset: dungeonTrapSet,
-                                        puzzleset: dungeonPuzzleSet,
-                                        numberOfRooms: numberOfRooms
-                                    }
-                                ));
                             } catch (e) {
                                 // nothing
                             }
@@ -406,16 +418,6 @@ export default function DungeonExplore(props) {
                         onChange={(event, newValue) => {
                             try {
                                 setDungeonTreasureSet(newValue.label);
-                                dispatch(setDungeonExploreDefaults(
-                                    {
-                                        setpiece: dungeonSetpiece,
-                                        monsterset: dungeonMonsterSet,
-                                        treasureset: newValue.label,
-                                        trapset: dungeonTrapSet,
-                                        puzzleset: dungeonPuzzleSet,
-                                        numberOfRooms: numberOfRooms
-                                    }
-                                ));
                             } catch (e) {
                                 // nothing
                             }
@@ -434,16 +436,6 @@ export default function DungeonExplore(props) {
                         onChange={(event, newValue) => {
                             try {
                                 setDungeonTrapSet(newValue.label);
-                                dispatch(setDungeonExploreDefaults(
-                                    {
-                                        setpiece: dungeonSetpiece,
-                                        monsterset: dungeonMonsterSet,
-                                        treasureset: dungeonTreasureSet,
-                                        trapset: newValue.label,
-                                        puzzleset: dungeonPuzzleSet,
-                                        numberOfRooms: numberOfRooms
-                                    }
-                                ));
                             } catch (e) {
                                 // nothing
                             }
@@ -462,16 +454,6 @@ export default function DungeonExplore(props) {
                         onChange={(event, newValue) => {
                             try {
                                 setDungeonPuzzleSet(newValue.label);
-                                dispatch(setDungeonExploreDefaults(
-                                    {
-                                        setpiece: dungeonSetpiece,
-                                        monsterset: dungeonMonsterSet,
-                                        treasureset: dungeonTreasureSet,
-                                        trapset: dungeonTrapSet,
-                                        puzzleset: newValue.label,
-                                        numberOfRooms: numberOfRooms
-                                    }
-                                ));
                             } catch (e) {
                                 // nothing
                             }
@@ -482,7 +464,10 @@ export default function DungeonExplore(props) {
                 <Grid item xs={12}>&nbsp;</Grid>
                 <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
                     <Button disabled={numberOfRooms && dungeonSetpiece && dungeonTrapSet && dungeonPuzzleSet && dungeonMonsterSet && dungeonTreasureSet ? false : true}
-                        variant="contained" onClick={() => setPageMode('play')}>{t("Play")}</Button>
+                        variant="contained" onClick={() => {
+                            contentPersist();
+                            setPageMode('play');
+                        }}>{t("Play")}</Button>
                 </Grid>
             </Grid>
         );
@@ -494,12 +479,10 @@ export default function DungeonExplore(props) {
                 <Grid item xs={12}>
                     <DungeonCanvas
                         style={{ width: '90%' }}
-                        dungeon={dungeon}
+                        dungeonRooms={dungeonRooms}
                         selectedRoom={selectedRoom}
                         onRoomSelect={onRoomSelect}
-                        onInfoClick={onInfoClick}
-                        roomTypes={roomTypes}
-                        roomMinSize={3} roomMaxSize={4} />
+                        onInfoClick={onInfoClick} />
                 </Grid>
                 <Grid item xs={12} style={{ display: 'flex', justifyContent: 'left' }}>
                     <Typography>{dungeonRooms && dungeonRooms[selectedRoom] ? dungeonRooms[selectedRoom].description : t("No room selected.")}</Typography>

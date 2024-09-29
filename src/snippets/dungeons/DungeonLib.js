@@ -228,3 +228,77 @@ export const getDungeonRooms = (setpieceId, numberOfRooms, trapSetId, puzzleSetI
     return result;
 }
 
+export const layoutRooms = (roomTypes, roomMinSize, roomMaxSize, width, height) => {
+    const rooms = [];
+
+    roomTypes.forEach(type => {
+        let placed = 0;
+        let tries = 0;
+        while (placed < type.occurrences && tries < 1000) {
+            let roomWidth = randomInt(roomMinSize, roomMaxSize);
+            let roomHeight = randomInt(roomMinSize, roomMaxSize);
+            let x = randomInt(0, width - roomWidth - 1);
+            let y = randomInt(0, height - roomHeight - 1);
+
+            let newRoom = { x, y, width: roomWidth, height: roomHeight, type };
+
+            if (rooms.every(room => !roomsOverlap(room, newRoom))) {
+                rooms.push(newRoom);
+                placed++;
+            } else {
+                tries++;
+            }
+        }
+    });
+
+    return sortRoomsByDistance(rooms);
+}
+
+const distanceCalc = (punto1, punto2) => {
+    let deltaX = punto2.x - punto1.x;
+    let deltaY = punto2.y - punto1.y;
+    return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+}
+
+const sortRoomsByDistance = (originalRooms) => {
+    if (originalRooms.length < 2) return originalRooms;
+
+    let sortedRooms = [];
+    let currentRoom = originalRooms[0];
+    let lastRoom = 0;
+
+    currentRoom.id = ++lastRoom;
+    sortedRooms.push(currentRoom);
+    originalRooms.splice(0, 1);
+
+    while (originalRooms.length > 0) {
+        let minimumDistance = Infinity;
+        let closerRoomIndex = -1;
+
+        for (let i = 0; i < originalRooms.length; i++) {
+            let distance = distanceCalc(currentRoom, originalRooms[i]);
+            if (distance < minimumDistance) {
+                minimumDistance = distance;
+                closerRoomIndex = i;
+            }
+        }
+
+        currentRoom = originalRooms[closerRoomIndex];
+        currentRoom.id = ++lastRoom;
+        sortedRooms.push(currentRoom);
+        originalRooms.splice(closerRoomIndex, 1);
+    }
+
+    return sortedRooms;
+}
+
+const roomsOverlap = (room1, room2) => {
+    return !(room2.x > room1.x + room1.width ||
+        room2.x + room2.width < room1.x ||
+        room2.y > room1.y + room1.height ||
+        room2.y + room2.height < room1.y);
+}
+
+const randomInt = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}

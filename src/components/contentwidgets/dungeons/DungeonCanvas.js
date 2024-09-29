@@ -86,8 +86,8 @@ const DungeonCanvas = (props) => {
   }
 
   useEffect(() => {
-    setDrawnCorridors([...Array(props.dungeon.rooms.length).keys()]);
-  }, [props.dungeon.rooms.length]);
+    setDrawnCorridors([...Array(props.dungeonRooms.length).keys()]);
+  }, [props.dungeonRooms.length]);
 
   useEffect(() => {
     drawMap();
@@ -112,7 +112,7 @@ const DungeonCanvas = (props) => {
 
   useEffect(() => {
     let maxCoordinateX = 0;
-    props.dungeon.rooms.forEach((room) => {
+    props.dungeonRooms.forEach((room) => {
       const roomMaxX = room.x + room.width;
       if (roomMaxX > maxCoordinateX) {
         maxCoordinateX = roomMaxX;
@@ -120,7 +120,7 @@ const DungeonCanvas = (props) => {
     });
 
     let maxCoordinateY = 0;
-    props.dungeon.rooms.forEach((room) => {
+    props.dungeonRooms.forEach((room) => {
       const roomMaxY = room.y + room.height;
       if (roomMaxY > maxCoordinateY) {
         maxCoordinateY = roomMaxY;
@@ -133,7 +133,7 @@ const DungeonCanvas = (props) => {
 
     setXInc(xInc);
     setYInc(yInc);
-  }, [props.dungeon, windowSize, props.dungeon.rooms, zoomlevel,
+  }, [props.dungeonRooms, windowSize, zoomlevel,
   windowSize.width, windowSize.height, bottomBarHeight, iconbarHeight, isTouchDevice]);
 
 
@@ -145,7 +145,7 @@ const DungeonCanvas = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [canvasRef, zoomlevel, mapOffset, currentDragDistance, currentDragDistance.x,
     currentDragDistance.y, windowSize.width, windowSize.height,
-    drawnCorridors, props.dungeon.rooms, xInc, yInc, props.selectedRoom]);
+    drawnCorridors, props.dungeonRooms, xInc, yInc, props.selectedRoom]);
 
 
   const drawCorridors = (color, all) => {
@@ -158,11 +158,11 @@ const DungeonCanvas = (props) => {
     // draw the corridors
     context.lineWidth = 5;
 
-    for (let i = 1; i < props.dungeon.rooms.length; i++) {
+    for (let i = 1; i < props.dungeonRooms.length; i++) {
       // Se i è presente nell'array drawnCorridors, allora disegna il corridoio
       if (all === true || drawnCorridors.includes(i)) {
-        let prevRoom = props.dungeon.rooms[i - 1];
-        let currRoom = props.dungeon.rooms[i];
+        let prevRoom = props.dungeonRooms[i - 1];
+        let currRoom = props.dungeonRooms[i];
 
         let prevCenter = { x: prevRoom.x + Math.floor(prevRoom.width / 2), y: prevRoom.y + Math.floor(prevRoom.height / 2) };
         let currCenter = { x: currRoom.x + Math.floor(currRoom.width / 2), y: currRoom.y + Math.floor(currRoom.height / 2) };
@@ -195,8 +195,8 @@ const DungeonCanvas = (props) => {
     }
 
     if (props.selectedRoom > 0) {
-      let prevRoom = props.dungeon.rooms[props.selectedRoom - 1];
-      let currRoom = props.dungeon.rooms[props.selectedRoom];
+      let prevRoom = props.dungeonRooms[props.selectedRoom - 1];
+      let currRoom = props.dungeonRooms[props.selectedRoom];
 
       let prevCenter = { x: prevRoom.x + Math.floor(prevRoom.width / 2), y: prevRoom.y + Math.floor(prevRoom.height / 2) };
       let currCenter = { x: currRoom.x + Math.floor(currRoom.width / 2), y: currRoom.y + Math.floor(currRoom.height / 2) };
@@ -211,9 +211,9 @@ const DungeonCanvas = (props) => {
       context.strokeRect(currCenter.x * xInc + 5 + realX, currCenter.y * yInc + 5 + realY, 5, 5);
     }
 
-    if (props.selectedRoom < props.dungeon.rooms.length - 1) {
-      let prevRoom = props.dungeon.rooms[props.selectedRoom];
-      let currRoom = props.dungeon.rooms[props.selectedRoom + 1];
+    if (props.selectedRoom < props.dungeonRooms.length - 1) {
+      let prevRoom = props.dungeonRooms[props.selectedRoom];
+      let currRoom = props.dungeonRooms[props.selectedRoom + 1];
 
       let prevCenter = { x: prevRoom.x + Math.floor(prevRoom.width / 2), y: prevRoom.y + Math.floor(prevRoom.height / 2) };
       let currCenter = { x: currRoom.x + Math.floor(currRoom.width / 2), y: currRoom.y + Math.floor(currRoom.height / 2) };
@@ -249,7 +249,7 @@ const DungeonCanvas = (props) => {
     // draw the dungeon rooms
     context.lineWidth = 5;
 
-    props.dungeon.rooms.forEach((room, index, array) => {
+    props.dungeonRooms.forEach((room, index, array) => {
 
       if (index === 0) {
         context.fillStyle = 'rgb(119, 253, 128)';
@@ -275,8 +275,8 @@ const DungeonCanvas = (props) => {
 
   const getClickedRoomNumber = (x, y) => {
 
-    for (let i = 0; i < props.dungeon.rooms.length; i++) {
-      const room = props.dungeon.rooms[i];
+    for (let i = 0; i < props.dungeonRooms.length; i++) {
+      const room = props.dungeonRooms[i];
       if (x >= room.x && x <= room.x + room.width && y >= room.y && y <= room.y + room.height) {
         return i;
       }
@@ -299,7 +299,7 @@ const DungeonCanvas = (props) => {
 
       tempDrawnCorridors = tempDrawnCorridors.filter((roomNumber) => roomNumber !== clickedRoomNumber);
 
-      if (clickedRoomNumber < props.dungeon.rooms.length - 1 && drawnCorridors.includes(clickedRoomNumber + 1)) {
+      if (clickedRoomNumber < props.dungeonRooms.length - 1 && drawnCorridors.includes(clickedRoomNumber + 1)) {
         tempDrawnCorridors = tempDrawnCorridors.filter((roomNumber) => roomNumber !== clickedRoomNumber + 1);
       }
 
@@ -308,7 +308,7 @@ const DungeonCanvas = (props) => {
     } else {
       let tempDrawnCorridors = [...drawnCorridors, clickedRoomNumber];
 
-      if (clickedRoomNumber < props.dungeon.rooms.length - 1 && !drawnCorridors.includes(clickedRoomNumber + 1)) {
+      if (clickedRoomNumber < props.dungeonRooms.length - 1 && !drawnCorridors.includes(clickedRoomNumber + 1)) {
         tempDrawnCorridors = [...tempDrawnCorridors, clickedRoomNumber + 1];
       }
 

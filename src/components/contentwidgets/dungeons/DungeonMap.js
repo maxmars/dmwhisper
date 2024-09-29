@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 //import Grid from '@mui/material/Grid';
-import { getDungeonRooms } from '../../../snippets/dungeons/DungeonLib';
+import { getDungeonRooms, layoutRooms } from '../../../snippets/dungeons/DungeonLib';
 import DungeonCanvas from './DungeonCanvas';
-import { Dungeon } from '../../../snippets/dungeons/Dungeon.js';
+import Button from '@mui/material/Button';
+import CasinoIcon from '@mui/icons-material/Casino';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import Grid from '@mui/material/Grid';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -12,36 +14,16 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { mergeContentAndTables } from '../../../store/slices/content.js';
-import { useSelector } from 'react-redux';
+import { mergeContentAndTables, setLastTableContent } from '../../../store/slices/content.js';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 export default function DungeonMap(props) {
 
-    const DungeonCreate = (rooms) => {
-
-        try {
-            const dungeonWidth = props.content.data.dungeon.rooms * 3;
-            const dungeonHeight = props.content.data.dungeon.rooms * 4;
-
-            const roomTypes = rooms ? rooms.map((room, index) => {
-                return {
-                    name: index,
-                    occurrences: 1
-                };
-            }) : [];
-
-            const newDungeon = new Dungeon(dungeonWidth, dungeonHeight, roomTypes);
-            newDungeon.generateRooms(3, 4);
-            return newDungeon;
-        } catch (e) {
-            return null;
-        }
-    }
-
     const content = useSelector((st) => st.content);
+    const dispatch = useDispatch();
+
     const [dungeonRooms, setDungeonRooms] = useState(null);
-    const [dungeon, setDungeon] = useState(DungeonCreate(null));
     const [roomContentsDialogOpen, setRoomContentsDialogOpen] = useState(false);
 
     const [selectedRoom, setSelectedRoom] = useState(0);
@@ -94,6 +76,64 @@ export default function DungeonMap(props) {
         }
     }
 
+    const generateRooms = () => {
+        const roomsResult = getDungeonRooms(props.content.data.dungeon.setpiece, props.content.data.dungeon.rooms,
+            props.content.data.dungeon.trapSet, props.content.data.dungeon.puzzleSet,
+            props.content.data.dungeon.monsterSet, props.content.data.dungeon.treasureSet);
+
+        if (roomsResult.statusMessage === 'success') {
+            try {
+                const dungeonWidth = props.content.data.dungeon.rooms * 3;
+                const dungeonHeight = props.content.data.dungeon.rooms * 3;
+
+                const roomTypes = roomsResult.rooms ? roomsResult.rooms.map((room, index) => {
+                    return {
+                        name: index,
+                        occurrences: 1
+                    };
+                }) : [];
+
+                const roomsLayout = layoutRooms(roomTypes, 3, 4, dungeonWidth, dungeonHeight);
+
+                roomsResult.rooms.forEach((room, index) => {
+                    room.x = roomsLayout[index].x;
+                    room.y = roomsLayout[index].y;
+                });
+            } catch (e) {
+                return null;
+            }
+
+            return roomsResult.rooms;
+        }
+
+        return null;
+    }
+
+    const diceRoll = () => {
+        const generatedRooms = generateRooms();
+
+        dispatch(setLastTableContent({
+            contentId: props.content.id + "TAB" + props.currentTab,
+            diceThrow: {
+                dungeonRooms: generatedRooms
+            },
+            htmlContent: null
+        }));
+
+        setDungeonRooms(generatedRooms);
+        setSelectedRoom(0);
+    }
+
+    const saveRoll = () => {
+        dispatch(setLastTableContent({
+            contentId: props.content.id + "TAB" + props.currentTab,
+            diceThrow: {
+                dungeonRooms: dungeonRooms
+            },
+            htmlContent: null
+        }));
+    }
+
     useEffect(() => {
         setSelectedRoomContents(0);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -101,35 +141,21 @@ export default function DungeonMap(props) {
 
     useEffect(() => {
         try {
-            setDungeon(DungeonCreate(dungeonRooms));
-        } catch (e) {
-            console.error(e);
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.content.data.dungeon.rooms, dungeonRooms]);
+            const cleanedId = props.content.id.replace(/[^0-9a-zA-Z]/g, '') + "TAB" + props.currentTab;
+            const lastTableContent = content.lastTableContent[cleanedId] ? content.lastTableContent[cleanedId] : null;
 
-    useEffect(() => {
-        try {
-            const roomsResult = getDungeonRooms(props.content.data.dungeon.setpiece, props.content.data.dungeon.rooms,
-                props.content.data.dungeon.trapSet, props.content.data.dungeon.puzzleSet,
-                props.content.data.dungeon.monsterSet, props.content.data.dungeon.treasureSet);
-
-            if (roomsResult.statusMessage === 'success') {
-                setDungeonRooms(roomsResult.rooms);
+            if (lastTableContent) {
+                setDungeonRooms(lastTableContent.diceThrow.dungeonRooms);
+            } else {
+                diceRoll();
             }
         } catch (e) {
             console.error(e);
         }
-    }, [props.content.data.dungeon.setpiece, props.content.data.dungeon.rooms,
-    props.content.data.dungeon.trapSet, props.content.data.dungeon.puzzleSet,
-    props.content.data.dungeon.monsterSet, props.content.data.dungeon.treasureSet]);
-
-    const roomTypes = dungeonRooms ? dungeonRooms.map((room, index) => {
-        return {
-            name: index,
-            occurrences: 1
-        };
-    }) : [];
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.content.data.dungeon.setpiece, props.content.data.dungeon.rooms, props.content.data.dungeon.trapSet,
+    props.content.data.dungeon.puzzleSet, props.content.data.dungeon.monsterSet, props.content.data.dungeon.treasureSet,
+    props.content.id, props.currentTab, content.lastTableContent]);
 
     const onRoomSelect = (room) => {
         if (selectedRoom === room) {
@@ -233,20 +259,26 @@ export default function DungeonMap(props) {
     }
 
     try {
+        if (!dungeonRooms || dungeonRooms.length === 0) {
+            return null;
+        }
+
         return (
             <Grid container >
                 <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
                     {getRoomInfoDialog()}
                 </Grid>
+                <Grid item xs={12} style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                    <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
+                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
+                </Grid>
                 <Grid item xs={12}>
                     <DungeonCanvas
                         style={{ width: '90%' }}
-                        dungeon={dungeon}
+                        dungeonRooms={dungeonRooms}
                         selectedRoom={selectedRoom}
                         onRoomSelect={onRoomSelect}
-                        onInfoClick={onInfoClick}
-                        roomTypes={roomTypes}
-                        roomMinSize={3} roomMaxSize={4} />
+                        onInfoClick={onInfoClick} />
                 </Grid>
                 <Grid item xs={12} style={{ display: 'flex', justifyContent: 'left' }}>
                     <Typography>{dungeonRooms && dungeonRooms[selectedRoom] ? dungeonRooms[selectedRoom].description : t("No room selected.")}</Typography>
