@@ -135,7 +135,7 @@ export default function DungeonMap(props) {
             const cleanedId = props.content.id.replace(/[^0-9a-zA-Z]/g, '') + "TAB" + props.currentTab;
             const lastTableContent = content.lastTableContent[cleanedId] ? content.lastTableContent[cleanedId] : null;
 
-            if (lastTableContent) {
+            if (lastTableContent && lastTableContent.diceThrow && lastTableContent.diceThrow.dungeonRooms) {
                 setDungeonRooms(lastTableContent.diceThrow.dungeonRooms);
             } else {
                 diceRoll();
