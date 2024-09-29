@@ -91,7 +91,7 @@ export default function DungeonSetup(props) {
             onChange={(event) => props.onDungeonRoomsChanged(event.target.value)}
             value={props.rooms}
             id="new-rooms-number"
-            label={t("Numero di stanze")}
+            label={t("Number of rooms")}
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>

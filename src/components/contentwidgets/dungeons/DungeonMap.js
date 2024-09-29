@@ -16,6 +16,8 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { mergeContentAndTables, setLastTableContent } from '../../../store/slices/content.js';
 import { useSelector, useDispatch } from 'react-redux';
+import { addThrow } from '../../../store/slices/throws.js';
+import { format } from 'date-fns';
 
 
 export default function DungeonMap(props) {
@@ -125,13 +127,10 @@ export default function DungeonMap(props) {
     }
 
     const saveRoll = () => {
-        dispatch(setLastTableContent({
-            contentId: props.content.id + "TAB" + props.currentTab,
-            diceThrow: {
-                dungeonRooms: dungeonRooms
-            },
-            htmlContent: null
-        }));
+        const contentToSave = {
+            dungeonRooms: dungeonRooms
+        };
+        dispatch(addThrow({ result: contentToSave, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
     }
 
     useEffect(() => {

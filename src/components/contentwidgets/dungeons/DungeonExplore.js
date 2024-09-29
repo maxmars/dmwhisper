@@ -385,7 +385,7 @@ export default function DungeonExplore(props) {
                         }}
                         value={numberOfRooms}
                         id="new-rooms-number"
-                        label={t("Numero di stanze")}
+                        label={t("Number of rooms")}
                         variant="outlined"
                         sx={{ width: "100%" }} />
                 </Grid>
