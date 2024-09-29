@@ -82,6 +82,8 @@ export default function DungeonExplore(props) {
                     roomsResult.rooms.forEach((room, index) => {
                         room.x = roomsLayout[index].x;
                         room.y = roomsLayout[index].y;
+                        room.width = roomsLayout[index].width;
+                        room.height = roomsLayout[index].height;
                     });
                 } catch (e) {
                     return null;
