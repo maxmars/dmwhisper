@@ -269,10 +269,6 @@ export default function DungeonMap(props) {
                 <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
                     {getRoomInfoDialog()}
                 </Grid>
-                <Grid item xs={12} style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-                    <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
-                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
-                </Grid>
                 <Grid item xs={12}>
                     <DungeonCanvas
                         style={{ width: '90%' }}
@@ -283,6 +279,10 @@ export default function DungeonMap(props) {
                 </Grid>
                 <Grid item xs={12} style={{ display: 'flex', justifyContent: 'left' }}>
                     <Typography>{dungeonRooms && dungeonRooms[selectedRoom] ? dungeonRooms[selectedRoom].description : t("No room selected.")}</Typography>
+                </Grid>
+                <Grid item xs={12} style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                    <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
+                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
                 </Grid>
             </Grid>
         );

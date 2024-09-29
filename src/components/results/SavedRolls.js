@@ -266,6 +266,8 @@ const ResultsList = () => {
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       {throwResult.timestamp}</div>} />
                 </ListItem>
+              } else if (throwResult.result.dungeonRooms === null) {
+                return null;
               } else {
 
                 if (searchText.length > 0 && !throwResult.result.toLowerCase().includes(searchText.toLowerCase())) {

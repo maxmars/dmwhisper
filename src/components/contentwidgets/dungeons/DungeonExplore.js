@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import CasinoIcon from '@mui/icons-material/Casino';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import { useSelector, useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 import { getDungeonRooms, layoutRooms } from '../../../snippets/dungeons/DungeonLib.js';
@@ -17,6 +19,8 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { mergeContentAndTables, setDungeonExploreDefaults, setLastTableContent } from '../../../store/slices/content.js';
+import { addThrow } from '../../../store/slices/throws.js';
+import { format } from 'date-fns';
 
 
 export default function DungeonExplore(props) {
@@ -59,7 +63,7 @@ export default function DungeonExplore(props) {
     const dungeonTreasureSets = useSelector((st) => st.content.dungeonTreasureSets ? st.content.dungeonTreasureSets : []);
     const dungeonPuzzleSets = useSelector((st) => st.content.dungeonPuzzleSets ? st.content.dungeonPuzzleSets : []);
 
-    const generateDungeon = () => {
+    const generateRooms = () => {
         try {
             const roomsResult = getDungeonRooms(dungeonSetpiece, numberOfRooms,
                 dungeonTrapSet, dungeonPuzzleSet,
@@ -210,7 +214,7 @@ export default function DungeonExplore(props) {
             if (lastTableContent && lastTableContent.diceThrow && lastTableContent.diceThrow.dungeonRooms) {
                 setDungeonRooms(lastTableContent.diceThrow.dungeonRooms);
             } else {
-                generateDungeon();
+                generateRooms();
             }
 
         } catch (e) {
@@ -218,6 +222,28 @@ export default function DungeonExplore(props) {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const diceRoll = () => {
+        const generatedRooms = generateRooms();
+
+        dispatch(setLastTableContent({
+            contentId: props.content.id + "TAB" + props.currentTab,
+            diceThrow: {
+                dungeonRooms: generatedRooms
+            },
+            htmlContent: null
+        }));
+
+        setDungeonRooms(generatedRooms);
+        setSelectedRoom(0);
+    }
+
+    const saveRoll = () => {
+        const contentToSave = {
+            dungeonRooms: dungeonRooms
+        };
+        dispatch(addThrow({ result: contentToSave, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
+    }
 
     const onRoomSelect = (room) => {
         if (selectedRoom === room) {
@@ -328,7 +354,7 @@ export default function DungeonExplore(props) {
             dungeonTreasureSet !== initialContent.dungeonTreasureSet ||
             dungeonPuzzleSet !== initialContent.dungeonPuzzleSet) {
 
-                const dungeonRooms = generateDungeon();
+                const dungeonRooms = generateRooms();
 
                 dispatch(setDungeonExploreDefaults(
                     {
@@ -488,6 +514,10 @@ export default function DungeonExplore(props) {
                 </Grid>
                 <Grid item xs={12} style={{ display: 'flex', justifyContent: 'left' }}>
                     <Typography>{dungeonRooms && dungeonRooms[selectedRoom] ? dungeonRooms[selectedRoom].description : t("No room selected.")}</Typography>
+                </Grid>
+                <Grid item xs={12} style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                    <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
+                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
                 </Grid>
                 <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
                     {getRoomInfoDialog()}
