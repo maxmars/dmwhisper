@@ -180,6 +180,7 @@ export default function DungeonExplore(props) {
 
     const saveRoll = () => {
         const contentToSave = {
+            dungeonName: dungeonSetpiece,
             dungeonRooms: dungeonRooms
         };
         dispatch(addThrow({ result: contentToSave, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));

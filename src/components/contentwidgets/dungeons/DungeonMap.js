@@ -71,6 +71,7 @@ export default function DungeonMap(props) {
 
     const saveRoll = () => {
         const contentToSave = {
+            dungeonName: props.content.label,
             dungeonRooms: dungeonRooms
         };
         dispatch(addThrow({ result: contentToSave, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
