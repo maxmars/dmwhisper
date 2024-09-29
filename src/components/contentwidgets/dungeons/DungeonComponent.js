@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import DungeonCanvas from './DungeonCanvas.js';
 import Grid from '@mui/material/Grid';
@@ -16,7 +16,6 @@ import { useTranslation } from 'react-i18next';
 export default function DungeonComponent(props) {
 
     const content = useSelector((st) => st.content);
-
     const { t } = useTranslation();
 
     const [roomContentsDialogOpen, setRoomContentsDialogOpen] = useState(false);
@@ -68,6 +67,15 @@ export default function DungeonComponent(props) {
             setSelectedRoomPuzzle(props.dungeonRooms[room].puzzle.textContent);
         }
     }
+
+    useEffect(() => {
+        try {
+            setSelectedRoomContents(0);
+        } catch (e) {
+            // nothing
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const onRoomSelect = (room) => {
         if (selectedRoom === room) {
