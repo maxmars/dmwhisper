@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { copyIntoClipboard } from '../../utils/index.js';
 import useTheme from '@mui/private-theming/useTheme';
 import { format } from 'date-fns';
+import DungeonComponent from '../contentwidgets/dungeons/DungeonComponent.js';
 
 const ResultsList = () => {
 
@@ -266,8 +267,20 @@ const ResultsList = () => {
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       {throwResult.timestamp}</div>} />
                 </ListItem>
-              } else if (throwResult.result.dungeonRooms === null) {
-                return null;
+              } else if (throwResult.result.dungeonRooms !== null) {
+                return (
+                  <ListItem key={"ris" + index}>
+                  <ListItemText primary={<div><DungeonComponent dungeonRooms={throwResult.result.dungeonRooms} /><br /><br /></div>}
+                    secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
+                      <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                        setThrowToBeDeleted(index);
+                        setCurrentEditedContent(null);
+                      }} />
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      {throwResult.timestamp}</div>} />
+
+                  </ListItem>
+                );
               } else {
 
                 if (searchText.length > 0 && !throwResult.result.toLowerCase().includes(searchText.toLowerCase())) {
