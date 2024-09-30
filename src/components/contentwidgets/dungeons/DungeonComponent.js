@@ -70,12 +70,13 @@ export default function DungeonComponent(props) {
 
     useEffect(() => {
         try {
+            setSelectedRoom(0);
             setSelectedRoomContents(0);
         } catch (e) {
             // nothing
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [props.dungeonRooms]);
 
     const onRoomSelect = (room) => {
         if (selectedRoom === room) {
