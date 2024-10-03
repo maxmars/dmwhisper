@@ -18,6 +18,10 @@ const renderReactDom = () => {
   );
 };
 
+window.addEventListener('load', function () {
+  window.history.pushState({ noBackExitsApp: true }, '');
+});
+
 if (window.cordova) {
   document.addEventListener('deviceready', () => {
     renderReactDom();

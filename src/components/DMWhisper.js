@@ -55,6 +55,22 @@ const DMWhisper = () => {
     }));
   });
 
+  React.useEffect(() => {
+    const handleBackButton = (event) => {
+      document.getElementById('root').click();
+      if (window.history.length < 2) {
+        window.history.pushState({ noBackExitsApp: true }, '');
+      }
+    };
+
+    window.addEventListener('popstate', handleBackButton);
+
+    return () => {
+      window.removeEventListener('popstate', handleBackButton);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // By default, user is on the "Browse content" tab
   const [tab, setTab] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);

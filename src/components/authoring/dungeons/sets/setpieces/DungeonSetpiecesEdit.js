@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Grid, Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import SetpiecesList from './DungeonSetpiecesList';
@@ -15,6 +15,21 @@ const DungeonSetpiecesEdit = (props) => {
   const selectSetpiece = itemId => setPageMode(itemId);
   const setSetpiecesListMode = () => setPageMode(trapsListPageMode);
 
+  useEffect(() => {
+    const handleBackButton = (event) => {
+      window.history.pushState({ noBackExitsApp: true }, '');
+      event.preventDefault();
+      props.returnToMenu();
+    };
+
+    window.addEventListener('popstate', handleBackButton);
+
+    return () => {
+      window.removeEventListener('popstate', handleBackButton);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
   return (
     <Grid container sx={{height: "100%"}} >
       <Grid item xs={12}>&nbsp;</Grid>

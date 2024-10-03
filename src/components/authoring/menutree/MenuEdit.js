@@ -86,6 +86,16 @@ export default function MenuEdit(props) {
     const theme = useTheme();
     const [headerInfoOpen, setHeaderInfoOpen] = useState(currentContentType !== "menu");
     const mounted = useRef();
+    const pathRef = useRef(path);
+    const unsavedContentRef = useRef(unsavedContent);
+
+    useEffect(() => {
+        pathRef.current = path;
+    }, [path]);
+
+    useEffect(() => {
+        unsavedContentRef.current = unsavedContent;
+    }, [unsavedContent]);
 
     useEffect(() => {
         setUnsavedContent("no");
@@ -97,6 +107,21 @@ export default function MenuEdit(props) {
     useEffect(() => {
         ckEditorThemeSync();
     });
+
+    useEffect(() => {
+        const handleBackButton = (event) => {
+            window.history.pushState({ noBackExitsApp: true }, '');
+            event.preventDefault();
+            backOneLevelCheck();
+        };
+
+        window.addEventListener('popstate', handleBackButton);
+
+        return () => {
+            window.removeEventListener('popstate', handleBackButton);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const ckEditorThemeSync = () => {
         setTimeout(() => {
@@ -208,7 +233,7 @@ export default function MenuEdit(props) {
     }
 
     const backOneLevelCheck = () => {
-        if (unsavedContent === "yes") {
+        if (unsavedContentRef.current === "yes") {
             setUnsavedContent("andbackonelevel");
             return;
         }
@@ -217,8 +242,8 @@ export default function MenuEdit(props) {
 
     const backOneLevel = () => {
         // If there's a dot in the path, remove the last part
-        if (path.indexOf(".") > -1) {
-            const newPath = path.substring(0, path.lastIndexOf("."));
+        if (pathRef.current.indexOf(".") > -1) {
+            const newPath = pathRef.current.substring(0, pathRef.current.lastIndexOf("."));
             const newContentMetaData = getContentMetaData(tree, newPath);
             const newCtyp = newContentMetaData.type ? newContentMetaData.type : "menu";
             setCurrentMenuId(newContentMetaData.id);
@@ -651,10 +676,10 @@ export default function MenuEdit(props) {
                                 currentContentType && (currentContentType === "map") ?
                                     <>
                                         <Grid item xs={12}>&nbsp;</Grid>
-                                        <MapSetup 
-                                            setpieceId={currentMenuSetpiece} 
-                                            density={currentMenuDensity} 
-                                            gridsize={currentMenuGrid} 
+                                        <MapSetup
+                                            setpieceId={currentMenuSetpiece}
+                                            density={currentMenuDensity}
+                                            gridsize={currentMenuGrid}
                                             onSetpieceIdChanged={(newSetpieceId) => {
                                                 setCurrentMenuSetpiece(newSetpieceId);
                                                 setUnsavedContent("yes");
@@ -675,8 +700,8 @@ export default function MenuEdit(props) {
                                 currentContentType && (currentContentType === "dungeon") ?
                                     <>
                                         <Grid item xs={12}>&nbsp;</Grid>
-                                        <DungeonSetup 
-                                            setpieceId={currentMenuDungeonSetpiece} 
+                                        <DungeonSetup
+                                            setpieceId={currentMenuDungeonSetpiece}
                                             monsterSetId={currentMenuDungeonMonsterSet}
                                             trapSetId={currentMenuDungeonTrapSet}
                                             treasureSetId={currentMenuDungeonTreasureSet}

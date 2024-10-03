@@ -23,17 +23,17 @@ export default function DungeonExplore(props) {
 
     const initialContent = {
         numberOfRooms: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.numberOfRooms ?
-        st.content.dungeonExploreDefaults.numberOfRooms : 10),
+            st.content.dungeonExploreDefaults.numberOfRooms : 10),
         dungeonSetpiece: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.setpiece ?
-        st.content.dungeonExploreDefaults.setpiece : ""),
+            st.content.dungeonExploreDefaults.setpiece : ""),
         dungeonMonsterSet: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.monsterset ?
-        st.content.dungeonExploreDefaults.monsterset : ""),
+            st.content.dungeonExploreDefaults.monsterset : ""),
         dungeonTrapSet: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.trapset ?
-        st.content.dungeonExploreDefaults.trapset : ""),
+            st.content.dungeonExploreDefaults.trapset : ""),
         dungeonTreasureSet: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.treasureset ?
-        st.content.dungeonExploreDefaults.treasureset : ""),
+            st.content.dungeonExploreDefaults.treasureset : ""),
         dungeonPuzzleSet: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.puzzleset ?
-        st.content.dungeonExploreDefaults.puzzleset : "")
+            st.content.dungeonExploreDefaults.puzzleset : "")
     }
 
     const [numberOfRooms, setNumberOfRooms] =
@@ -67,7 +67,7 @@ export default function DungeonExplore(props) {
                 try {
                     const dungeonWidth = numberOfRooms * 3;
                     const dungeonHeight = numberOfRooms * 3;
-        
+
                     const roomTypes = roomsResult.rooms ? roomsResult.rooms.map((room, index) => {
                         return {
                             name: index,
@@ -86,7 +86,7 @@ export default function DungeonExplore(props) {
                 } catch (e) {
                     return null;
                 }
-        
+
                 setDungeonRooms(roomsResult.rooms);
 
                 return roomsResult.rooms;
@@ -149,6 +149,23 @@ export default function DungeonExplore(props) {
     );
 
     useEffect(() => {
+        const handleBackButton = (event) => {
+            window.history.pushState({ noBackExitsApp: true }, '');
+            event.preventDefault();
+            if (pageMode !== 'setup') {
+                setPageMode('setup');
+            }
+        };
+
+        window.addEventListener('popstate', handleBackButton);
+
+        return () => {
+            window.removeEventListener('popstate', handleBackButton);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    useEffect(() => {
         try {
             const lastTableContent = content.lastTableContent['dungeonExplore'] ? content.lastTableContent['dungeonExplore'] : null;
 
@@ -194,27 +211,27 @@ export default function DungeonExplore(props) {
             dungeonTreasureSet !== initialContent.dungeonTreasureSet ||
             dungeonPuzzleSet !== initialContent.dungeonPuzzleSet) {
 
-                const dungeonRooms = generateRooms();
+            const dungeonRooms = generateRooms();
 
-                dispatch(setDungeonExploreDefaults(
-                    {
-                        setpiece: dungeonSetpiece,
-                        monsterset: dungeonMonsterSet,
-                        treasureset: dungeonTreasureSet,
-                        trapset: dungeonTrapSet,
-                        puzzleset: dungeonPuzzleSet,
-                        numberOfRooms: numberOfRooms
-                    }
-                ));
-                dispatch(setLastTableContent({
-                    contentId: 'dungeonExplore',
-                    diceThrow: {
-                        dungeonRooms: dungeonRooms,
-                    },
-                    htmlContent: null
-                }));
-    
-            }
+            dispatch(setDungeonExploreDefaults(
+                {
+                    setpiece: dungeonSetpiece,
+                    monsterset: dungeonMonsterSet,
+                    treasureset: dungeonTreasureSet,
+                    trapset: dungeonTrapSet,
+                    puzzleset: dungeonPuzzleSet,
+                    numberOfRooms: numberOfRooms
+                }
+            ));
+            dispatch(setLastTableContent({
+                contentId: 'dungeonExplore',
+                diceThrow: {
+                    dungeonRooms: dungeonRooms,
+                },
+                htmlContent: null
+            }));
+
+        }
     }
 
     const getDungeonSetup = () => {

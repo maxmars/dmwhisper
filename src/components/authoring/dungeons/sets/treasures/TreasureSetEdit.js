@@ -106,6 +106,21 @@ const TreasureSetEdit = (props) => {
   require('ckeditor5-custom-build/build/translations/' + lng + '.js');
   // End CKEditor stuff
 
+  useEffect(() => {
+    const handleBackButton = (event) => {
+      window.history.pushState({ noBackExitsApp: true }, '');
+      event.preventDefault();
+      props.endEditing();
+    };
+
+    window.addEventListener('popstate', handleBackButton);
+
+    return () => {
+      window.removeEventListener('popstate', handleBackButton);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
   const updateHeader = () => {
 
     if (treasureSets.find((treasure) => treasure.id === editedTreasureSetId) && editedTreasureSetId !== props.itemId) {

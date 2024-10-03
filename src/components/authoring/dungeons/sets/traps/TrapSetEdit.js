@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -20,7 +20,6 @@ import TablesChooser from '../../../tables/TablesChooser.js';
 import { uuidv4 } from '../../../../../utils/index.js';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Editor } from 'ckeditor5-custom-build/build/ckeditor';
-import { useEffect } from 'react';
 import { useRef } from 'react';
 
 
@@ -106,6 +105,21 @@ const TrapSetEdit = (props) => {
   require('ckeditor5-custom-build/build/translations/' + lng + '.js');
   // End CKEditor stuff
 
+  useEffect(() => {
+    const handleBackButton = (event) => {
+      window.history.pushState({ noBackExitsApp: true }, '');
+      event.preventDefault();
+      props.endEditing();
+    };
+
+    window.addEventListener('popstate', handleBackButton);
+
+    return () => {
+      window.removeEventListener('popstate', handleBackButton);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
   const updateHeader = () => {
 
     if (trapSets.find((trap) => trap.id === editedTrapSetId) && editedTrapSetId !== props.itemId) {

@@ -13,6 +13,7 @@ import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import useTheme from '@mui/private-theming/useTheme';
+import { useEffect, useRef } from 'react';
 import './style.css'
 
 const ContentTree = () => {
@@ -29,17 +30,38 @@ const ContentTree = () => {
     const [contentName, setContentName] = useState(getContentName(tree, path));
     const [selectedContent, setSelectedContent] = useState(initialContent ? null : getContentMetaData(tree, path));
     const dispatch = useDispatch();
+    const pathRef = useRef(path);
+
+    // Aggiorna i riferimenti quando lo stato cambia
+    useEffect(() => {
+        pathRef.current = path;
+    }, [path]);
 
     const columns = [
         { field: 'label', headerName: t('Content'), flex: 1 },
     ];
 
+    useEffect(() => {
+        const handleBackButton = (event) => {
+            window.history.pushState({ noBackExitsApp: true }, '');
+            event.preventDefault();
+            backOneLevel();
+        };
+
+        window.addEventListener('popstate', handleBackButton);
+
+        return () => {
+            window.removeEventListener('popstate', handleBackButton);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     const upperPath = () => {
-        let newPath = path;
+        let newPath = pathRef.current;
 
         // If there's a dot in the path, remove the last part
-        if (path.indexOf(".") > -1) {
-            newPath = path.substring(0, path.lastIndexOf("."));
+        if (newPath.indexOf(".") > -1) {
+            newPath = newPath.substring(0, newPath.lastIndexOf("."));
         } else {
             newPath = "";
         }
@@ -48,11 +70,11 @@ const ContentTree = () => {
     }
 
     const pathLeaf = () => {
-        let newPath = path;
+        let newPath = pathRef.current;
 
         // If there's a dot in the path, remove the last part
-        if (path.indexOf(".") > -1) {
-            newPath = path.substring(path.lastIndexOf(".") + 1);
+        if (newPath.indexOf(".") > -1) {
+            newPath = newPath.substring(newPath.lastIndexOf(".") + 1);
         }
 
         return newPath;

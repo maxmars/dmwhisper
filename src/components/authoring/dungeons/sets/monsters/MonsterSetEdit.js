@@ -106,6 +106,21 @@ const MonsterSetEdit = (props) => {
   require('ckeditor5-custom-build/build/translations/' + lng + '.js');
   // End CKEditor stuff
 
+  useEffect(() => {
+    const handleBackButton = (event) => {
+      window.history.pushState({ noBackExitsApp: true }, '');
+      event.preventDefault();
+      props.endEditing();
+    };
+
+    window.addEventListener('popstate', handleBackButton);
+
+    return () => {
+      window.removeEventListener('popstate', handleBackButton);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props, props.endEditing]);
+  
   const updateHeader = () => {
 
     if (monsterSets.find((monster) => monster.id === editedMonsterSetId) && editedMonsterSetId !== props.itemId) {

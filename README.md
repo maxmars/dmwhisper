@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    03 Ott 2024
+    -----------
+    - 1.40.1 On browsers that allow it, pressing "back" browser button now goes back one level. Chrome does not allow this fully (you have to interact with the page between "back" button presses), but Firefox does.
+
     29 Set 2024
     -----------
     - 1.40.0 Random dungeon generator! You can now add dungeons to your content and generate them on the fly.
