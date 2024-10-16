@@ -56,9 +56,8 @@ const DMWhisper = () => {
   });
 
   React.useEffect(() => {
-    const handleBackButton = (event) => {
-      document.getElementById('root').click();
-      if (window.history.length < 2) {
+    const handleBackButton = (event) => {      
+      if (window.history.length < 2 && event.state) {
         window.history.pushState({ noBackExitsApp: true }, '');
       }
     };

@@ -43,9 +43,11 @@ const ContentTree = () => {
 
     useEffect(() => {
         const handleBackButton = (event) => {
-            window.history.pushState({ noBackExitsApp: true }, '');
-            event.preventDefault();
-            backOneLevel();
+            if (event.state) {
+                window.history.pushState({ noBackExitsApp: true }, '');
+                event.preventDefault();
+                backOneLevel();
+            }
         };
 
         window.addEventListener('popstate', handleBackButton);
