@@ -17,6 +17,7 @@ import { copyIntoClipboard } from '../../utils/index.js';
 import useTheme from '@mui/private-theming/useTheme';
 import { format } from 'date-fns';
 import DungeonComponent from '../contentwidgets/dungeons/DungeonComponent.js';
+import AreaMapComponent from '../contentwidgets/areamaps/AreaMapComponent.js';
 
 const ResultsList = () => {
 
@@ -107,67 +108,6 @@ const ResultsList = () => {
   }
   //#endregion page events
 
-  //#region dungeon map stuff
-  const getDungeonMapHtml = (index, cells, gridrowcells, gridrowdensity) => {
-    const mapId = "throwHtmlContent" + index;
-
-    return <div id={mapId}>
-      {[...Array(gridrowcells)].map((_, i) => (
-        <div key={"map" + i}>
-          <br />
-          <div style={{ display: 'flex', width: '100%' }}>
-            {[...Array(gridrowcells)].map((_, j) => {
-              let description = "";
-
-              if (cells[i * gridrowcells + j]) {
-                try {
-                  description = cells[i * gridrowcells + j].content.split("</h1>")[0].substr(4);
-                  if (description.length > 15) {
-                    description = description.substring(0, 13) + "..";
-                  }
-                } catch (error) {
-                  description = cells[i * gridrowcells + j].description;
-                }
-              }
-
-              return (<div key={"cell" + i + "-" + j} style={{ display: 'flex', flexBasis: (100 / gridrowcells) + '%', border: "2px solid " + (dark ? "black" : "white"), flexGrow: '0', justifyContent: 'center', backgroundColor: cells[i * gridrowcells + j] ? "orange" : "transparent" }}>
-                <br />
-                <div style={{ display: 'flex', alignItems: 'center' }}>{cells[i * gridrowcells + j] ? <a href={"#" + cells[i * gridrowcells + j].id} style={{ color: "white", fontSize: "12px !important" }}>{description}</a> : " "}</div>
-                <br />&nbsp;
-              </div>);
-
-            })}
-          </div>
-        </div>
-      ))}
-      <br />
-      {[...Array(gridrowcells)].map((_, i) => (
-        <div key={"content" + i} style={{ display: 'flex', flexWrap: 'wrap', width: '100%' }}>
-          {[...Array(gridrowcells)].map((_, j) => (
-            cells[i * gridrowcells + j] ?
-              <div key={i + ".." + j} style={{ width: '100%' }} id={cells[i * gridrowcells + j].id} >
-                <br />
-                <div key={i + "-" + j} style={{ display: 'block', flexBasis: '100%', flexGrow: '0', justifyContent: 'left', border: "2px solid orange" }}>
-                  <div style={{ width: "100%" }} />
-                  {"[" + (i + 1) + ", " + (j + 1) + "] " + t("Description") + ": " + cells[i * gridrowcells + j].description}
-                  <div style={{ width: "100%", textAlign: 'left' }} dangerouslySetInnerHTML={{ __html: cells[i * gridrowcells + j].content }} />
-                  <div style={{ width: "100%" }} />
-                  <div style={{ width: "100%" }}>
-                    <a href={"#" + mapId} style={{ color: dark ? "yellow" : "blue" }}>{t("Back to top")}</a>
-                  </div>
-                  <div style={{ width: "100%" }} />
-                </div>
-              </div>
-              : null
-          ))}
-        </div>
-      ))}
-      <br />
-
-    </div>
-  }
-  //#endregion dungeon map stuff
-
   //#region render
   if (throwToBeDeleted !== null) {
     return (
@@ -254,15 +194,13 @@ const ResultsList = () => {
                 }
 
                 return <ListItem key={"ris" + index}>
-                  <ListItemText primary={<div>{getDungeonMapHtml(index, throwResult.result.cells, throwResult.result.gridrowcells, throwResult.result.gridrowdensity)}<br /><br /></div>}
+                  <ListItemText primary={<div>
+                    <AreaMapComponent cells={filtered} gridrowcells={throwResult.result.gridrowcells} dark={dark} />
+                    <br /><br /></div>}
                     secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
                       <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                         setThrowToBeDeleted(index);
                         setCurrentEditedContent(null);
-                      }} />
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <ContentCopyIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                        throwCopy(index);
                       }} />
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       {throwResult.timestamp}</div>} />

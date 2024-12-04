@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Information from '../contentwidgets/Information';
 import Table from '../contentwidgets/Table';
-import AreaMap from '../contentwidgets/AreaMap';
+import AreaMap from '../contentwidgets/areamaps/AreaMap';
 import DungeonMap from '../contentwidgets/dungeons/DungeonMap';
 import Menu from '../contentwidgets/Menu';
 import IconButton from '@mui/material/IconButton';

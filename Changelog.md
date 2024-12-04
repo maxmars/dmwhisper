@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    04 Dic 2024
+    -----------
+    - 1.41.0 Maps are now rendered with a Canvas and a Dialog instead of ugly looking plain HTML.
+
     16 Ott 2024
     -----------
     - 1.40.2 Squashed small bug on AreaMap navigation.
