@@ -1,5 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 
+// Aggiungiamo i nuovi colori alla lista
+const colors = ['#90EE90', '#FFA500', '#ADD8E6', '#FFFF00', '#D3D3D3', '#E6E6FA', '#7FFFD4', '#FFC0CB']; // Verde chiaro, arancione, azzurro, giallo, grigio chiaro, lavanda, acquamarina, rosa
+
 const AreaMapCanvas = ({ numCells, mapCells, onMapCellClicked, dark }) => {
   const canvasRef = useRef(null);
 
@@ -25,33 +28,56 @@ const AreaMapCanvas = ({ numCells, mapCells, onMapCellClicked, dark }) => {
 
     canvas.addEventListener('click', handleClick);
 
+    const wrapText = (text, maxWidth) => {
+      const words = text.split(' ');
+      let lines = [];
+      let currentLine = words[0];
+
+      for (let i = 1; i < words.length; i++) {
+        const word = words[i];
+        const width = ctx.measureText(currentLine + ' ' + word).width;
+        if (width < maxWidth) {
+          currentLine += ' ' + word;
+        } else {
+          lines.push(currentLine);
+          currentLine = word;
+        }
+      }
+      lines.push(currentLine);
+      return lines;
+    };
+
+    const descriptionColors = {};
+    mapCells.forEach((cell) => {
+      if (cell && !descriptionColors[cell.description]) {
+        descriptionColors[cell.description] = colors[Object.keys(descriptionColors).length % colors.length];
+      }
+    });
+
+    // Disegna lo sfondo del canvas con un bordo di 2 pixel
+    ctx.fillStyle = dark ? 'black' : 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = dark ? 'white' : 'black';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(1, 1, canvas.width - 2, canvas.height - 2);
+
     for (let row = 0; row < numCells; row++) {
       for (let col = 0; col < numCells; col++) {
         const cellIndex = row * numCells + col;
         const cell = mapCells[cellIndex];
 
         if (cell) {
-          ctx.fillStyle = 'orange';
-          ctx.fillRect(col * cellWidth, row * cellHeight, cellWidth, cellHeight);
+          ctx.fillStyle = descriptionColors[cell.description];
+          ctx.fillRect(col * cellWidth + 2, row * cellHeight + 2, cellWidth - 4, cellHeight - 4);
 
           ctx.fillStyle = 'black';
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
           ctx.font = '16px Arial';
-
-          const text = cell.description;
-          const maxWidth = cellWidth - 10; // margine per evitare che il testo tocchi i bordi
-          const textMetrics = ctx.measureText(text);
-
-          if (textMetrics.width > maxWidth) {
-            const scale = maxWidth / textMetrics.width;
-            ctx.font = `${16 * scale}px Arial`;
-          }
-
-          ctx.fillText(cell.description, col * cellWidth + cellWidth / 2, row * cellHeight + cellHeight / 2);
-        } else {
-          ctx.fillStyle = dark ? 'black' : 'white';
-          ctx.fillRect(col * cellWidth, row * cellHeight, cellWidth, cellHeight);
+          const lines = wrapText(cell.description, cellWidth - 10);
+          lines.forEach((line, index) => {
+            ctx.fillText(line, col * cellWidth + cellWidth / 2, row * cellHeight + (cellHeight / 2) - ((lines.length - 1) * 8) + (index * 16));
+          });
         }
       }
     }
@@ -64,7 +90,7 @@ const AreaMapCanvas = ({ numCells, mapCells, onMapCellClicked, dark }) => {
   return (
     <canvas
       ref={canvasRef}
-      style={{ width: '100%', height: '70vh' }}
+      style={{ width: '100%', height: '70vh', border: `2px solid ${dark ? 'white' : 'black'}` }}
       width={window.innerWidth}
       height={window.innerHeight * 0.7}
     />
