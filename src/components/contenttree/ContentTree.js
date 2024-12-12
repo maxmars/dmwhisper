@@ -14,16 +14,19 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import useTheme from '@mui/private-theming/useTheme';
 import { useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import './style.css'
 
 const ContentTree = () => {
 
+    const [searchParams] = useSearchParams();
+    const pathParam = searchParams.get('path');
     const wholeContent = useSelector((st) => st.content);
     const tree = wholeContent.tree;
     const [tab, setTab] = useState(0);
     const { t } = useTranslation();
     const theme = useTheme();
-    const initialTabPath = wholeContent.tabPaths ? wholeContent.tabPaths[0] : "";
+    const initialTabPath = pathParam ? pathParam : (wholeContent.tabPaths ? wholeContent.tabPaths[0] : "");
     const [path, setPath] = useState(initialTabPath);
     let initialContent = getContent(tree, path);
     const [currentContent, setCurrentContent] = useState(initialContent ? initialContent : null);

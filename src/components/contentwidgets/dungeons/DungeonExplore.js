@@ -15,11 +15,13 @@ import { useTranslation } from 'react-i18next';
 import { setDungeonExploreDefaults, setLastTableContent } from '../../../store/slices/content.js';
 import { addThrow } from '../../../store/slices/throws.js';
 import { format } from 'date-fns';
+import { useParams } from 'react-router-dom';
 
 
 export default function DungeonExplore(props) {
 
     const content = useSelector((st) => st.content);
+    const { dngnsetpiece, roomsnumber, dngnmonsterset, dngngtrapset, dngntreasureset, dngnpuzzleset } = useParams();
 
     const initialContent = {
         numberOfRooms: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.numberOfRooms ?
@@ -34,6 +36,16 @@ export default function DungeonExplore(props) {
             st.content.dungeonExploreDefaults.treasureset : ""),
         dungeonPuzzleSet: useSelector((st) => st.content.dungeonExploreDefaults && st.content.dungeonExploreDefaults.puzzleset ?
             st.content.dungeonExploreDefaults.puzzleset : "")
+    }
+
+    if (dngnsetpiece) {
+        initialContent.dungeonSetpiece = dngnsetpiece;
+
+        initialContent.numberOfRooms = roomsnumber ? roomsnumber : 10;
+        initialContent.dungeonMonsterSet = dngnmonsterset ? dngnmonsterset : "";
+        initialContent.dungeonTrapSet = dngngtrapset ? dngngtrapset : "";
+        initialContent.dungeonTreasureSet = dngntreasureset ? dngntreasureset : "";
+        initialContent.dungeonPuzzleSet = dngnpuzzleset ? dngnpuzzleset : "";
     }
 
     const [numberOfRooms, setNumberOfRooms] =
@@ -100,7 +112,7 @@ export default function DungeonExplore(props) {
     }
 
     const [dungeonRooms, setDungeonRooms] = useState(null);
-    const [pageMode, setPageMode] = useState('setup');
+    const [pageMode, setPageMode] = useState(dngnsetpiece ? 'play' : 'setup');
 
     const dungeonSetpiecesNames = useMemo(
         () => dungeonSetpieces.map((item) => {
@@ -167,7 +179,8 @@ export default function DungeonExplore(props) {
 
     useEffect(() => {
         try {
-            const lastTableContent = content.lastTableContent['dungeonExplore'] ? content.lastTableContent['dungeonExplore'] : null;
+            const lastTableContent = !dngnsetpiece && content.lastTableContent['dungeonExplore'] ? 
+                content.lastTableContent['dungeonExplore'] : null;
 
             if (lastTableContent && lastTableContent.diceThrow && lastTableContent.diceThrow.dungeonRooms) {
                 setDungeonRooms(lastTableContent.diceThrow.dungeonRooms);
@@ -179,7 +192,7 @@ export default function DungeonExplore(props) {
             console.error(e);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [dngnsetpiece]);
 
     const diceRoll = () => {
         const generatedRooms = generateRooms();
@@ -359,6 +372,11 @@ export default function DungeonExplore(props) {
     }
 
     const getDungeonPlayer = () => {
+        if (dungeonRooms === null) {
+            diceRoll();
+            return null;
+        }
+
         return (
             <Grid container >
                 <Grid item xs={12}>
@@ -373,6 +391,10 @@ export default function DungeonExplore(props) {
                 <Grid item xs={12}>
                     <Button onClick={() => setPageMode("setup")} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to dungeon setup")}</Button>
                 </Grid>
+                <Grid item xs={12}>&nbsp;</Grid>
+                <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', verticalAlign: 'center' }}>
+                    <Button sx={{ width: '90%' }} variant="outlined" onClick={() => window.history.back()}>{t("Back")}</Button>
+                </Grid>
             </Grid>
         );
     }
@@ -384,6 +406,7 @@ export default function DungeonExplore(props) {
             return getDungeonPlayer();
         }
     } catch (e) {
+        console.log(e);
         return null;
     }
 

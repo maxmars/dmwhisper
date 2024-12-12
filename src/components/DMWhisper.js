@@ -34,6 +34,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
+import { Navigate, useNavigate, Routes, Route } from 'react-router-dom';
 
 
 const DMWhisper = () => {
@@ -46,6 +47,8 @@ const DMWhisper = () => {
       mode: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     },
   }));
+
+  const navigate = useNavigate();
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
     setDarkTheme(createTheme({
@@ -70,8 +73,6 @@ const DMWhisper = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // By default, user is on the "Browse content" tab
-  const [tab, setTab] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const throws = useSelector((st) => st.throws);
 
@@ -117,7 +118,7 @@ const DMWhisper = () => {
     >
       <List>
         <ListItem key="browse" disablePadding>
-          <ListItemButton onClick={() => setTab(0)}>
+          <ListItemButton onClick={() => navigate("browse")}>
             <ListItemIcon>
               <TableChartIcon />
             </ListItemIcon>
@@ -125,7 +126,7 @@ const DMWhisper = () => {
           </ListItemButton>
         </ListItem>
         <ListItem key="saved" disablePadding>
-          <ListItemButton onClick={() => setTab(1)}>
+          <ListItemButton onClick={() => navigate("saved")}>
             <ListItemIcon>
               <StarRateIcon />
             </ListItemIcon>
@@ -133,7 +134,7 @@ const DMWhisper = () => {
           </ListItemButton>
         </ListItem>
         <ListItem key="dungeon" disablePadding>
-          <ListItemButton onClick={() => setTab(2)}>
+          <ListItemButton onClick={() => navigate("dungeon")}>
             <ListItemIcon>
               <AccountTreeIcon />
             </ListItemIcon>
@@ -141,7 +142,7 @@ const DMWhisper = () => {
           </ListItemButton>
         </ListItem>
         <ListItem key="edit_content" disablePadding>
-          <ListItemButton onClick={() => setTab(3)}>
+          <ListItemButton onClick={() => navigate("edit_content")}>
             <ListItemIcon>
               <DataObjectIcon />
             </ListItemIcon>
@@ -149,7 +150,7 @@ const DMWhisper = () => {
           </ListItemButton>
         </ListItem>
         <ListItem key="list_of_contents" disablePadding>
-          <ListItemButton onClick={() => setTab(4)}>
+          <ListItemButton onClick={() => navigate("list_of_contents")}>
             <ListItemIcon>
               <FormatListBulletedIcon />
             </ListItemIcon>
@@ -157,7 +158,7 @@ const DMWhisper = () => {
           </ListItemButton>
         </ListItem>
         <ListItem key="input" disablePadding>
-          <ListItemButton onClick={() => setTab(5)}>
+          <ListItemButton onClick={() => navigate("input")}>
             <ListItemIcon>
               <InputIcon />
             </ListItemIcon>
@@ -165,7 +166,7 @@ const DMWhisper = () => {
           </ListItemButton>
         </ListItem>
         <ListItem key="output" disablePadding>
-          <ListItemButton onClick={() => setTab(6)}>
+          <ListItemButton onClick={() => navigate("output")}>
             <ListItemIcon>
               <OutputIcon />
             </ListItemIcon>
@@ -181,7 +182,7 @@ const DMWhisper = () => {
           </ListItemButton>
         </ListItem>
         <ListItem key="info" disablePadding>
-          <ListItemButton onClick={() => setTab(7)}>
+          <ListItemButton onClick={() => navigate("info")}>
             <ListItemIcon>
               <InfoIcon />
             </ListItemIcon>
@@ -217,16 +218,19 @@ const DMWhisper = () => {
           >
             {leftMenu()}
           </Drawer>
-        </div>
+        </div>        
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'scroll', width: '100%', height: '100%' }}>
-          {tab === 0 && <ContentTree />}
-          {tab === 1 && <ResultsList />}
-          {tab === 2 && <DungeonExplore />}
-          {tab === 3 && <AuthoringMenu />}
-          {tab === 4 && <ContentsList />}
-          {tab === 5 && <InputMenu />}
-          {tab === 6 && <OutputMenu />}
-          {tab === 7 && <Info />}
+        <Routes>
+          <Route path="/" element={<Navigate to="browse" replace />} />
+          <Route path="browse" element={<ContentTree />} />
+          <Route path="saved" element={<ResultsList />} />
+          <Route path="dungeon/:dngnsetpiece?/:roomsnumber?/:dngnmonsterset?/:dngngtrapset?/:dngntreasureset?/:dngnpuzzleset?" element={<DungeonExplore />} />
+          <Route path="edit_content" element={<AuthoringMenu />} />
+          <Route path="list_of_contents" element={<ContentsList />} />
+          <Route path="input" element={<InputMenu />} />
+          <Route path="output" element={<OutputMenu />} />
+          <Route path="info" element={<Info />} />
+        </Routes>
           {/* {tab === 8 && <Test />} */}
         </div>
       </ThemeProvider>

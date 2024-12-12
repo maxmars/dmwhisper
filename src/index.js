@@ -6,13 +6,28 @@ import reportWebVitals from './reportWebVitals';
 import { store } from './store';
 import { Provider } from 'react-redux';
 import './i18n/i18n.js';
+import {
+  createHashRouter,
+  RouterProvider,
+} from "react-router-dom";
+
+
+const router = createHashRouter([
+  {
+    path: "/*",
+    element: <DMWhisper />,
+    loader: null,
+    children: [
+    ],
+  },
+]);
 
 const renderReactDom = () => {
   const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(
     <React.StrictMode>
       <Provider store={store}>
-        <DMWhisper />
+        <RouterProvider router={router} />
       </Provider>
     </React.StrictMode>
   );
