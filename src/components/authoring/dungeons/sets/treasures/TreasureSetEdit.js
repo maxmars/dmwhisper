@@ -82,18 +82,18 @@ const TreasureSetEdit = (props) => {
         }
       }
 
-      elToApply = document.getElementsByTagName("a");
+      // elToApply = document.getElementsByTagName("a");
 
-      if (elToApply) {
-        const elArray = Array.from(elToApply);
-        elArray.forEach(element => {
-          if (theme.palette.mode === "dark") {
-            element.setAttribute("style", "color: white !important; background-color: black !important;");
-          } else {
-            element.setAttribute("style", "color: black !important; background-color: white !important;");
-          }
-        });
-      }
+      // if (elToApply) {
+      //   const elArray = Array.from(elToApply);
+      //   elArray.forEach(element => {
+      //     if (theme.palette.mode === "dark") {
+      //       element.setAttribute("style", "color: white !important; background-color: black !important;");
+      //     } else {
+      //       element.setAttribute("style", "color: black !important; background-color: white !important;");
+      //     }
+      //   });
+      // }
     }, 250);
   }
 

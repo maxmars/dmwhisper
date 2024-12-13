@@ -108,11 +108,13 @@ export default function Table(props) {
 
     const currentContents = getCurrentContents();
 
-    dispatch(setLastTableContent({
-      contentId: props.content.id + "TAB" + props.currentTab,
-      diceThrow: currentContents.throw,
-      htmlContent: currentContents.htmlContent
-    }));
+    if (props.currentTab > -1) {
+      dispatch(setLastTableContent({
+        contentId: props.content.id + "TAB" + props.currentTab,
+        diceThrow: currentContents.throw,
+        htmlContent: currentContents.htmlContent
+      }));
+    }
 
     setCurrentThrow(currentContents.throw);
     setCurrentHtmlContent(currentContents.htmlContent);
@@ -139,15 +141,20 @@ export default function Table(props) {
 
   const getLastContentOrRoll = () => {
     try {
-      const cleanedId = props.content.id.replace(/[^0-9a-zA-Z]/g, '') + "TAB" + props.currentTab;
-      const lastTableContent = content.lastTableContent[cleanedId] ? content.lastTableContent[cleanedId] : null;
+      if (props.currentTab > -1) {
+        const cleanedId = props.content.id.replace(/[^0-9a-zA-Z]/g, '') + "TAB" + props.currentTab;
+        const lastTableContent = content.lastTableContent[cleanedId] ? content.lastTableContent[cleanedId] : null;
 
-      setMode("rockandroll");
+        setMode("rockandroll");
 
-      if (lastTableContent) {
-        setCurrentThrow(lastTableContent.diceThrow);
-        setCurrentHtmlContent(lastTableContent.htmlContent);
+        if (lastTableContent) {
+          setCurrentThrow(lastTableContent.diceThrow);
+          setCurrentHtmlContent(lastTableContent.htmlContent);
+        } else {
+          diceRoll();
+        }
       } else {
+        setMode("rockandroll");
         diceRoll();
       }
     } catch (e) {
@@ -278,7 +285,7 @@ export default function Table(props) {
           </>
         });
 
-        return <>
+        return <div id='tabletopdiv'>
           <Grid id="listedValuesDiv" container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={3} style={{ display: "flex", justifyContent: "flex-end" }} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText}>
@@ -300,7 +307,7 @@ export default function Table(props) {
             </Grid>
             <Grid item xs={12}>&nbsp;</Grid>
           </Grid >
-        </>;
+        </div>;
       } catch (e) {
         return null;
       }

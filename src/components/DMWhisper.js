@@ -35,6 +35,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import { Navigate, useNavigate, Routes, Route } from 'react-router-dom';
+import SpotlightedContent from './contenttree/SpotlightedContent';
 
 
 const DMWhisper = () => {
@@ -222,6 +223,7 @@ const DMWhisper = () => {
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'scroll', width: '100%', height: '100%' }}>
         <Routes>
           <Route path="/" element={<Navigate to="browse" replace />} />
+          <Route path="spotlight/:path" element={<SpotlightedContent />} />
           <Route path="browse" element={<ContentTree />} />
           <Route path="saved" element={<ResultsList />} />
           <Route path="dungeon/:dngnsetpiece?/:roomsnumber?/:dngnmonsterset?/:dngngtrapset?/:dngntreasureset?/:dngnpuzzleset?" element={<DungeonExplore />} />

@@ -91,15 +91,17 @@ export default function AreaMap(props) {
                 }
             });
 
-            dispatch(setLastTableContent({
-                contentId: props.content.id + "TAB" + props.currentTab,
-                diceThrow: {
-                    cells: mapcells,
-                    gridrowcells: mapgridrowcells,
-                    gridrowdensity: mapgridrowdensity
-                },
-                htmlContent: null
-            }));
+            if (props.currentTab > -1) {
+                dispatch(setLastTableContent({
+                    contentId: props.content.id + "TAB" + props.currentTab,
+                    diceThrow: {
+                        cells: mapcells,
+                        gridrowcells: mapgridrowcells,
+                        gridrowdensity: mapgridrowdensity
+                    },
+                    htmlContent: null
+                }));
+            }
 
             setCells(mapcells);
             setGridrowcells(mapgridrowcells);
@@ -145,13 +147,17 @@ export default function AreaMap(props) {
 
     const getLastContentOrRoll = () => {
         try {
-            const cleanedId = props.content.id.replace(/[^0-9a-zA-Z]/g, '') + "TAB" + props.currentTab;
-            const lastTableContent = content.lastTableContent[cleanedId] ? content.lastTableContent[cleanedId] : null;
+            if (props.currentTab > -1) {
+                const cleanedId = props.content.id.replace(/[^0-9a-zA-Z]/g, '') + "TAB" + props.currentTab;
+                const lastTableContent = content.lastTableContent[cleanedId] ? content.lastTableContent[cleanedId] : null;
 
-            if (lastTableContent) {
-                setCells(lastTableContent.diceThrow.cells);
-                setGridrowcells(lastTableContent.diceThrow.gridrowcells);
-                setGridrowdensity(lastTableContent.diceThrow.gridrowdensity);
+                if (lastTableContent) {
+                    setCells(lastTableContent.diceThrow.cells);
+                    setGridrowcells(lastTableContent.diceThrow.gridrowcells);
+                    setGridrowdensity(lastTableContent.diceThrow.gridrowdensity);
+                } else {
+                    diceRoll();
+                }
             } else {
                 diceRoll();
             }

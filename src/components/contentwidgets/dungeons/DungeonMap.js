@@ -58,13 +58,15 @@ export default function DungeonMap(props) {
     const diceRoll = () => {
         const generatedRooms = generateRooms();
 
-        dispatch(setLastTableContent({
-            contentId: props.content.id + "TAB" + props.currentTab,
-            diceThrow: {
-                dungeonRooms: generatedRooms
-            },
-            htmlContent: null
-        }));
+        if (props.currentTab > -1) {
+            dispatch(setLastTableContent({
+                contentId: props.content.id + "TAB" + props.currentTab,
+                diceThrow: {
+                    dungeonRooms: generatedRooms
+                },
+                htmlContent: null
+            }));
+        }
 
         setDungeonRooms(generatedRooms);
     }
@@ -79,11 +81,15 @@ export default function DungeonMap(props) {
 
     useEffect(() => {
         try {
-            const cleanedId = props.content.id.replace(/[^0-9a-zA-Z]/g, '') + "TAB" + props.currentTab;
-            const lastTableContent = content.lastTableContent[cleanedId] ? content.lastTableContent[cleanedId] : null;
+            if (props.currentTab > -1) {
+                const cleanedId = props.content.id.replace(/[^0-9a-zA-Z]/g, '') + "TAB" + props.currentTab;
+                const lastTableContent = content.lastTableContent[cleanedId] ? content.lastTableContent[cleanedId] : null;
 
-            if (lastTableContent && lastTableContent.diceThrow && lastTableContent.diceThrow.dungeonRooms) {
-                setDungeonRooms(lastTableContent.diceThrow.dungeonRooms);
+                if (lastTableContent && lastTableContent.diceThrow && lastTableContent.diceThrow.dungeonRooms) {
+                    setDungeonRooms(lastTableContent.diceThrow.dungeonRooms);
+                } else {
+                    diceRoll();
+                }
             } else {
                 diceRoll();
             }

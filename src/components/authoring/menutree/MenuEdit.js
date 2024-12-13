@@ -103,11 +103,6 @@ export default function MenuEdit(props) {
     }, [contentMetaData]);
     //#endregion Component initializations
 
-    //#region CKEditor stuff
-    useEffect(() => {
-        ckEditorThemeSync();
-    });
-
     useEffect(() => {
         const handleBackButton = (event) => {
             window.history.pushState({ noBackExitsApp: true }, '');
@@ -122,6 +117,11 @@ export default function MenuEdit(props) {
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    //#region CKEditor stuff
+    useEffect(() => {
+        ckEditorThemeSync();
+    });
 
     const ckEditorThemeSync = () => {
         setTimeout(() => {
@@ -144,18 +144,18 @@ export default function MenuEdit(props) {
                 }
             }
 
-            elToApply = document.getElementsByTagName("a");
+            // elToApply = document.getElementsByTagName("a");
 
-            if (elToApply) {
-                const elArray = Array.from(elToApply);
-                elArray.forEach(element => {
-                    if (theme.palette.mode === "dark") {
-                        element.setAttribute("style", "color: white !important; background-color: black !important;");
-                    } else {
-                        element.setAttribute("style", "color: black !important; background-color: white !important;");
-                    }
-                });
-            }
+            // if (elToApply) {
+            //     const elArray = Array.from(elToApply);
+            //     elArray.forEach(element => {
+            //         if (theme.palette.mode === "dark") {
+            //             element.setAttribute("style", "color: white !important; background-color: black !important;");
+            //         } else {
+            //             element.setAttribute("style", "color: black !important; background-color: white !important;");
+            //         }
+            //     });
+            // }
         }, 250);
     }
 

@@ -61,18 +61,18 @@ const ResultsList = () => {
         }
       }
 
-      elToApply = document.getElementsByTagName("a");
+  //     elToApply = document.getElementsByTagName("a");
 
-      if (elToApply) {
-        const elArray = Array.from(elToApply);
-        elArray.forEach(element => {
-          if (theme.palette.mode === "dark") {
-            element.setAttribute("style", "color: white !important; background-color: black !important; font-size: 12px !important;");
-          } else {
-            element.setAttribute("style", "color: black !important; background-color: white !important; font-size: 12px !important;");
-          }
-        });
-      }
+  //     if (elToApply) {
+  //       const elArray = Array.from(elToApply);
+  //       elArray.forEach(element => {
+  //         if (theme.palette.mode === "dark") {
+  //           element.setAttribute("style", "color: white !important; background-color: black !important; font-size: 12px !important;");
+  //         } else {
+  //           element.setAttribute("style", "color: black !important; background-color: white !important; font-size: 12px !important;");
+  //         }
+  //       });
+  //     }
     }, 250);
   }
 
@@ -195,7 +195,7 @@ const ResultsList = () => {
 
                 return <ListItem key={"ris" + index}>
                   <ListItemText primary={<div>
-                    <AreaMapComponent cells={filtered} gridrowcells={throwResult.result.gridrowcells} dark={dark} />
+                    <AreaMapComponent cells={throwResult.result.cells} gridrowcells={throwResult.result.gridrowcells} dark={dark} />
                     <br /><br /></div>}
                     secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
                       <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
