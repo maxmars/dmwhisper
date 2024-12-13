@@ -11,7 +11,7 @@
 } 
 
 body {
-  background-color: var(--background-color); 
+  background-color: var(--background-color) !important; 
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -21,7 +21,7 @@ body {
 }
 
 a { 
-  color: var(--link-color); 
+  color: var(--link-color) !important; 
 }
 
 code {
