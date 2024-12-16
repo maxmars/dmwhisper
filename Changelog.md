@@ -1,5 +1,13 @@
 # Changelog Template progetto DM Whisper
 
+    16 Dic 2024
+    -----------
+    - 1.51.0 Puzzle set items can now be laid out in order (shuffled among non ordered items)
+
+    10 Dic 2024
+    -----------
+    - 1.50.0 Now you can link to dungeons and content pages from a content page / table item.
+
     04 Dic 2024
     -----------
     - 1.41.0 Maps are now rendered with a Canvas and a Dialog instead of ugly looking plain HTML.

@@ -383,6 +383,14 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    16 Dic 2024
+    -----------
+    - 1.51.0 Puzzle set items can now be laid out in order (shuffled among non ordered items)
+
+    10 Dic 2024
+    -----------
+    - 1.50.0 Now you can link to dungeons and content pages from a content page / table item.
+
     16 Ott 2024
     -----------
     - 1.40.2 Squashed small bug on AreaMap navigation.

@@ -237,7 +237,7 @@ i18n
           "Puzzle Set Description": "Puzzle Set Description",
           "Edited puzzle set:": "Edited puzzle set:",
           "Back to puzzle sets list": "Back to puzzle sets list",
-
+          "Keep in sequence": "Keep in sequence",
         }
       },
       it: {
@@ -460,7 +460,7 @@ i18n
           "Puzzle Set Description": "Descrizione set di rompicapo",
           "Edited puzzle set:": "Set di rompicapo modificato:",
           "Back to puzzle sets list": "Torna alla lista di set di rompicapo",
-          
+          "Keep in sequence": "Mantieni in sequenza",
         }
       },
       es: {
@@ -682,7 +682,7 @@ i18n
           "Puzzle Set Description": "Descripción de conjunto de rompecabezas",
           "Edited puzzle set:": "Conjunto de rompecabezas editado:",
           "Back to puzzle sets list": "Volver a la lista de conjuntos de rompecabezas",
-
+          "Keep in sequence": "Mantener en secuencia",
         },
       },
       fr: {
@@ -904,6 +904,7 @@ i18n
           "Puzzle Set Description": "Description de l'ensemble de puzzles",
           "Edited puzzle set:": "Ensemble de puzzles édité:",
           "Back to puzzle sets list": "Retour à la liste des ensembles de puzzles",
+          "Keep in sequence": "Garder en séquence",
         },
       },
       de: {
@@ -1125,7 +1126,7 @@ i18n
           "Puzzle Set Description": "Beschreibung des Puzzle-Sets",
           "Edited puzzle set:": "Bearbeitetes Puzzle-Set:",
           "Back to puzzle sets list": "Zurück zur Liste der Puzzle-Sets",
-
+          "Keep in sequence": "In der Reihenfolge halten"
         }
       },
       pt: {
@@ -1347,7 +1348,7 @@ i18n
           "Puzzle Set Description": "Descrição do conjunto de quebra-cabeças",
           "Edited puzzle set:": "Conjunto de quebra-cabeças editado:",
           "Back to puzzle sets list": "Voltar para a lista de conjuntos de quebra-cabeças",
-
+          "Keep in sequence": "Manter em sequência"
         }
       },
       gr: {
@@ -1569,7 +1570,7 @@ i18n
           "Puzzle Set Description": "Περιγραφή συνόλου γρίφων",
           "Edited puzzle set:": "Επεξεργασμένο σύνολο γρίφων:",
           "Back to puzzle sets list": "Επιστροφή στη λίστα συνόλων γρίφων",
-
+          "List of room sets": "Λίστα συνόλων δωματίων",
         }
       },
       se: {
@@ -1791,7 +1792,8 @@ i18n
           "Puzzle Set Description": "Puzzle Set Description",
           "Edited puzzle set:": "Edited puzzle set:",
           "Back to puzzle sets list": "Back to puzzle sets list",
-
+          "List of room sets": "List of room sets",          
+          "In der Reihenfolge halten": "Håll i ordning",
         }
       }
     }

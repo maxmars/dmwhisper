@@ -179,7 +179,7 @@ export default function DungeonExplore(props) {
 
     useEffect(() => {
         try {
-            const lastTableContent = !dngnsetpiece && content.lastTableContent['dungeonExplore'] ? 
+            const lastTableContent = !dngnsetpiece && content.lastTableContent['dungeonExplore'] ?
                 content.lastTableContent['dungeonExplore'] : null;
 
             if (lastTableContent && lastTableContent.diceThrow && lastTableContent.diceThrow.dungeonRooms) {
@@ -197,13 +197,17 @@ export default function DungeonExplore(props) {
     const diceRoll = () => {
         const generatedRooms = generateRooms();
 
-        dispatch(setLastTableContent({
-            contentId: props.content.id + "TAB" + props.currentTab,
-            diceThrow: {
-                dungeonRooms: generatedRooms
-            },
-            htmlContent: null
-        }));
+        try {
+            dispatch(setLastTableContent({
+                contentId: props.content.id + "TAB" + props.currentTab,
+                diceThrow: {
+                    dungeonRooms: generatedRooms
+                },
+                htmlContent: null
+            }));
+        } catch (e) {
+            // Nothing
+        }
 
         setDungeonRooms(generatedRooms);
     }

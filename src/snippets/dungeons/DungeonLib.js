@@ -28,7 +28,7 @@ const getDungeonSetRng = (items) => {
 
             foundItem.maxAppears--;
             return foundItem;
-        }        
+        }
     }
 
     return null;
@@ -99,7 +99,7 @@ export const getDungeonRooms = (setpieceId, numberOfRooms, trapSetId, puzzleSetI
         endRoom = {
             ...endRooms[idx],
             index: idx
-        }; 
+        };
     } else if (anyRooms.length > 0) {
         const idx = Math.floor(Math.random() * anyRooms.length);
         endRoom = {
@@ -212,21 +212,88 @@ export const getDungeonRooms = (setpieceId, numberOfRooms, trapSetId, puzzleSetI
     treasureSet = JSON.parse(JSON.stringify(treasureSet));
 
     result.rooms = [];
+    let puzzles = [];
 
     rooms.forEach(room => {
         room = JSON.parse(JSON.stringify(room));
 
         room.trap = getDungeonSetRng(trapSet.rng);
-        room.puzzle = getDungeonSetRng(puzzleSet.rng);
+        puzzles.push(getDungeonSetRng(puzzleSet.rng));
         room.monster = getDungeonSetRng(monsterSet.rng);
         room.treasure = getDungeonSetRng(treasureSet.rng);
 
         result.rooms.push(room);
     });
 
+    const puzzlesInSequence = puzzleSet.rng.filter(puzzle => puzzle.keepInSequence);
+    puzzles = ensureSequenceElements(puzzles, puzzlesInSequence);
+    puzzles = reorderSequenceElements(puzzles);
+
+    rooms.forEach((room, index) => {
+        room.puzzle = puzzles[index];
+    });
+
     result.statusMessage = 'success';
     return result;
 }
+
+function ensureSequenceElements(array, sequenceElements) {
+    let result = [...array];
+    let sequenceItems = sequenceElements.filter(item => item.keepInSequence);
+
+    // Trova gli elementi sequenziali mancanti
+    let missingSequenceItems = sequenceItems.filter(seqItem => !result.some(item => item.description === seqItem.description));
+
+    // Ordina gli elementi sequenziali mancanti
+    missingSequenceItems.sort((a, b) => a.min - b.min);
+
+    // Inserisci gli elementi mancanti in posizioni casuali
+    for (let seqItem of missingSequenceItems) {
+        let inserted = false;
+        while (!inserted) {
+            let randomIndex = Math.floor(Math.random() * result.length);
+            if (!result[randomIndex].keepInSequence) {
+                result[randomIndex] = seqItem;
+                inserted = true;
+            }
+        }
+    }
+
+    return result;
+}
+
+
+function reorderSequenceElements(array) {
+    let sequenceElements = [];
+    let nonSequenceElements = [];
+
+    // Separare gli elementi sequenziali da quelli non sequenziali
+    for (let item of array) {
+        if (item.keepInSequence) {
+            sequenceElements.push(item);
+        } else {
+            nonSequenceElements.push(item);
+        }
+    }
+
+    // Ordinare gli elementi sequenziali secondo l'ordine prestabilito
+    sequenceElements.sort((a, b) => a.min - b.min);
+
+    // Ricomporre l'array, mantenendo l'ordine per gli elementi non sequenziali
+    let result = [];
+    let seqIndex = 0;
+    for (let item of array) {
+        if (item.keepInSequence) {
+            result.push(sequenceElements[seqIndex]);
+            seqIndex++;
+        } else {
+            result.push(item);
+        }
+    }
+
+    return result;
+}
+
 
 export const layoutRooms = (roomTypes, roomMinSize, roomMaxSize, width, height) => {
     const rooms = [];

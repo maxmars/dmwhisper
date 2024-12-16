@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import useTheme from '@mui/private-theming/useTheme';
+import Checkbox from '@mui/material/Checkbox';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
@@ -42,6 +43,7 @@ const PuzzleSetEdit = (props) => {
   const [newMin, setNewMin] = useState(null);
   const [newMax, setNewMax] = useState(null);
   const [newLabel, setNewLabel] = useState(null);
+  const [newKeepInSequence, setNewKeepInSequence] = useState(null);
   const [newMaxOccurrences, setNewMaxOccurrences] = useState(100);
   const mounted = useRef();
 
@@ -200,6 +202,7 @@ const PuzzleSetEdit = (props) => {
       textContent: currentMenuContent,
       table: currentMenuTable,
       // TODO Unused ATM
+      keepInSequence: newKeepInSequence,
       minAppears: 0,
       maxAppears: document.getElementById('new-max-occurrences').value,
       width: 1,
@@ -216,7 +219,9 @@ const PuzzleSetEdit = (props) => {
 
     document.getElementById('new-min').value = '';
     document.getElementById('new-max').value = '';
-    document.getElementById('new-result').value = '';
+    document.getElementById('new-label').value = '';
+    document.getElementById('new-max-occurrences').value = 100;
+    document.getElementById('new-keep-in-sequence').value = false;
     setCurrentMenuTable(undefined);
   }
 
@@ -234,6 +239,7 @@ const PuzzleSetEdit = (props) => {
     setNewMin(rngId.split('-')[0]);
     setNewMax(rngId.split('-')[1]);
     setNewLabel(puzzleSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).description);
+    setNewKeepInSequence(puzzleSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).keepInSequence);
     setNewMaxOccurrences(puzzleSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).maxAppears);
     setCurrentMenuTable(puzzleSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).table);
     setCurrentMenuContent(puzzleSet.rng.find((rng) => rng.min + '-' + rng.max === rngId).textContent);
@@ -345,6 +351,14 @@ const PuzzleSetEdit = (props) => {
             label={newMaxOccurrences ? "" : t("Max occurrences")}
             variant="outlined"
             sx={{ width: "100%" }} />
+        </Grid>
+        <Grid container item xs={12} direction="row" alignItems="center">
+          <Checkbox id="new-keep-in-sequence" 
+            checked={newKeepInSequence} 
+            onChange={() => setNewKeepInSequence(!newKeepInSequence)} 
+            inputProps={{ 'aria-label': 'controlled' }} 
+          />
+          <Typography>{t("Keep in sequence")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
 
