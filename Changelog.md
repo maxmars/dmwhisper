@@ -2,6 +2,7 @@
 
     16 Dic 2024
     -----------
+    - 1.52.0 Implemented counters.
     - 1.51.0 Puzzle set items can now be laid out in order (shuffled among non ordered items)
 
     10 Dic 2024

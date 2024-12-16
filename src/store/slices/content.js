@@ -10,6 +10,11 @@ const content = createSlice({
     name: 'content',
     initialState,
     reducers: {
+        setCounterData(state, action) {
+            const { counterData } = action.payload;
+
+            state.counterData = counterData;
+        },
         setDungeonExploreDefaults(state, action) {
             const { setpiece, monsterset, treasureset, trapset, puzzleset, numberOfRooms } = action.payload;
 
@@ -860,4 +865,4 @@ export const { setContent, clearContent, setLastTableContent, addTable, removeTa
     updateDungeonSetpieceHeader, updateDungeonTrapSetHeader, updateDungeonTreasureSetHeader,
     updateDungeonMonsterSetItem, updateDungeonPuzzleSetItem, updateDungeonSetpieceItem, updateDungeonTrapSetItem, 
     updateDungeonTreasureSetItem, updateContent, updateContentHeader, addMenuItem, updateContentType,
-    setClipboardAction, deleteMenuItem, setTabPath, clearTabPath, setDungeonExploreDefaults } = content.actions;
+    setClipboardAction, deleteMenuItem, setTabPath, clearTabPath, setDungeonExploreDefaults, setCounterData } = content.actions;

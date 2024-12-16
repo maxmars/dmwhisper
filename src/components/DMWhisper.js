@@ -33,9 +33,11 @@ import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import StarRateIcon from '@mui/icons-material/StarRate';
+import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import { Navigate, useNavigate, Routes, Route } from 'react-router-dom';
 import SpotlightedContent from './contenttree/SpotlightedContent';
+import GeneralCounters from './contentwidgets/counters/GeneralCounters';
 
 
 const DMWhisper = () => {
@@ -142,6 +144,14 @@ const DMWhisper = () => {
             <ListItemText primary={t("Dungeon Explore")} />
           </ListItemButton>
         </ListItem>
+        <ListItem key="counter" disablePadding>
+          <ListItemButton onClick={() => navigate("counter")}>
+            <ListItemIcon>
+              <DonutLargeIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("Counter")} />
+          </ListItemButton>
+        </ListItem>
         <ListItem key="edit_content" disablePadding>
           <ListItemButton onClick={() => navigate("edit_content")}>
             <ListItemIcon>
@@ -227,6 +237,7 @@ const DMWhisper = () => {
           <Route path="browse" element={<ContentTree />} />
           <Route path="saved" element={<ResultsList />} />
           <Route path="dungeon/:dngnsetpiece?/:roomsnumber?/:dngnmonsterset?/:dngngtrapset?/:dngntreasureset?/:dngnpuzzleset?" element={<DungeonExplore />} />
+          <Route path="counter" element={<GeneralCounters />} />
           <Route path="edit_content" element={<AuthoringMenu />} />
           <Route path="list_of_contents" element={<ContentsList />} />
           <Route path="input" element={<InputMenu />} />
