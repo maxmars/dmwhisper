@@ -229,7 +229,7 @@ export const getDungeonRooms = (setpieceId, numberOfRooms, trapSetId, puzzleSetI
     puzzles = ensureSequenceElements(puzzles, puzzlesInSequence);
     puzzles = reorderSequenceElements(puzzles);
 
-    rooms.forEach((room, index) => {
+    result.rooms.forEach((room, index) => {
         room.puzzle = puzzles[index];
     });
 
