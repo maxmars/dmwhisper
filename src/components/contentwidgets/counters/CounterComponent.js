@@ -177,7 +177,7 @@ function CounterComponent(props) {
                         <Typography>{counterName}</Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <CircularProgressWithLabel value={(currentValue / maxCounter) * 100} sizePercent={80} thickness={10} />
+                        <CircularProgressWithLabel value={(currentValue / maxCounter) * 100} sizePercent={30} thickness={6} />
                     </Grid>
                     <Grid item xs={12} container spacing={1} justifyContent="center">
                         <Grid item>
