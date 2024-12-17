@@ -3,7 +3,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SearchIcon from '@mui/icons-material/Search';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { Button, Grid, List, ListItem, ListItemText, TextField, Box } from '@mui/material';
+import html2pdf from 'html2pdf.js';
 import Typography from '@mui/material/Typography';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Editor } from 'ckeditor5-custom-build/build/ckeditor';
@@ -61,18 +63,18 @@ const ResultsList = () => {
         }
       }
 
-  //     elToApply = document.getElementsByTagName("a");
+      //     elToApply = document.getElementsByTagName("a");
 
-  //     if (elToApply) {
-  //       const elArray = Array.from(elToApply);
-  //       elArray.forEach(element => {
-  //         if (theme.palette.mode === "dark") {
-  //           element.setAttribute("style", "color: white !important; background-color: black !important; font-size: 12px !important;");
-  //         } else {
-  //           element.setAttribute("style", "color: black !important; background-color: white !important; font-size: 12px !important;");
-  //         }
-  //       });
-  //     }
+      //     if (elToApply) {
+      //       const elArray = Array.from(elToApply);
+      //       elArray.forEach(element => {
+      //         if (theme.palette.mode === "dark") {
+      //           element.setAttribute("style", "color: white !important; background-color: black !important; font-size: 12px !important;");
+      //         } else {
+      //           element.setAttribute("style", "color: black !important; background-color: white !important; font-size: 12px !important;");
+      //         }
+      //       });
+      //     }
     }, 250);
   }
 
@@ -105,6 +107,27 @@ const ResultsList = () => {
     } catch (err) {
       console.error('Failed to copy: ', err);
     }
+  }
+
+  const saveAsPdf = (elementId) => {
+    const element = document.getElementById(elementId);
+
+    const backgroundColor = (dark ? "black" : "white");
+    const html2canvasOpts = { backgroundColor: backgroundColor, scale: 1 };
+
+    if (elementId.includes("dungeondraw")) {
+      html2canvasOpts.width = window.innerWidth;
+    }
+
+    const opt = {
+      margin: 1,
+      filename: elementId + '.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: html2canvasOpts,
+      jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf(element, opt);
   }
   //#endregion page events
 
@@ -194,7 +217,7 @@ const ResultsList = () => {
                 }
 
                 return <ListItem key={"ris" + index}>
-                  <ListItemText primary={<div>
+                  <ListItemText primary={<div style={{maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white'}} id={"areamapdraw" + index}>
                     <AreaMapComponent cells={throwResult.result.cells} gridrowcells={throwResult.result.gridrowcells} dark={dark} />
                     <br /><br /></div>}
                     secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
@@ -203,19 +226,27 @@ const ResultsList = () => {
                         setCurrentEditedContent(null);
                       }} />
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                        saveAsPdf("areamapdraw" + index);
+                      }} />
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       {throwResult.timestamp}</div>} />
                 </ListItem>
               } else if (throwResult.result.dungeonRooms) {
                 return (
                   <ListItem key={"dungeon" + index}>
-                  <ListItemText primary={<div><div>{throwResult.result.dungeonName}</div><br /><DungeonComponent dungeonRooms={throwResult.result.dungeonRooms} /><br /><br /></div>}
-                    secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
-                      <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                        setThrowToBeDeleted(index);
-                        setCurrentEditedContent(null);
-                      }} />
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      {throwResult.timestamp}</div>} />
+                    <ListItemText primary={<div style={{maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white'}} id={"dungeondraw" + index}><div>{throwResult.result.dungeonName}</div><br /><DungeonComponent dungeonRooms={throwResult.result.dungeonRooms} /><br /><br /></div>}
+                      secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
+                        <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                          setThrowToBeDeleted(index);
+                          setCurrentEditedContent(null);
+                        }} />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                          saveAsPdf("dungeondraw" + index);
+                        }} />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {throwResult.timestamp}</div>} />
 
                   </ListItem>
                 );
@@ -227,7 +258,7 @@ const ResultsList = () => {
 
                 return (
                   <ListItem key={"ris" + index}>
-                    <ListItemText primary={<div><div id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} /><br /><br /></div>}
+                    <ListItemText primary={<div><div style={{maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white'}} id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} /><br /><br /></div>}
                       secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
                         <EditIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                           setEditedThrow(index);
@@ -241,6 +272,10 @@ const ResultsList = () => {
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <ContentCopyIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                           throwCopy(index);
+                        }} />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                          saveAsPdf("throwHtmlContent" + index);
                         }} />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         {throwResult.timestamp}</div>} />

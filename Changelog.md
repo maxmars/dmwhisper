@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    17 Dic 2024
+    -----------
+    - 1.57.0 Export saved content to PDF.
+
     16 Dic 2024
     -----------
     - 1.52.0 Implemented counters.

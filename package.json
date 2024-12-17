@@ -25,6 +25,7 @@
     "ckeditor5-custom-build": "file:./ckeditor5",
     "date-fns": "^2.29.3",
     "formik": "^2.2.9",
+    "html2pdf.js": "^0.10.2",
     "i18next": "^23.5.1",
     "i18next-browser-languagedetector": "^7.1.0",
     "idb-keyval": "^6.2.1",
