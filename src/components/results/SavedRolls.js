@@ -124,7 +124,7 @@ const ResultsList = () => {
       filename: elementId + '.pdf',
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: html2canvasOpts,
-      jsPDF: { unit: 'cm', format: 'a4', orientation: 'portrait' }
+      jsPDF: { format: 'a4' }
     };
 
     html2pdf(element, opt);
@@ -205,6 +205,10 @@ const ResultsList = () => {
               if (throwResult.result.cells) {
 
                 const filtered = throwResult.result.cells.filter(cell => {
+                  if (searchText.length === 0) {
+                    return true;
+                  }
+
                   if (cell) {
                     return cell.content.toLowerCase().includes(searchText.toLowerCase());
                   } else {
@@ -233,6 +237,11 @@ const ResultsList = () => {
                       {throwResult.timestamp}</div>} />
                 </ListItem>
               } else if (throwResult.result.dungeonRooms) {
+
+                if (searchText.length > 0 && !throwResult.result.dungeonName.toLowerCase().includes(searchText.toLowerCase())) {
+                  return null;
+                }
+
                 return (
                   <ListItem key={"dungeon" + index}>
                     <ListItemText primary={<div style={{maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white'}} id={"dungeondraw" + index}><div>{throwResult.result.dungeonName}</div><br /><DungeonComponent dungeonRooms={throwResult.result.dungeonRooms} /><br /><br /></div>}
