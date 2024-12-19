@@ -6,7 +6,8 @@ import infoIconFile from './images/info.png';
 
 const DungeonCanvas = (props) => {
 
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+  // Still undecided. I like having icons!
+  const isTouchDevice = false; // 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
   const bottomBarHeight = 200;
   const iconbarHeight = 50;
 

@@ -244,7 +244,7 @@ const ResultsList = () => {
 
                 return (
                   <ListItem key={"dungeon" + index}>
-                    <ListItemText primary={<div style={{maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white'}} id={"dungeondraw" + index}><div>{throwResult.result.dungeonName}</div><br /><DungeonComponent dungeonRooms={throwResult.result.dungeonRooms} /><br /><br /></div>}
+                    <ListItemText primary={<div style={{backgroundColor: dark ? 'black' : 'white'}} id={"dungeondraw" + index}><div>{throwResult.result.dungeonName}</div><br /><DungeonComponent dungeonRooms={throwResult.result.dungeonRooms} /><br /><br /></div>}
                       secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
                         <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                           setThrowToBeDeleted(index);
