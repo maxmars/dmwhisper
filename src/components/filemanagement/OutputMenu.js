@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DownloadIcon from '@mui/icons-material/Download';
 import { useTranslation } from 'react-i18next';
+import { downloadJson } from '../../utils';
 
 const OutputMenu = () => {
 
@@ -16,16 +17,6 @@ const OutputMenu = () => {
     navigator.clipboard.writeText(JSON.stringify(contentToExport));
   };
 
-  const downloadJson = () => {
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(contentToExport));
-    var downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "dmwhisper_data.json");
-    document.body.appendChild(downloadAnchorNode); // required for firefox
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
-  }
-
   return (
     <Grid container sx={{ overflow: 'scroll', height: '100%' }}>
       <Grid item xs={12}>&nbsp;</Grid>
@@ -33,7 +24,7 @@ const OutputMenu = () => {
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button sx={{ width: '80%' }} startIcon={<DownloadIcon />} onClick={downloadJson} variant="contained" color="primary">{t("Download content as JSON")}</Button>
+        <Button sx={{ width: '80%' }} startIcon={<DownloadIcon />} onClick={() => downloadJson(contentToExport)} variant="contained" color="primary">{t("Download content as JSON")}</Button>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>&nbsp;</Grid>

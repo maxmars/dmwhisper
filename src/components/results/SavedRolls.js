@@ -4,6 +4,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SearchIcon from '@mui/icons-material/Search';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import DownloadIcon from '@mui/icons-material/Download';
 import { Button, Grid, List, ListItem, ListItemText, TextField, Box } from '@mui/material';
 import html2pdf from 'html2pdf.js';
 import Typography from '@mui/material/Typography';
@@ -20,6 +21,8 @@ import useTheme from '@mui/private-theming/useTheme';
 import { format } from 'date-fns';
 import DungeonComponent from '../contentwidgets/dungeons/DungeonComponent.js';
 import AreaMapComponent from '../contentwidgets/areamaps/AreaMapComponent.js';
+import { downloadJson } from '../../utils';
+
 
 const ResultsList = () => {
 
@@ -221,7 +224,7 @@ const ResultsList = () => {
                 }
 
                 return <ListItem key={"ris" + index}>
-                  <ListItemText primary={<div style={{maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white'}} id={"areamapdraw" + index}>
+                  <ListItemText primary={<div style={{ maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white' }} id={"areamapdraw" + index}>
                     <AreaMapComponent cells={throwResult.result.cells} gridrowcells={throwResult.result.gridrowcells} dark={dark} />
                     <br /><br /></div>}
                     secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
@@ -234,6 +237,10 @@ const ResultsList = () => {
                         saveAsPdf("areamapdraw" + index);
                       }} />
                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                        downloadJson({ contentType: "areamap", contentData: throwResult.result }, "savedMapContent.json");
+                      }} />
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       {throwResult.timestamp}</div>} />
                 </ListItem>
               } else if (throwResult.result.dungeonRooms) {
@@ -244,7 +251,7 @@ const ResultsList = () => {
 
                 return (
                   <ListItem key={"dungeon" + index}>
-                    <ListItemText primary={<div style={{backgroundColor: dark ? 'black' : 'white'}} id={"dungeondraw" + index}><div>{throwResult.result.dungeonName}</div><br /><DungeonComponent dungeonRooms={throwResult.result.dungeonRooms} /><br /><br /></div>}
+                    <ListItemText primary={<div style={{ backgroundColor: dark ? 'black' : 'white' }} id={"dungeondraw" + index}><div>{throwResult.result.dungeonName}</div><br /><DungeonComponent dungeonRooms={throwResult.result.dungeonRooms} /><br /><br /></div>}
                       secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
                         <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                           setThrowToBeDeleted(index);
@@ -253,6 +260,10 @@ const ResultsList = () => {
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                           saveAsPdf("dungeondraw" + index);
+                        }} />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                          downloadJson({ contentType: "dungeon", contentData: throwResult.result }, "savedDungeonContent.json");
                         }} />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         {throwResult.timestamp}</div>} />
@@ -267,7 +278,7 @@ const ResultsList = () => {
 
                 return (
                   <ListItem key={"ris" + index}>
-                    <ListItemText primary={<div><div style={{maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white'}} id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} /><br /><br /></div>}
+                    <ListItemText primary={<div><div style={{ maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white' }} id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} /><br /><br /></div>}
                       secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
                         <EditIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                           setEditedThrow(index);
@@ -285,6 +296,10 @@ const ResultsList = () => {
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                           saveAsPdf("throwHtmlContent" + index);
+                        }} />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                          downloadJson({ contentType: "text", contentData: throwResult.result }, "savedTextContent.json");
                         }} />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         {throwResult.timestamp}</div>} />
