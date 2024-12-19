@@ -37,6 +37,12 @@ const ImportJsonFile = (props) => {
     dispatch(clearTabPath());
 
     const newDataFile = JSON.parse(jsonText);
+
+    if (!newDataFile.tree || !newDataFile.tables) {
+      props.returnToMenu();
+      return;
+    }
+
     newDataFile.lastTableContent = {};
     
     dispatch(setContent(newDataFile));
