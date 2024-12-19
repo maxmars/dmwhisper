@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    18 Dic 2024
+    -----------
+    - 1.54.0 You can now save and load saved content, of any kind.
+
     17 Dic 2024
     -----------
     - 1.57.0 Export saved content to PDF.
