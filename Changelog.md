@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    21 Dic 2024
+    -----------
+    - 1.55.0 Saved content import button is now also available on the saved content page.
+
     18 Dic 2024
     -----------
     - 1.54.0 You can now save and load saved content, of any kind.

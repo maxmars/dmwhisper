@@ -469,6 +469,8 @@ i18n
           "Initial Value": "Valore iniziale",
           "Utilize": "Utilizza",
           "Modify": "Modifica",
+          "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)",
+          "Importazione di una intera sandbox": "Importazione di una intera sandbox",
         }
       },
       es: {
@@ -699,7 +701,8 @@ i18n
           "Initial Value": "Valor inicial",
           "Utilize": "Utilizar",
           "Modify": "Modificar",
-
+          "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Importación de un solo contenido (hojas de personaje, mapas, mazmorras..)",
+          "Importazione di una intera sandbox": "Importación de una sandbox completa",
         },
       },
       fr: {
@@ -930,6 +933,8 @@ i18n
           "Initial Value": "Valeur initiale",
           "Utilize": "Utiliser",
           "Modify": "Modifier",
+          "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Importation d'un seul contenu (feuilles de personnage, cartes, donjons..)",
+          "Importazione di una intera sandbox": "Importation d'une sandbox entière",
         },
       },
       de: {
@@ -1160,6 +1165,8 @@ i18n
           "Initial Value": "Anfangswert",
           "Utilize": "Nutzen",
           "Modify": "Ändern",
+          "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Import eines einzelnen Inhalts (Charakterblätter, Karten, Dungeon..)",
+          "Importazione di una intera sandbox": "Import einer ganzen Sandbox",
         }
       },
       pt: {
@@ -1390,6 +1397,8 @@ i18n
           "Initial Value": "Valor inicial",
           "Utilize": "Utilizar",
           "Modify": "Modificar",
+          "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Importação de um único conteúdo (fichas de personagem, mapas, masmorras..)",
+          "Importazione di una intera sandbox": "Importação de uma sandbox inteira",
         }
       },
       gr: {
@@ -1620,6 +1629,9 @@ i18n
           "Initial Value": "Αρχική τιμή",
           "Utilize": "Χρησιμοποιώ",
           "Modify": "Τροποποιώ",
+          "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Εισαγωγή ενός περιεχομένου (φύλλα χαρακτήρων, χάρτες, μπουντρούμια..)",
+          "Importazione di una intera sandbox": "Εισαγωγή ενός ολόκληρου sandbox",
+
         }
       }
     }

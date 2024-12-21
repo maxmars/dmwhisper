@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import ResultsList from './results/SavedRolls';
 import ContentTree from './contenttree/ContentTree';
 import AuthoringMenu from './authoring/AuthoringMenu';
 import InputMenu from './filemanagement/InputMenu';
@@ -38,6 +37,7 @@ import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import { Navigate, useNavigate, Routes, Route } from 'react-router-dom';
 import SpotlightedContent from './contenttree/SpotlightedContent';
 import GeneralCounters from './contentwidgets/counters/GeneralCounters';
+import SavedResultsComponent from './results/SavedResultsComponent';
 
 
 const DMWhisper = () => {
@@ -235,7 +235,7 @@ const DMWhisper = () => {
           <Route path="/" element={<Navigate to="browse" replace />} />
           <Route path="spotlight/:path" element={<SpotlightedContent />} />
           <Route path="browse" element={<ContentTree />} />
-          <Route path="saved" element={<ResultsList />} />
+          <Route path="saved" element={<SavedResultsComponent />} />
           <Route path="dungeon/:dngnsetpiece?/:roomsnumber?/:dngnmonsterset?/:dngngtrapset?/:dngntreasureset?/:dngnpuzzleset?" element={<DungeonExplore />} />
           <Route path="counter" element={<GeneralCounters />} />
           <Route path="edit_content" element={<AuthoringMenu />} />

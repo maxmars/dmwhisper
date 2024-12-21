@@ -14,17 +14,18 @@ import { useState } from 'react';
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { clearThrows, updateThrow, deleteThrow } from '../../store/slices/throws';
+import { clearThrows, updateThrow, deleteThrow } from '../../store/slices/throws.js';
 import { useTranslation } from 'react-i18next';
 import { copyIntoClipboard } from '../../utils/index.js';
 import useTheme from '@mui/private-theming/useTheme';
 import { format } from 'date-fns';
 import DungeonComponent from '../contentwidgets/dungeons/DungeonComponent.js';
 import AreaMapComponent from '../contentwidgets/areamaps/AreaMapComponent.js';
-import { downloadJson } from '../../utils';
+import { downloadJson } from '../../utils/index.js';
+import UploadIcon from '@mui/icons-material/Upload';
 
 
-const ResultsList = () => {
+const SavedResultsPage = ({ showImportContentWidget }) => {
 
   //#region Component initializations
   const theme = useTheme();
@@ -317,6 +318,10 @@ const ResultsList = () => {
               : null
           }
         </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>
+          <Button startIcon={<UploadIcon />} onClick={showImportContentWidget} style={{ width: '100%' }} variant="contained" color="primary">{t("Import data")}</Button>
+        </Grid>
       </Grid>
     );
   }
@@ -326,4 +331,4 @@ const ResultsList = () => {
 };
 
 
-export default ResultsList;
+export default SavedResultsPage;

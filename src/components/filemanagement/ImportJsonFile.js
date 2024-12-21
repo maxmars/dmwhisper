@@ -56,14 +56,14 @@ const ImportJsonFile = (props) => {
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>
-        <Typography>Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..). {t("Tap to select a JSON file to import")}.</Typography>
+        <Typography>{t("Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)")}. {t("Tap to select a JSON file to import")}.</Typography>
       </Grid>
       <Grid item xs={12}>
         <MuiFileInput style={{width: '100%'}} getInputText={(value) => value ? value.name : t('Tap to select a file to import') } inputProps={{ accept: '.json' }} value={jsonSaveFile} onChange={handleSingleContentImport} />
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12}>
-        <Typography>Importazione di una intera sandbox. {t("Tap to select a JSON file to import")}. {t("Warning: ALL existing content will be overwritten!")}</Typography>
+        <Typography>{t("Importazione di una intera sandbox")}. {t("Tap to select a JSON file to import")}. {t("Warning: ALL existing content will be overwritten!")}</Typography>
       </Grid>
       <Grid item xs={12}>
         <MuiFileInput style={{width: '100%'}} getInputText={(value) => value ? value.name : t('Tap to select a file to import') } inputProps={{ accept: '.json' }} value={jsonFile} onChange={handleSandboxImport} />
