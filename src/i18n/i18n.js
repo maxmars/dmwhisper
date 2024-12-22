@@ -238,6 +238,7 @@ i18n
           "Edited puzzle set:": "Edited puzzle set:",
           "Back to puzzle sets list": "Back to puzzle sets list",
           "Keep in sequence": "Keep in sequence",
+          "Counter": "Counter",
         }
       },
       it: {
@@ -471,6 +472,7 @@ i18n
           "Modify": "Modifica",
           "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)",
           "Importazione di una intera sandbox": "Importazione di una intera sandbox",
+          "Counter": "Contatore",
         }
       },
       es: {
@@ -703,6 +705,7 @@ i18n
           "Modify": "Modificar",
           "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Importación de un solo contenido (hojas de personaje, mapas, mazmorras..)",
           "Importazione di una intera sandbox": "Importación de una sandbox completa",
+          "Counter": "Contador",
         },
       },
       fr: {
@@ -935,6 +938,7 @@ i18n
           "Modify": "Modifier",
           "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Importation d'un seul contenu (feuilles de personnage, cartes, donjons..)",
           "Importazione di una intera sandbox": "Importation d'une sandbox entière",
+          "Counter": "Compteur",
         },
       },
       de: {
@@ -1167,6 +1171,7 @@ i18n
           "Modify": "Ändern",
           "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Import eines einzelnen Inhalts (Charakterblätter, Karten, Dungeon..)",
           "Importazione di una intera sandbox": "Import einer ganzen Sandbox",
+          "Counter": "Zähler",
         }
       },
       pt: {
@@ -1399,6 +1404,7 @@ i18n
           "Modify": "Modificar",
           "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Importação de um único conteúdo (fichas de personagem, mapas, masmorras..)",
           "Importazione di una intera sandbox": "Importação de uma sandbox inteira",
+          "Counter": "Contador",
         }
       },
       gr: {
@@ -1631,7 +1637,7 @@ i18n
           "Modify": "Τροποποιώ",
           "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Εισαγωγή ενός περιεχομένου (φύλλα χαρακτήρων, χάρτες, μπουντρούμια..)",
           "Importazione di una intera sandbox": "Εισαγωγή ενός ολόκληρου sandbox",
-
+          "Counter": "Μετρητής"
         }
       }
     }
