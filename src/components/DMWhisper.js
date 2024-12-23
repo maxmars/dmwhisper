@@ -149,7 +149,7 @@ const DMWhisper = () => {
             <ListItemIcon>
               <DonutLargeIcon />
             </ListItemIcon>
-            <ListItemText primary={t("Counter")} />
+            <ListItemText primary={t("Counters")} />
           </ListItemButton>
         </ListItem>
         <ListItem key="edit_content" disablePadding>
