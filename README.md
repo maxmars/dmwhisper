@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    30 Dic 2024
+    -----------
+    - 1.56.0 Visual feedback about processing status on several pages.
+
     21 Dic 2024
     -----------
     - 1.55.0 Saved content import button is now also available on the saved content page.

@@ -23,6 +23,7 @@ import DungeonComponent from '../contentwidgets/dungeons/DungeonComponent.js';
 import AreaMapComponent from '../contentwidgets/areamaps/AreaMapComponent.js';
 import { downloadJson } from '../../utils/index.js';
 import UploadIcon from '@mui/icons-material/Upload';
+import ClearThrowsConfirm from './ClearThrowsConfirm.js';
 
 
 const SavedResultsPage = ({ showImportContentWidget }) => {
@@ -38,6 +39,7 @@ const SavedResultsPage = ({ showImportContentWidget }) => {
   const [currentEditedContent, setCurrentEditedContent] = useState("");
   const [throwToBeDeleted, setThrowToBeDeleted] = useState(null);
   const [searchText, setSearchText] = useState("");
+  const [confirmClearThrows, setConfirmClearThrows] = useState(false);
   //#endregion
 
 
@@ -92,7 +94,7 @@ const SavedResultsPage = ({ showImportContentWidget }) => {
   //#endregion CKEditor stuff
 
   //#region page events
-  const onClick = (rowId) => {
+  const clearAllThrows = (rowId) => {
     dispatch(clearThrows(rowId));
   };
 
@@ -136,6 +138,20 @@ const SavedResultsPage = ({ showImportContentWidget }) => {
   //#endregion page events
 
   //#region render
+  if (confirmClearThrows) {
+    return (
+      <ClearThrowsConfirm
+        onYesClick={() => {
+          clearAllThrows();
+          setConfirmClearThrows(false);
+        }}
+        onNoClick={() => {
+          setConfirmClearThrows(false);
+        }}
+      />
+    );
+  }
+  
   if (throwToBeDeleted !== null) {
     return (
       <Grid container sx={{ overflow: 'scroll' }}>
@@ -314,7 +330,7 @@ const SavedResultsPage = ({ showImportContentWidget }) => {
         <Grid item xs={12}>
           {
             throws.sequence.length > 0 ?
-              <Button style={{ width: '100%' }} variant="contained" color="primary" onClick={onClick}>{t("Clean")}</Button>
+              <Button style={{ width: '100%' }} variant="contained" color="primary" onClick={() => setConfirmClearThrows(true)}>{t("Clean")}</Button>
               : null
           }
         </Grid>

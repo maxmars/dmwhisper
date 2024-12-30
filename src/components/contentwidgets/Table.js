@@ -25,6 +25,7 @@ export default function Table(props) {
   //#region Component initialization
   const { t } = useTranslation();
   const content = useSelector((st) => st.content);
+  const [contentClasssName, setContentClassName] = useState("");
   const [mode, setMode] = useState("rockandroll");
   const [currentThrow, setCurrentThrow] = useState(null);
   const [currentHtmlContent, setCurrentHtmlContent] = useState(null);
@@ -106,6 +107,7 @@ export default function Table(props) {
 
   const diceRoll = () => {
 
+    setContentClassName("YellowBackgroundColor");
     const currentContents = getCurrentContents();
 
     if (props.currentTab > -1) {
@@ -118,6 +120,12 @@ export default function Table(props) {
 
     setCurrentThrow(currentContents.throw);
     setCurrentHtmlContent(currentContents.htmlContent);
+
+    setTimeout(() => {
+
+      setContentClassName("");
+
+    }, 150);
 
   };
   //#endregion
@@ -250,8 +258,8 @@ export default function Table(props) {
                   }
                 </div>
               </div>
-              <div dangerouslySetInnerHTML={{ __html: currentHtmlContent }} />
-              {currentThrow && currentThrow.length > 0 ? <div>{currentThrow}</div> : null}
+              <div className={contentClasssName} dangerouslySetInnerHTML={{ __html: currentHtmlContent }} />
+              {currentThrow && currentThrow.length > 0 ? <div className={contentClasssName} dangerouslySetInnerHTML={{ __html: currentThrow }} /> : null}
               <br />
               <div style={{ width: '100%' }}>
                 <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>

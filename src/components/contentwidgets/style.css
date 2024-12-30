@@ -1,3 +1,8 @@
 .MuiDataGrid-footerContainer {
     display: none !important;
 }
+
+.YellowBackgroundColor {
+    background-color: yellow;
+    color: black;
+}

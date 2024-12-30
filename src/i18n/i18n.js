@@ -239,6 +239,13 @@ i18n
           "Back to puzzle sets list": "Back to puzzle sets list",
           "Keep in sequence": "Keep in sequence",
           "Counters": "Counters",
+
+          "Warning! All saved items are going to be deleted": "Warning! All saved items are going to be deleted",
+          "Do you really want to delete all saved items?" : "Do you really want to delete all saved items?",
+          "Error": "Error",
+          "Error importing content": "Error importing content",
+          "Content imported": "Content imported",
+          "Content imported successfully": "Content imported successfully",
         }
       },
       it: {
@@ -473,6 +480,14 @@ i18n
           "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)",
           "Importazione di una intera sandbox": "Importazione di una intera sandbox",
           "Counters": "Contatori",
+
+          "Warning! All saved items are going to be deleted": "Attenzione! Tutti gli elementi salvati verranno eliminati",
+          "Do you really want to delete all saved items?" : "Vuoi davvero eliminare tutti gli elementi salvati?",
+          "Error": "Errore",
+          "Error importing content": "Errore nell'importazione del contenuto",
+          "Content imported": "Contenuto importato",
+          "Content imported successfully": "Contenuto importato con successo",
+
         }
       },
       es: {
@@ -706,6 +721,13 @@ i18n
           "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Importación de un solo contenido (hojas de personaje, mapas, mazmorras..)",
           "Importazione di una intera sandbox": "Importación de una sandbox completa",
           "Counters": "Contadores",
+
+          "Warning! All saved items are going to be deleted": "¡Advertencia! Todos los elementos guardados se eliminarán",
+          "Do you really want to delete all saved items?" : "¿Realmente quieres eliminar todos los elementos guardados?",
+          "Error": "Error",
+          "Error importing content": "Error al importar contenido",
+          "Content imported": "Contenido importado",
+          "Content imported successfully": "Contenido importado con éxito",
         },
       },
       fr: {
@@ -939,6 +961,14 @@ i18n
           "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Importation d'un seul contenu (feuilles de personnage, cartes, donjons..)",
           "Importazione di una intera sandbox": "Importation d'une sandbox entière",
           "Counters": "Compteurs",
+
+          "Warning! All saved items are going to be deleted": "Attention! Tous les éléments enregistrés vont être supprimés",
+          "Do you really want to delete all saved items?" : "Voulez-vous vraiment supprimer tous les éléments enregistrés?",
+          "Error": "Erreur",
+          "Error importing content": "Erreur lors de l'importation du contenu",
+          "Content imported": "Contenu importé",
+          "Content imported successfully": "Contenu importé avec succès",
+          
         },
       },
       de: {
@@ -1172,6 +1202,13 @@ i18n
           "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Import eines einzelnen Inhalts (Charakterblätter, Karten, Dungeon..)",
           "Importazione di una intera sandbox": "Import einer ganzen Sandbox",
           "Counters": "Zähler",
+
+          "Warning! All saved items are going to be deleted": "Achtung! Alle gespeicherten Elemente werden gelöscht",
+          "Do you really want to delete all saved items?" : "Möchten Sie wirklich alle gespeicherten Elemente löschen?",
+          "Error": "Fehler",
+          "Error importing content": "Fehler beim Importieren des Inhalts",
+          "Content imported": "Inhalt importiert",
+          "Content imported successfully": "Inhalt erfolgreich importiert",
         }
       },
       pt: {
@@ -1405,6 +1442,13 @@ i18n
           "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Importação de um único conteúdo (fichas de personagem, mapas, masmorras..)",
           "Importazione di una intera sandbox": "Importação de uma sandbox inteira",
           "Counters": "Contadores",
+
+          "Warning! All saved items are going to be deleted": "Aviso! Todos os itens salvos serão excluídos",
+          "Do you really want to delete all saved items?" : "Você realmente quer excluir todos os itens salvos?",
+          "Error": "Erro",
+          "Error importing content": "Erro ao importar conteúdo",
+          "Content imported": "Conteúdo importado",
+          "Content imported successfully": "Conteúdo importado com sucesso",
         }
       },
       gr: {
@@ -1637,7 +1681,15 @@ i18n
           "Modify": "Τροποποιώ",
           "Importazione di un singolo contenuto (schede personaggio, mappe, dungeon..)": "Εισαγωγή ενός περιεχομένου (φύλλα χαρακτήρων, χάρτες, μπουντρούμια..)",
           "Importazione di una intera sandbox": "Εισαγωγή ενός ολόκληρου sandbox",
-          "Counters": "μετρητές"
+          "Counters": "μετρητές",
+
+          "Warning! All saved items are going to be deleted": "Προειδοποίηση! Όλα τα αποθηκευμένα στοιχεία πρόκειται να διαγραφούν",
+          "Do you really want to delete all saved items?" : "Θέλετε πραγματικά να διαγράψετε όλα τα αποθηκευμένα στοιχεία;",
+          "Error": "Σφάλμα",
+          "Error importing content": "Σφάλμα εισαγωγής περιεχομένου",
+          "Content imported": "Περιεχόμενο εισήχθη",
+          "Content imported successfully": "Το περιεχόμενο εισήχθη με επιτυχία",
+
         }
       }
     }
