@@ -1,4 +1,57 @@
 import { store } from '../../store';
+import { mergeContentAndTables } from '../../store/slices/content.js';
+
+export const getRoomContent = (dungeonRooms, content, room) => {
+
+    const roomContent = {
+        description: "",
+        monsters: "",
+        traps: "",
+        treasures: "",
+        puzzles: ""
+    };
+
+    if (!dungeonRooms || room < 0 || room >= dungeonRooms.length) {
+        return roomContent;
+    }
+
+    if (dungeonRooms[room].table) {
+        const tables = dungeonRooms[room].table.trim().split(" ");
+        roomContent.description = mergeContentAndTables(dungeonRooms[room].textContent, tables, content);
+    } else {
+        roomContent.description = dungeonRooms[room].textContent;
+    }
+
+    if (dungeonRooms[room].monster.table) {
+        const tables = dungeonRooms[room].monster.table.trim().split(" ");
+        roomContent.monsters = mergeContentAndTables(dungeonRooms[room].monster.textContent, tables, content);
+    } else {
+        roomContent.monsters = dungeonRooms[room].monster.textContent;
+    }
+
+    if (dungeonRooms[room].trap.table) {
+        const tables = dungeonRooms[room].trap.table.trim().split(" ");
+        roomContent.traps = mergeContentAndTables(dungeonRooms[room].trap.textContent, tables, content);
+    } else {
+        roomContent.traps = dungeonRooms[room].trap.textContent;
+    }
+
+    if (dungeonRooms[room].treasure.table) {
+        const tables = dungeonRooms[room].treasure.table.trim().split(" ");
+        roomContent.treasures = mergeContentAndTables(dungeonRooms[room].treasure.textContent, tables, content);
+    } else {
+        roomContent.treasures = dungeonRooms[room].treasure.textContent;
+    }
+
+    if (dungeonRooms[room].puzzle.table) {
+        const tables = dungeonRooms[room].puzzle.table.trim().split(" ");
+        roomContent.puzzles = mergeContentAndTables(dungeonRooms[room].puzzle.textContent, tables, content);
+    } else {
+        roomContent.puzzles = dungeonRooms[room].puzzle.textContent;
+    }
+
+    return roomContent;
+}
 
 
 const getDungeonSetRng = (items) => {

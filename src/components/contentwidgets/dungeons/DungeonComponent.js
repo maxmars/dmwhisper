@@ -9,8 +9,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { mergeContentAndTables } from '../../../store/slices/content.js';
 import { useTranslation } from 'react-i18next';
+import { getRoomContent } from '../../../snippets/dungeons/DungeonLib.js';
 
 
 export default function DungeonComponent(props) {
@@ -32,40 +32,13 @@ export default function DungeonComponent(props) {
             return;
         }
 
-        if (props.dungeonRooms[room].table) {
-            const tables = props.dungeonRooms[room].table.trim().split(" ");
-            setSelectedRoomDescription(mergeContentAndTables(props.dungeonRooms[room].textContent, tables, content));
-        } else {
-            setSelectedRoomDescription(props.dungeonRooms[room].textContent);
-        }
+        const roomContent = getRoomContent(props.dungeonRooms, content, room);
 
-        if (props.dungeonRooms[room].monster.table) {
-            const tables = props.dungeonRooms[room].monster.table.trim().split(" ");
-            setSelectedRoomMonster(mergeContentAndTables(props.dungeonRooms[room].monster.textContent, tables, content));
-        } else {
-            setSelectedRoomMonster(props.dungeonRooms[room].monster.textContent);
-        }
-
-        if (props.dungeonRooms[room].trap.table) {
-            const tables = props.dungeonRooms[room].trap.table.trim().split(" ");
-            setSelectedRoomTrap(mergeContentAndTables(props.dungeonRooms[room].trap.textContent, tables, content));
-        } else {
-            setSelectedRoomTrap(props.dungeonRooms[room].trap.textContent);
-        }
-
-        if (props.dungeonRooms[room].treasure.table) {
-            const tables = props.dungeonRooms[room].treasure.table.trim().split(" ");
-            setSelectedRoomTreasure(mergeContentAndTables(props.dungeonRooms[room].treasure.textContent, tables, content));
-        } else {
-            setSelectedRoomTreasure(props.dungeonRooms[room].treasure.textContent);
-        }
-
-        if (props.dungeonRooms[room].puzzle.table) {
-            const tables = props.dungeonRooms[room].puzzle.table.trim().split(" ");
-            setSelectedRoomPuzzle(mergeContentAndTables(props.dungeonRooms[room].puzzle.textContent, tables, content));
-        } else {
-            setSelectedRoomPuzzle(props.dungeonRooms[room].puzzle.textContent);
-        }
+        setSelectedRoomDescription(roomContent.description);
+        setSelectedRoomMonster(roomContent.monsters);
+        setSelectedRoomTrap(roomContent.traps);
+        setSelectedRoomTreasure(roomContent.treasures);
+        setSelectedRoomPuzzle(roomContent.puzzles);
     }
 
     useEffect(() => {

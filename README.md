@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    01 Gen 2025
+    -----------
+    - 1.56.1 Generated dungeon content is persistent until re-rolled.
+
     30 Dic 2024
     -----------
     - 1.56.0 Visual feedback about processing status on several pages.

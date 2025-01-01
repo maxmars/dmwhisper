@@ -16,6 +16,7 @@ import { setDungeonExploreDefaults, setLastTableContent } from '../../../store/s
 import { addThrow } from '../../../store/slices/throws.js';
 import { format } from 'date-fns';
 import { useParams } from 'react-router-dom';
+import { getRoomContent } from '../../../snippets/dungeons/DungeonLib.js';
 
 
 export default function DungeonExplore(props) {
@@ -99,9 +100,22 @@ export default function DungeonExplore(props) {
                     return null;
                 }
 
-                setDungeonRooms(roomsResult.rooms);
+                const processedDungeonRooms = roomsResult.rooms.map((room, index) => {
+                    const roomContentData = getRoomContent(roomsResult.rooms, content, index);
+                    const processedDungeonRoom = JSON.parse(JSON.stringify(room));
+        
+                    processedDungeonRoom.textContent = roomContentData.description;
+                    processedDungeonRoom.monster.textContent = roomContentData.monsters;
+                    processedDungeonRoom.trap.textContent = roomContentData.traps;
+                    processedDungeonRoom.treasure.textContent = roomContentData.treasures;
+                    processedDungeonRoom.puzzle.textContent = roomContentData.puzzles;
+        
+                    return processedDungeonRoom;
+                });
+        
+                setDungeonRooms(processedDungeonRooms);
 
-                return roomsResult.rooms;
+                return processedDungeonRooms;
             }
 
             return dungeonRooms;
@@ -197,11 +211,24 @@ export default function DungeonExplore(props) {
     const diceRoll = () => {
         const generatedRooms = generateRooms();
 
+        const processedDungeonRooms = generatedRooms.map((room, index) => {
+            const roomContentData = getRoomContent(generatedRooms, content, index);
+            const processedDungeonRoom = JSON.parse(JSON.stringify(room));
+
+            processedDungeonRoom.textContent = roomContentData.description;
+            processedDungeonRoom.monster.textContent = roomContentData.monsters;
+            processedDungeonRoom.trap.textContent = roomContentData.traps;
+            processedDungeonRoom.treasure.textContent = roomContentData.treasures;
+            processedDungeonRoom.puzzle.textContent = roomContentData.puzzles;
+
+            return processedDungeonRoom;
+        });
+
         try {
             dispatch(setLastTableContent({
                 contentId: props.content.id + "TAB" + props.currentTab,
                 diceThrow: {
-                    dungeonRooms: generatedRooms
+                    dungeonRooms: processedDungeonRooms
                 },
                 htmlContent: null
             }));
@@ -209,13 +236,27 @@ export default function DungeonExplore(props) {
             // Nothing
         }
 
-        setDungeonRooms(generatedRooms);
+        setDungeonRooms(processedDungeonRooms);
     }
 
     const saveRoll = () => {
+
+        const processedDungeonRooms = dungeonRooms.map((room, index) => {
+            const roomContentData = getRoomContent(dungeonRooms, content, index);
+            const processedDungeonRoom = JSON.parse(JSON.stringify(room));
+
+            processedDungeonRoom.textContent = roomContentData.description;
+            processedDungeonRoom.monster.textContent = roomContentData.monsters;
+            processedDungeonRoom.trap.textContent = roomContentData.traps;
+            processedDungeonRoom.treasure.textContent = roomContentData.treasures;
+            processedDungeonRoom.puzzle.textContent = roomContentData.puzzles;
+
+            return processedDungeonRoom;
+        });
+
         const contentToSave = {
             dungeonName: dungeonSetpiece,
-            dungeonRooms: dungeonRooms
+            dungeonRooms: processedDungeonRooms
         };
         dispatch(addThrow({ result: contentToSave, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
     };
@@ -229,7 +270,19 @@ export default function DungeonExplore(props) {
             dungeonPuzzleSet !== initialContent.dungeonPuzzleSet) {
 
             const dungeonRooms = generateRooms();
-
+            const processedDungeonRooms = dungeonRooms.map((room, index) => {
+                const roomContentData = getRoomContent(dungeonRooms, content, index);
+                const processedDungeonRoom = JSON.parse(JSON.stringify(room));
+    
+                processedDungeonRoom.textContent = roomContentData.description;
+                processedDungeonRoom.monster.textContent = roomContentData.monsters;
+                processedDungeonRoom.trap.textContent = roomContentData.traps;
+                processedDungeonRoom.treasure.textContent = roomContentData.treasures;
+                processedDungeonRoom.puzzle.textContent = roomContentData.puzzles;
+    
+                return processedDungeonRoom;
+            });
+    
             dispatch(setDungeonExploreDefaults(
                 {
                     setpiece: dungeonSetpiece,
@@ -243,7 +296,7 @@ export default function DungeonExplore(props) {
             dispatch(setLastTableContent({
                 contentId: 'dungeonExplore',
                 diceThrow: {
-                    dungeonRooms: dungeonRooms,
+                    dungeonRooms: processedDungeonRooms,
                 },
                 htmlContent: null
             }));

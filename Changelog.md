@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    01 Gen 2025
+    -----------
+    - 1.56.1 Generated dungeon content is persistent until re-rolled.
+
     30 Dic 2024
     -----------
     - 1.56.0 Visual feedback about processing status on several pages.
