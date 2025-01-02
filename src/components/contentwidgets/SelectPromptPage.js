@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { TextField, Button, List, ListItemButton, ListItemText, Typography } from '@mui/material';
-import { Shuffle as ShuffleIcon } from '@mui/icons-material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import openai from 'openai';
 import { addThrow } from '../../store/slices/throws';
 import { useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 import { CircularProgress } from '@mui/material';
-
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
 
 const SelectPromptPage = ({ pageContent, onCancel }) => {
     const [prompts, setPrompts] = useState([]);
@@ -90,7 +89,7 @@ const SelectPromptPage = ({ pageContent, onCancel }) => {
             <div style={{ padding: 20 }}>
                 <Typography variant="h5">Risposta di GenAI:</Typography>
                 <div dangerouslySetInnerHTML={{ __html: genaiAnwser }} />
-                <Button startIcon={<ShuffleIcon />} variant="contained" color="primary" onClick={handleSave} style={{ marginTop: 10 }}>
+                <Button startIcon={<SaveAltIcon />} variant="contained" color="primary" onClick={handleSave} style={{ marginTop: 10 }}>
                     Salva
                 </Button>&nbsp;&nbsp;&nbsp;
                 <Button startIcon={<CloseIcon />} variant="contained" color="primary" onClick={handleCancel} style={{ marginTop: 10 }}>
