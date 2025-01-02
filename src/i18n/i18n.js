@@ -246,6 +246,24 @@ i18n
           "Error importing content": "Error importing content",
           "Content imported": "Content imported",
           "Content imported successfully": "Content imported successfully",
+
+          "Settings": "Settings",
+          "no api key configured!": "no api key configured!",
+          "Errore nella richiesta a OpenAI:": "Error in the request to OpenAI:",
+          "Invio del prompt a ChatGPT in corso..": "Sending the prompt to ChatGPT in progress..",
+          "Risposta di ChatGPT:": "ChatGPT answer:",
+          "Seleziona un Prompt da inviare a ChatGPT insieme al contenuto della pagina": "Select a Prompt to send to ChatGPT along with the content of the page",
+          "Nota: devi avere già configurato una Api Key nelle Impostazioni. Le chiamate API di ChatGPT sono a pagamento e dovrai avere credito sufficiente per queste chiamate.": "Note: you must have already configured an Api Key in the Settings. ChatGPT API calls are paid and you must have sufficient credit for these calls.",
+          "Modifica Prompt": "Edit Prompt",
+          "Invia a ChatGPT": "Send to ChatGPT",
+          "Annulla": "Cancel",
+          "Impostazioni salvate!": "Settings saved!",
+          "API Key": "API Key",
+          "Nome Prompt": "Prompt Name",
+          "Testo Prompt": "Prompt Text",
+          "Aggiungi Prompt": "Add Prompt",
+          "Interpreta con ChatGPT": "Interpret with ChatGPT",
+
         }
       },
       it: {
@@ -488,6 +506,23 @@ i18n
           "Content imported": "Contenuto importato",
           "Content imported successfully": "Contenuto importato con successo",
 
+          "Settings": "Impostazioni",
+          "no api key configured!": "nessuna chiave API configurata!",
+          "Errore nella richiesta a OpenAI:": "Errore nella richiesta a OpenAI:",
+          "Invio del prompt a ChatGPT in corso..": "Invio del prompt a ChatGPT in corso..",
+          "Risposta di ChatGPT:": "Risposta di ChatGPT:",
+          "Seleziona un Prompt da inviare a ChatGPT insieme al contenuto della pagina": "Seleziona un Prompt da inviare a ChatGPT insieme al contenuto della pagina",
+          "Nota: devi avere già configurato una Api Key nelle Impostazioni. Le chiamate API di ChatGPT sono a pagamento e dovrai avere credito sufficiente per queste chiamate.": "Nota: devi avere già configurato una Api Key nelle Impostazioni. Le chiamate API di ChatGPT sono a pagamento e dovrai avere credito sufficiente per queste chiamate.",
+          "Modifica Prompt": "Modifica Prompt",
+          "Invia a ChatGPT": "Invia a ChatGPT",
+          "Annulla": "Annulla",
+          "Impostazioni salvate!": "Impostazioni salvate!",
+          "API Key": "API Key",
+          "Nome Prompt": "Nome Prompt",
+          "Testo Prompt": "Testo Prompt",
+          "Aggiungi Prompt": "Aggiungi Prompt",
+          "Interpreta con ChatGPT": "Interpreta con ChatGPT",
+
         }
       },
       es: {
@@ -728,6 +763,24 @@ i18n
           "Error importing content": "Error al importar contenido",
           "Content imported": "Contenido importado",
           "Content imported successfully": "Contenido importado con éxito",
+
+          "Settings": "Ajustes",
+          "no api key configured!": "¡ninguna clave de API configurada!",
+          "Errore nella richiesta a OpenAI:": "Error en la solicitud a OpenAI:",
+          "Invio del prompt a ChatGPT in corso..": "Enviando el prompt a ChatGPT..",
+          "Risposta di ChatGPT:": "Respuesta de ChatGPT:",
+          "Seleziona un Prompt da inviare a ChatGPT insieme al contenuto della pagina": "Selecciona un Prompt para enviar a ChatGPT junto con el contenido de la página",
+          "Nota: devi avere già configurato una Api Key nelle Impostazioni. Le chiamate API di ChatGPT sono a pagamento e dovrai avere credito sufficiente per queste chiamate.": "Nota: debes haber configurado una clave API en Configuración. Las llamadas a la API de ChatGPT son de pago y deberás tener crédito suficiente para estas llamadas.",
+          "Modifica Prompt": "Editar Prompt",
+          "Invia a ChatGPT": "Enviar a ChatGPT",
+          "Annulla": "Cancelar",
+          "Impostazioni salvate!": "¡Ajustes guardados!",
+          "API Key": "API Key",
+          "Nome Prompt": "Nombre Prompt",
+          "Testo Prompt": "Texto Prompt",
+          "Aggiungi Prompt": "Agregar Prompt",
+          "Interpreta con ChatGPT": "Interpretar con ChatGPT",
+
         },
       },
       fr: {
@@ -968,7 +1021,24 @@ i18n
           "Error importing content": "Erreur lors de l'importation du contenu",
           "Content imported": "Contenu importé",
           "Content imported successfully": "Contenu importé avec succès",
-          
+
+          "Settings": "Paramètres",
+          "no api key configured!": "aucune clé API configurée!",
+          "Errore nella richiesta a OpenAI:": "Erreur dans la demande à OpenAI:",
+          "Invio del prompt a ChatGPT in corso..": "Envoi du prompt à ChatGPT..",
+          "Risposta di ChatGPT:": "Réponse de ChatGPT:",
+          "Seleziona un Prompt da inviare a ChatGPT insieme al contenuto della pagina": "Sélectionnez un Prompt à envoyer à ChatGPT avec le contenu de la page",
+          "Nota: devi avere già configurato una Api Key nelle Impostazioni. Le chiamate API di ChatGPT sono a pagamento e dovrai avere credito sufficiente per queste chiamate.": "Remarque: vous devez déjà avoir configuré une clé API dans les paramètres. Les appels API de ChatGPT sont payants et vous devrez avoir suffisamment de crédit pour ces appels.",
+          "Modifica Prompt": "Modifier Prompt",
+          "Invia a ChatGPT": "Envoyer à ChatGPT",
+          "Annulla": "Annuler",
+          "Impostazioni salvate!": "Paramètres enregistrés!",
+          "API Key": "API Key",
+          "Nome Prompt": "Nom Prompt",
+          "Testo Prompt": "Texte Prompt",
+          "Aggiungi Prompt": "Ajouter Prompt",
+          "Interpreta con ChatGPT": "Interpréter avec ChatGPT",
+
         },
       },
       de: {
@@ -1209,6 +1279,24 @@ i18n
           "Error importing content": "Fehler beim Importieren des Inhalts",
           "Content imported": "Inhalt importiert",
           "Content imported successfully": "Inhalt erfolgreich importiert",
+
+          "Settings": "Einstellungen",
+          "no api key configured!": "kein API-Schlüssel konfiguriert!",
+          "Errore nella richiesta a OpenAI:": "Fehler bei der Anfrage an OpenAI:",
+          "Invio del prompt a ChatGPT in corso..": "Senden des Prompts an ChatGPT..",
+          "Risposta di ChatGPT:": "Antwort von ChatGPT:",
+          "Seleziona un Prompt da inviare a ChatGPT insieme al contenuto della pagina": "Wählen Sie einen Prompt aus, der zusammen mit dem Seiteninhalt an ChatGPT gesendet werden soll",
+          "Nota: devi avere già configurato una Api Key nelle Impostazioni. Le chiamate API di ChatGPT sono a pagamento e dovrai avere credito sufficiente per queste chiamate.": "Hinweis: Sie müssen bereits einen API-Schlüssel in den Einstellungen konfiguriert haben. Die API-Aufrufe von ChatGPT sind kostenpflichtig und Sie müssen über ausreichendes Guthaben für diese Anrufe verfügen.",
+          "Modifica Prompt": "Prompt bearbeiten",
+          "Invia a ChatGPT": "An ChatGPT senden",
+          "Annulla": "Abbrechen",
+          "Impostazioni salvate!": "Einstellungen gespeichert!",
+          "API Key": "API Key",
+          "Nome Prompt": "Prompt-Name",
+          "Testo Prompt": "Prompt-Text",
+          "Aggiungi Prompt": "Prompt hinzufügen",
+          "Interpreta con ChatGPT": "Mit ChatGPT interpretieren",
+
         }
       },
       pt: {
@@ -1449,6 +1537,24 @@ i18n
           "Error importing content": "Erro ao importar conteúdo",
           "Content imported": "Conteúdo importado",
           "Content imported successfully": "Conteúdo importado com sucesso",
+
+          "Settings": "Configurações",
+          "no api key configured!": "nenhuma chave de API configurada!",
+          "Errore nella richiesta a OpenAI:": "Erro na solicitação para OpenAI:",
+          "Invio del prompt a ChatGPT in corso..": "Envio do prompt para ChatGPT..",
+          "Risposta di ChatGPT:": "Resposta do ChatGPT:",
+          "Seleziona un Prompt da inviare a ChatGPT insieme al contenuto della pagina": "Selecione um Prompt para enviar ao ChatGPT junto com o conteúdo da página",
+          "Nota: devi avere già configurato una Api Key nelle Impostazioni. Le chiamate API di ChatGPT sono a pagamento e dovrai avere credito sufficiente per queste chiamate.": "Nota: você já deve ter configurado uma chave de API nas Configurações. As chamadas de API do ChatGPT são pagas e você precisará ter crédito suficiente para essas chamadas.",
+          "Modifica Prompt": "Editar Prompt",
+          "Invia a ChatGPT": "Enviar para ChatGPT",
+          "Annulla": "Cancelar",
+          "Impostazioni salvate!": "Configurações salvas!",
+          "API Key": "Chave de API",
+          "Nome Prompt": "Nome do Prompt",
+          "Testo Prompt": "Texto do Prompt",
+          "Aggiungi Prompt": "Adicionar Prompt",
+          "Interpreta con ChatGPT": "Interpretar com ChatGPT",
+
         }
       },
       gr: {
@@ -1689,6 +1795,23 @@ i18n
           "Error importing content": "Σφάλμα εισαγωγής περιεχομένου",
           "Content imported": "Περιεχόμενο εισήχθη",
           "Content imported successfully": "Το περιεχόμενο εισήχθη με επιτυχία",
+
+          "Settings": "Ρυθμίσεις",
+          "no api key configured!": "δεν έχει διαμορφωθεί κλειδί api!",
+          "Errore nella richiesta a OpenAI:": "Σφάλμα στο αίτημα στο OpenAI:",
+          "Invio del prompt a ChatGPT in corso..": "Αποστολή του prompt στο ChatGPT σε εξέλιξη..",
+          "Risposta di ChatGPT:": "Απάντηση από το ChatGPT:",
+          "Seleziona un Prompt da inviare a ChatGPT insieme al contenuto della pagina": "Επιλέξτε ένα Prompt για να στείλετε στο ChatGPT μαζί με το περιεχόμενο της σελίδας",
+          "Nota: devi avere già configurato una Api Key nelle Impostazioni. Le chiamate API di ChatGPT sono a pagamento e dovrai avere credito sufficiente per queste chiamate.": "Σημείωση: πρέπει να έχετε ήδη ρυθμίσει ένα κλειδί Api στις Ρυθμίσεις. Οι κλήσεις API του ChatGPT είναι χρεωστικές και θα πρέπει να έχετε αρκετό πίστωμα για αυτές τις κλήσεις.",
+          "Modifica Prompt": "Επεξεργασία Prompt",
+          "Invia a ChatGPT": "Αποστολή στο ChatGPT",
+          "Annulla": "Ακύρωση",
+          "Impostazioni salvate!": "Οι ρυθμίσεις αποθηκεύτηκαν!",
+          "API Key": "Κλειδί API",
+          "Nome Prompt": "Όνομα Prompt",
+          "Testo Prompt": "Κείμενο Prompt",
+          "Aggiungi Prompt": "Προσθήκη Prompt",
+          "Interpreta con ChatGPT": "Ερμηνεία με ChatGPT",
 
         }
       }

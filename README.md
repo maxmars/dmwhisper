@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    02 Gen 2025
+    -----------
+    - 1.57.0 Added support for ChatGPT: user can call OpenAI APIs specifying a prompt + current page content (useful to fine-tune app generated content).
+
     01 Gen 2025
     -----------
     - 1.56.1 Generated dungeon content is persistent until re-rolled.

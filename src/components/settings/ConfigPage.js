@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, List, ListItem, ListItemText, IconButton } from '@mui/material';
+import { TextField, Button, List, ListItem, ListItemText, IconButton, Typography } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
+
 
 const ConfigPage = () => {
+  const { t } = useTranslation();
+
   const [apiKey, setApiKey] = useState('');
   const [prompts, setPrompts] = useState([]);
   const [newPromptName, setNewPromptName] = useState('');
   const [newPromptText, setNewPromptText] = useState('');
   const [editingIndex, setEditingIndex] = useState(-1);
+  const [warningMessage, setWarningMessage] = useState(null);
 
   useEffect(() => {
     const savedApiKey = localStorage.getItem('apiKey');
@@ -44,34 +49,45 @@ const ConfigPage = () => {
   const handleSave = () => {
     localStorage.setItem('apiKey', apiKey);
     localStorage.setItem('prompts', JSON.stringify(prompts));
-    alert('Impostazioni salvate!');
+    setWarningMessage(t("Impostazioni salvate!"));
   };
+
+  if (warningMessage) {
+    return (
+      <div style={{ padding: 20 }}>
+        <Typography variant='h5'>{warningMessage}</Typography>
+        <Button variant="contained" color="secondary" onClick={() => setWarningMessage(null)} style={{ marginTop: 20 }}>
+          {t('Dismiss')}
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div style={{ padding: 20 }}>
       <TextField
-        label="API Key"
+        label={t("API Key")}
         value={apiKey}
         onChange={(e) => setApiKey(e.target.value)}
         fullWidth
         margin="normal"
       />
       <TextField
-        label="Nome Prompt"
+        label={t("Nome Prompt")}
         value={newPromptName}
         onChange={(e) => setNewPromptName(e.target.value)}
         fullWidth
         margin="normal"
       />
       <TextField
-        label="Testo Prompt"
+        label={t("Testo Prompt")}
         value={newPromptText}
         onChange={(e) => setNewPromptText(e.target.value)}
         fullWidth
         margin="normal"
       />
       <Button variant="contained" color="primary" onClick={handleAddPrompt}>
-        {editingIndex === -1 ? 'Aggiungi Prompt' : 'Modifica Prompt'}
+        {editingIndex === -1 ? t('Aggiungi Prompt') : t('Modifica Prompt')}
       </Button>
       <List>
         {prompts.map((prompt, index) => (

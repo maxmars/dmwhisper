@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, List, ListItemButton, ListItemText, Typography } from '@mui/material';
+import { TextField, Button, List, ListItemButton, ListItemText, Typography, Grid } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import openai from 'openai';
 import { addThrow } from '../../store/slices/throws';
@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 import { CircularProgress } from '@mui/material';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import { useTranslation } from 'react-i18next';
 
 const SelectPromptPage = ({ pageContent, onCancel }) => {
     const [prompts, setPrompts] = useState([]);
@@ -16,9 +17,10 @@ const SelectPromptPage = ({ pageContent, onCancel }) => {
     const [showSpinner, setShowSpinner] = useState(false);
 
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     const configuration = {
-        apiKey: localStorage.getItem('apiKey') ? localStorage.getItem('apiKey') : 'no api key configured!',
+        apiKey: localStorage.getItem('apiKey') ? localStorage.getItem('apiKey') : t('no api key configured!'),
         dangerouslyAllowBrowser: true,
     };
     const openaiInstance = new openai(configuration);
@@ -47,8 +49,7 @@ const SelectPromptPage = ({ pageContent, onCancel }) => {
             setShowSpinner(false);
 
         } catch (error) {
-            console.error('Errore nella richiesta a OpenAI:', JSON.stringify(error));
-            setGenaiAnwser('Errore nella richiesta a OpenAI: ' + JSON.stringify(error));
+            setGenaiAnwser(t('Errore nella richiesta a OpenAI:') + JSON.stringify(error));
             setShowSpinner(false);
         }
     };
@@ -77,17 +78,24 @@ const SelectPromptPage = ({ pageContent, onCancel }) => {
 
     if (showSpinner) {
         return (
-            <div style={{ padding: 20 }}>
-                <Typography variant="h5">Invio del prompt a ChatGPT in corso...</Typography>
-                <CircularProgress />
-            </div>
+            <Grid container spacing={3} direction="column" alignItems="center" justifyContent="center">
+                <Grid item xs={12}>
+                    &nbsp;
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography variant="h5">{t("Invio del prompt a ChatGPT in corso..")}</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                    <CircularProgress />
+                </Grid>
+            </Grid>
         );
     }
 
     if (genaiAnwser && genaiAnwser !== null && genaiAnwser !== '') {
         return (
             <div style={{ padding: 20 }}>
-                <Typography variant="h5">Risposta di GenAI:</Typography>
+                <Typography variant="h5">{t("Risposta di ChatGPT:")}</Typography>
                 <div dangerouslySetInnerHTML={{ __html: genaiAnwser }} />
                 <Button startIcon={<SaveAltIcon />} variant="contained" color="primary" onClick={handleSave} style={{ marginTop: 10 }}>
                     Salva
@@ -100,8 +108,8 @@ const SelectPromptPage = ({ pageContent, onCancel }) => {
     } else {
         return (
             <div style={{ padding: 20 }}>
-                <Typography variant="h5">Seleziona un Prompt da inviare a ChatGPT insieme al contenuto della pagina</Typography>
-                <Typography>Nota: devi avere già configurato una Api Key nelle Impostazioni. Le chiamate API di ChatGPT sono a pagamento e dovrai avere credito sufficiente per queste chiamate.</Typography>
+                <Typography variant="h5">{t("Seleziona un Prompt da inviare a ChatGPT insieme al contenuto della pagina")}</Typography>
+                <Typography>{t("Nota: devi avere già configurato una Api Key nelle Impostazioni. Le chiamate API di ChatGPT sono a pagamento e dovrai avere credito sufficiente per queste chiamate.")}</Typography>
                 <List>
                     {prompts.map((prompt, index) => (
                         <ListItemButton key={index} onClick={() => handleSelectPrompt(prompt)}>
@@ -112,7 +120,7 @@ const SelectPromptPage = ({ pageContent, onCancel }) => {
                 {selectedPrompt && (
                     <div>
                         <TextField
-                            label="Modifica Prompt"
+                            label={t("Modifica Prompt")}
                             value={editableText}
                             onChange={(e) => setEditableText(e.target.value)}
                             fullWidth
@@ -121,10 +129,10 @@ const SelectPromptPage = ({ pageContent, onCancel }) => {
                             rows={4}
                         />
                         <Button variant="contained" color="primary" onClick={handleSendToChatGPT}>
-                            Invia a ChatGPT
+                            {t("Invia a ChatGPT")}
                         </Button>
                         <Button variant="contained" color="secondary" onClick={handleCancel} style={{ marginLeft: 10 }}>
-                            Annulla
+                            {t("Annulla")}
                         </Button>
                     </div>
                 )}
