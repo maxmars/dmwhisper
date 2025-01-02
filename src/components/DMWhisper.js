@@ -38,6 +38,8 @@ import { Navigate, useNavigate, Routes, Route } from 'react-router-dom';
 import SpotlightedContent from './contenttree/SpotlightedContent';
 import GeneralCounters from './contentwidgets/counters/GeneralCounters';
 import SavedResultsComponent from './results/SavedResultsComponent';
+import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
+import ConfigPage from './settings/ConfigPage';
 
 
 const DMWhisper = () => {
@@ -192,6 +194,14 @@ const DMWhisper = () => {
             <ListItemText primary={t("User manual")} />
           </ListItemButton>
         </ListItem>
+        <ListItem key="settings" disablePadding>
+          <ListItemButton onClick={() => navigate("settings")}>
+            <ListItemIcon>
+              <SettingsSuggestIcon />
+            </ListItemIcon>
+            <ListItemText primary={t("Settings")} />
+          </ListItemButton>
+        </ListItem>
         <ListItem key="info" disablePadding>
           <ListItemButton onClick={() => navigate("info")}>
             <ListItemIcon>
@@ -242,6 +252,7 @@ const DMWhisper = () => {
           <Route path="list_of_contents" element={<ContentsList />} />
           <Route path="input" element={<InputMenu />} />
           <Route path="output" element={<OutputMenu />} />
+          <Route path="settings" element={<ConfigPage />} />
           <Route path="info" element={<Info />} />
         </Routes>
           {/* {tab === 8 && <Test />} */}

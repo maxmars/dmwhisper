@@ -19,8 +19,15 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import useTheme from '@mui/private-theming/useTheme';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '@mui/material';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import SelectPromptPage from './SelectPromptPage';
+
 
 export default function Table(props) {
+
+  //#region OpenAI initialization
+  const apiKeyPresent = localStorage.getItem('apiKey') ? true : false;
+  //#endregion
 
   //#region Component initialization
   const { t } = useTranslation();
@@ -275,11 +282,16 @@ export default function Table(props) {
                       <Button onClick={() => setAutoUpdate(true)} startIcon={<UpdateIcon />} variant='contained'>{t("Auto update")}</Button>
                   }
                 </div>
+                <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                  <Button disabled={!apiKeyPresent} onClick={() => setMode("prompt")} startIcon={<AutoAwesomeIcon />} variant='contained'>{t("Interpreta con ChatGPT")}</Button>
+                </div>
               </div>
             </Stack>
           }
         </Box>
       );
+    } else if (mode === "prompt") {
+      return <SelectPromptPage pageContent={currentHtmlContent} onCancel={() => setMode("rockandroll")} />;
     } else {
       try {
         const items = listedValues.map(item => {
