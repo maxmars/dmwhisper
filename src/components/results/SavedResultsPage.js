@@ -24,11 +24,14 @@ import AreaMapComponent from '../contentwidgets/areamaps/AreaMapComponent.js';
 import { downloadJson } from '../../utils/index.js';
 import UploadIcon from '@mui/icons-material/Upload';
 import ClearThrowsConfirm from './ClearThrowsConfirm.js';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 
 
-const SavedResultsPage = ({ showImportContentWidget }) => {
+const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
 
   //#region Component initializations
+  const savepagesearchtext = localStorage.getItem("savepagesearchtext");
+
   const theme = useTheme();
   const dark = theme.palette.mode === "dark";
   const { t } = useTranslation();
@@ -38,7 +41,7 @@ const SavedResultsPage = ({ showImportContentWidget }) => {
   const [editedThrow, setEditedThrow] = useState(null);
   const [currentEditedContent, setCurrentEditedContent] = useState("");
   const [throwToBeDeleted, setThrowToBeDeleted] = useState(null);
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState(savepagesearchtext ? savepagesearchtext : "");
   const [confirmClearThrows, setConfirmClearThrows] = useState(false);
   //#endregion
 
@@ -151,7 +154,7 @@ const SavedResultsPage = ({ showImportContentWidget }) => {
       />
     );
   }
-  
+
   if (throwToBeDeleted !== null) {
     return (
       <Grid container sx={{ overflow: 'scroll' }}>
@@ -214,7 +217,10 @@ const SavedResultsPage = ({ showImportContentWidget }) => {
             <SearchIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
             <TextField id="input-with-sx" label="" variant="standard" sx={{ width: "100%" }}
               value={searchText}
-              onChange={(event) => { setSearchText(event.target.value) }} />
+              onChange={(event) => {
+                localStorage.setItem("savepagesearchtext", event.target.value);
+                setSearchText(event.target.value);
+              }} />
           </Box>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -244,21 +250,30 @@ const SavedResultsPage = ({ showImportContentWidget }) => {
                   <ListItemText primary={<div style={{ maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white' }} id={"areamapdraw" + index}>
                     <AreaMapComponent cells={throwResult.result.cells} gridrowcells={throwResult.result.gridrowcells} dark={dark} />
                     <br /><br /></div>}
-                    secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
-                      <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                        setThrowToBeDeleted(index);
-                        setCurrentEditedContent(null);
-                      }} />
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                        saveAsPdf("areamapdraw" + index);
-                      }} />
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                        downloadJson({ contentType: "areamap", contentData: throwResult.result }, "savedMapContent.json");
-                      }} />
-                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      {throwResult.timestamp}</div>} />
+                    secondary={
+                      <Grid container sx={{ overflow: 'scroll' }}>
+                        <Grid item xs={12}>
+                          <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            setThrowToBeDeleted(index);
+                            setCurrentEditedContent(null);
+                          }} />
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            saveAsPdf("areamapdraw" + index);
+                          }} />
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            downloadJson({ contentType: "areamap", contentData: throwResult.result }, "savedMapContent.json");
+                          }} />
+                        </Grid>
+                        <Grid item xs={12} sx={{ mt: 1 }}>
+                          {throwResult.timestamp}
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Box sx={{ width: '100%', borderBottom: '1px solid', borderColor: dark ? 'yellow' : 'blue' }} />
+                        </Grid>
+                      </Grid>
+                    } />
                 </ListItem>
               } else if (throwResult.result.dungeonRooms) {
 
@@ -276,22 +291,31 @@ const SavedResultsPage = ({ showImportContentWidget }) => {
                         <br />
                         <br />
                       </div>
-                      }
-                      secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
-                        <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                          setThrowToBeDeleted(index);
-                          setCurrentEditedContent(null);
-                        }} />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                          saveAsPdf("dungeondraw" + index);
-                        }} />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                          downloadJson({ contentType: "dungeon", contentData: throwResult.result }, "savedDungeonContent.json");
-                        }} />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        {throwResult.timestamp}</div>} />
+                    }
+                      secondary={
+                        <Grid container sx={{ overflow: 'scroll' }}>
+                          <Grid item xs={12}>
+                            <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                              setThrowToBeDeleted(index);
+                              setCurrentEditedContent(null);
+                            }} />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                              saveAsPdf("dungeondraw" + index);
+                            }} />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                              downloadJson({ contentType: "dungeon", contentData: throwResult.result }, "savedDungeonContent.json");
+                            }} />
+                          </Grid>
+                          <Grid item xs={12} sx={{ mt: 1 }}>
+                            {throwResult.timestamp}
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Box sx={{ width: '100%', borderBottom: '1px solid', borderColor: dark ? 'yellow' : 'blue' }} />
+                          </Grid>
+                        </Grid>
+                      } />
 
                   </ListItem>
                 );
@@ -304,30 +328,38 @@ const SavedResultsPage = ({ showImportContentWidget }) => {
                 return (
                   <ListItem key={"ris" + index}>
                     <ListItemText primary={<div><div style={{ maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white' }} id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} /><br /><br /></div>}
-                      secondary={<div style={{ display: 'flex', alignItems: 'center' }}>
-                        <EditIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                          setEditedThrow(index);
-                          setCurrentEditedContent(throwResult.result);
-                        }} />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                          setThrowToBeDeleted(index);
-                          setCurrentEditedContent(null);
-                        }} />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <ContentCopyIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                          throwCopy(index);
-                        }} />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                          saveAsPdf("throwHtmlContent" + index);
-                        }} />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                          downloadJson({ contentType: "text", contentData: throwResult.result }, "savedTextContent.json");
-                        }} />
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        {throwResult.timestamp}</div>} />
+                      secondary={
+                        <Grid container sx={{ overflow: 'scroll' }}>
+                          <Grid item xs={12}>
+                            <EditIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                              setEditedThrow(index);
+                              setCurrentEditedContent(throwResult.result);
+                            }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <AutoAwesomeIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                              showGenAiWidget({ pageContent: throwResult.result });
+                            }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <ContentCopyIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                              throwCopy(index);
+                            }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                              setThrowToBeDeleted(index);
+                              setCurrentEditedContent(null);
+                            }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                              saveAsPdf("throwHtmlContent" + index);
+                            }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                              downloadJson({ contentType: "text", contentData: throwResult.result }, "savedTextContent.json");
+                            }} />
+                          </Grid>
+                          <Grid item xs={12} sx={{ mt: 1 }}>
+                            {throwResult.timestamp}
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Box sx={{ width: '100%', borderBottom: '1px solid', borderColor: dark ? 'yellow' : 'blue' }} />
+                          </Grid>
+                        </Grid>
+                      } />
                   </ListItem>
                 );
               }

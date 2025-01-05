@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    05 Gen 2025
+    -----------
+    - 1.58.0 Quality-of-life improvements for the "saved results page": search text is now persistent, gen ai can now be used to process saved content.
+
     02 Gen 2025
     -----------
     - 1.57.0 Added support for ChatGPT: user can call OpenAI APIs specifying a prompt + current page content (useful to fine-tune app generated content).
