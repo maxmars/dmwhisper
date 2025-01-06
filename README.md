@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    06 Gen 2025
+    -----------
+    - 1.59.0 More QoL improvements for the "saved results page": saved items are now collapsible and collapsed by default.
+
     05 Gen 2025
     -----------
     - 1.58.0 Quality-of-life improvements for the "saved results page": search text is now persistent, gen ai can now be used to process saved content.

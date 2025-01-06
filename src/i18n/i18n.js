@@ -264,6 +264,9 @@ i18n
           "Aggiungi Prompt": "Add Prompt",
           "Interpreta con ChatGPT": "Interpret with ChatGPT",
 
+          "Contenuto salvato in data": "Content saved on:",
+          "Dungeon": "Dungeon:",
+          "Mappa salvata in data": "Map saved on:",
         }
       },
       it: {
@@ -523,6 +526,9 @@ i18n
           "Aggiungi Prompt": "Aggiungi Prompt",
           "Interpreta con ChatGPT": "Interpreta con ChatGPT",
 
+          "Contenuto salvato in data": "Contenuto salvato il:",
+          "Dungeon": "Dungeon:",
+          "Mappa salvata in data": "Mappa salvata il:",
         }
       },
       es: {
@@ -781,6 +787,9 @@ i18n
           "Aggiungi Prompt": "Agregar Prompt",
           "Interpreta con ChatGPT": "Interpretar con ChatGPT",
 
+          "Contenuto salvato in data": "Contenido guardado en la fecha:",
+          "Dungeon": "Mazmorra:",
+          "Mappa salvata in data": "Mapa guardado en la fecha:",
         },
       },
       fr: {
@@ -1039,6 +1048,9 @@ i18n
           "Aggiungi Prompt": "Ajouter Prompt",
           "Interpreta con ChatGPT": "Interpréter avec ChatGPT",
 
+          "Contenuto salvato in data": "Contenu enregistré le:",
+          "Dungeon": "Donjon:",
+          "Mappa salvata in data": "Carte enregistrée le:",
         },
       },
       de: {
@@ -1297,6 +1309,9 @@ i18n
           "Aggiungi Prompt": "Prompt hinzufügen",
           "Interpreta con ChatGPT": "Mit ChatGPT interpretieren",
 
+          "Contenuto salvato in data": "Inhalt gespeichert am:",
+          "Dungeon": "Dungeon:",
+          "Mappa salvata in data": "Karte gespeichert am:",
         }
       },
       pt: {
@@ -1555,6 +1570,9 @@ i18n
           "Aggiungi Prompt": "Adicionar Prompt",
           "Interpreta con ChatGPT": "Interpretar com ChatGPT",
 
+          "Contenuto salvato in data": "Conteúdo salvo em:",
+          "Dungeon": "Masmorra:",
+          "Mappa salvata in data": "Mapa salvo em:",
         }
       },
       gr: {
@@ -1812,6 +1830,10 @@ i18n
           "Testo Prompt": "Κείμενο Prompt",
           "Aggiungi Prompt": "Προσθήκη Prompt",
           "Interpreta con ChatGPT": "Ερμηνεία με ChatGPT",
+
+          "Contenuto salvato in data": "Περιεχόμενο αποθηκεύτηκε στις:",
+          "Dungeon": "Μαζορέ:",
+          "Mappa salvata in data": "Χάρτης αποθηκεύτηκε στις:",
 
         }
       }

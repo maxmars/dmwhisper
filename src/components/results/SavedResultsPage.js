@@ -5,7 +5,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SearchIcon from '@mui/icons-material/Search';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import DownloadIcon from '@mui/icons-material/Download';
-import { Button, Grid, List, ListItem, ListItemText, TextField, Box } from '@mui/material';
+import { Button, Grid, List, ListItem, ListItemText, TextField, Box, AccordionSummary, AccordionDetails, Accordion } from '@mui/material';
 import html2pdf from 'html2pdf.js';
 import Typography from '@mui/material/Typography';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -25,6 +25,7 @@ import { downloadJson } from '../../utils/index.js';
 import UploadIcon from '@mui/icons-material/Upload';
 import ClearThrowsConfirm from './ClearThrowsConfirm.js';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
 const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
@@ -246,35 +247,42 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                   return null;
                 }
 
-                return <ListItem key={"ris" + index}>
-                  <ListItemText primary={<div style={{ maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white' }} id={"areamapdraw" + index}>
-                    <AreaMapComponent cells={throwResult.result.cells} gridrowcells={throwResult.result.gridrowcells} dark={dark} />
-                    <br /><br /></div>}
-                    secondary={
-                      <Grid container sx={{ overflow: 'scroll' }}>
-                        <Grid item xs={12}>
-                          <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                            setThrowToBeDeleted(index);
-                            setCurrentEditedContent(null);
-                          }} />
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                            saveAsPdf("areamapdraw" + index);
-                          }} />
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                            downloadJson({ contentType: "areamap", contentData: throwResult.result }, "savedMapContent.json");
-                          }} />
+                return (
+                  <ListItem key={"ris" + index}>
+                    <Accordion style={{ width: "100%" }}>
+                      <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`panel${index}-content`} id={`panel${index}-header`} >
+                        <Typography>{t("Mappa salvata in data") + " " + throwResult.timestamp}</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <div style={{ maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white' }} id={"areamapdraw" + index}>
+                          <AreaMapComponent cells={throwResult.result.cells} gridrowcells={throwResult.result.gridrowcells} dark={dark} />
+                          <br /><br />
+                        </div>
+                        <Grid container sx={{ overflow: 'scroll' }}>
+                          <Grid item xs={12}>
+                            <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                              setThrowToBeDeleted(index);
+                              setCurrentEditedContent(null);
+                            }} />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                              saveAsPdf("areamapdraw" + index);
+                            }} />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                              downloadJson({ contentType: "areamap", contentData: throwResult.result }, "savedMapContent.json");
+                            }} />
+                          </Grid>
+                          <Grid item xs={12} sx={{ mt: 1 }}>
+                            {throwResult.timestamp}
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Box sx={{ width: '100%', borderBottom: '1px solid', borderColor: dark ? 'yellow' : 'blue' }} />
+                          </Grid>
                         </Grid>
-                        <Grid item xs={12} sx={{ mt: 1 }}>
-                          {throwResult.timestamp}
-                        </Grid>
-                        <Grid item xs={12}>
-                          <Box sx={{ width: '100%', borderBottom: '1px solid', borderColor: dark ? 'yellow' : 'blue' }} />
-                        </Grid>
-                      </Grid>
-                    } />
-                </ListItem>
+                      </AccordionDetails>
+                    </Accordion>
+                  </ListItem>);
               } else if (throwResult.result.dungeonRooms) {
 
                 if (searchText.length > 0 && !throwResult.result.dungeonName.toLowerCase().includes(searchText.toLowerCase())) {
@@ -283,16 +291,20 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
 
                 return (
                   <ListItem key={"dungeon" + index}>
-                    <ListItemText primary={
-                      <div style={{ backgroundColor: dark ? 'black' : 'white' }} id={"dungeondraw" + index}>
-                        <div>{throwResult.result.dungeonName}</div>
-                        <br />
-                        <DungeonComponent dungeonRooms={throwResult.result.dungeonRooms} />
-                        <br />
-                        <br />
-                      </div>
-                    }
-                      secondary={
+                    <Accordion style={{ width: "100%" }}>
+                      <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`panel${index}-content`} id={`panel${index}-header`} >
+                        <Typography>{t("Dungeon") + " " + throwResult.result.dungeonName}</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+
+                        <div style={{ backgroundColor: dark ? 'black' : 'white' }} id={"dungeondraw" + index}>
+                          <div>{t("Dungeon") + " " + throwResult.result.dungeonName}</div>
+                          <br />
+                          <DungeonComponent dungeonRooms={throwResult.result.dungeonRooms} />
+                          <br />
+                          <br />
+                        </div>
+
                         <Grid container sx={{ overflow: 'scroll' }}>
                           <Grid item xs={12}>
                             <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
@@ -315,8 +327,8 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                             <Box sx={{ width: '100%', borderBottom: '1px solid', borderColor: dark ? 'yellow' : 'blue' }} />
                           </Grid>
                         </Grid>
-                      } />
-
+                      </AccordionDetails>
+                    </Accordion>
                   </ListItem>
                 );
               } else {
@@ -327,8 +339,16 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
 
                 return (
                   <ListItem key={"ris" + index}>
-                    <ListItemText primary={<div><div style={{ maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white' }} id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} /><br /><br /></div>}
-                      secondary={
+                    <Accordion style={{ width: "100%" }}>
+                      <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`panel${index}-content`} id={`panel${index}-header`} >
+                        <Typography>{t("Contenuto salvato in data") + " " + throwResult.timestamp}</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+
+                        <div>
+                          <div style={{ maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white' }} id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} />
+                          <br /><br />
+                        </div>
                         <Grid container sx={{ overflow: 'scroll' }}>
                           <Grid item xs={12}>
                             <EditIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
@@ -359,7 +379,8 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                             <Box sx={{ width: '100%', borderBottom: '1px solid', borderColor: dark ? 'yellow' : 'blue' }} />
                           </Grid>
                         </Grid>
-                      } />
+                      </AccordionDetails>
+                    </Accordion>
                   </ListItem>
                 );
               }
