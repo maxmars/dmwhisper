@@ -267,6 +267,8 @@ i18n
           "Contenuto salvato in data": "Content saved on:",
           "Dungeon": "Dungeon:",
           "Mappa salvata in data": "Map saved on:",
+
+          "Modello GPT OpenAI": "OpenAI GPT Model",
         }
       },
       it: {
@@ -529,6 +531,8 @@ i18n
           "Contenuto salvato in data": "Contenuto salvato il:",
           "Dungeon": "Dungeon:",
           "Mappa salvata in data": "Mappa salvata il:",
+
+          "Modello GPT OpenAI": "Modello GPT OpenAI",
         }
       },
       es: {
@@ -790,6 +794,8 @@ i18n
           "Contenuto salvato in data": "Contenido guardado en la fecha:",
           "Dungeon": "Mazmorra:",
           "Mappa salvata in data": "Mapa guardado en la fecha:",
+
+          "Modello GPT OpenAI": "Modelo GPT OpenAI",
         },
       },
       fr: {
@@ -1051,6 +1057,8 @@ i18n
           "Contenuto salvato in data": "Contenu enregistré le:",
           "Dungeon": "Donjon:",
           "Mappa salvata in data": "Carte enregistrée le:",
+
+          "Modello GPT OpenAI": "Modèle GPT OpenAI",
         },
       },
       de: {
@@ -1312,6 +1320,8 @@ i18n
           "Contenuto salvato in data": "Inhalt gespeichert am:",
           "Dungeon": "Dungeon:",
           "Mappa salvata in data": "Karte gespeichert am:",
+
+          "Modello GPT OpenAI": "Modell GPT OpenAI",
         }
       },
       pt: {
@@ -1573,6 +1583,8 @@ i18n
           "Contenuto salvato in data": "Conteúdo salvo em:",
           "Dungeon": "Masmorra:",
           "Mappa salvata in data": "Mapa salvo em:",
+
+          "Modello GPT OpenAI": "Modelo GPT OpenAI",
         }
       },
       gr: {
@@ -1835,6 +1847,7 @@ i18n
           "Dungeon": "Μαζορέ:",
           "Mappa salvata in data": "Χάρτης αποθηκεύτηκε στις:",
 
+          "Modello GPT OpenAI": "Μοντέλο GPT OpenAI",
         }
       }
     }

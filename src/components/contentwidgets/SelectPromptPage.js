@@ -25,13 +25,17 @@ const SelectPromptPage = ({ pageContent, onCancel }) => {
     };
     const openaiInstance = new openai(configuration);
 
+    const getSelectedModel = () => {
+        return localStorage.getItem('selectedModel') || 'gpt-4o-mini';
+      };
+      
     const handleSendToChatGPT = async () => {
 
         setShowSpinner(true);
 
         try {
             const completion = await openaiInstance.chat.completions.create({
-                model: 'gpt-4o-mini',
+                model: getSelectedModel(),
                 messages: [{
                     role: 'user',
                     content: editableText + "\"" + pageContent + "\"",

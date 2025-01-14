@@ -5,7 +5,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SearchIcon from '@mui/icons-material/Search';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import DownloadIcon from '@mui/icons-material/Download';
-import { Button, Grid, List, ListItem, ListItemText, TextField, Box, AccordionSummary, AccordionDetails, Accordion } from '@mui/material';
+import { Button, Grid, List, ListItem, TextField, Box, AccordionSummary, AccordionDetails, Accordion } from '@mui/material';
 import html2pdf from 'html2pdf.js';
 import Typography from '@mui/material/Typography';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -356,7 +356,7 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                               setCurrentEditedContent(throwResult.result);
                             }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <AutoAwesomeIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
-                              showGenAiWidget({ pageContent: throwResult.result });
+                              showGenAiWidget(throwResult.result);
                             }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <ContentCopyIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                               throwCopy(index);

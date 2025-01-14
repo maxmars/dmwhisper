@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, List, ListItem, ListItemText, IconButton, Typography } from '@mui/material';
+import { TextField, Button, List, ListItem, ListItemText, IconButton, Typography, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { Delete, Edit } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-
 
 const ConfigPage = () => {
   const { t } = useTranslation();
@@ -13,12 +12,15 @@ const ConfigPage = () => {
   const [newPromptText, setNewPromptText] = useState('');
   const [editingIndex, setEditingIndex] = useState(-1);
   const [warningMessage, setWarningMessage] = useState(null);
+  const [selectedModel, setSelectedModel] = useState('gpt-4o-mini');
 
   useEffect(() => {
     const savedApiKey = localStorage.getItem('apiKey');
     const savedPrompts = localStorage.getItem('prompts');
+    const savedModel = localStorage.getItem('selectedModel');
     if (savedApiKey) setApiKey(savedApiKey);
     if (savedPrompts) setPrompts(JSON.parse(savedPrompts));
+    if (savedModel) setSelectedModel(savedModel);
   }, []);
 
   const handleAddPrompt = () => {
@@ -49,6 +51,7 @@ const ConfigPage = () => {
   const handleSave = () => {
     localStorage.setItem('apiKey', apiKey);
     localStorage.setItem('prompts', JSON.stringify(prompts));
+    localStorage.setItem('selectedModel', selectedModel);
     setWarningMessage(t("Impostazioni salvate!"));
   };
 
@@ -72,6 +75,18 @@ const ConfigPage = () => {
         fullWidth
         margin="normal"
       />
+      <FormControl fullWidth margin="normal">
+        <InputLabel>{t("Modello GPT OpenAI")}</InputLabel>
+        <Select
+          value={selectedModel}
+          onChange={(e) => setSelectedModel(e.target.value)}
+        >
+          <MenuItem value="gpt-4o">gpt-4o</MenuItem>
+          <MenuItem value="gpt-4o-mini">gpt-4o-mini</MenuItem>
+          <MenuItem value="o1">o1</MenuItem>
+          <MenuItem value="o1-mini">o1-mini</MenuItem>
+        </Select>
+      </FormControl>
       <TextField
         label={t("Nome Prompt")}
         value={newPromptName}

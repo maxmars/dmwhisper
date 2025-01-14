@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    14 Gen 2025
+    -----------
+    - 1.60.0 You can now choose OpenAI model in the settings page.
+
     06 Gen 2025
     -----------
     - 1.59.0 More QoL improvements for the "saved results page": saved items are now collapsible and collapsed by default.
