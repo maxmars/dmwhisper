@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, List, ListItemButton, ListItemText, Typography, Grid } from '@mui/material';
+import { TextField, Button, List, ListItemButton, ListItemText, Typography, Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import openai from 'openai';
 import { addThrow } from '../../store/slices/throws';
@@ -12,6 +12,7 @@ import { useTranslation } from 'react-i18next';
 const SelectPromptPage = ({ pageContent, onCancel }) => {
     const [prompts, setPrompts] = useState([]);
     const [selectedPrompt, setSelectedPrompt] = useState(null);
+    const [selectedModel, setSelectedModel] = useState('gpt-4o-mini');
     const [editableText, setEditableText] = useState('');
     const [genaiAnwser, setGenaiAnwser] = useState(null);
     const [showSpinner, setShowSpinner] = useState(false);
@@ -25,17 +26,13 @@ const SelectPromptPage = ({ pageContent, onCancel }) => {
     };
     const openaiInstance = new openai(configuration);
 
-    const getSelectedModel = () => {
-        return localStorage.getItem('selectedModel') || 'gpt-4o-mini';
-      };
-      
     const handleSendToChatGPT = async () => {
 
         setShowSpinner(true);
 
         try {
             const completion = await openaiInstance.chat.completions.create({
-                model: getSelectedModel(),
+                model: selectedModel,
                 messages: [{
                     role: 'user',
                     content: editableText + "\"" + pageContent + "\"",
@@ -61,6 +58,8 @@ const SelectPromptPage = ({ pageContent, onCancel }) => {
     useEffect(() => {
         const savedPrompts = localStorage.getItem('prompts');
         if (savedPrompts) setPrompts(JSON.parse(savedPrompts));
+        const savedModel = localStorage.getItem('selectedModel');
+        if (savedModel) setSelectedModel(savedModel);
     }, []);
 
     const handleSelectPrompt = (prompt) => {
@@ -114,6 +113,18 @@ const SelectPromptPage = ({ pageContent, onCancel }) => {
             <div style={{ padding: 20 }}>
                 <Typography variant="h5">{t("Seleziona un Prompt da inviare a ChatGPT insieme al contenuto della pagina")}</Typography>
                 <Typography>{t("Nota: devi avere già configurato una Api Key nelle Impostazioni. Le chiamate API di ChatGPT sono a pagamento e dovrai avere credito sufficiente per queste chiamate.")}</Typography>
+                <FormControl fullWidth margin="normal">
+                    <InputLabel>{t("Modello GPT OpenAI")}</InputLabel>
+                    <Select
+                        value={selectedModel}
+                        onChange={(e) => setSelectedModel(e.target.value)}
+                    >
+                        <MenuItem value="gpt-4o">gpt-4o</MenuItem>
+                        <MenuItem value="gpt-4o-mini">gpt-4o-mini</MenuItem>
+                        <MenuItem value="o1">o1</MenuItem>
+                        <MenuItem value="o1-mini">o1-mini</MenuItem>
+                    </Select>
+                </FormControl>
                 <List>
                     {prompts.map((prompt, index) => (
                         <ListItemButton key={index} onClick={() => handleSelectPrompt(prompt)}>

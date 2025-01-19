@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    19 Gen 2025
+    -----------
+    - 1.61.0 You can now choose an OpenAI model before sending a prompt, overriding the default model that is saved in the settings page.
+
     14 Gen 2025
     -----------
     - 1.60.0 You can now choose OpenAI model in the settings page.
