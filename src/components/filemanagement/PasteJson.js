@@ -1,4 +1,4 @@
-import { Grid, Button, TextField } from '@mui/material';
+import { Grid2 as Grid, Button, TextField } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { setContent, initialState, clearTabPath } from '../../store/slices/content';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -31,11 +31,11 @@ const PasteJson = (props) => {
 
   return (
     <Grid container >
-      <Grid item xs={12}>
+      <Grid size={12}>
         <Button startIcon={<ArrowBackIosNewIcon />} onClick={props.returnToMenu} style={{ width: '100%' }} variant="contained" color="primary">{t("Back")}</Button>
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12}>
         <TextField fullWidth
           id="new-tables"
           label={t("Paste here a JSON string in DMWhisper format")}
@@ -44,16 +44,16 @@ const PasteJson = (props) => {
           placeholder="JSON string here"
         />
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12}>
         <Typography>{t("Warning: ALL existing content will be overwritten!")}</Typography>
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12}>
         <Button onClick={setTables} style={{ width: '100%' }} variant="contained" color="primary">{t("Parse content")}</Button>
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12}>
         <Typography>{t("Tip: importing an empty content will reset current content to the initial values.")}</Typography>
       </Grid>
     </Grid>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Grid, Button, Typography } from '@mui/material';
+import { Grid2 as Grid, Button, Typography } from '@mui/material';
 import TablesEdit from './tables/TablesEdit';
 import SetpiecesEdit from './maps/setpieces/SetpiecesEdit';
 import TrapSetsEdit from './dungeons/sets/traps/TrapSetsEdit';
@@ -28,31 +28,31 @@ const AuthoringMenu = () => {
     case 'menu':
       return (
         <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'scroll', height: '80vh' }}>
-          <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Grid size={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button sx={{ width: '90%' }} startIcon={<ListIcon />} onClick={() => setPageMode('menuedit')} variant="contained" color="primary">{t("Edit content tree")}</Button>
           </Grid>
-          <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Grid size={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button sx={{ width: '90%' }} startIcon={<TableChartIcon />} onClick={() => setPageMode('tablesedit')} variant="contained" color="primary">{t("Edit content tables")}</Button>
           </Grid>
-          <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Grid size={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button sx={{ width: '90%' }} startIcon={<MapIcon />} onClick={() => setPageMode('setpiecesedit')} variant="contained" color="primary">{t("Edit maps contents")}</Button>
           </Grid>
-          <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Grid size={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Typography sx={{ width: '90%' }} align='center'>{t("Dungeons")}</Typography>
           </Grid>
-          <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Grid size={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button sx={{ width: '90%' }} startIcon={<AccountTreeIcon />} onClick={() => setPageMode('dungeonsetpiecesedit')} variant="contained" color="primary">{t("Edit dungeon rooms")}</Button>
           </Grid>
-          <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Grid size={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button sx={{ width: '90%' }} startIcon={<AccountTreeIcon />} onClick={() => setPageMode('dungeontrapsedit')} variant="contained" color="primary">{t("Edit traps")}</Button>
           </Grid>
-          <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Grid size={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button sx={{ width: '90%' }} startIcon={<AccountTreeIcon />} onClick={() => setPageMode('dungeonmonstersedit')} variant="contained" color="primary">{t("Edit monsters")}</Button>
           </Grid>
-          <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Grid size={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button sx={{ width: '90%' }} startIcon={<AccountTreeIcon />} onClick={() => setPageMode('dungeontreasuresedit')} variant="contained" color="primary">{t("Edit treasures")}</Button>
           </Grid>
-          <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Grid size={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button sx={{ width: '90%' }} startIcon={<AccountTreeIcon />} onClick={() => setPageMode('dungeonpuzzlesedit')} variant="contained" color="primary">{t("Edit puzzles")}</Button>
           </Grid>
         </Grid>

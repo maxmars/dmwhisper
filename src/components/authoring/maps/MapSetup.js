@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import { Typography } from '@mui/material';
 import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 
@@ -25,10 +25,10 @@ export default function MapSetup(props) {
 
   return (
     <Grid container sx={{ width: '100%' }}>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}><Typography>{t("Map data")}</Typography></Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12}><Typography>{t("Map data")}</Typography></Grid>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12} sx={{ display: 'flex', alignItems: 'center' }}>
         <Autocomplete
           disablePortal
           id="setpiecesIDs"
@@ -41,7 +41,7 @@ export default function MapSetup(props) {
           renderInput={(params) => <TextField {...params} label={t("Set piece id") + ".."} />}
         />
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid size={12}>&nbsp;</Grid>
       <FormControl>
         <FormLabel id="demo-controlled-radio-buttons-group">{t("Density")}</FormLabel>
         <RadioGroup
@@ -55,7 +55,7 @@ export default function MapSetup(props) {
           <FormControlLabel value="3" control={<Radio />} label={t("High")} />
         </RadioGroup>
       </FormControl>
-      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid size={12}>&nbsp;</Grid>
       <FormControl>
         <FormLabel id="demo-controlled-radio-buttons-group">{t("Grid size")}</FormLabel>
         <RadioGroup

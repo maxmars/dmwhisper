@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CircularProgress, Typography, Box } from '@mui/material';
-import { Grid, TextField, Button } from '@mui/material';
+import { Grid2 as Grid, TextField, Button } from '@mui/material';
 import { AddCircleOutline, RemoveCircleOutline } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 
@@ -148,8 +148,8 @@ function CounterComponent(props) {
                         justifyContent: "center",
                         alignItems: "center"
                     }}>
-                    <Grid item xs={12} sx={{ width: '100%' }} >&nbsp;</Grid>
-                    <Grid item xs={12} sx={{ width: '95%' }} >
+                    <Grid size={12} sx={{ width: '100%' }} >&nbsp;</Grid>
+                    <Grid size={12} sx={{ width: '95%' }} >
                         <TextField
                             sx={{ width: '100%' }}
                             label={t("Counter Label")}
@@ -157,7 +157,7 @@ function CounterComponent(props) {
                             onChange={handleCounterNameChange}
                         />
                     </Grid>
-                    <Grid item xs={12} sx={{ width: '95%' }} >
+                    <Grid size={12} sx={{ width: '95%' }} >
                         <TextField
                             sx={{ width: '100%' }}
                             label={t("Max Counter Value")}
@@ -167,7 +167,7 @@ function CounterComponent(props) {
                             onChange={handleMaxCounterChange}
                         />
                     </Grid>
-                    <Grid item xs={12} sx={{ width: '95%' }} >
+                    <Grid size={12} sx={{ width: '95%' }} >
                         <TextField
                             sx={{ width: '100%' }}
                             label={t("Initial Value")}
@@ -177,7 +177,7 @@ function CounterComponent(props) {
                             onChange={handleInitialValueChange}
                         />
                     </Grid>
-                    <Grid item xs={12} sx={{ width: '95%' }} >
+                    <Grid size={12} sx={{ width: '95%' }} >
                         <Button sx={{ width: '100%' }} variant="contained" onClick={handleUse}>
                         {t("Utilize")}
                         </Button>
@@ -192,27 +192,27 @@ function CounterComponent(props) {
                         alignItems: "center",
                         width: '100%'
                     }}>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                         <Typography>{counterName}</Typography>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                         <CircularProgressWithLabel value={(currentValue / maxCounter) * 100} sizePercent={30} thickness={6} />
                     </Grid>
-                    <Grid item xs={12} container spacing={1} sx={{
+                    <Grid size={12} container spacing={1} sx={{
                         justifyContent: "center"
                     }}>
-                        <Grid item>
+                        <Grid>
                             <Button variant="contained" onClick={handleDecrement}>
                                 <RemoveCircleOutline />
                             </Button>
                         </Grid>
-                        <Grid item>
+                        <Grid>
                             <Button variant="contained" onClick={handleIncrement}>
                                 <AddCircleOutline />
                             </Button>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid size={12}>
                         <Button variant="contained" onClick={handleModify}>
                         {t("Modify")}
                         </Button>

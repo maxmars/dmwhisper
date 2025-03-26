@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { FormControl, InputLabel, MenuItem, Select, Button, Grid, Typography, TextField, Alert } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, Button, Grid2 as Grid, Typography, TextField, Alert } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import CheckIcon from '@mui/icons-material/Check';
@@ -225,18 +225,17 @@ const DungeonSetpieceEdit = (props) => {
     return (
       <Grid container >
         <Grid
-          item
-          xs={12}
           style={{ display: 'flex', justifyContent: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
             color: theme.palette.warning.contrastText
-          }}>
+          }}
+          size={12}>
           <Typography>{t("Edited setpiece:")} {props.itemId}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <TextField id="setpiece-set-id"
             label={t("Setpiece Set ID")}
             variant="outlined"
@@ -245,7 +244,7 @@ const DungeonSetpieceEdit = (props) => {
             onChange={(event) => setEditedSetpieceId(event.target.value)}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField id="setpiece-set-description"
             label={t("Setpiece Set Description")}
             variant="outlined"
@@ -253,39 +252,40 @@ const DungeonSetpieceEdit = (props) => {
             value={editedSetpieceDescription ? editedSetpieceDescription : ''}
             onChange={(event) => setEditedSetpieceDescription(event.target.value)} />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         {alert ?
           <>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <Alert severity='error' onClose={() => setAlert(null)}>
                 {alert}
               </Alert>
             </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid size={12}>&nbsp;</Grid>
           </>
           :
           null}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Button onClick={updateHeader} startIcon={<SaveAltIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Update header info")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <Grid
-          item
-          xs={12}
           style={{ display: 'flex', justifyContent: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
             color: theme.palette.warning.contrastText
-          }}>
+          }}
+          size={12}>
           <Typography>{t("List of RNG values")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Typography>{t("Click on the bin to delete values.")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid
+          style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}
+          size={12}>
           <DataGrid       
             sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}     
             onRowClick={(params) => editRNGValues(params.row.id)}
@@ -295,20 +295,19 @@ const DungeonSetpieceEdit = (props) => {
             paginationModel={{ page: 0, pageSize: 100 }}
           />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <Grid
-          item
-          xs={12}
           style={{ display: 'flex', justifyContent: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
             color: theme.palette.warning.contrastText
-          }}>
+          }}
+          size={12}>
           <Typography>{t("Add a new RNG:")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <FormControl fullWidth>
             <InputLabel id="dungeon-position-select-label">{t("Position in dungeon")}</InputLabel>
             <Select
@@ -325,8 +324,8 @@ const DungeonSetpieceEdit = (props) => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <FormControl fullWidth>
             <InputLabel id="appearance-rate-select-label">{t("Appearance Rate")}</InputLabel>
             <Select
@@ -343,8 +342,8 @@ const DungeonSetpieceEdit = (props) => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <TextField
             onChange={(event) => setNewLabel(event.target.value)}
             value={newLabel ? newLabel : ''}
@@ -353,7 +352,7 @@ const DungeonSetpieceEdit = (props) => {
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField
             type="number"
             onChange={(event) => setNewMaxOccurrences(event.target.value)}
@@ -363,7 +362,7 @@ const DungeonSetpieceEdit = (props) => {
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <CKEditor
           editor={Editor}
           data={currentMenuContent}
@@ -387,9 +386,9 @@ const DungeonSetpieceEdit = (props) => {
             ckEditorThemeSync();
           }}
         />
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
+        <Grid size={12}>
           <TablesChooser
             tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => {
               return {
@@ -405,26 +404,26 @@ const DungeonSetpieceEdit = (props) => {
             }}
           />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         {itemAlert ?
           <>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <Alert severity='error' onClose={() => setItemAlert(null)}>
                 {itemAlert}
               </Alert>
             </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid size={12}>&nbsp;</Grid>
           </>
           :
           null}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Button onClick={addRng} startIcon={<AddIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Add new RNG")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Button onClick={props.endEditing} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to setpieces list")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
       </Grid >
     );
   } else {
@@ -433,31 +432,34 @@ const DungeonSetpieceEdit = (props) => {
 
     return (
       <Grid container >
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <Grid
-          item
-          xs={12}
           style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
             color: theme.palette.warning.contrastText
-          }}>
+          }}
+          size={12}>
           <Typography>{t("Warning! RNG is about to be deleted")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Typography>{t("Do you really want to delete RNG")} {itemToDelete} ({result})?</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          size={6}>
           <Button onClick={() => deleteRng(itemToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
         </Grid>
-        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Grid
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          size={6}>
           <Button onClick={() => setItemToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
       </Grid >
     );
   }

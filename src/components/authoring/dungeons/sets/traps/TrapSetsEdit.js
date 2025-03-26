@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Grid, Button } from '@mui/material';
+import { Grid2 as Grid, Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import TrapSetsList from './TrapSetsList';
 import TrapSetEdit from './TrapSetEdit';
@@ -32,12 +32,12 @@ const TrapSetsEdit = (props) => {
   
   return (
     <Grid container sx={{height: "100%"}} >
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12}>
         <Button startIcon={<ArrowBackIosNewIcon />} onClick={props.returnToMenu} style={{ width: '100%' }} variant="contained" color="primary">{t("Main menu")}</Button>
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12}>
         {
           pageMode === trapsListPageMode ?
           <TrapSetsList selectItem={selectTrapSet} />
@@ -45,7 +45,7 @@ const TrapSetsEdit = (props) => {
           <TrapSetEdit itemId={pageMode} endEditing={setTrapSetsListMode} />
         }
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid size={12}>&nbsp;</Grid>
     </Grid>
   );
 };

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Grid from '@mui/material/Grid'
+import { Grid2 as Grid } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -304,10 +304,10 @@ export default function Table(props) {
       try {
         const items = listedValues.map(item => {
           return <>
-            <Grid item xs={3} key={"dice" + item.min + "-" + item.max} style={{ display: "flex", justifyContent: "flex-end" }} >
+           <Grid size={3} key={"dice" + item.min + "-" + item.max} style={{ display: "flex", justifyContent: "flex-end" }} >
               <div style={{ marginRight: "1em" }}>{item.min}-{item.max}</div>
             </Grid>
-            <Grid item xs={9} key={"result" + item.min + "-" + item.max}>
+           <Grid size={9} key={"result" + item.min + "-" + item.max}>
               <div>{item.result ? item.result : item.table}</div>
             </Grid>
           </>
@@ -316,10 +316,9 @@ export default function Table(props) {
         return (
           <div id='tabletopdiv'>
             <Grid id="listedValuesDiv" container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-              <Grid item xs={12}>&nbsp;</Grid>
+              <Grid size={12}>&nbsp;</Grid>
               <Grid
-                item
-                xs={3}
+                size={3}
                 style={{ display: "flex", justifyContent: "flex-end" }}
                 sx={{
                   bgcolor: theme.palette.warning.main,
@@ -328,8 +327,7 @@ export default function Table(props) {
                 <div style={{ marginRight: "1em" }}>{t("Roll")}</div>
               </Grid>
               <Grid
-                item
-                xs={9}
+                size={9}
                 sx={{
                   bgcolor: theme.palette.warning.main,
                   color: theme.palette.warning.contrastText
@@ -337,17 +335,17 @@ export default function Table(props) {
                 <div>{t("Description")}</div>
               </Grid>
               {items}
-              <Grid item xs={12}>&nbsp;</Grid>
+              <Grid size={12}>&nbsp;</Grid>
             </Grid>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-              <Grid item xs={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+              <Grid size={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                 <Button onClick={shuffleValues} startIcon={<ShuffleIcon />} variant='contained'>{t("Shuffle")}</Button>
                 <Button onClick={saveShuffledValues} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
               </Grid>
-              <Grid item xs={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+              <Grid size={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                 <Button onClick={() => setMode("rockandroll")} startIcon={<CasinoIcon />} variant='contained'>{t("Return to rolling mode")}</Button>
               </Grid>
-              <Grid item xs={12}>&nbsp;</Grid>
+              <Grid size={12}>&nbsp;</Grid>
             </Grid >
           </div>
         );

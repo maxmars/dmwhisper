@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import DungeonCanvas from './DungeonCanvas.js';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Typography } from '@mui/material';
@@ -155,7 +155,7 @@ export default function DungeonComponent(props) {
     try {
         return (
             <Grid container >
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <DungeonCanvas
                         style={{ width: '100%' }}
                         dungeonRooms={props.dungeonRooms}
@@ -163,10 +163,10 @@ export default function DungeonComponent(props) {
                         onRoomSelect={onRoomSelect}
                         onInfoClick={onInfoClick} />
                 </Grid>
-                <Grid item xs={12} style={{ display: 'flex', justifyContent: 'left' }}>
+                <Grid size={12} style={{ display: 'flex', justifyContent: 'left' }}>
                     <Typography>{props.dungeonRooms && props.dungeonRooms[selectedRoom] ? props.dungeonRooms[selectedRoom].description : t("No room selected.")}</Typography>
                 </Grid>
-                <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+                <Grid size={12} style={{ display: 'flex', justifyContent: 'center' }}>
                     {getRoomInfoDialog()}
                 </Grid>
             </Grid>

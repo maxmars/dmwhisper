@@ -13,7 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import HomeIcon from '@mui/icons-material/Home';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
@@ -515,33 +515,33 @@ export default function MenuEdit(props) {
 
     return (
         <Grid container sx={{ height: "100%" }} >
-            <Grid item xs={12}>
+            <Grid size={12}>
                 <Button startIcon={<ArrowBackIosNewIcon />} sx={{ margin: "5px", width: "95%" }} variant="contained" color="primary" onClick={props.returnToMenu}>{t("Main menu")}</Button>
             </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={1}>
+            <Grid size={12}>&nbsp;</Grid>
+           <Grid size={1}>
                 <IconButton style={{ marginRight: "7px" }} variant="contained" color="primary" onClick={() => backOneLevelCheck()}><ArrowBackIosNewIcon /></IconButton>
             </Grid>
-            <Grid item xs={1}>
+           <Grid size={1}>
                 <IconButton style={{ marginLeft: "7px" }} variant="contained" color="primary" onClick={() => backToRootMenuCheck()}><HomeIcon /></IconButton>
             </Grid>
-            <Grid item xs={10}>
+           <Grid size={10}>
                 <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{contentName}</Typography>
             </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <Grid size={12}>&nbsp;</Grid>
+           <Grid size={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Button startIcon={<ContentCutIcon />} disabled={path === ""} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => cutContent(path)}>{t("Cut")}</Button>
             </Grid>
-            <Grid item xs={1}>&nbsp;</Grid>
-            <Grid item xs={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+           <Grid size={1}>&nbsp;</Grid>
+           <Grid size={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Button startIcon={<ContentCopyIcon />} disabled={path === ""} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => copyContent(path)}>{t("Copy")}</Button>
             </Grid>
-            <Grid item xs={1}>&nbsp;</Grid>
-            <Grid item xs={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+           <Grid size={1}>&nbsp;</Grid>
+           <Grid size={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Button startIcon={<ContentPasteIcon />} disabled={wholeContent.clipboardAction === null} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => pasteContent(wholeContent, path)}>{t("Paste")}</Button>
             </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={12}>
+            <Grid size={12}>&nbsp;</Grid>
+            <Grid size={12}>
                 <Accordion expanded={headerInfoOpen} onChange={(event, newExpanded) => setHeaderInfoOpen(newExpanded)}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
@@ -551,10 +551,10 @@ export default function MenuEdit(props) {
                         <Typography>{t("Menu header")}</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Grid container>
-                            <Grid item xs={12}>&nbsp;</Grid>
-                            <Grid item xs={12}><Typography>{t("Content ID")}</Typography></Grid>
-                            <Grid item xs={12}>
+                        <Grid >
+                            <Grid size={12}>&nbsp;</Grid>
+                            <Grid size={12}><Typography>{t("Content ID")}</Typography></Grid>
+                            <Grid size={12}>
                                 {
                                     path.length > 0 ?
                                         <TextField
@@ -576,9 +576,9 @@ export default function MenuEdit(props) {
                                             sx={{ width: "100%" }} />
                                 }
                             </Grid>
-                            <Grid item xs={12}>&nbsp;</Grid>
-                            <Grid item xs={12}><Typography>{t("Content Label")}</Typography></Grid>
-                            <Grid item xs={12}>
+                            <Grid size={12}>&nbsp;</Grid>
+                            <Grid size={12}><Typography>{t("Content Label")}</Typography></Grid>
+                            <Grid size={12}>
                                 {
                                     path.length > 0 ?
                                         <TextField
@@ -600,9 +600,9 @@ export default function MenuEdit(props) {
                                             sx={{ width: "100%" }} />
                                 }
                             </Grid>
-                            <Grid item xs={12}>&nbsp;</Grid>
-                            <Grid item xs={12}><Typography>{t("Content Type")}</Typography></Grid>
-                            <Grid item xs={12}>
+                            <Grid size={12}>&nbsp;</Grid>
+                            <Grid size={12}><Typography>{t("Content Type")}</Typography></Grid>
+                            <Grid size={12}>
                                 <Select
                                     labelId="current-content-type-select-label"
                                     id="current-content-type-select"
@@ -622,9 +622,9 @@ export default function MenuEdit(props) {
                             {
                                 currentContentType && (currentContentType === "table" || currentContentType === "information") ?
                                     <>
-                                        <Grid item xs={12}>&nbsp;</Grid>
-                                        <Grid item xs={12}><Typography>{t("Text content")}</Typography></Grid>
-                                        <Grid item xs={12}>
+                                        <Grid size={12}>&nbsp;</Grid>
+                                        <Grid size={12}><Typography>{t("Text content")}</Typography></Grid>
+                                        <Grid size={12}>
                                             <CKEditor
                                                 editor={Editor}
                                                 data={currentMenuContent}
@@ -652,9 +652,9 @@ export default function MenuEdit(props) {
                                         {
                                             currentContentType === "table" ?
                                                 <>
-                                                    <Grid item xs={12}>&nbsp;</Grid>
-                                                    <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
-                                                    <Grid item xs={12}>
+                                                    <Grid size={12}>&nbsp;</Grid>
+                                                    <Grid size={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
+                                                    <Grid size={12}>
                                                         <TablesChooser
                                                             tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => { return { label: item, id: uuidv4() } }) : null}
                                                             onTablesChange={(tables) => {
@@ -672,7 +672,7 @@ export default function MenuEdit(props) {
                             {
                                 currentContentType && (currentContentType === "map") ?
                                     <>
-                                        <Grid item xs={12}>&nbsp;</Grid>
+                                        <Grid size={12}>&nbsp;</Grid>
                                         <MapSetup
                                             setpieceId={currentMenuSetpiece}
                                             density={currentMenuDensity}
@@ -696,7 +696,7 @@ export default function MenuEdit(props) {
                             {
                                 currentContentType && (currentContentType === "dungeon") ?
                                     <>
-                                        <Grid item xs={12}>&nbsp;</Grid>
+                                        <Grid size={12}>&nbsp;</Grid>
                                         <DungeonSetup
                                             setpieceId={currentMenuDungeonSetpiece}
                                             monsterSetId={currentMenuDungeonMonsterSet}
@@ -732,7 +732,7 @@ export default function MenuEdit(props) {
                                     </> : null
 
                             }
-                            <Grid item xs={12}>&nbsp;</Grid>
+                            <Grid size={12}>&nbsp;</Grid>
                             <Button disabled={!contentMetaData.type} startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => updateMenuHeader()}>{t("Save header data")}</Button>
                         </Grid>
                     </AccordionDetails>
@@ -742,8 +742,8 @@ export default function MenuEdit(props) {
             {
                 !currentContentType || currentContentType === "menu" ?
                     <>
-                        <Grid item xs={12}>&nbsp;</Grid>
-                        <Grid item xs={12} style={{ height: (content ? (content.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>
+                        <Grid size={12}>&nbsp;</Grid>
+                        <Grid size={12} style={{ height: (content ? (content.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>
                             <DataGrid
                                 sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
                                 hideFooter
@@ -755,7 +755,7 @@ export default function MenuEdit(props) {
                         </Grid>
                     </> : null
             }
-            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid size={12}>&nbsp;</Grid>
             {
                 currentContentType === "menu" ?
                     <Accordion>
@@ -767,9 +767,9 @@ export default function MenuEdit(props) {
                             <Typography>{t("Add a new sub menu")}</Typography>
                         </AccordionSummary>
                         <AccordionDetails>
-                            <Grid container>
-                                <Grid item xs={12}><Typography>{t("Content ID")}</Typography></Grid>
-                                <Grid item xs={12}>
+                            <Grid >
+                                <Grid size={12}><Typography>{t("Content ID")}</Typography></Grid>
+                                <Grid size={12}>
                                     <TextField
                                         value={newContentId}
                                         onChange={(event) => setNewContentId(event.target.value.trim().replace(/\./g, "-"))}
@@ -777,9 +777,9 @@ export default function MenuEdit(props) {
                                         variant="outlined"
                                         sx={{ width: "100%" }} />
                                 </Grid>
-                                <Grid item xs={12}>&nbsp;</Grid>
-                                <Grid item xs={12}><Typography>{t("Content Label")}</Typography></Grid>
-                                <Grid item xs={12}>
+                                <Grid size={12}>&nbsp;</Grid>
+                                <Grid size={12}><Typography>{t("Content Label")}</Typography></Grid>
+                                <Grid size={12}>
                                     <TextField
                                         value={newContentLabel}
                                         onChange={(event) => setNewContentLabel(event.target.value)}
@@ -787,9 +787,9 @@ export default function MenuEdit(props) {
                                         variant="outlined"
                                         sx={{ width: "100%" }} />
                                 </Grid>
-                                <Grid item xs={12}>&nbsp;</Grid>
-                                <Grid item xs={12}><Typography>{t("Content Type")}</Typography></Grid>
-                                <Grid item xs={12}>
+                                <Grid size={12}>&nbsp;</Grid>
+                                <Grid size={12}><Typography>{t("Content Type")}</Typography></Grid>
+                                <Grid size={12}>
                                     <Select
                                         labelId="new-content-type-select-label"
                                         id="new-content-type-select"
@@ -805,9 +805,9 @@ export default function MenuEdit(props) {
                                         <MenuItem value="dungeon">{t("Dungeon")}</MenuItem>
                                     </Select>
                                 </Grid>
-                                <Grid item xs={12}>&nbsp;</Grid>
+                                <Grid size={12}>&nbsp;</Grid>
                                 <Button startIcon={<SaveAltIcon />} style={{ width: "100%" }} variant="contained" color="primary" onClick={() => addNewSubmenu()}>{t("Add Sub menu")}</Button>
-                                <Grid item xs={12}>&nbsp;</Grid>
+                                <Grid size={12}>&nbsp;</Grid>
                             </Grid>
                         </AccordionDetails>
                     </Accordion> : null

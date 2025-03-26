@@ -9,7 +9,7 @@ import { useMemo } from 'react';
 import { getDungeonRooms, layoutRooms } from '../../../snippets/dungeons/DungeonLib.js';
 import DungeonComponent from './DungeonComponent.js';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { setDungeonExploreDefaults, setLastTableContent } from '../../../store/slices/content.js';
@@ -307,10 +307,10 @@ export default function DungeonExplore(props) {
     const getDungeonSetup = () => {
         return (
             <Grid container sx={{ width: '100%' }}>
-                <Grid item xs={12}>&nbsp;</Grid>
-                <Grid item xs={12}><Typography>{t("Dungeon data")}</Typography></Grid>
-                <Grid item xs={12}>&nbsp;</Grid>
-                <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+                <Grid size={12}>&nbsp;</Grid>
+                <Grid size={12}><Typography>{t("Dungeon data")}</Typography></Grid>
+                <Grid size={12}>&nbsp;</Grid>
+                <Grid size={12} sx={{ display: 'flex', alignItems: 'center' }}>
                     <Autocomplete
                         disablePortal
                         id="setpiecesIDs"
@@ -327,8 +327,8 @@ export default function DungeonExplore(props) {
                         renderInput={(params) => <TextField {...params} label={t("Dungeon set piece id") + ".."} />}
                     />
                 </Grid>
-                <Grid item xs={12}>&nbsp;</Grid>
-                <Grid item xs={12}>
+                <Grid size={12}>&nbsp;</Grid>
+                <Grid size={12}>
                     <TextField
                         type="number"
                         onChange={(event) => {
@@ -344,8 +344,8 @@ export default function DungeonExplore(props) {
                         variant="outlined"
                         sx={{ width: "100%" }} />
                 </Grid>
-                <Grid item xs={12}>&nbsp;</Grid>
-                <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+                <Grid size={12}>&nbsp;</Grid>
+                <Grid size={12} sx={{ display: 'flex', alignItems: 'center' }}>
                     <Autocomplete
                         disablePortal
                         id="monstersIDs"
@@ -362,8 +362,8 @@ export default function DungeonExplore(props) {
                         renderInput={(params) => <TextField {...params} label={t("Dungeon monster set id") + ".."} />}
                     />
                 </Grid>
-                <Grid item xs={12}>&nbsp;</Grid>
-                <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+                <Grid size={12}>&nbsp;</Grid>
+                <Grid size={12} sx={{ display: 'flex', alignItems: 'center' }}>
                     <Autocomplete
                         disablePortal
                         id="treasuresIDs"
@@ -380,8 +380,8 @@ export default function DungeonExplore(props) {
                         renderInput={(params) => <TextField {...params} label={t("Dungeon treasure set id") + ".."} />}
                     />
                 </Grid>
-                <Grid item xs={12}>&nbsp;</Grid>
-                <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+                <Grid size={12}>&nbsp;</Grid>
+                <Grid size={12} sx={{ display: 'flex', alignItems: 'center' }}>
                     <Autocomplete
                         disablePortal
                         id="trapsIDs"
@@ -398,8 +398,8 @@ export default function DungeonExplore(props) {
                         renderInput={(params) => <TextField {...params} label={t("Dungeon trap set id") + ".."} />}
                     />
                 </Grid>
-                <Grid item xs={12}>&nbsp;</Grid>
-                <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+                <Grid size={12}>&nbsp;</Grid>
+                <Grid size={12} sx={{ display: 'flex', alignItems: 'center' }}>
                     <Autocomplete
                         disablePortal
                         id="puzzlesIDs"
@@ -416,8 +416,8 @@ export default function DungeonExplore(props) {
                         renderInput={(params) => <TextField {...params} label={t("Dungeon puzzle set id") + ".."} />}
                     />
                 </Grid>
-                <Grid item xs={12}>&nbsp;</Grid>
-                <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+                <Grid size={12}>&nbsp;</Grid>
+                <Grid size={12} sx={{ display: 'flex', alignItems: 'center' }}>
                     <Button disabled={numberOfRooms && dungeonSetpiece && dungeonTrapSet && dungeonPuzzleSet && dungeonMonsterSet && dungeonTreasureSet ? false : true}
                         variant="contained" onClick={() => {
                             contentPersist();
@@ -436,20 +436,20 @@ export default function DungeonExplore(props) {
 
         return (
             <Grid container >
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <DungeonComponent
                         style={{ width: '90%' }}
                         dungeonRooms={dungeonRooms} />
                 </Grid>
-                <Grid item xs={12} style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
+                <Grid size={12} style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
                     <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
                     <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <Button onClick={() => setPageMode("setup")} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to dungeon setup")}</Button>
                 </Grid>
-                <Grid item xs={12}>&nbsp;</Grid>
-                <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', verticalAlign: 'center' }}>
+                <Grid size={12}>&nbsp;</Grid>
+                <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', verticalAlign: 'center' }}>
                     <Button sx={{ width: '90%' }} variant="outlined" onClick={() => window.history.back()}>{t("Back")}</Button>
                 </Grid>
             </Grid>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTheme } from '@mui/material/styles';
@@ -243,8 +243,7 @@ export default function SetpieceEdit(props) {
     return (
       <Grid container >
         <Grid
-          item
-          xs={12}
+          size={12}
           style={{ display: 'flex', justifyContent: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
@@ -252,9 +251,9 @@ export default function SetpieceEdit(props) {
           }}>
           <Typography>{t("Edited setpiece:")} {props.setpieceId}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <TextField id="setpiece-id"
             label={t("Set piece ID")}
             variant="outlined"
@@ -263,7 +262,7 @@ export default function SetpieceEdit(props) {
             onChange={(event) => setEditedSetpieceId(event.target.value)}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField id="setpiece-description"
             label={t("Set piece Description")}
             variant="outlined"
@@ -271,26 +270,25 @@ export default function SetpieceEdit(props) {
             value={editedSetpieceDescription ? editedSetpieceDescription : ''}
             onChange={(event) => setEditedSetpieceDescription(event.target.value)} />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         {alert ?
           <>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <Alert severity='error' onClose={() => setAlert(null)}>
                 {alert}
               </Alert>
             </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid size={12}>&nbsp;</Grid>
           </>
           :
           null}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Button onClick={updateHeader} startIcon={<SaveAltIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Update header info")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <Grid
-          item
-          xs={12}
+          size={12}
           style={{ display: 'flex', justifyContent: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
@@ -298,12 +296,12 @@ export default function SetpieceEdit(props) {
           }}>
           <Typography>{t("List of RNG values")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Typography>{t("Click on the bin to delete values.")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12} style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
           <DataGrid
             sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
             onRowClick={(params) => editRNGValues(params.row.id)}
@@ -313,11 +311,10 @@ export default function SetpieceEdit(props) {
             paginationModel={{ page: 0, pageSize: 100 }}
           />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <Grid
-          item
-          xs={12}
+          size={12}
           style={{ display: 'flex', justifyContent: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
@@ -325,8 +322,8 @@ export default function SetpieceEdit(props) {
           }}>
           <Typography>{t("Add a new RNG:")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <TextField
             onChange={(event) => setNewMin(event.target.value)}
             value={newMin ? newMin : ''}
@@ -336,7 +333,7 @@ export default function SetpieceEdit(props) {
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField
             onChange={(event) => setNewMax(event.target.value)}
             value={newMax ? newMax : ''}
@@ -346,8 +343,8 @@ export default function SetpieceEdit(props) {
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <TextField
             onChange={(event) => setNewResult(event.target.value)}
             value={newResult ? newResult : ''}
@@ -356,7 +353,7 @@ export default function SetpieceEdit(props) {
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <CKEditor
           editor={Editor}
           data={currentMenuContent}
@@ -380,9 +377,9 @@ export default function SetpieceEdit(props) {
             ckEditorThemeSync();
           }}
         />
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
+        <Grid size={12}>
           <TablesChooser
             tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => {
               return {
@@ -398,26 +395,26 @@ export default function SetpieceEdit(props) {
             }}
           />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         {rngAlert ?
           <>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <Alert severity='error' onClose={() => setRngAlert(null)}>
                 {rngAlert}
               </Alert>
             </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid size={12}>&nbsp;</Grid>
           </>
           :
           null}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Button onClick={addRng} startIcon={<AddIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Add new RNG")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Button onClick={props.endEditing} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to setpieces list")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
       </Grid >
     );
   } else {
@@ -426,10 +423,9 @@ export default function SetpieceEdit(props) {
 
     return (
       <Grid container >
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <Grid
-          item
-          xs={12}
+          size={12}
           style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
@@ -437,20 +433,20 @@ export default function SetpieceEdit(props) {
           }}>
           <Typography>{t("Warning! RNG is about to be deleted")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Typography>{t("Do you really want to delete RNG")} {rngToDelete} ({result})?</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+       <Grid size={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button onClick={() => deleteRng(rngToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
         </Grid>
-        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+       <Grid size={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button onClick={() => setRNGToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
       </Grid >
     );
   }

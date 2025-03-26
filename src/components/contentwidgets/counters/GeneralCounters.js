@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Grid, Button, Box } from '@mui/material';
+import { Grid2 as Grid, Button, Box } from '@mui/material';
 import CounterComponent from './CounterComponent'; // Assicurati di avere importato il CounterComponent
 import { useSelector, useDispatch } from 'react-redux';
 import { setCounterData } from '../../../store/slices/content.js';
@@ -53,9 +53,9 @@ function GeneralCounters() {
     };
 
     return (
-        <Grid container direction="column" spacing={2}>
+        <Grid direction="column" spacing={2}>
             {counters.map(counter => (
-                <Grid xs={12} item key={counter.id}>
+                <Grid size={12} key={counter.id}>
                     <CounterComponent 
                         counterEditHandler={handleEditCounter}
                         counterId={counter.id}
@@ -81,7 +81,7 @@ function GeneralCounters() {
                     </Box>
                 </Grid>
             ))}
-            <Grid item>
+            <Grid>
                 <Box
                     // Facoltativo: per visualizzare i confini dell'elemento
                     style={{ border: '1px solid #000', height: '100px' }}

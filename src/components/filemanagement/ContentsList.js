@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { Grid, Button, Typography, Select, MenuItem, TextField } from '@mui/material';
+import { Grid2 as Grid, Button, Typography, Select, MenuItem, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import { useTheme } from '@mui/material/styles';
@@ -139,14 +139,14 @@ const ContentsList = () => {
   if (message) {
     return (
       <Grid container sx={{ overflow: 'scroll', height: '100%' }}>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Typography>
             {message}
           </Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Button onClick={() => setMessage(null)} variant="contained" sx={{ width: "100%" }}>{t('Ok')}</Button>
         </Grid>
       </Grid>
@@ -156,17 +156,17 @@ const ContentsList = () => {
   if (contentToDelete) {
     return (
       <Grid container sx={{ overflow: 'scroll', height: '100%' }}>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Typography>
             {t("Are you sure you want to delete the content in slot")} {contentToDelete}? {t("This action cannot be undone.")}
           </Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Grid size={12}>&nbsp;</Grid>
+       <Grid size={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button onClick={() => deleteContent(contentToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
         </Grid>
-        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+       <Grid size={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button onClick={() => setContentToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
         </Grid>
       </Grid>
@@ -176,13 +176,13 @@ const ContentsList = () => {
   if (contentsList) {
     return (
       <Grid container sx={{ overflow: 'scroll', height: '100%' }}>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Typography>
             {t("Save current content in slot")}
           </Typography>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Select
             id="save-slot"
             value={selectedSlot}
@@ -196,31 +196,31 @@ const ContentsList = () => {
             <MenuItem value={5}>5</MenuItem>
           </Select>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Typography>
             {t("With label")}
           </Typography>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField id="save-label" label={t("Content label")} variant="outlined" sx={{ width: "100%" }} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Typography>
             {t("Overwriting current content, if any")}
           </Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Button onClick={saveContent} variant="contained" startIcon={<SaveAltIcon />} sx={{ width: "100%" }}>{t('Save now')}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Typography>
             {t("Or, load content from a slot:")}
           </Typography>
         </Grid>
-        <Grid item xs={12} style={{ height: (contentsList ? (contentsList.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>
+        <Grid size={12} style={{ height: (contentsList ? (contentsList.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>
           <DataGrid
             sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: mainColor, color: contrastTextColor } }}
             hideFooter

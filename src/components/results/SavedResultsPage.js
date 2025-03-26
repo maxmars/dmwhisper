@@ -5,7 +5,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SearchIcon from '@mui/icons-material/Search';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import DownloadIcon from '@mui/icons-material/Download';
-import { Button, Grid, List, ListItem, TextField, Box, AccordionSummary, AccordionDetails, Accordion } from '@mui/material';
+import { Button, Grid2 as Grid, List, ListItem, TextField, Box, AccordionSummary, AccordionDetails, Accordion } from '@mui/material';
 import html2pdf from 'html2pdf.js';
 import Typography from '@mui/material/Typography';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -159,25 +159,25 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
   if (throwToBeDeleted !== null) {
     return (
       <Grid container sx={{ overflow: 'scroll' }}>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} sx={{ display: "flex", justifyContent: "space-around" }}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid sx={{ display: "flex", justifyContent: "space-around" }} size={12}>
           <Typography>{t("Are you sure you want to delete the content in slot")}?</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} sx={{ display: "flex", justifyContent: "space-around" }}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid sx={{ display: "flex", justifyContent: "space-around" }} size={12}>
           <Button variant="contained" color="primary" onClick={throwDelete}>{t("Yes")}</Button>
           <Button variant="contained" color="primary" onClick={() => setThrowToBeDeleted(null)}>{t("No")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
       </Grid>
     );
   } else if (editedThrow !== null) {
     return (
       <Grid container sx={{ overflow: 'scroll' }}>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <CKEditor
             editor={Editor}
             data={currentEditedContent}
@@ -202,7 +202,7 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
             }}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Button style={{ width: '100%' }} variant="contained" color="primary" onClick={() => {
             setEditedThrow(null);
             dispatch(updateThrow({ index: editedThrow, result: currentEditedContent, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
@@ -213,7 +213,7 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
   } else {
     return (
       <Grid container sx={{ overflow: 'scroll' }}>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Box sx={{ display: 'flex', alignItems: 'flex-end', width: "100%" }}>
             <SearchIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
             <TextField id="input-with-sx" label="" variant="standard" sx={{ width: "100%" }}
@@ -224,9 +224,9 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
               }} />
           </Box>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
             {throws.sequence.map((throwResult, index) => {
               if (throwResult.result.cells) {
@@ -259,7 +259,7 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                           <br /><br />
                         </div>
                         <Grid container sx={{ overflow: 'scroll' }}>
-                          <Grid item xs={12}>
+                          <Grid size={12}>
                             <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                               setThrowToBeDeleted(index);
                               setCurrentEditedContent(null);
@@ -273,10 +273,10 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                               downloadJson({ contentType: "areamap", contentData: throwResult.result }, "savedMapContent.json");
                             }} />
                           </Grid>
-                          <Grid item xs={12} sx={{ mt: 1 }}>
+                          <Grid sx={{ mt: 1 }} size={12}>
                             {throwResult.timestamp}
                           </Grid>
-                          <Grid item xs={12}>
+                          <Grid size={12}>
                             <Box sx={[{
                               width: '100%',
                               borderBottom: '1px solid'
@@ -310,7 +310,7 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                           <br />
                         </div>
                         <Grid container sx={{ overflow: 'scroll' }}>
-                          <Grid item xs={12}>
+                          <Grid size={12}>
                             <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                               setThrowToBeDeleted(index);
                               setCurrentEditedContent(null);
@@ -324,10 +324,10 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                               downloadJson({ contentType: "dungeon", contentData: throwResult.result }, "savedDungeonContent.json");
                             }} />
                           </Grid>
-                          <Grid item xs={12} sx={{ mt: 1 }}>
+                          <Grid sx={{ mt: 1 }} size={12}>
                             {throwResult.timestamp}
                           </Grid>
-                          <Grid item xs={12}>
+                          <Grid size={12}>
                             <Box sx={[{
                               width: '100%',
                               borderBottom: '1px solid'
@@ -358,7 +358,7 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                           <br /><br />
                         </div>
                         <Grid container sx={{ overflow: 'scroll' }}>
-                          <Grid item xs={12}>
+                          <Grid size={12}>
                             <EditIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
                               setEditedThrow(index);
                               setCurrentEditedContent(throwResult.result);
@@ -380,10 +380,10 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                               downloadJson({ contentType: "text", contentData: throwResult.result }, "savedTextContent.json");
                             }} />
                           </Grid>
-                          <Grid item xs={12} sx={{ mt: 1 }}>
+                          <Grid sx={{ mt: 1 }} size={12}>
                             {throwResult.timestamp}
                           </Grid>
-                          <Grid item xs={12}>
+                          <Grid size={12}>
                             <Box sx={[{
                               width: '100%',
                               borderBottom: '1px solid'
@@ -402,16 +402,16 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
             })}
           </List>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           {
             throws.sequence.length > 0 ?
               <Button style={{ width: '100%' }} variant="contained" color="primary" onClick={() => setConfirmClearThrows(true)}>{t("Clean")}</Button>
               : null
           }
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Button startIcon={<UploadIcon />} onClick={showImportContentWidget} style={{ width: '100%' }} variant="contained" color="primary">{t("Import data")}</Button>
         </Grid>
       </Grid>

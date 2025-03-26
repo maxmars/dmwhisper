@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTheme } from '@mui/material/styles';
@@ -216,7 +216,7 @@ const MonsterSetEdit = (props) => {
 
     document.getElementById('new-min').value = '';
     document.getElementById('new-max').value = '';
-    document.getElementById('new-result').value = '';
+    //document.getElementById('new-result').value = '';
     setCurrentMenuTable(undefined);
   }
 
@@ -244,8 +244,7 @@ const MonsterSetEdit = (props) => {
     return (
       <Grid container >
         <Grid
-          item
-          xs={12}
+          size={12}
           style={{ display: 'flex', justifyContent: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
@@ -253,9 +252,9 @@ const MonsterSetEdit = (props) => {
           }}>
           <Typography>{t("Edited monster set:")} {props.itemId}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <TextField id="monster-set-id"
             label={t("Monster Set ID")}
             variant="outlined"
@@ -264,7 +263,7 @@ const MonsterSetEdit = (props) => {
             onChange={(event) => setEditedMonsterSetId(event.target.value)}
           />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField id="monster-set-description"
             label={t("Monster Set Description")}
             variant="outlined"
@@ -272,26 +271,25 @@ const MonsterSetEdit = (props) => {
             value={editedMonsterSetDescription ? editedMonsterSetDescription : ''}
             onChange={(event) => setEditedMonsterDescription(event.target.value)} />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         {alert ?
           <>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <Alert severity='error' onClose={() => setAlert(null)}>
                 {alert}
               </Alert>
             </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid size={12}>&nbsp;</Grid>
           </>
           :
           null}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Button onClick={updateHeader} startIcon={<SaveAltIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Update header info")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <Grid
-          item
-          xs={12}
+          size={12}
           style={{ display: 'flex', justifyContent: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
@@ -299,12 +297,12 @@ const MonsterSetEdit = (props) => {
           }}>
           <Typography>{t("List of RNG values")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Typography>{t("Click on the bin to delete values.")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12} style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
           <DataGrid
             sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
             onRowClick={(params) => editRNGValues(params.row.id)}
@@ -314,11 +312,10 @@ const MonsterSetEdit = (props) => {
             paginationModel={{ page: 0, pageSize: 100 }}
           />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <Grid
-          item
-          xs={12}
+          size={12}
           style={{ display: 'flex', justifyContent: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
@@ -326,8 +323,8 @@ const MonsterSetEdit = (props) => {
           }}>
           <Typography>{t("Add a new RNG:")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <TextField
             onChange={(event) => setNewMin(event.target.value)}
             value={newMin ? newMin : ''}
@@ -337,7 +334,7 @@ const MonsterSetEdit = (props) => {
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField
             onChange={(event) => setNewMax(event.target.value)}
             value={newMax ? newMax : ''}
@@ -347,8 +344,8 @@ const MonsterSetEdit = (props) => {
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <TextField
             onChange={(event) => setNewLabel(event.target.value)}
             value={newLabel ? newLabel : ''}
@@ -357,7 +354,7 @@ const MonsterSetEdit = (props) => {
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField
             type="number"
             onChange={(event) => setNewMaxOccurrences(event.target.value)}
@@ -367,7 +364,7 @@ const MonsterSetEdit = (props) => {
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <CKEditor
           editor={Editor}
           data={currentMenuContent}
@@ -391,9 +388,9 @@ const MonsterSetEdit = (props) => {
             ckEditorThemeSync();
           }}
         />
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
+        <Grid size={12}>
           <TablesChooser
             tablesIds={currentMenuTable && currentMenuTable.trim().length > 0 ? currentMenuTable.trim().split(' ').map((item) => {
               return {
@@ -409,26 +406,26 @@ const MonsterSetEdit = (props) => {
             }}
           />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         {itemAlert ?
           <>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <Alert severity='error' onClose={() => setItemAlert(null)}>
                 {itemAlert}
               </Alert>
             </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid size={12}>&nbsp;</Grid>
           </>
           :
           null}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Button onClick={addRng} startIcon={<AddIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Add new RNG")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Button onClick={props.endEditing} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to monster sets list")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
       </Grid >
     );
   } else {
@@ -437,10 +434,9 @@ const MonsterSetEdit = (props) => {
 
     return (
       <Grid container >
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <Grid
-          item
-          xs={12}
+          size={12}
           style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
@@ -448,20 +444,20 @@ const MonsterSetEdit = (props) => {
           }}>
           <Typography>{t("Warning! RNG is about to be deleted")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Typography>{t("Do you really want to delete RNG")} {itemToDelete} ({result})?</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+       <Grid size={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button onClick={() => deleteRng(itemToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
         </Grid>
-        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+       <Grid size={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button onClick={() => setItemToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
       </Grid >
     );
   }

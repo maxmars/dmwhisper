@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import { Typography } from '@mui/material';
 
 
@@ -64,10 +64,10 @@ export default function DungeonSetup(props) {
 
   return (
     <Grid container sx={{ width: '100%' }}>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}><Typography>{t("Dungeon data")}</Typography></Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12}><Typography>{t("Dungeon data")}</Typography></Grid>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12} sx={{ display: 'flex', alignItems: 'center' }}>
         <Autocomplete
           disablePortal
           id="setpiecesIDs"
@@ -84,8 +84,8 @@ export default function DungeonSetup(props) {
           renderInput={(params) => <TextField {...params} label={t("Dungeon set piece id") + ".."} />}
         />
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12}>
           <TextField
             type="number"
             onChange={(event) => props.onDungeonRoomsChanged(event.target.value)}
@@ -95,8 +95,8 @@ export default function DungeonSetup(props) {
             variant="outlined"
             sx={{ width: "100%" }} />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+        <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12} sx={{ display: 'flex', alignItems: 'center' }}>
         <Autocomplete
           disablePortal
           id="monstersIDs"
@@ -113,8 +113,8 @@ export default function DungeonSetup(props) {
           renderInput={(params) => <TextField {...params} label={t("Dungeon monster set id") + ".."} />}
         />
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12} sx={{ display: 'flex', alignItems: 'center' }}>
         <Autocomplete
           disablePortal
           id="treasuresIDs"
@@ -131,8 +131,8 @@ export default function DungeonSetup(props) {
           renderInput={(params) => <TextField {...params} label={t("Dungeon treasure set id") + ".."} />}
         />
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12} sx={{ display: 'flex', alignItems: 'center' }}>
         <Autocomplete
           disablePortal
           id="trapsIDs"
@@ -149,8 +149,8 @@ export default function DungeonSetup(props) {
           renderInput={(params) => <TextField {...params} label={t("Dungeon trap set id") + ".."} />}
         />
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center' }}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12} sx={{ display: 'flex', alignItems: 'center' }}>
         <Autocomplete
           disablePortal
           id="puzzlesIDs"
@@ -167,7 +167,7 @@ export default function DungeonSetup(props) {
           renderInput={(params) => <TextField {...params} label={t("Dungeon puzzle set id") + ".."} />}
         />
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid size={12}>&nbsp;</Grid>
     </Grid>
   );
 }

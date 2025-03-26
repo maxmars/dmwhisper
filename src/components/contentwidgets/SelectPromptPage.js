@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, List, ListItemButton, ListItemText, Typography, Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { TextField, Button, List, ListItemButton, ListItemText, Typography, Grid2 as Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import openai from 'openai';
 import { addThrow } from '../../store/slices/throws';
@@ -89,13 +89,13 @@ const SelectPromptPage = ({ pageContent, onCancel }) => {
                     alignItems: "center",
                     justifyContent: "center"
                 }}>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     &nbsp;
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <Typography variant="h5">{t("Invio del prompt a ChatGPT in corso..")}</Typography>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid size={12}>
                     <CircularProgress />
                 </Grid>
             </Grid>

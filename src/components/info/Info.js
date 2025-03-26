@@ -1,4 +1,4 @@
-import { Grid, Typography, Link } from '@mui/material';
+import { Grid2 as Grid, Typography, Link } from '@mui/material';
 import logo from './logo_dmwhisper.jpeg';
 import { useTranslation } from 'react-i18next';
 
@@ -7,40 +7,40 @@ const Info = () => {
 
   return (
     <Grid container sx={{ overflow: 'scroll' }}>
-      <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Grid size={12} sx={{ display: 'flex', justifyContent: 'center' }}>
         <Typography variant="h4">DM Whisper</Typography>
       </Grid>
-      <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Grid size={12} sx={{ display: 'flex', justifyContent: 'center' }}>
         <Typography variant='body' sx={{
           m: 2
         }}>v. 1.61.0</Typography>
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12} sx={{ display: 'flex', justifyContent: 'center' }}>
         <img alt="DMWhisper logo" style={{ maxWidth: '98%', maxHeight: '98%' }} src={logo} />
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
         <Typography variant="h6" sx={{
           m: 2
         }}>{t("An app that helps Dungeon Masters run Role Playing Games sessions, by rolling dice and instantly looking up table items, with a few twists.")}</Typography>
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
         <Typography variant="body" sx={{
           m: 2
         }}>{t("By")} <Link href="mailto:maxmars@gmail.com">Massimiliano Marsiglietti</Link>, {t("published under the Apache 2.0 Open Source license.")}</Typography>
       </Grid>
-      <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+      <Grid size={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
         <Typography variant="body" sx={{
           m: 2
         }}>{t("See the product home page for information about the content JSON format.")}</Typography>
       </Grid>
-      <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Grid size={12} sx={{ display: 'flex', justifyContent: 'center' }}>
         <Link href="https://github.com/maxmars/dmwhisper">github.com/maxmars/dmwhisper</Link>
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12} sx={{ display: 'flex', justifyContent: 'center' }}>
         <code>This project uses the following licensed third party libraries:<br />
         <br />
         CKEditor 5, which is licensed from CKSource (www.cksource.com).<br />
@@ -56,7 +56,7 @@ const Info = () => {
         The same conditions apply to DMWhisper -- it is provided "as is", without warranty of any kind, express or implied.
         Feel free to use it but please note that the authors are not responsible for any damage that may occur from its use.</code>
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
+      <Grid size={12}>&nbsp;</Grid>
     </Grid>
   );
 };

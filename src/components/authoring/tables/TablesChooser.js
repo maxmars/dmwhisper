@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import { useTheme } from '@mui/material/styles';
 import AddIcon from '@mui/icons-material/Add';
@@ -122,8 +122,8 @@ export default function TablesChooser(props) {
 
   return (
     <Grid container sx={{ width: '100%' }}>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={5} sx={{ display: 'flex', alignItems: 'center' }}>
+      <Grid size={12}>&nbsp;</Grid>
+     <Grid size={5} sx={{ display: 'flex', alignItems: 'center' }}>
         <Autocomplete
           disablePortal
           id="tableIDs"
@@ -135,15 +135,15 @@ export default function TablesChooser(props) {
           renderInput={(params) => <TextField {...params} label={t("Table Id..")} />}
         />
       </Grid>
-      <Grid item xs={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', borderLeft: '1em' }}>
+     <Grid size={4} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', borderLeft: '1em' }}>
         <Typography variant="body1">{t("Unique values?")}</Typography>
         <Checkbox checked={unique} onChange={toggleUnique} inputProps={{ 'aria-label': 'controlled' }} />
       </Grid>
-      <Grid item xs={3} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', borderLeft: '1em' }}>
+     <Grid size={3} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', borderLeft: '1em' }}>
         <IconButton disabled={!tableId} onClick={() => addTableId(tableId, unique)}><AddIcon /></IconButton>
       </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} style={{ height: (props.tablesIds ? (props.tablesIds.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>
+      <Grid size={12}>&nbsp;</Grid>
+      <Grid size={12} style={{ height: (props.tablesIds ? (props.tablesIds.length * 52) + 156 : "100") + "px", overflow: "scroll" }}>
         <DataGrid
           sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: mainColor, color: contrastTextColor } }}
           hideFooter

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import Typography from '@mui/material/Typography';
@@ -50,10 +50,10 @@ export default function AreaMapComponent({cells, gridrowcells, dark}) {
 
     return (
         <Grid container >
-            <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Grid size={12} style={{ display: 'flex', justifyContent: 'center' }}>
                 <AreaMapCanvas numCells={gridrowcells} mapCells={cells} onMapCellClicked={mapCellClickHandler} dark={dark} />
             </Grid>
-            <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center' }}>
+            <Grid size={12} style={{ display: 'flex', justifyContent: 'center' }}>
                     {getBuildingInfoDialog()}
             </Grid>
         </Grid>

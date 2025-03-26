@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Information from '../contentwidgets/Information';
@@ -90,12 +90,12 @@ const SelectedContent = (props) => {
           alignItems: 'center',
         }}
       >
-        <Grid item xs={1}>
+       <Grid size={1}>
           <IconButton style={{ marginRight: "7px" }} variant="contained" onClick={props.clearSelectedContent}>
             <ArrowBackIosNewIcon sx={{ 'color': 'white !important' }} />
           </IconButton>
         </Grid>
-        <Grid item xs={11}>
+       <Grid size={11}>
           <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{props.selectedContent ? props.selectedContent.label : ""}</Typography>
         </Grid>
       </Grid>
@@ -113,10 +113,10 @@ const SelectedContent = (props) => {
           justifyContent: 'center',
         }}
       >
-        <Grid item xs={12} sx={{ height: "100%" }}>
+        <Grid size={12} sx={{ height: "100%" }}>
           {getProperWidget()}
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
       </Grid>
       <Grid
         container
@@ -130,8 +130,8 @@ const SelectedContent = (props) => {
           overflowX: 'hidden',
         }}
       >
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', verticalAlign: 'center' }}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12} sx={{ display: 'flex', justifyContent: 'center', verticalAlign: 'center' }}>
           <Button sx={{ width: '90%' }} variant="outlined" onClick={() => props.clearSelectedContent()}>{t("Back")}</Button>
         </Grid>
       </Grid>

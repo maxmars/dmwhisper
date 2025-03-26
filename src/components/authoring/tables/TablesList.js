@@ -7,7 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import { useDispatch } from 'react-redux';
 import { addTable, removeTable } from '../../../store/slices/content';
@@ -102,10 +102,9 @@ export default function TablesList(props) {
 
     return (
       <Grid container >
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <Grid
-          item
-          xs={12}
+          size={12}
           style={{ display: 'flex', justifyContent: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
@@ -113,8 +112,8 @@ export default function TablesList(props) {
           }}>
           <Typography>{t("List of Tables")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <TextField
             id="table-filter"
             value={tablesFilter}
@@ -129,8 +128,8 @@ export default function TablesList(props) {
             variant="standard"
           />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} style={{ height: (contentsList ? (contentsList.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12} style={{ height: (contentsList ? (contentsList.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
           <DataGrid
             sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
             onRowClick={(params, event, details) => props.selectTable(params.row.id)}
@@ -140,15 +139,14 @@ export default function TablesList(props) {
             paginationModel={{ page: 0, pageSize: 100 }}
           />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Typography>{t("Click on a table to edit/delete it")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <Grid
-          item
-          xs={12}
+          size={12}
           style={{ display: 'flex', justifyContent: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
@@ -156,38 +154,37 @@ export default function TablesList(props) {
           }}>
           <Typography>{t("Add a new table:")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <TextField id="new-table-id" label={t("Table ID")} variant="outlined" sx={{ width: "100%" }} />
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>
           <TextField id="new-table-description" label={t("Table Description")} variant="outlined" sx={{ width: "100%" }} />
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         {alert ?
           <>
-            <Grid item xs={12}>
+            <Grid size={12}>
               <Alert severity='error' onClose={() => setAlert(null)}>
                 {alert}
               </Alert>
             </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
+            <Grid size={12}>&nbsp;</Grid>
           </>
           :
           null}
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Button onClick={addNewTable} startIcon={<AddIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Add new table")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
       </Grid >
     );
   } else {
     return (
       <Grid container >
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <Grid
-          item
-          xs={12}
+          size={12}
           style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
           sx={{
             bgcolor: theme.palette.warning.main,
@@ -195,20 +192,20 @@ export default function TablesList(props) {
           }}>
           <Typography>{t("Warning! Table is about to be deleted")}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
           <Typography>{t("Do you really want to delete table")} {tableIdToDelete}?</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+       <Grid size={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button onClick={() => deleteTable(tableIdToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
         </Grid>
-        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+       <Grid size={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Button onClick={() => setTableIdToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
       </Grid >
     );
   }

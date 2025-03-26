@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
+import { Grid2 as Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
@@ -15,10 +15,9 @@ export default function ContentLoadedFeedback(props) {
 
     return (
         <Grid container sx={{ height: "100%" }} >
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
         <Grid
-            item
-            xs={12}
+            size={12}
             style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
             sx={{
                 bgcolor: theme.palette.warning.main,
@@ -26,17 +25,17 @@ export default function ContentLoadedFeedback(props) {
             }}>
             <Typography>{t(props.title)}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>
             <Typography>{t(props.message)}</Typography>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
+        <Grid size={12} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Button onClick={props.onOkClick} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Ok")}</Button>
         </Grid>
-        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid size={12}>&nbsp;</Grid>
     </Grid >
     );
 
