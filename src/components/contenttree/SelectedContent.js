@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid2 as Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Information from '../contentwidgets/Information';

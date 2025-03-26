@@ -9,7 +9,7 @@ import { useMemo } from 'react';
 import { getDungeonRooms, layoutRooms } from '../../../snippets/dungeons/DungeonLib.js';
 import DungeonComponent from './DungeonComponent.js';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { Grid2 as Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { setDungeonExploreDefaults, setLastTableContent } from '../../../store/slices/content.js';

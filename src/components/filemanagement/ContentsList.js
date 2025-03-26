@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { Grid2 as Grid, Button, Typography, Select, MenuItem, TextField } from '@mui/material';
+import { Grid, Button, Typography, Select, MenuItem, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import { useTheme } from '@mui/material/styles';

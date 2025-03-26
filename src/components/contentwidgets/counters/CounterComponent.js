@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CircularProgress, Typography, Box } from '@mui/material';
-import { Grid2 as Grid, TextField, Button } from '@mui/material';
+import { Grid, TextField, Button } from '@mui/material';
 import { AddCircleOutline, RemoveCircleOutline } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 
@@ -179,7 +179,7 @@ function CounterComponent(props) {
                     </Grid>
                     <Grid size={12} sx={{ width: '95%' }} >
                         <Button sx={{ width: '100%' }} variant="contained" onClick={handleUse}>
-                        {t("Utilize")}
+                            {t("Utilize")}
                         </Button>
                     </Grid>
                 </Grid>
@@ -192,29 +192,41 @@ function CounterComponent(props) {
                         alignItems: "center",
                         width: '100%'
                     }}>
-                    <Grid size={12}>
-                        <Typography>{counterName}</Typography>
-                    </Grid>
-                    <Grid size={12}>
-                        <CircularProgressWithLabel value={(currentValue / maxCounter) * 100} sizePercent={30} thickness={6} />
-                    </Grid>
-                    <Grid size={12} container spacing={1} sx={{
+                    <Grid size={12} sx={{
+                        display: "flex",
                         justifyContent: "center"
                     }}>
-                        <Grid>
-                            <Button variant="contained" onClick={handleDecrement}>
-                                <RemoveCircleOutline />
-                            </Button>
-                        </Grid>
-                        <Grid>
-                            <Button variant="contained" onClick={handleIncrement}>
-                                <AddCircleOutline />
-                            </Button>
-                        </Grid>
+                        <Typography>{counterName}</Typography>
+                    </Grid>
+                    <Grid size={12} sx={{
+                        display: "flex",
+                        justifyContent: "center"
+                    }}>
+                        <CircularProgressWithLabel value={(currentValue / maxCounter) * 100} sizePercent={30} thickness={6} />
                     </Grid>
                     <Grid size={12}>
-                        <Button variant="contained" onClick={handleModify}>
-                        {t("Modify")}
+                        <Grid container spacing={1} sx={{
+                            display: "flex",
+                            justifyContent: "center"
+                        }}>
+                            <Grid>
+                                <Button variant="contained" onClick={handleDecrement}>
+                                    <RemoveCircleOutline />
+                                </Button>
+                            </Grid>
+                            <Grid>
+                                <Button variant="contained" onClick={handleIncrement}>
+                                    <AddCircleOutline />
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                    <Grid size={12} sx={{
+                        display: "flex",
+                        justifyContent: "center"
+                    }}>
+                        <Button variant="contained" onClick={handleModify} sx={{ width: '90%' }}>
+                            {t("Modify")}
                         </Button>
                     </Grid>
                 </Grid>

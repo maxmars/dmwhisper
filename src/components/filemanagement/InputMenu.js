@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Grid2 as Grid, Button } from '@mui/material';
+import { Grid, Button } from '@mui/material';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import PasteJson from './PasteJson';
 import FileUploadIcon from '@mui/icons-material/FileUpload';

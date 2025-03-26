@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useMemo } from 'react';
 import Autocomplete from '@mui/material/Autocomplete';
 import Typography from '@mui/material/Typography';
-import { Grid2 as Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTheme } from '@mui/material/styles';

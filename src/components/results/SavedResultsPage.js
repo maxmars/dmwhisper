@@ -5,7 +5,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import SearchIcon from '@mui/icons-material/Search';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import DownloadIcon from '@mui/icons-material/Download';
-import { Button, Grid2 as Grid, List, ListItem, TextField, Box, AccordionSummary, AccordionDetails, Accordion } from '@mui/material';
+import { Button, Grid, List, ListItem, TextField, Box, AccordionSummary, AccordionDetails, Accordion } from '@mui/material';
 import html2pdf from 'html2pdf.js';
 import Typography from '@mui/material/Typography';
 import { CKEditor } from '@ckeditor/ckeditor5-react';

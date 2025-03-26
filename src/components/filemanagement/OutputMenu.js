@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid2 as Grid, Button } from '@mui/material';
+import { Grid, Button } from '@mui/material';
 import { useSelector } from 'react-redux';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DownloadIcon from '@mui/icons-material/Download';

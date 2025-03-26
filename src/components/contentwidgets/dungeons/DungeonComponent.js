@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import DungeonCanvas from './DungeonCanvas.js';
-import { Grid2 as Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Typography } from '@mui/material';

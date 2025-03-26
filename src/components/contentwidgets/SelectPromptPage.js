@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, List, ListItemButton, ListItemText, Typography, Grid2 as Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { TextField, Button, List, ListItemButton, ListItemText, Typography, Grid, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
 import openai from 'openai';
 import { addThrow } from '../../store/slices/throws';

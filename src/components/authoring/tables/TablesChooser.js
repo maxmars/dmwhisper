@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Grid2 as Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 import { useTheme } from '@mui/material/styles';
 import AddIcon from '@mui/icons-material/Add';

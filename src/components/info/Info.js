@@ -1,4 +1,4 @@
-import { Grid2 as Grid, Typography, Link } from '@mui/material';
+import { Grid, Typography, Link } from '@mui/material';
 import logo from './logo_dmwhisper.jpeg';
 import { useTranslation } from 'react-i18next';
 

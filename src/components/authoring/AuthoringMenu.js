@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Grid2 as Grid, Button, Typography } from '@mui/material';
+import { Grid, Button, Typography } from '@mui/material';
 import TablesEdit from './tables/TablesEdit';
 import SetpiecesEdit from './maps/setpieces/SetpiecesEdit';
 import TrapSetsEdit from './dungeons/sets/traps/TrapSetsEdit';

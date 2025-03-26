@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Grid2 as Grid, Button, Box } from '@mui/material';
+import { Grid, Button, Box } from '@mui/material';
 import CounterComponent from './CounterComponent'; // Assicurati di avere importato il CounterComponent
 import { useSelector, useDispatch } from 'react-redux';
 import { setCounterData } from '../../../store/slices/content.js';

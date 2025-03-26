@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Grid2 as Grid, Button } from '@mui/material';
+import { Grid, Button } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import SetpiecesList from './SetpiecesList';
 import SetpieceEdit from './SetpieceEdit';

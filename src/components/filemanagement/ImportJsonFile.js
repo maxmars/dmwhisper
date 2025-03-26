@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Grid2 as Grid, Button, Typography } from '@mui/material';
+import { Grid, Button, Typography } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { setContent, clearTabPath } from '../../store/slices/content';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';

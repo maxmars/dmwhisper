@@ -7,7 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { Grid2 as Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import { useDispatch } from 'react-redux';
 import { addTable, removeTable } from '../../../store/slices/content';
