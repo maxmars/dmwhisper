@@ -66,13 +66,15 @@ function GeneralCounters() {
                         sx={{ width: "100%" }} 
                     />
                     <Box
-                        width="90%"
-                        margin="0 auto"
-                        display="flex"
-                        justifyContent="center"
-                        alignItems="center"
-                        style={{ border: '1px solid #000', height: '100px' }} // Facoltativo: per visualizzare i confini dell'elemento
-                    >
+                        // Facoltativo: per visualizzare i confini dell'elemento
+                        style={{ border: '1px solid #000', height: '100px' }}
+                        sx={{
+                            width: "90%",
+                            margin: "0 auto",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}>
                         <Button sx={{ width: "100%" }} variant="contained" color="secondary" onClick={() => handleRemoveCounter(counter.id)}>
                             {t("Remove")}
                         </Button>
@@ -81,13 +83,15 @@ function GeneralCounters() {
             ))}
             <Grid item>
                 <Box
-                    width="90%"
-                    margin="0 auto"
-                    display="flex"
-                    justifyContent="center"
-                    alignItems="center"
-                    style={{ border: '1px solid #000', height: '100px' }} // Facoltativo: per visualizzare i confini dell'elemento
-                >
+                    // Facoltativo: per visualizzare i confini dell'elemento
+                    style={{ border: '1px solid #000', height: '100px' }}
+                    sx={{
+                        width: "90%",
+                        margin: "0 auto",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}>
                     <Button sx={{ width: "100%" }} variant="contained" color="primary" onClick={handleAddCounter}>
                     {t("Add")}
                     </Button>

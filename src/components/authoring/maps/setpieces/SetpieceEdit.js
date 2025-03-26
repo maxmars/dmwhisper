@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import useTheme from '@mui/private-theming/useTheme';
+import { useTheme } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
@@ -242,7 +242,14 @@ export default function SetpieceEdit(props) {
 
     return (
       <Grid container >
-        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
           <Typography>{t("Edited setpiece:")} {props.setpieceId}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -281,7 +288,14 @@ export default function SetpieceEdit(props) {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
           <Typography>{t("List of RNG values")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -296,12 +310,19 @@ export default function SetpieceEdit(props) {
             rows={rows}
             columns={columns}
             hideFooterPagination={true}
-            paginationModel={{ page: 1, pageSize: 1000 }}
+            paginationModel={{ page: 0, pageSize: 100 }}
           />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
           <Typography>{t("Add a new RNG:")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -336,7 +357,6 @@ export default function SetpieceEdit(props) {
             sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-
         <CKEditor
           editor={Editor}
           data={currentMenuContent}
@@ -360,7 +380,6 @@ export default function SetpieceEdit(props) {
             ckEditorThemeSync();
           }}
         />
-
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
         <Grid item xs={12}>
@@ -405,26 +424,35 @@ export default function SetpieceEdit(props) {
     // get result from rngToDelete
     const result = setpiece.rng.find((rng) => rng.min + '-' + rng.max === rngToDelete).result;
 
-    return <Grid container >
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Typography>{t("Warning! RNG is about to be deleted")}</Typography>
-      </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>
-        <Typography>{t("Do you really want to delete RNG")} {rngToDelete} ({result})?</Typography>
-      </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button onClick={() => deleteRng(rngToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
-      </Grid>
-      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button onClick={() => setRNGToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
-      </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-    </Grid >
+    return (
+      <Grid container >
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
+          <Typography>{t("Warning! RNG is about to be deleted")}</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>
+          <Typography>{t("Do you really want to delete RNG")} {rngToDelete} ({result})?</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Button onClick={() => deleteRng(rngToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
+        </Grid>
+        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Button onClick={() => setRNGToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+      </Grid >
+    );
   }
 
 }

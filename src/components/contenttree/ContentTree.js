@@ -12,7 +12,7 @@ import { Tab, Tabs } from '@mui/material';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import useTheme from '@mui/private-theming/useTheme';
+import { useTheme } from '@mui/material/styles';
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import './style.css'

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { getRng, mergeContentAndTables, setLastTableContent } from '../../../store/slices/content.js';
 import { uuidv4 } from '../../../utils/index.js';
-import useTheme from '@mui/private-theming/useTheme';
+import { useTheme } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
 import Button from '@mui/material/Button';
 import CasinoIcon from '@mui/icons-material/Casino';
@@ -174,9 +174,13 @@ export default function AreaMap(props) {
     if (error) {
         return (
             <Box sx={{ width: '100%' }}>
-                <Stack spacing={2} direction="column"
-                    justifyContent="space-evenly"
-                    alignItems="center">
+                <Stack
+                    spacing={2}
+                    direction="column"
+                    sx={{
+                        justifyContent: "space-evenly",
+                        alignItems: "center"
+                    }}>
                     <div>{t("Content Error:")} {error}. {t("Please check content for errors.")}</div>
                     <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                         <Button onClick={resetError} startIcon={<ErrorIcon />} variant='contained'>{t("Dismiss")}</Button>

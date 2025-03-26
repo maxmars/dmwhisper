@@ -11,7 +11,9 @@ const Info = () => {
         <Typography variant="h4">DM Whisper</Typography>
       </Grid>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
-        <Typography m={2} variant='body'>v. 1.61.0</Typography>
+        <Typography variant='body' sx={{
+          m: 2
+        }}>v. 1.61.0</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
@@ -19,14 +21,20 @@ const Info = () => {
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-        <Typography m={2} variant="h6">{t("An app that helps Dungeon Masters run Role Playing Games sessions, by rolling dice and instantly looking up table items, with a few twists.")}</Typography>
+        <Typography variant="h6" sx={{
+          m: 2
+        }}>{t("An app that helps Dungeon Masters run Role Playing Games sessions, by rolling dice and instantly looking up table items, with a few twists.")}</Typography>
       </Grid>
       <Grid item xs={12}>&nbsp;</Grid>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-        <Typography m={2} variant="body">{t("By")} <Link href="mailto:maxmars@gmail.com">Massimiliano Marsiglietti</Link>, {t("published under the Apache 2.0 Open Source license.")}</Typography>
+        <Typography variant="body" sx={{
+          m: 2
+        }}>{t("By")} <Link href="mailto:maxmars@gmail.com">Massimiliano Marsiglietti</Link>, {t("published under the Apache 2.0 Open Source license.")}</Typography>
       </Grid>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-        <Typography m={2} variant="body">{t("See the product home page for information about the content JSON format.")}</Typography>
+        <Typography variant="body" sx={{
+          m: 2
+        }}>{t("See the product home page for information about the content JSON format.")}</Typography>
       </Grid>
       <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center' }}>
         <Link href="https://github.com/maxmars/dmwhisper">github.com/maxmars/dmwhisper</Link>

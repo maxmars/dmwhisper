@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Grid, Button, Typography, Select, MenuItem, TextField } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
-import useTheme from '@mui/private-theming/useTheme';
+import { useTheme } from '@mui/material/styles';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import UploadIcon from '@mui/icons-material/Upload';

@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { FormControl, InputLabel, MenuItem, Select, Button, Grid, Typography, TextField, Alert } from '@mui/material';
-import useTheme from '@mui/private-theming/useTheme';
+import { useTheme } from '@mui/material/styles';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -162,6 +162,7 @@ const DungeonSetpieceEdit = (props) => {
     },
     {
       field: 'actions',
+      headerName: t('Delete'),
       type: 'actions',
       width: window.innerWidth * 0.15,
       getActions: (params) => [
@@ -196,7 +197,7 @@ const DungeonSetpieceEdit = (props) => {
       item: newRngs,
     }));
 
-    document.getElementById('new-result').value = '';
+    // document.getElementById('new-result').value = '';
     setCurrentMenuTable(undefined);
   }
 
@@ -223,7 +224,14 @@ const DungeonSetpieceEdit = (props) => {
 
     return (
       <Grid container >
-        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
           <Typography>{t("Edited setpiece:")} {props.itemId}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -262,7 +270,14 @@ const DungeonSetpieceEdit = (props) => {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
           <Typography>{t("List of RNG values")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -271,18 +286,25 @@ const DungeonSetpieceEdit = (props) => {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12} style={{ height: (rows ? (rows.length * 52) + 56 : "100") + "px", overflow: "scroll" }}>
-          <DataGrid
-            sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
+          <DataGrid       
+            sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}     
             onRowClick={(params) => editRNGValues(params.row.id)}
             rows={rows}
             columns={columns}
             hideFooterPagination={true}
-            paginationModel={{ page: 1, pageSize: 1000 }}
+            paginationModel={{ page: 0, pageSize: 100 }}
           />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
           <Typography>{t("Add a new RNG:")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -342,7 +364,6 @@ const DungeonSetpieceEdit = (props) => {
             sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-
         <CKEditor
           editor={Editor}
           data={currentMenuContent}
@@ -366,7 +387,6 @@ const DungeonSetpieceEdit = (props) => {
             ckEditorThemeSync();
           }}
         />
-
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
         <Grid item xs={12}>
@@ -411,26 +431,35 @@ const DungeonSetpieceEdit = (props) => {
     // get result from itemToDelete
     const result = setpiece.rng.find((rng, index) => index === itemToDelete - 1).description;
 
-    return <Grid container >
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Typography>{t("Warning! RNG is about to be deleted")}</Typography>
-      </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>
-        <Typography>{t("Do you really want to delete RNG")} {itemToDelete} ({result})?</Typography>
-      </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button onClick={() => deleteRng(itemToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
-      </Grid>
-      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button onClick={() => setItemToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
-      </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-    </Grid >
+    return (
+      <Grid container >
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
+          <Typography>{t("Warning! RNG is about to be deleted")}</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>
+          <Typography>{t("Do you really want to delete RNG")} {itemToDelete} ({result})?</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Button onClick={() => deleteRng(itemToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
+        </Grid>
+        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Button onClick={() => setItemToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+      </Grid >
+    );
   }
 
 }

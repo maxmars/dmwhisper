@@ -16,7 +16,7 @@ import { format } from 'date-fns';
 import ErrorIcon from '@mui/icons-material/Error';
 import CasinoIcon from '@mui/icons-material/Casino';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-import useTheme from '@mui/private-theming/useTheme';
+import { useTheme } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '@mui/material';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
@@ -219,18 +219,26 @@ export default function Table(props) {
       return (
         <Box sx={{ width: '100%' }}>
           {error ?
-            <Stack spacing={2} direction="column"
-              justifyContent="space-evenly"
-              alignItems="center">
+            <Stack
+              spacing={2}
+              direction="column"
+              sx={{
+                justifyContent: "space-evenly",
+                alignItems: "center"
+              }}>
               <div>{t("Content Error:")} {error}. {t("Please check content for errors.")}</div>
               <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                 <Button onClick={resetError} startIcon={<ErrorIcon />} variant='contained'>{t("Dismiss")}</Button>
               </div>
             </Stack>
             :
-            <Stack spacing={2} direction="column"
-              justifyContent="space-evenly"
-              alignItems="center">
+            <Stack
+              spacing={2}
+              direction="column"
+              sx={{
+                justifyContent: "space-evenly",
+                alignItems: "center"
+              }}>
               <div style={{ width: '100%' }}>
                 <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around', gap: '5%', alignItems: 'center' }}>
                   <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained' sx={{ width: "30%" }}>{t("Roll")}</Button>
@@ -305,29 +313,44 @@ export default function Table(props) {
           </>
         });
 
-        return <div id='tabletopdiv'>
-          <Grid id="listedValuesDiv" container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            <Grid item xs={12}>&nbsp;</Grid>
-            <Grid item xs={3} style={{ display: "flex", justifyContent: "flex-end" }} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText}>
-              <div style={{ marginRight: "1em" }}>{t("Roll")}</div>
+        return (
+          <div id='tabletopdiv'>
+            <Grid id="listedValuesDiv" container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+              <Grid item xs={12}>&nbsp;</Grid>
+              <Grid
+                item
+                xs={3}
+                style={{ display: "flex", justifyContent: "flex-end" }}
+                sx={{
+                  bgcolor: theme.palette.warning.main,
+                  color: theme.palette.warning.contrastText
+                }}>
+                <div style={{ marginRight: "1em" }}>{t("Roll")}</div>
+              </Grid>
+              <Grid
+                item
+                xs={9}
+                sx={{
+                  bgcolor: theme.palette.warning.main,
+                  color: theme.palette.warning.contrastText
+                }}>
+                <div>{t("Description")}</div>
+              </Grid>
+              {items}
+              <Grid item xs={12}>&nbsp;</Grid>
             </Grid>
-            <Grid item xs={9} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText}>
-              <div>{t("Description")}</div>
-            </Grid>
-            {items}
-            <Grid item xs={12}>&nbsp;</Grid>
-          </Grid>
-          <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            <Grid item xs={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-              <Button onClick={shuffleValues} startIcon={<ShuffleIcon />} variant='contained'>{t("Shuffle")}</Button>
-              <Button onClick={saveShuffledValues} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
-            </Grid>
-            <Grid item xs={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-              <Button onClick={() => setMode("rockandroll")} startIcon={<CasinoIcon />} variant='contained'>{t("Return to rolling mode")}</Button>
-            </Grid>
-            <Grid item xs={12}>&nbsp;</Grid>
-          </Grid >
-        </div>;
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+              <Grid item xs={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                <Button onClick={shuffleValues} startIcon={<ShuffleIcon />} variant='contained'>{t("Shuffle")}</Button>
+                <Button onClick={saveShuffledValues} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
+              </Grid>
+              <Grid item xs={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                <Button onClick={() => setMode("rockandroll")} startIcon={<CasinoIcon />} variant='contained'>{t("Return to rolling mode")}</Button>
+              </Grid>
+              <Grid item xs={12}>&nbsp;</Grid>
+            </Grid >
+          </div>
+        );
       } catch (e) {
         return null;
       }

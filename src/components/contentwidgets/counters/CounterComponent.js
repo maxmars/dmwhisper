@@ -19,18 +19,23 @@ function CircularProgressWithLabel({ value, sizePercent = 10, thickness = 3.6 })
     }, [sizePercent]);
 
     return (
-        <Box position="relative" display="inline-flex">
+        <Box
+            sx={{
+                position: "relative",
+                display: "inline-flex"
+            }}>
             <CircularProgress variant="determinate" value={value} size={size} thickness={thickness} />
             <Box
-                top={0}
-                left={0}
-                bottom={0}
-                right={0}
-                position="absolute"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-            >
+                sx={{
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    right: 0,
+                    position: "absolute",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}>
                 <Typography variant="caption" component="div" color="textSecondary">
                     {`${Math.round(value)}%`}
                 </Typography>
@@ -135,7 +140,14 @@ function CounterComponent(props) {
     return (
         <>
             {mode === 'input' ? (
-                <Grid justifyContent="center" container spacing={2} direction="column" alignItems="center">
+                <Grid
+                    container
+                    spacing={2}
+                    direction="column"
+                    sx={{
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}>
                     <Grid item xs={12} sx={{ width: '100%' }} >&nbsp;</Grid>
                     <Grid item xs={12} sx={{ width: '95%' }} >
                         <TextField
@@ -172,14 +184,23 @@ function CounterComponent(props) {
                     </Grid>
                 </Grid>
             ) : (
-                <Grid container spacing={2} direction="column" alignItems="center" sx={{ width: '100%' }}>
+                <Grid
+                    container
+                    spacing={2}
+                    direction="column"
+                    sx={{
+                        alignItems: "center",
+                        width: '100%'
+                    }}>
                     <Grid item xs={12}>
                         <Typography>{counterName}</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <CircularProgressWithLabel value={(currentValue / maxCounter) * 100} sizePercent={30} thickness={6} />
                     </Grid>
-                    <Grid item xs={12} container spacing={1} justifyContent="center">
+                    <Grid item xs={12} container spacing={1} sx={{
+                        justifyContent: "center"
+                    }}>
                         <Grid item>
                             <Button variant="contained" onClick={handleDecrement}>
                                 <RemoveCircleOutline />

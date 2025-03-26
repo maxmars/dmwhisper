@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import useTheme from '@mui/private-theming/useTheme';
+import { useTheme } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@mui/material/TextField';
@@ -242,7 +242,14 @@ const TrapSetEdit = (props) => {
 
     return (
       <Grid container >
-        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
           <Typography>{t("Edited trap set:")} {props.itemId}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -281,7 +288,14 @@ const TrapSetEdit = (props) => {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
           <Typography>{t("List of RNG values")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -296,12 +310,19 @@ const TrapSetEdit = (props) => {
             rows={rows}
             columns={columns}
             hideFooterPagination={true}
-            paginationModel={{ page: 1, pageSize: 1000 }}
+            paginationModel={{ page: 0, pageSize: 100 }}
           />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
           <Typography>{t("Add a new RNG:")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -346,7 +367,6 @@ const TrapSetEdit = (props) => {
             sx={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-
         <CKEditor
           editor={Editor}
           data={currentMenuContent}
@@ -370,7 +390,6 @@ const TrapSetEdit = (props) => {
             ckEditorThemeSync();
           }}
         />
-
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}><Typography>{t("Roll on the following tables:")}</Typography></Grid>
         <Grid item xs={12}>
@@ -415,26 +434,35 @@ const TrapSetEdit = (props) => {
     // get result from itemToDelete
     const result = trapSet.rng.find((rng) => rng.min + '-' + rng.max === itemToDelete).result;
 
-    return <Grid container >
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Typography>{t("Warning! RNG is about to be deleted")}</Typography>
-      </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>
-        <Typography>{t("Do you really want to delete RNG")} {itemToDelete} ({result})?</Typography>
-      </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button onClick={() => deleteRng(itemToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
-      </Grid>
-      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button onClick={() => setItemToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
-      </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-    </Grid >
+    return (
+      <Grid container >
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
+          <Typography>{t("Warning! RNG is about to be deleted")}</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>
+          <Typography>{t("Do you really want to delete RNG")} {itemToDelete} ({result})?</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Button onClick={() => deleteRng(itemToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
+        </Grid>
+        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Button onClick={() => setItemToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+      </Grid >
+    );
   }
 
 }

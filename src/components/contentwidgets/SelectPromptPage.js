@@ -81,7 +81,14 @@ const SelectPromptPage = ({ pageContent, onCancel }) => {
 
     if (showSpinner) {
         return (
-            <Grid container spacing={3} direction="column" alignItems="center" justifyContent="center">
+            <Grid
+                container
+                spacing={3}
+                direction="column"
+                sx={{
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}>
                 <Grid item xs={12}>
                     &nbsp;
                 </Grid>

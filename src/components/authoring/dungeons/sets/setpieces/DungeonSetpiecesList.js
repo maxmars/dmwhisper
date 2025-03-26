@@ -12,7 +12,7 @@ import Alert from '@mui/material/Alert';
 import { useDispatch } from 'react-redux';
 import { addDungeonSetpiece, removeDungeonSetpiece } from '../../../../../store/slices/content';
 import { setDungeonSetpiecesFilter } from '../../../../../store/slices/defaults';
-import useTheme from '@mui/private-theming/useTheme';
+import { useTheme } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
@@ -103,7 +103,14 @@ const DungeonSetpiecesList = (props) => {
     return (
       <Grid container >
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
           <Typography>{t("List of setpiece sets")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -130,7 +137,7 @@ const DungeonSetpiecesList = (props) => {
             rows={contentsList}
             columns={columns}
             hideFooterPagination={true}
-            paginationModel={{ page: 1, pageSize: 1000 }}
+            paginationModel={{ page: 0, pageSize: 100 }}
           />
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -139,7 +146,14 @@ const DungeonSetpiecesList = (props) => {
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
         <Grid item xs={12}>&nbsp;</Grid>
-        <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
           <Typography>{t("Add a new setpiece set:")}</Typography>
         </Grid>
         <Grid item xs={12}>&nbsp;</Grid>
@@ -168,26 +182,35 @@ const DungeonSetpiecesList = (props) => {
       </Grid >
     );
   } else {
-    return <Grid container >
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12} bgcolor={theme.palette.warning.main} color={theme.palette.warning.contrastText} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Typography>{t("Warning! Setpiece set is about to be deleted")}</Typography>
-      </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>
-        <Typography>{t("Do you really want to delete setpiece set")} {itemIdToDelete}?</Typography>
-      </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button onClick={() => deleteItem(itemIdToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
-      </Grid>
-      <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Button onClick={() => setItemIdToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
-      </Grid>
-      <Grid item xs={12}>&nbsp;</Grid>
-    </Grid >
+    return (
+      <Grid container >
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid
+          item
+          xs={12}
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          sx={{
+            bgcolor: theme.palette.warning.main,
+            color: theme.palette.warning.contrastText
+          }}>
+          <Typography>{t("Warning! Setpiece set is about to be deleted")}</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>
+          <Typography>{t("Do you really want to delete setpiece set")} {itemIdToDelete}?</Typography>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Button onClick={() => deleteItem(itemIdToDelete)} startIcon={<CheckIcon />} variant="contained" color="primary">{t("Yes")}</Button>
+        </Grid>
+        <Grid item xs={6} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Button onClick={() => setItemIdToDelete(null)} startIcon={<CloseIcon />} variant="contained" color="primary">{t("No")}</Button>
+        </Grid>
+        <Grid item xs={12}>&nbsp;</Grid>
+      </Grid >
+    );
   }
 }
 

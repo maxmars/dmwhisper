@@ -22,7 +22,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { useDispatch } from 'react-redux';
-import useTheme from '@mui/private-theming/useTheme';
+import { useTheme } from '@mui/material/styles';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import ContentCutIcon from '@mui/icons-material/ContentCut';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
@@ -528,7 +528,6 @@ export default function MenuEdit(props) {
             <Grid item xs={10}>
                 <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{contentName}</Typography>
             </Grid>
-
             <Grid item xs={12}>&nbsp;</Grid>
             <Grid item xs={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Button startIcon={<ContentCutIcon />} disabled={path === ""} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => cutContent(path)}>{t("Cut")}</Button>
@@ -541,9 +540,7 @@ export default function MenuEdit(props) {
             <Grid item xs={4} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <Button startIcon={<ContentPasteIcon />} disabled={wholeContent.clipboardAction === null} style={{ width: "100%" }} variant="contained" color="warning" onClick={() => pasteContent(wholeContent, path)}>{t("Paste")}</Button>
             </Grid>
-
             <Grid item xs={12}>&nbsp;</Grid>
-
             <Grid item xs={12}>
                 <Accordion expanded={headerInfoOpen} onChange={(event, newExpanded) => setHeaderInfoOpen(newExpanded)}>
                     <AccordionSummary

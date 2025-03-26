@@ -17,7 +17,7 @@ import { useEffect } from 'react';
 import { clearThrows, updateThrow, deleteThrow } from '../../store/slices/throws.js';
 import { useTranslation } from 'react-i18next';
 import { copyIntoClipboard } from '../../utils/index.js';
-import useTheme from '@mui/private-theming/useTheme';
+import { useTheme } from '@mui/material/styles';
 import { format } from 'date-fns';
 import DungeonComponent from '../contentwidgets/dungeons/DungeonComponent.js';
 import AreaMapComponent from '../contentwidgets/areamaps/AreaMapComponent.js';
@@ -277,18 +277,24 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                             {throwResult.timestamp}
                           </Grid>
                           <Grid item xs={12}>
-                            <Box sx={{ width: '100%', borderBottom: '1px solid', borderColor: dark ? 'yellow' : 'blue' }} />
+                            <Box sx={[{
+                              width: '100%',
+                              borderBottom: '1px solid'
+                            }, dark ? {
+                              borderColor: 'yellow'
+                            } : {
+                              borderColor: 'blue'
+                            }]} />
                           </Grid>
                         </Grid>
                       </AccordionDetails>
                     </Accordion>
-                  </ListItem>);
+                  </ListItem>
+                );
               } else if (throwResult.result.dungeonRooms) {
-
                 if (searchText.length > 0 && !throwResult.result.dungeonName.toLowerCase().includes(searchText.toLowerCase())) {
                   return null;
                 }
-
                 return (
                   <ListItem key={"dungeon" + index}>
                     <Accordion style={{ width: "100%" }}>
@@ -296,7 +302,6 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                         <Typography>{t("Dungeon") + " " + throwResult.result.dungeonName}</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
-
                         <div style={{ backgroundColor: dark ? 'black' : 'white' }} id={"dungeondraw" + index}>
                           <div>{t("Dungeon") + " " + throwResult.result.dungeonName}</div>
                           <br />
@@ -304,7 +309,6 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                           <br />
                           <br />
                         </div>
-
                         <Grid container sx={{ overflow: 'scroll' }}>
                           <Grid item xs={12}>
                             <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
@@ -324,7 +328,14 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                             {throwResult.timestamp}
                           </Grid>
                           <Grid item xs={12}>
-                            <Box sx={{ width: '100%', borderBottom: '1px solid', borderColor: dark ? 'yellow' : 'blue' }} />
+                            <Box sx={[{
+                              width: '100%',
+                              borderBottom: '1px solid'
+                            }, dark ? {
+                              borderColor: 'yellow'
+                            } : {
+                              borderColor: 'blue'
+                            }]} />
                           </Grid>
                         </Grid>
                       </AccordionDetails>
@@ -332,11 +343,9 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                   </ListItem>
                 );
               } else {
-
                 if (searchText.length > 0 && !throwResult.result.toLowerCase().includes(searchText.toLowerCase())) {
                   return null;
                 }
-
                 return (
                   <ListItem key={"ris" + index}>
                     <Accordion style={{ width: "100%" }}>
@@ -344,7 +353,6 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                         <Typography>{t("Contenuto salvato in data") + " " + throwResult.timestamp}</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
-
                         <div>
                           <div style={{ maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white' }} id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} />
                           <br /><br />
@@ -376,7 +384,14 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                             {throwResult.timestamp}
                           </Grid>
                           <Grid item xs={12}>
-                            <Box sx={{ width: '100%', borderBottom: '1px solid', borderColor: dark ? 'yellow' : 'blue' }} />
+                            <Box sx={[{
+                              width: '100%',
+                              borderBottom: '1px solid'
+                            }, dark ? {
+                              borderColor: 'yellow'
+                            } : {
+                              borderColor: 'blue'
+                            }]} />
                           </Grid>
                         </Grid>
                       </AccordionDetails>
@@ -403,9 +418,5 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
     );
   }
   //#endregion render
-
-
 };
-
-
 export default SavedResultsPage;
