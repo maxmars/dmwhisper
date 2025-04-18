@@ -13,7 +13,7 @@ const Info = () => {
       <Grid size={12} sx={{ display: 'flex', justifyContent: 'center' }}>
         <Typography variant='body' sx={{
           m: 2
-        }}>v. 1.61.0</Typography>
+        }}>v. 1.62.0</Typography>
       </Grid>
       <Grid size={12}>&nbsp;</Grid>
       <Grid size={12} sx={{ display: 'flex', justifyContent: 'center' }}>

@@ -28,6 +28,7 @@ const DungeonCanvas = (props) => {
     height: window.innerHeight - 100,
   });
 
+  const [corridorLayout, setCorridorLayout] = useState([]);
   const [drawnCorridors, setDrawnCorridors] = useState([]);
   const [xInc, setXInc] = useState(0);
   const [yInc, setYInc] = useState(0);
@@ -91,6 +92,33 @@ const DungeonCanvas = (props) => {
   }, [props.dungeonRooms.length]);
 
   useEffect(() => {
+    const newCorridorLayout = [];
+    for (let i = 0; i < props.dungeonRooms.length - 1; i++) {
+      if (Math.random() < 0.5 && i + 1 < props.dungeonRooms.length) {
+        newCorridorLayout.push([i, i + 1]); // Collegamento alla stanza successiva
+      } else if (i + 2 < props.dungeonRooms.length) {
+        newCorridorLayout.push([i, i + 1]); // Collegamento alla stanza successiva
+        newCorridorLayout.push([i, i + 2]); // Collegamento alla seconda stanza successiva
+        i++; // Salta la stanza successiva
+      }
+    }
+  
+    // Assicurati che l'ultima stanza sia connessa
+    const lastRoomIndex = props.dungeonRooms.length - 1;
+    const semiLastRoomIndex = props.dungeonRooms.length - 2;
+  
+    const isLastRoomConnected = newCorridorLayout.some(
+      ([fromIndex, toIndex]) => fromIndex === lastRoomIndex || toIndex === lastRoomIndex
+    );
+  
+    if (!isLastRoomConnected && lastRoomIndex > 0) {
+      newCorridorLayout.push([semiLastRoomIndex, lastRoomIndex]); // Collega la penultima stanza all'ultima
+    }
+  
+    setCorridorLayout(newCorridorLayout);
+  }, [props.dungeonRooms]);
+
+  useEffect(() => {
     drawMap();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [windowSize.height, windowSize.width, bottomBarHeight, iconbarHeight]);
@@ -149,88 +177,87 @@ const DungeonCanvas = (props) => {
     drawnCorridors, props.dungeonRooms, xInc, yInc, props.selectedRoom]);
 
 
-  const drawCorridors = (color, all) => {
+  const drawCorridors = (color) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
 
-    const realX = mapOffset.x + currentDragDistance.x; //mapOffset.x - bcr.left;
-    const realY = mapOffset.y + currentDragDistance.y; //mapOffset.y - bcr.top;
+    const realX = mapOffset.x + currentDragDistance.x;
+    const realY = mapOffset.y + currentDragDistance.y;
 
-    // draw the corridors
     context.lineWidth = 5;
 
-    for (let i = 1; i < props.dungeonRooms.length; i++) {
-      // Se i è presente nell'array drawnCorridors, allora disegna il corridoio
-      if (all === true || drawnCorridors.includes(i)) {
-        let prevRoom = props.dungeonRooms[i - 1];
-        let currRoom = props.dungeonRooms[i];
+    corridorLayout.forEach(([fromIndex, toIndex]) => {
+      const fromRoom = props.dungeonRooms[fromIndex];
+      const toRoom = props.dungeonRooms[toIndex];
 
-        let prevCenter = { x: prevRoom.x + Math.floor(prevRoom.width / 2), y: prevRoom.y + Math.floor(prevRoom.height / 2) };
-        let currCenter = { x: currRoom.x + Math.floor(currRoom.width / 2), y: currRoom.y + Math.floor(currRoom.height / 2) };
+      const fromCenter = {
+        x: fromRoom.x + Math.floor(fromRoom.width / 2),
+        y: fromRoom.y + Math.floor(fromRoom.height / 2),
+      };
+      const toCenter = {
+        x: toRoom.x + Math.floor(toRoom.width / 2),
+        y: toRoom.y + Math.floor(toRoom.height / 2),
+      };
 
-        context.strokeStyle = color;
-        context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
-        context.strokeRect(currCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
+      context.strokeStyle = color;
+      context.strokeRect(fromCenter.x * xInc + 5 + realX, fromCenter.y * yInc + 5 + realY, toCenter.x * xInc - fromCenter.x * xInc, 5);
+      context.strokeRect(toCenter.x * xInc + 5 + realX, fromCenter.y * yInc + 5 + realY, 5, toCenter.y * yInc - fromCenter.y * yInc);
 
-        context.strokeStyle = 'yellow';
-        context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, 5);
-        context.strokeRect(currCenter.x * xInc + 5 + realX, currCenter.y * yInc + 5 + realY, 5, 5);
-
-      }
-    }
-
-  }
+      context.strokeStyle = 'yellow';
+      context.strokeRect(fromCenter.x * xInc + 5 + realX, fromCenter.y * yInc + 5 + realY, 5, 5);
+      context.strokeRect(toCenter.x * xInc + 5 + realX, toCenter.y * yInc + 5 + realY, 5, 5);
+    });
+  };
 
   const drawSelectedRoomCorridors = (color) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
-
-    const realX = mapOffset.x + currentDragDistance.x; //mapOffset.x - bcr.left;
-    const realY = mapOffset.y + currentDragDistance.y; //mapOffset.y - bcr.top;
-
+  
+    const realX = mapOffset.x + currentDragDistance.x;
+    const realY = mapOffset.y + currentDragDistance.y;
+  
     // draw the corridors
     context.lineWidth = 5;
-
+  
     if (props.selectedRoom === -1) {
       return;
     }
-
-    if (props.selectedRoom > 0) {
-      let prevRoom = props.dungeonRooms[props.selectedRoom - 1];
-      let currRoom = props.dungeonRooms[props.selectedRoom];
-
-      let prevCenter = { x: prevRoom.x + Math.floor(prevRoom.width / 2), y: prevRoom.y + Math.floor(prevRoom.height / 2) };
-      let currCenter = { x: currRoom.x + Math.floor(currRoom.width / 2), y: currRoom.y + Math.floor(currRoom.height / 2) };
-
+  
+    // Trova i corridoi che coinvolgono la stanza selezionata
+    const selectedCorridors = corridorLayout
+      .map((corridor, index) => ({ corridor, index })) // Aggiungi l'indice del corridoio
+      .filter(({ corridor: [fromIndex, toIndex] }) => fromIndex === props.selectedRoom || toIndex === props.selectedRoom);
+  
+    // Ordina i corridoi in base alla distanza tra gli indici in corridorLayout (decrescente)
+    selectedCorridors.sort((a, b) => Math.abs(b.index - corridorLayout.indexOf(b.corridor)) - Math.abs(a.index - corridorLayout.indexOf(a.corridor)));
+  
+    // Disegna i corridoi ordinati
+    selectedCorridors.forEach(({ corridor: [fromIndex, toIndex] }) => {
+      const fromRoom = props.dungeonRooms[fromIndex];
+      const toRoom = props.dungeonRooms[toIndex];
+  
+      const fromCenter = {
+        x: fromRoom.x + Math.floor(fromRoom.width / 2),
+        y: fromRoom.y + Math.floor(fromRoom.height / 2),
+      };
+      const toCenter = {
+        x: toRoom.x + Math.floor(toRoom.width / 2),
+        y: toRoom.y + Math.floor(toRoom.height / 2),
+      };
+  
       context.strokeStyle = color;
-
-      context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
-      context.strokeRect(currCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
-
+  
+      // Disegna il corridoio tra le due stanze
+      context.strokeRect(fromCenter.x * xInc + 5 + realX, fromCenter.y * yInc + 5 + realY, toCenter.x * xInc - fromCenter.x * xInc, 5);
+      context.strokeRect(toCenter.x * xInc + 5 + realX, fromCenter.y * yInc + 5 + realY, 5, toCenter.y * yInc - fromCenter.y * yInc);
+  
+      // Disegna i punti finali del corridoio
       context.strokeStyle = 'yellow';
-      context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, 5);
-      context.strokeRect(currCenter.x * xInc + 5 + realX, currCenter.y * yInc + 5 + realY, 5, 5);
-    }
-
-    if (props.selectedRoom < props.dungeonRooms.length - 1) {
-      let prevRoom = props.dungeonRooms[props.selectedRoom];
-      let currRoom = props.dungeonRooms[props.selectedRoom + 1];
-
-      let prevCenter = { x: prevRoom.x + Math.floor(prevRoom.width / 2), y: prevRoom.y + Math.floor(prevRoom.height / 2) };
-      let currCenter = { x: currRoom.x + Math.floor(currRoom.width / 2), y: currRoom.y + Math.floor(currRoom.height / 2) };
-
-      context.strokeStyle = color;
-
-      context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, currCenter.x * xInc - prevCenter.x * xInc, 5);
-      context.strokeRect(currCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, currCenter.y * yInc - prevCenter.y * yInc);
-
-      context.strokeStyle = 'yellow';
-      context.strokeRect(prevCenter.x * xInc + 5 + realX, prevCenter.y * yInc + 5 + realY, 5, 5);
-      context.strokeRect(currCenter.x * xInc + 5 + realX, currCenter.y * yInc + 5 + realY, 5, 5);
-    }
-
-  }
-
+      context.strokeRect(fromCenter.x * xInc + 5 + realX, fromCenter.y * yInc + 5 + realY, 5, 5);
+      context.strokeRect(toCenter.x * xInc + 5 + realX, toCenter.y * yInc + 5 + realY, 5, 5);
+    });
+  };
+    
   const drawMap = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
@@ -471,7 +498,7 @@ const DungeonCanvas = (props) => {
               x: mapOffset.x * scaleFactor + midPoint.x * (1 - scaleFactor),
               y: mapOffset.y * scaleFactor + midPoint.y * (1 - scaleFactor),
             };
-            
+
             setZoomlevel(newZoomLevel);
             setMapOffset(newMapOffset);
             setInitialPinchDistance(distance);

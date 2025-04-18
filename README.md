@@ -383,6 +383,10 @@ The first table here contains references to the two tables next to it.
 
 # Log of Changes
 
+    18 Apr 2025
+    -----------
+    - 1.62.0 Improvements to dungeons layout.
+
     19 Gen 2025
     -----------
     - 1.61.0 You can now choose an OpenAI model before sending a prompt, overriding the default model that is saved in the settings page.
