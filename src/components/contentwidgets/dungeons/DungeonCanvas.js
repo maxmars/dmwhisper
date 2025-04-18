@@ -255,6 +255,20 @@ const DungeonCanvas = (props) => {
       // Disegna il corridoio tra le due stanze
       context.strokeRect(fromCenter.x * xInc + 5 + realX, fromCenter.y * yInc + 5 + realY, toCenter.x * xInc - fromCenter.x * xInc, 5);
       context.strokeRect(toCenter.x * xInc + 5 + realX, fromCenter.y * yInc + 5 + realY, 5, toCenter.y * yInc - fromCenter.y * yInc);
+    });
+
+    selectedCorridors.forEach(({ corridor: [fromIndex, toIndex] }) => {
+      const fromRoom = props.dungeonRooms[fromIndex];
+      const toRoom = props.dungeonRooms[toIndex];
+  
+      const fromCenter = {
+        x: fromRoom.x + Math.floor(fromRoom.width / 2),
+        y: fromRoom.y + Math.floor(fromRoom.height / 2),
+      };
+      const toCenter = {
+        x: toRoom.x + Math.floor(toRoom.width / 2),
+        y: toRoom.y + Math.floor(toRoom.height / 2),
+      };
   
       // Disegna i punti finali del corridoio
       context.strokeStyle = 'yellow';
