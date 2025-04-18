@@ -6,7 +6,7 @@ import CasinoIcon from '@mui/icons-material/Casino';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import { useSelector, useDispatch } from 'react-redux';
 import { useMemo } from 'react';
-import { getDungeonRooms, layoutRooms } from '../../../snippets/dungeons/DungeonLib.js';
+import { getDungeonRooms, layoutRooms, getCorridorLayout } from '../../../snippets/dungeons/DungeonLib.js';
 import DungeonComponent from './DungeonComponent.js';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Grid } from '@mui/material';
@@ -114,6 +114,7 @@ export default function DungeonExplore(props) {
                 });
         
                 setDungeonRooms(processedDungeonRooms);
+                setCorridorLayout(getCorridorLayout(processedDungeonRooms));
 
                 return processedDungeonRooms;
             }
@@ -126,6 +127,7 @@ export default function DungeonExplore(props) {
     }
 
     const [dungeonRooms, setDungeonRooms] = useState(null);
+    const [corridorLayout, setCorridorLayout] = useState(null);
     const [pageMode, setPageMode] = useState(dngnsetpiece ? 'play' : 'setup');
 
     const dungeonSetpiecesNames = useMemo(
@@ -198,6 +200,7 @@ export default function DungeonExplore(props) {
 
             if (lastTableContent && lastTableContent.diceThrow && lastTableContent.diceThrow.dungeonRooms) {
                 setDungeonRooms(lastTableContent.diceThrow.dungeonRooms);
+                setCorridorLayout(lastTableContent.diceThrow.dungeonCorridorsLayout);
             } else {
                 generateRooms();
             }
@@ -224,11 +227,14 @@ export default function DungeonExplore(props) {
             return processedDungeonRoom;
         });
 
+        const corridorLayout = getCorridorLayout(processedDungeonRooms);
+
         try {
             dispatch(setLastTableContent({
                 contentId: props.content.id + "TAB" + props.currentTab,
                 diceThrow: {
-                    dungeonRooms: processedDungeonRooms
+                    dungeonRooms: processedDungeonRooms,
+                    dungeonCorridorsLayout: corridorLayout
                 },
                 htmlContent: null
             }));
@@ -237,6 +243,7 @@ export default function DungeonExplore(props) {
         }
 
         setDungeonRooms(processedDungeonRooms);
+        setCorridorLayout(corridorLayout);
     }
 
     const saveRoll = () => {
@@ -256,7 +263,8 @@ export default function DungeonExplore(props) {
 
         const contentToSave = {
             dungeonName: dungeonSetpiece,
-            dungeonRooms: processedDungeonRooms
+            dungeonRooms: processedDungeonRooms,
+            dungeonCorridorsLayout: corridorLayout,
         };
         dispatch(addThrow({ result: contentToSave, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
     };
@@ -293,10 +301,14 @@ export default function DungeonExplore(props) {
                     numberOfRooms: numberOfRooms
                 }
             ));
+
+            const corridorLayout = getCorridorLayout(processedDungeonRooms);
+
             dispatch(setLastTableContent({
                 contentId: 'dungeonExplore',
                 diceThrow: {
                     dungeonRooms: processedDungeonRooms,
+                    dungeonCorridorsLayout: corridorLayout
                 },
                 htmlContent: null
             }));
@@ -439,7 +451,8 @@ export default function DungeonExplore(props) {
                 <Grid size={12}>
                     <DungeonComponent
                         style={{ width: '90%' }}
-                        dungeonRooms={dungeonRooms} />
+                        dungeonRooms={dungeonRooms}
+                        dungeonCorridorsLayout={corridorLayout} />
                 </Grid>
                 <Grid size={12} style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
                     <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>

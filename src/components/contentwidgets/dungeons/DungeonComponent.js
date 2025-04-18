@@ -159,6 +159,7 @@ export default function DungeonComponent(props) {
                     <DungeonCanvas
                         style={{ width: '100%' }}
                         dungeonRooms={props.dungeonRooms}
+                        corridorLayout={props.dungeonCorridorsLayout}
                         selectedRoom={selectedRoom}
                         onRoomSelect={onRoomSelect}
                         onInfoClick={onInfoClick} />

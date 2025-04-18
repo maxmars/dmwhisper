@@ -422,3 +422,30 @@ const roomsOverlap = (room1, room2) => {
 const randomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+export const getCorridorLayout = (dungeonRooms) => {
+    const newCorridorLayout = [];
+    for (let i = 0; i < dungeonRooms.length - 1; i++) {
+        if (Math.random() < 0.5 && i + 1 < dungeonRooms.length) {
+            newCorridorLayout.push([i, i + 1]); // Collegamento alla stanza successiva
+        } else if (i + 2 < dungeonRooms.length) {
+            newCorridorLayout.push([i, i + 1]); // Collegamento alla stanza successiva
+            newCorridorLayout.push([i, i + 2]); // Collegamento alla seconda stanza successiva
+            i++; // Salta la stanza successiva
+        }
+    }
+
+    // Assicurati che l'ultima stanza sia connessa
+    const lastRoomIndex = dungeonRooms.length - 1;
+    const semiLastRoomIndex = dungeonRooms.length - 2;
+
+    const isLastRoomConnected = newCorridorLayout.some(
+        ([fromIndex, toIndex]) => fromIndex === lastRoomIndex || toIndex === lastRoomIndex
+    );
+
+    if (!isLastRoomConnected && lastRoomIndex > 0) {
+        newCorridorLayout.push([semiLastRoomIndex, lastRoomIndex]); // Collega la penultima stanza all'ultima
+    }
+
+    return newCorridorLayout;
+}

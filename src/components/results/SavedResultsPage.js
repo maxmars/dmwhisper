@@ -305,7 +305,9 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                         <div style={{ backgroundColor: dark ? 'black' : 'white' }} id={"dungeondraw" + index}>
                           <div>{t("Dungeon") + " " + throwResult.result.dungeonName}</div>
                           <br />
-                          <DungeonComponent dungeonRooms={throwResult.result.dungeonRooms} />
+                          <DungeonComponent 
+                            dungeonRooms={throwResult.result.dungeonRooms} 
+                            dungeonCorridorsLayout={throwResult.result.dungeonCorridorsLayout} />
                           <br />
                           <br />
                         </div>

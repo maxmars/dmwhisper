@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getDungeonRooms, layoutRooms } from '../../../snippets/dungeons/DungeonLib';
+import { getDungeonRooms, layoutRooms, getCorridorLayout } from '../../../snippets/dungeons/DungeonLib';
 import DungeonComponent from './DungeonComponent';
 import Button from '@mui/material/Button';
 import CasinoIcon from '@mui/icons-material/Casino';
@@ -18,6 +18,8 @@ export default function DungeonMap(props) {
     const dispatch = useDispatch();
 
     const [dungeonRooms, setDungeonRooms] = useState(null);
+    const [corridorLayout, setCorridorLayout] = useState(null);
+
     const { t } = useTranslation();
 
     const generateRooms = () => {
@@ -57,24 +59,28 @@ export default function DungeonMap(props) {
 
     const diceRoll = () => {
         const generatedRooms = generateRooms();
+        const corridorLayout = getCorridorLayout(generatedRooms);
 
         if (props.currentTab > -1) {
             dispatch(setLastTableContent({
                 contentId: props.content.id + "TAB" + props.currentTab,
                 diceThrow: {
-                    dungeonRooms: generatedRooms
+                    dungeonRooms: generatedRooms,
+                    dungeonCorridorsLayout: corridorLayout
                 },
                 htmlContent: null
             }));
         }
 
+        setCorridorLayout(corridorLayout);
         setDungeonRooms(generatedRooms);
     }
 
     const saveRoll = () => {
         const contentToSave = {
             dungeonName: props.content.label,
-            dungeonRooms: dungeonRooms
+            dungeonRooms: dungeonRooms,
+            dungeonCorridorsLayout: getCorridorLayout(dungeonRooms),
         };
         dispatch(addThrow({ result: contentToSave, timestamp: format(new Date(), "yyyy-MM-dd' 'HH:mm:ss") }));
     };
@@ -87,6 +93,7 @@ export default function DungeonMap(props) {
 
                 if (lastTableContent && lastTableContent.diceThrow && lastTableContent.diceThrow.dungeonRooms) {
                     setDungeonRooms(lastTableContent.diceThrow.dungeonRooms);
+                    setCorridorLayout(lastTableContent.diceThrow.dungeonCorridorsLayout);
                 } else {
                     diceRoll();
                 }
@@ -111,7 +118,8 @@ export default function DungeonMap(props) {
                 <Grid size={12}>
                     <DungeonComponent
                         style={{ width: '90%' }}
-                        dungeonRooms={dungeonRooms} />
+                        dungeonRooms={dungeonRooms}
+                        dungeonCorridorsLayout={corridorLayout} />
                 </Grid>
                 <Grid size={12} style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
                     <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>

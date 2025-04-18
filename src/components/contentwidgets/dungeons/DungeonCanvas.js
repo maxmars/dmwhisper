@@ -92,6 +92,11 @@ const DungeonCanvas = (props) => {
   }, [props.dungeonRooms.length]);
 
   useEffect(() => {
+    if (props.corridorLayout) {
+      setCorridorLayout(props.corridorLayout);
+      return;
+    }
+    
     const newCorridorLayout = [];
     for (let i = 0; i < props.dungeonRooms.length - 1; i++) {
       if (Math.random() < 0.5 && i + 1 < props.dungeonRooms.length) {
@@ -116,7 +121,7 @@ const DungeonCanvas = (props) => {
     }
   
     setCorridorLayout(newCorridorLayout);
-  }, [props.dungeonRooms]);
+  }, [props.corridorLayout, props.dungeonRooms]);
 
   useEffect(() => {
     drawMap();
