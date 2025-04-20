@@ -87,16 +87,18 @@ const DungeonCanvas = (props) => {
     }
   }
 
+
   useEffect(() => {
     setDrawnCorridors([...Array(props.dungeonRooms.length).keys()]);
   }, [props.dungeonRooms.length]);
+
 
   useEffect(() => {
     if (props.corridorLayout) {
       setCorridorLayout(props.corridorLayout);
       return;
     }
-    
+
     const newCorridorLayout = [];
     for (let i = 0; i < props.dungeonRooms.length - 1; i++) {
       if (Math.random() < 0.5 && i + 1 < props.dungeonRooms.length) {
@@ -107,26 +109,28 @@ const DungeonCanvas = (props) => {
         i++; // Salta la stanza successiva
       }
     }
-  
+
     // Assicurati che l'ultima stanza sia connessa
     const lastRoomIndex = props.dungeonRooms.length - 1;
     const semiLastRoomIndex = props.dungeonRooms.length - 2;
-  
+
     const isLastRoomConnected = newCorridorLayout.some(
       ([fromIndex, toIndex]) => fromIndex === lastRoomIndex || toIndex === lastRoomIndex
     );
-  
+
     if (!isLastRoomConnected && lastRoomIndex > 0) {
       newCorridorLayout.push([semiLastRoomIndex, lastRoomIndex]); // Collega la penultima stanza all'ultima
     }
-  
+
     setCorridorLayout(newCorridorLayout);
   }, [props.corridorLayout, props.dungeonRooms]);
+
 
   useEffect(() => {
     drawMap();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [windowSize.height, windowSize.width, bottomBarHeight, iconbarHeight]);
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -143,6 +147,7 @@ const DungeonCanvas = (props) => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+
 
   useEffect(() => {
     let maxCoordinateX = 0;
@@ -217,30 +222,30 @@ const DungeonCanvas = (props) => {
   const drawSelectedRoomCorridors = (color) => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
-  
+
     const realX = mapOffset.x + currentDragDistance.x;
     const realY = mapOffset.y + currentDragDistance.y;
-  
+
     // draw the corridors
     context.lineWidth = 5;
-  
+
     if (props.selectedRoom === -1) {
       return;
     }
-  
+
     // Trova i corridoi che coinvolgono la stanza selezionata
     const selectedCorridors = corridorLayout
       .map((corridor, index) => ({ corridor, index })) // Aggiungi l'indice del corridoio
       .filter(({ corridor: [fromIndex, toIndex] }) => fromIndex === props.selectedRoom || toIndex === props.selectedRoom);
-  
+
     // Ordina i corridoi in base alla distanza tra gli indici in corridorLayout (decrescente)
     selectedCorridors.sort((a, b) => Math.abs(b.index - corridorLayout.indexOf(b.corridor)) - Math.abs(a.index - corridorLayout.indexOf(a.corridor)));
-  
+
     // Disegna i corridoi ordinati
     selectedCorridors.forEach(({ corridor: [fromIndex, toIndex] }) => {
       const fromRoom = props.dungeonRooms[fromIndex];
       const toRoom = props.dungeonRooms[toIndex];
-  
+
       const fromCenter = {
         x: fromRoom.x + Math.floor(fromRoom.width / 2),
         y: fromRoom.y + Math.floor(fromRoom.height / 2),
@@ -249,9 +254,9 @@ const DungeonCanvas = (props) => {
         x: toRoom.x + Math.floor(toRoom.width / 2),
         y: toRoom.y + Math.floor(toRoom.height / 2),
       };
-  
+
       context.strokeStyle = color;
-  
+
       // Disegna il corridoio tra le due stanze
       context.strokeRect(fromCenter.x * xInc + 5 + realX, fromCenter.y * yInc + 5 + realY, toCenter.x * xInc - fromCenter.x * xInc, 5);
       context.strokeRect(toCenter.x * xInc + 5 + realX, fromCenter.y * yInc + 5 + realY, 5, toCenter.y * yInc - fromCenter.y * yInc);
@@ -260,7 +265,7 @@ const DungeonCanvas = (props) => {
     selectedCorridors.forEach(({ corridor: [fromIndex, toIndex] }) => {
       const fromRoom = props.dungeonRooms[fromIndex];
       const toRoom = props.dungeonRooms[toIndex];
-  
+
       const fromCenter = {
         x: fromRoom.x + Math.floor(fromRoom.width / 2),
         y: fromRoom.y + Math.floor(fromRoom.height / 2),
@@ -269,14 +274,14 @@ const DungeonCanvas = (props) => {
         x: toRoom.x + Math.floor(toRoom.width / 2),
         y: toRoom.y + Math.floor(toRoom.height / 2),
       };
-  
+
       // Disegna i punti finali del corridoio
       context.strokeStyle = 'yellow';
       context.strokeRect(fromCenter.x * xInc + 5 + realX, fromCenter.y * yInc + 5 + realY, 5, 5);
       context.strokeRect(toCenter.x * xInc + 5 + realX, toCenter.y * yInc + 5 + realY, 5, 5);
     });
   };
-    
+
   const drawMap = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
@@ -312,6 +317,20 @@ const DungeonCanvas = (props) => {
         context.strokeStyle = 'yellow';
         context.strokeRect(room.x * xInc + realX, room.y * yInc + realY, room.width * xInc, room.height * yInc);
       }
+
+      // Calcola la posizione dell'angolo in basso a sinistra
+      let textX = room.x * xInc + realX; // angolo sinistro
+      let textY = room.y * yInc + realY + room.height * yInc; // angolo inferiore
+
+      // Imposta il font e calcola la larghezza desiderata
+      let fontSize = (room.width * xInc) / 14; // larghezza del rettangolo
+      context.font = `${fontSize}px Arial`; // Usa un font proporzionato alla larghezza
+      context.textAlign = "left"; // Allinea il testo a sinistra
+      context.textBaseline = "bottom"; // Posiziona il testo al bordo inferiore
+      context.fillStyle = 'black'; // Colore del testo
+
+      // Disegna il testo
+      context.fillText(room.description, textX, textY);
     });
 
     // draw selected corridors
@@ -428,46 +447,6 @@ const DungeonCanvas = (props) => {
     roomClicked(x, y);
 
   }
-
-  // const screenTapped = (e) => {
-  //   try {
-  //     // get the canvas coordinates of the touch
-  //     const touch = e.changedTouches[0];
-
-  //     const canvas = canvasRef.current;
-  //     const bcr = canvas.getBoundingClientRect();
-
-  //     // If click is inside the zoom out icon, toggle the path visibility
-  //     // if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-  //     //   touch.clientX - bcr.left <= 50 && touch.clientX >= 0) {
-  //     //   if (zoomlevel > 0.5)
-  //     //     setZoomlevel(zoomlevel - 0.25);
-  //     //   return;
-  //     // }
-
-  //     // If click is inside the zoom in icon, toggle the path visibility
-  //     // if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-  //     //   touch.clientX - bcr.left <= 110 && touch.clientX >= 60) {
-  //     //   if (zoomlevel < 4)
-  //     //     setZoomlevel(zoomlevel + 0.25);
-  //     //   return;
-  //     // }
-
-  //     // If click is inside the info icon, toggle the info visibility
-  //     // if (touch.clientY > bcr.height + bcr.top - iconbarHeight &&
-  //     //   touch.clientX - bcr.left <= 170 && touch.clientX >= 120) {
-  //     //   props.onInfoClick();
-  //     //   return;
-  //     // }
-
-  //     const x = (touch.clientX - mapOffset.x - bcr.left) / xInc;
-  //     const y = (touch.clientY - mapOffset.y - bcr.top) / yInc;
-
-  //     roomClicked(x, y);
-  //   } catch (e) {
-  //     // No need to do anything
-  //   }
-  // }
 
   const calculateDistance = (touch1, touch2) => {
     const dx = touch2.pageX - touch1.pageX;

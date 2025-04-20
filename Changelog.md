@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    20 Apr 2025
+    -----------
+    - 1.63.0 Dungeon room names are now drawn inside each room.
+
     18 Apr 2025
     -----------
     - 1.62.0 Improvements to dungeons layout.
