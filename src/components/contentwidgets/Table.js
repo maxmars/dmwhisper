@@ -202,6 +202,12 @@ export default function Table(props) {
         let maxTempDieValue = 1;
         const table = getTable(content, props.content.data.table.trim());
 
+        if (!table || !table.rng) {
+          setMaxDieValue(1);
+          setListedValues([t("Error: No table found")]);
+          return null;
+        }
+
         table.rng.forEach(item => {
           if (item.max > maxTempDieValue) {
             maxTempDieValue = item.max;
