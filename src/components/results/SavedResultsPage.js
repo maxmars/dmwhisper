@@ -227,7 +227,7 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
         <Grid size={12}>&nbsp;</Grid>
         <Grid size={12}>&nbsp;</Grid>
         <Grid size={12}>
-          <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+          <List sx={{ width: '100%'/*, bgcolor: 'background.paper'*/ }}>
             {throws.sequence.map((throwResult, index) => {
               if (throwResult.result.cells) {
 

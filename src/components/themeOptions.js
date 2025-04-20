@@ -10,8 +10,8 @@ export const themeOptions = {
       main: '#f50057',
     },
     background: {
-      default: 'rgba(245, 230, 202, 0.3)',
-      paper: 'rgba(245, 230, 202, 0.3)',
+      default: 'rgba(245, 230, 202, 1.0)',
+      paper: 'rgba(245, 230, 202, 1.0)',
     },
     text: {
       primary: '#333333',
@@ -119,17 +119,32 @@ export const themeOptions = {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
+          minHeight: '100vh',
           backgroundImage: homepage ? `linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3)), url(${homepage}/images/diarybg.jpg)` : '',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'left bottom',
+          //backgroundSize: 'cover',
+          backgroundRepeat: 'repeat-y',
+          backgroundPosition: 'left top',
         },
       },
     },
-    MuiDrawer: {
+    MuiDataGrid: {
       styleOverrides: {
-        paper: {
-          backgroundColor: 'rgba(245, 230, 202, 1.0)', // Colore con opacità 100%
+        root: {
+          backgroundColor: 'rgba(245, 230, 202, 0.3)',
+        },
+      },
+    },
+    MuiAccordion: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'rgba(245, 230, 202, 0.3)',
+        },
+      },
+    },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'rgba(245, 230, 202, 0.3)',
         },
       },
     },
