@@ -40,28 +40,31 @@ import GeneralCounters from './contentwidgets/counters/GeneralCounters';
 import SavedResultsComponent from './results/SavedResultsComponent';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import ConfigPage from './settings/ConfigPage';
+import { themeOptions } from './themeOptions';
 
+
+const theme = createTheme(themeOptions);
 
 const DMWhisper = () => {
 
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
-  const [darkTheme, setDarkTheme] = useState(createTheme({
-    palette: {
-      mode: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    },
-  }));
-
   const navigate = useNavigate();
 
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-    setDarkTheme(createTheme({
-      palette: {
-        mode: event.matches ? 'dark' : 'light'
-      },
-    }));
-  });
+
+  // const [darkTheme, setDarkTheme] = useState(createTheme({
+  //   palette: {
+  //     mode: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  //   },
+  // }));
+
+  // window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+  //   setDarkTheme(createTheme({
+  //     palette: {
+  //       mode: event.matches ? 'dark' : 'light'
+  //     },
+  //   }));
+  // });
 
   React.useEffect(() => {
     const handleBackButton = (event) => {      
@@ -224,7 +227,7 @@ const DMWhisper = () => {
 
   try {
     return (
-      <ThemeProvider theme={darkTheme}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <div key="left" style={{ paddingLeft: "2em" }}>
           <IconButton aria-label="Menu" onClick={() => setMenuOpen(!menuOpen)} edge="start" color="inherit" >

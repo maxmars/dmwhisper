@@ -11,9 +11,9 @@ import Typography from '@mui/material/Typography';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Editor } from 'ckeditor5-custom-build/build/ckeditor';
 import { useState } from 'react';
-import { useRef } from 'react';
+// import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { clearThrows, updateThrow, deleteThrow } from '../../store/slices/throws.js';
 import { useTranslation } from 'react-i18next';
 import { copyIntoClipboard } from '../../utils/index.js';
@@ -38,7 +38,7 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
   const { t } = useTranslation();
   const throws = useSelector((st) => st.throws);
   const dispatch = useDispatch();
-  const mounted = useRef();
+  // const mounted = useRef();
   const [editedThrow, setEditedThrow] = useState(null);
   const [currentEditedContent, setCurrentEditedContent] = useState("");
   const [throwToBeDeleted, setThrowToBeDeleted] = useState(null);
@@ -48,45 +48,45 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
 
 
   //#region CKEditor stuff
-  useEffect(() => {
-    ckEditorThemeSync();
-  });
+  // useEffect(() => {
+  //   ckEditorThemeSync();
+  // });
 
-  const ckEditorThemeSync = () => {
-    setTimeout(() => {
-      let elToApply = document.getElementsByClassName("ck-content")[0];
-      if (elToApply) {
-        if (!mounted.current) {
-          // do componentDidMount logic
-          if (theme.palette.mode === "dark") {
-            elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
-          } else {
-            elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
-          }
-          mounted.current = true;
-        } else {
-          if (theme.palette.mode === "dark") {
-            elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
-          } else {
-            elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
-          }
-        }
-      }
+  // const ckEditorThemeSync = () => {
+  //   setTimeout(() => {
+  //     let elToApply = document.getElementsByClassName("ck-content")[0];
+  //     if (elToApply) {
+  //       if (!mounted.current) {
+  //         // do componentDidMount logic
+  //         if (theme.palette.mode === "dark") {
+  //           elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
+  //         } else {
+  //           elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
+  //         }
+  //         mounted.current = true;
+  //       } else {
+  //         if (theme.palette.mode === "dark") {
+  //           elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
+  //         } else {
+  //           elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
+  //         }
+  //       }
+  //     }
 
-      //     elToApply = document.getElementsByTagName("a");
+  //     //     elToApply = document.getElementsByTagName("a");
 
-      //     if (elToApply) {
-      //       const elArray = Array.from(elToApply);
-      //       elArray.forEach(element => {
-      //         if (theme.palette.mode === "dark") {
-      //           element.setAttribute("style", "color: white !important; background-color: black !important; font-size: 12px !important;");
-      //         } else {
-      //           element.setAttribute("style", "color: black !important; background-color: white !important; font-size: 12px !important;");
-      //         }
-      //       });
-      //     }
-    }, 250);
-  }
+  //     //     if (elToApply) {
+  //     //       const elArray = Array.from(elToApply);
+  //     //       elArray.forEach(element => {
+  //     //         if (theme.palette.mode === "dark") {
+  //     //           element.setAttribute("style", "color: white !important; background-color: black !important; font-size: 12px !important;");
+  //     //         } else {
+  //     //           element.setAttribute("style", "color: black !important; background-color: white !important; font-size: 12px !important;");
+  //     //         }
+  //     //       });
+  //     //     }
+  //   }, 250);
+  // }
 
   let lng = navigator.language.substring(0, 2).toLocaleLowerCase();
 
@@ -185,7 +185,7 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
             onReady={editor => {
               // You can store the "editor" and use when it is needed.
               //console.log('Editor is ready to use!', editor);
-              ckEditorThemeSync();
+              // ckEditorThemeSync();
             }}
             onChange={(event, editor) => {
               const data = editor.getData();
@@ -194,11 +194,11 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
             }}
             onBlur={(event, editor) => {
               //console.log('Blur.', editor);
-              ckEditorThemeSync();
+              // ckEditorThemeSync();
             }}
             onFocus={(event, editor) => {
               //console.log('Focus.', editor);
-              ckEditorThemeSync();
+              // ckEditorThemeSync();
             }}
           />
         </Grid>
@@ -254,22 +254,22 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                         <Typography>{t("Mappa salvata in data") + " " + throwResult.timestamp}</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
-                        <div style={{ maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white' }} id={"areamapdraw" + index}>
+                        <div style={{ maxWidth: "100%", width: "100%"/*, backgroundColor: dark ? 'black' : 'white'*/ }} id={"areamapdraw" + index}>
                           <AreaMapComponent cells={throwResult.result.cells} gridrowcells={throwResult.result.gridrowcells} dark={dark} />
                           <br /><br />
                         </div>
                         <Grid container sx={{ overflow: 'scroll' }}>
                           <Grid size={12}>
-                            <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
                               setThrowToBeDeleted(index);
                               setCurrentEditedContent(null);
                             }} />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
                               saveAsPdf("areamapdraw" + index);
                             }} />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
                               downloadJson({ contentType: "areamap", contentData: throwResult.result }, "savedMapContent.json");
                             }} />
                           </Grid>
@@ -280,11 +280,11 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                             <Box sx={[{
                               width: '100%',
                               borderBottom: '1px solid'
-                            }, dark ? {
+                            }/*, dark ? {
                               borderColor: 'yellow'
                             } : {
                               borderColor: 'blue'
-                            }]} />
+                            }*/ ]} />
                           </Grid>
                         </Grid>
                       </AccordionDetails>
@@ -313,16 +313,16 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                         </div>
                         <Grid container sx={{ overflow: 'scroll' }}>
                           <Grid size={12}>
-                            <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
                               setThrowToBeDeleted(index);
                               setCurrentEditedContent(null);
                             }} />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
                               saveAsPdf("dungeondraw" + index);
                             }} />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
                               downloadJson({ contentType: "dungeon", contentData: throwResult.result }, "savedDungeonContent.json");
                             }} />
                           </Grid>
@@ -333,11 +333,11 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                             <Box sx={[{
                               width: '100%',
                               borderBottom: '1px solid'
-                            }, dark ? {
+                            } /*, dark ? {
                               borderColor: 'yellow'
                             } : {
                               borderColor: 'blue'
-                            }]} />
+                            }*/ ]} />
                           </Grid>
                         </Grid>
                       </AccordionDetails>
@@ -356,29 +356,29 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                       </AccordionSummary>
                       <AccordionDetails>
                         <div>
-                          <div style={{ maxWidth: "100%", width: "100%", backgroundColor: dark ? 'black' : 'white' }} id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} />
+                          <div style={{ maxWidth: "100%", width: "100%"/*, backgroundColor: dark ? 'black' : 'white'*/ }} id={"throwHtmlContent" + index} dangerouslySetInnerHTML={{ __html: throwResult.result }} />
                           <br /><br />
                         </div>
                         <Grid container sx={{ overflow: 'scroll' }}>
                           <Grid size={12}>
-                            <EditIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            <EditIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
                               setEditedThrow(index);
                               setCurrentEditedContent(throwResult.result);
                             }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <AutoAwesomeIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            <AutoAwesomeIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
                               showGenAiWidget(throwResult.result);
                             }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <ContentCopyIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            <ContentCopyIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
                               throwCopy(index);
                             }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
                               setThrowToBeDeleted(index);
                               setCurrentEditedContent(null);
                             }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
                               saveAsPdf("throwHtmlContent" + index);
                             }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#0089ff", cursor: "pointer" }} onClick={() => {
+                            <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
                               downloadJson({ contentType: "text", contentData: throwResult.result }, "savedTextContent.json");
                             }} />
                           </Grid>
@@ -389,11 +389,11 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                             <Box sx={[{
                               width: '100%',
                               borderBottom: '1px solid'
-                            }, dark ? {
+                            }, /*dark ? {
                               borderColor: 'yellow'
                             } : {
                               borderColor: 'blue'
-                            }]} />
+                            }*/ ]} />
                           </Grid>
                         </Grid>
                       </AccordionDetails>

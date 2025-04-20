@@ -84,7 +84,7 @@ const SelectedContent = (props) => {
           width: '97vw',
           overflowY: 'hidden',
           overflowX: 'hidden',
-          backgroundColor: '#1976d2',
+          backgroundColor: '#5a4b3c',
           color: 'white',
           display: 'flex',
           alignItems: 'center',
@@ -96,7 +96,7 @@ const SelectedContent = (props) => {
           </IconButton>
         </Grid>
        <Grid size={11}>
-          <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{props.selectedContent ? props.selectedContent.label : ""}</Typography>
+          <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{ props.selectedContent ? props.selectedContent.label : ""}</Typography>
         </Grid>
       </Grid>
       <Grid

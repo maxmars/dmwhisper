@@ -91,7 +91,7 @@ const SpotlightedContent = (props) => {
           width: '97vw',
           overflowY: 'hidden',
           overflowX: 'hidden',
-          backgroundColor: '#1976d2',
+          backgroundColor: '#5a4b3c',
           color: 'white',
           display: 'flex',
           alignItems: 'center',

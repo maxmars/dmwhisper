@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useRef } from 'react';
+// import { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { FormControl, InputLabel, MenuItem, Select, Button, Grid, Typography, TextField, Alert } from '@mui/material';
@@ -39,7 +39,7 @@ const DungeonSetpieceEdit = (props) => {
   const [newPositionInDungeon, setNewPositionInDungeon] = useState("any"); // any, start, middle, end
   const [newRate, setNewRate] = useState("common"); // common (70%), uncommon (25%), rare (5%). Only for "any" and "middle" positions
   const [newMaxOccurrences, setNewMaxOccurrences] = useState(100);
-  const mounted = useRef();
+  // const mounted = useRef();
 
   const rows = setpiece.rng.map((rng, index) => {
     let description = rng.description;
@@ -54,45 +54,45 @@ const DungeonSetpieceEdit = (props) => {
   const dispatch = useDispatch();
 
   // CKEditor stuff
-  useEffect(() => {
-    ckEditorThemeSync();
-  });
+  // useEffect(() => {
+  //   ckEditorThemeSync();
+  // });
 
-  const ckEditorThemeSync = () => {
-    setTimeout(() => {
-      let elToApply = document.getElementsByClassName("ck-content")[0];
-      if (elToApply) {
-        if (!mounted.current) {
-          // do componentDidMount logic
-          if (theme.palette.mode === "dark") {
-            elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
-          } else {
-            elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
-          }
-          mounted.current = true;
-        } else {
-          if (theme.palette.mode === "dark") {
-            elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
-          } else {
-            elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
-          }
-        }
-      }
+  // const ckEditorThemeSync = () => {
+  //   setTimeout(() => {
+  //     let elToApply = document.getElementsByClassName("ck-content")[0];
+  //     if (elToApply) {
+  //       if (!mounted.current) {
+  //         // do componentDidMount logic
+  //         if (theme.palette.mode === "dark") {
+  //           elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
+  //         } else {
+  //           elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
+  //         }
+  //         mounted.current = true;
+  //       } else {
+  //         if (theme.palette.mode === "dark") {
+  //           elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
+  //         } else {
+  //           elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
+  //         }
+  //       }
+  //     }
 
-      // elToApply = document.getElementsByTagName("a");
+  //     // elToApply = document.getElementsByTagName("a");
 
-      // if (elToApply) {
-      //   const elArray = Array.from(elToApply);
-      //   elArray.forEach(element => {
-      //     if (theme.palette.mode === "dark") {
-      //       element.setAttribute("style", "color: white !important; background-color: black !important;");
-      //     } else {
-      //       element.setAttribute("style", "color: black !important; background-color: white !important;");
-      //     }
-      //   });
-      // }
-    }, 250);
-  }
+  //     // if (elToApply) {
+  //     //   const elArray = Array.from(elToApply);
+  //     //   elArray.forEach(element => {
+  //     //     if (theme.palette.mode === "dark") {
+  //     //       element.setAttribute("style", "color: white !important; background-color: black !important;");
+  //     //     } else {
+  //     //       element.setAttribute("style", "color: black !important; background-color: white !important;");
+  //     //     }
+  //     //   });
+  //     // }
+  //   }, 250);
+  // }
 
   let lng = navigator.language.substring(0, 2).toLocaleLowerCase();
 
@@ -379,11 +379,11 @@ const DungeonSetpieceEdit = (props) => {
           }}
           onBlur={(event, editor) => {
             //console.log('Blur.', editor);
-            ckEditorThemeSync();
+            // ckEditorThemeSync();
           }}
           onFocus={(event, editor) => {
             //console.log('Focus.', editor);
-            ckEditorThemeSync();
+            // ckEditorThemeSync();
           }}
         />
         <Grid size={12}>&nbsp;</Grid>

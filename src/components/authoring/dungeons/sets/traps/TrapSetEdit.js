@@ -20,7 +20,7 @@ import TablesChooser from '../../../tables/TablesChooser.js';
 import { uuidv4 } from '../../../../../utils/index.js';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Editor } from 'ckeditor5-custom-build/build/ckeditor';
-import { useRef } from 'react';
+// import { useRef } from 'react';
 
 
 const TrapSetEdit = (props) => {
@@ -42,7 +42,7 @@ const TrapSetEdit = (props) => {
   const [newMax, setNewMax] = useState(null);
   const [newLabel, setNewLabel] = useState(null);
   const [newMaxOccurrences, setNewMaxOccurrences] = useState(100);
-  const mounted = useRef();
+  // const mounted = useRef();
 
   const rows = trapSet.rng.map((rng) => {
     let description = rng.description;
@@ -56,45 +56,45 @@ const TrapSetEdit = (props) => {
   const dispatch = useDispatch();
 
   // CKEditor stuff
-  useEffect(() => {
-    ckEditorThemeSync();
-  });
+  // useEffect(() => {
+  //   ckEditorThemeSync();
+  // });
 
-  const ckEditorThemeSync = () => {
-    setTimeout(() => {
-      let elToApply = document.getElementsByClassName("ck-content")[0];
-      if (elToApply) {
-        if (!mounted.current) {
-          // do componentDidMount logic
-          if (theme.palette.mode === "dark") {
-            elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
-          } else {
-            elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
-          }
-          mounted.current = true;
-        } else {
-          if (theme.palette.mode === "dark") {
-            elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
-          } else {
-            elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
-          }
-        }
-      }
+  // const ckEditorThemeSync = () => {
+  //   setTimeout(() => {
+  //     let elToApply = document.getElementsByClassName("ck-content")[0];
+  //     if (elToApply) {
+  //       if (!mounted.current) {
+  //         // do componentDidMount logic
+  //         if (theme.palette.mode === "dark") {
+  //           elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
+  //         } else {
+  //           elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
+  //         }
+  //         mounted.current = true;
+  //       } else {
+  //         if (theme.palette.mode === "dark") {
+  //           elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
+  //         } else {
+  //           elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
+  //         }
+  //       }
+  //     }
 
-      // elToApply = document.getElementsByTagName("a");
+  //     // elToApply = document.getElementsByTagName("a");
 
-      // if (elToApply) {
-      //   const elArray = Array.from(elToApply);
-      //   elArray.forEach(element => {
-      //     if (theme.palette.mode === "dark") {
-      //       element.setAttribute("style", "color: white !important; background-color: black !important;");
-      //     } else {
-      //       element.setAttribute("style", "color: black !important; background-color: white !important;");
-      //     }
-      //   });
-      // }
-    }, 250);
-  }
+  //     // if (elToApply) {
+  //     //   const elArray = Array.from(elToApply);
+  //     //   elArray.forEach(element => {
+  //     //     if (theme.palette.mode === "dark") {
+  //     //       element.setAttribute("style", "color: white !important; background-color: black !important;");
+  //     //     } else {
+  //     //       element.setAttribute("style", "color: black !important; background-color: white !important;");
+  //     //     }
+  //     //   });
+  //     // }
+  //   }, 250);
+  // }
 
   let lng = navigator.language.substring(0, 2).toLocaleLowerCase();
 
@@ -380,11 +380,11 @@ const TrapSetEdit = (props) => {
           }}
           onBlur={(event, editor) => {
             //console.log('Blur.', editor);
-            ckEditorThemeSync();
+            // ckEditorThemeSync();
           }}
           onFocus={(event, editor) => {
             //console.log('Focus.', editor);
-            ckEditorThemeSync();
+            // ckEditorThemeSync();
           }}
         />
         <Grid size={12}>&nbsp;</Grid>

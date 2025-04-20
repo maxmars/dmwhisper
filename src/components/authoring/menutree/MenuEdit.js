@@ -85,7 +85,7 @@ export default function MenuEdit(props) {
     const [currentContentType, setCurrentContentType] = useState(ctyp);
     const theme = useTheme();
     const [headerInfoOpen, setHeaderInfoOpen] = useState(currentContentType !== "menu");
-    const mounted = useRef();
+    // const mounted = useRef();
     const pathRef = useRef(path);
     const unsavedContentRef = useRef(unsavedContent);
 
@@ -119,45 +119,45 @@ export default function MenuEdit(props) {
     }, []);
 
     //#region CKEditor stuff
-    useEffect(() => {
-        ckEditorThemeSync();
-    });
+    // useEffect(() => {
+    //     ckEditorThemeSync();
+    // });
 
-    const ckEditorThemeSync = () => {
-        setTimeout(() => {
-            let elToApply = document.getElementsByClassName("ck-content")[0];
-            if (elToApply) {
-                if (!mounted.current) {
-                    // do componentDidMount logic
-                    if (theme.palette.mode === "dark") {
-                        elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
-                    } else {
-                        elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
-                    }
-                    mounted.current = true;
-                } else {
-                    if (theme.palette.mode === "dark") {
-                        elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
-                    } else {
-                        elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
-                    }
-                }
-            }
+    // const ckEditorThemeSync = () => {
+    //     setTimeout(() => {
+    //         let elToApply = document.getElementsByClassName("ck-content")[0];
+    //         if (elToApply) {
+    //             if (!mounted.current) {
+    //                 // do componentDidMount logic
+    //                 if (theme.palette.mode === "dark") {
+    //                     elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
+    //                 } else {
+    //                     elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
+    //                 }
+    //                 mounted.current = true;
+    //             } else {
+    //                 if (theme.palette.mode === "dark") {
+    //                     elToApply.setAttribute("style", "color: white !important; background-color: black !important;");
+    //                 } else {
+    //                     elToApply.setAttribute("style", "color: black !important; background-color: white !important;");
+    //                 }
+    //             }
+    //         }
 
-            // elToApply = document.getElementsByTagName("a");
+    //         // elToApply = document.getElementsByTagName("a");
 
-            // if (elToApply) {
-            //     const elArray = Array.from(elToApply);
-            //     elArray.forEach(element => {
-            //         if (theme.palette.mode === "dark") {
-            //             element.setAttribute("style", "color: white !important; background-color: black !important;");
-            //         } else {
-            //             element.setAttribute("style", "color: black !important; background-color: white !important;");
-            //         }
-            //     });
-            // }
-        }, 250);
-    }
+    //         // if (elToApply) {
+    //         //     const elArray = Array.from(elToApply);
+    //         //     elArray.forEach(element => {
+    //         //         if (theme.palette.mode === "dark") {
+    //         //             element.setAttribute("style", "color: white !important; background-color: black !important;");
+    //         //         } else {
+    //         //             element.setAttribute("style", "color: black !important; background-color: white !important;");
+    //         //         }
+    //         //     });
+    //         // }
+    //     }, 250);
+    // }
 
     let lng = navigator.language.substring(0, 2).toLocaleLowerCase();
 
@@ -641,11 +641,11 @@ export default function MenuEdit(props) {
                                                 }}
                                                 onBlur={(event, editor) => {
                                                     //console.log('Blur.', editor);
-                                                    ckEditorThemeSync();
+                                                    // ckEditorThemeSync();
                                                 }}
                                                 onFocus={(event, editor) => {
                                                     //console.log('Focus.', editor);
-                                                    ckEditorThemeSync();
+                                                    // ckEditorThemeSync();
                                                 }}
                                             />
                                         </Grid>
