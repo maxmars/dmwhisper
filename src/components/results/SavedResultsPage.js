@@ -302,7 +302,7 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                         <Typography>{t("Dungeon") + " " + throwResult.result.dungeonName}</Typography>
                       </AccordionSummary>
                       <AccordionDetails>
-                        <div style={{ backgroundColor: dark ? 'black' : 'white' }} id={"dungeondraw" + index}>
+                        <div /*style={{ backgroundColor: dark ? 'black' : 'white' }}*/ id={"dungeondraw" + index}>
                           <div>{t("Dungeon") + " " + throwResult.result.dungeonName}</div>
                           <br />
                           <DungeonComponent 

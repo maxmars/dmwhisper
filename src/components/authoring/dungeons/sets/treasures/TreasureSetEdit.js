@@ -381,11 +381,11 @@ const TreasureSetEdit = (props) => {
           }}
           onBlur={(event, editor) => {
             //console.log('Blur.', editor);
-            ckEditorThemeSync();
+            // ckEditorThemeSync();
           }}
           onFocus={(event, editor) => {
             //console.log('Focus.', editor);
-            ckEditorThemeSync();
+            // ckEditorThemeSync();
           }}
         />
         <Grid size={12}>&nbsp;</Grid>
