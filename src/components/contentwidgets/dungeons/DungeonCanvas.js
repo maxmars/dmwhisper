@@ -323,11 +323,18 @@ const DungeonCanvas = (props) => {
       let textY = room.y * yInc + realY + room.height * yInc; // angolo inferiore
 
       // Imposta il font e calcola la larghezza desiderata
-      let fontSize = (room.width * xInc) / 14; // larghezza del rettangolo
+      let fontSize = (room.width * xInc) / 7; // larghezza del rettangolo
       context.font = `${fontSize}px Arial`; // Usa un font proporzionato alla larghezza
       context.textAlign = "left"; // Allinea il testo a sinistra
       context.textBaseline = "bottom"; // Posiziona il testo al bordo inferiore
-      context.fillStyle = 'black'; // Colore del testo
+
+      // Disegna lo sfondo nero dietro al testo
+      context.fillStyle = 'black'; // Colore dello sfondo
+      let textWidth = context.measureText(room.description).width; // Larghezza del testo
+      context.fillRect(textX, textY - fontSize, textWidth, fontSize); // Rettangolo nero dietro al testo
+
+      // Imposta il colore del testo su bianco
+      context.fillStyle = 'white'; // Colore del testo
 
       // Disegna il testo
       context.fillText(room.description, textX, textY);

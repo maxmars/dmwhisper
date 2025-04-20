@@ -1,4 +1,6 @@
-export const themeOptions= {
+const homepage = process.env.REACT_APP_HOMEPAGE;
+
+export const themeOptions = {
   palette: {
     mode: 'light',
     primary: {
@@ -8,8 +10,8 @@ export const themeOptions= {
       main: '#f50057',
     },
     background: {
-      default: '#f5e6ca',
-      paper: '#f5e6ca',
+      default: 'rgba(245, 230, 202, 0.3)',
+      paper: 'rgba(245, 230, 202, 0.3)',
     },
     text: {
       primary: '#333333',
@@ -111,6 +113,23 @@ export const themeOptions= {
           backgroundColor: '#fafafa',
           opacity: 1,
           transition: 'background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+        },
+      },
+    },
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundImage: homepage ? `linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3)), url(${homepage}/images/diarybg.jpg)` : '',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'left bottom',
+        },
+      },
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: 'rgba(245, 230, 202, 1.0)', // Colore con opacità 100%
         },
       },
     },
