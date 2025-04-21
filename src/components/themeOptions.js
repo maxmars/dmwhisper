@@ -40,6 +40,16 @@ export const themeOptions = {
     overline: {
       fontFamily: 'Merriweather Sans',
     },
+    allVariants: {
+      "& a": {
+        color: '#e15400',
+        textDecoration: "none",
+        "&:hover": {
+          color: '#333333',
+          textDecoration: "underline",
+        },
+      },
+    },
     fontFamily: 'Merriweather Sans',
     h1: {
       fontFamily: 'Merriweather Sans',
@@ -141,8 +151,12 @@ export const themeOptions = {
     MuiDataGrid: {
       styleOverrides: {
         root: {
+          '& .MuiDataGrid-cell': {
+            fontSize: '1.1rem',
+          },
           '& .MuiDataGrid-columnHeaders': {
             backgroundColor: '#5a4b3c',
+            fontSize: '1.2rem',
           },
           '& .MuiDataGrid-columnHeader': {
             backgroundColor: '#5a4b3c',
