@@ -1,17 +1,28 @@
 const homepage = process.env.REACT_APP_HOMEPAGE;
 
 export const themeOptions = {
+  breakpoints: {
+    values: {
+      xs: 0,
+      xsm: 400,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
   palette: {
     mode: 'light',
     primary: {
       main: '#5a4b3c',
+      mainmatch: 'white',
     },
     secondary: {
       main: '#f50057',
     },
     background: {
-      default: 'rgba(245, 230, 202, 1.0)',
-      paper: 'rgba(245, 230, 202, 1.0)',
+      default: 'rgba(231, 219, 208, 1.0)',
+      paper: 'rgba(231, 219, 208, 1.0)',
     },
     text: {
       primary: '#333333',
@@ -130,21 +141,21 @@ export const themeOptions = {
     MuiDataGrid: {
       styleOverrides: {
         root: {
-          backgroundColor: 'rgba(245, 230, 202, 0.3)',
+          '& .MuiDataGrid-columnHeaders': {
+            backgroundColor: '#5a4b3c',
+          },
+          '& .MuiDataGrid-columnHeader': {
+            backgroundColor: '#5a4b3c',
+            color: '#ffffff',
+          },
+          backgroundColor: 'rgba(231, 219, 208, 0.3)',
         },
       },
     },
     MuiAccordion: {
       styleOverrides: {
         root: {
-          backgroundColor: 'rgba(245, 230, 202, 0.3)',
-        },
-      },
-    },
-    MuiList: {
-      styleOverrides: {
-        root: {
-          backgroundColor: 'rgba(245, 230, 202, 0.3)',
+          backgroundColor: 'rgba(231, 219, 208, 0.4)',
         },
       },
     },

@@ -91,15 +91,13 @@ const SpotlightedContent = (props) => {
           width: '97vw',
           overflowY: 'hidden',
           overflowX: 'hidden',
-          backgroundColor: '#5a4b3c',
-          color: 'white',
           display: 'flex',
           alignItems: 'center',
         }}
       >
        <Grid size={1}>
           <IconButton style={{ marginRight: "7px" }} variant="contained" onClick={() => window.history.back()}>
-            <ArrowBackIosNewIcon sx={{ 'color': 'white !important' }} />
+            <ArrowBackIosNewIcon />
           </IconButton>
         </Grid>
        <Grid size={11}>

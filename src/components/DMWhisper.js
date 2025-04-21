@@ -41,6 +41,7 @@ import SavedResultsComponent from './results/SavedResultsComponent';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import ConfigPage from './settings/ConfigPage';
 import { themeOptions } from './themeOptions';
+import LogoMkt from './logo/LogoMkt';
 
 
 const theme = createTheme(themeOptions);
@@ -67,7 +68,7 @@ const DMWhisper = () => {
   // });
 
   React.useEffect(() => {
-    const handleBackButton = (event) => {      
+    const handleBackButton = (event) => {
       if (window.history.length < 2 && event.state) {
         window.history.pushState({ noBackExitsApp: true }, '');
       }
@@ -229,35 +230,51 @@ const DMWhisper = () => {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div key="left" style={{ paddingLeft: "2em" }}>
-          <IconButton aria-label="Menu" onClick={() => setMenuOpen(!menuOpen)} edge="start" color="inherit" >
-            <MenuIcon />
-          </IconButton>
-          <br />
-          <br />
-          <Drawer
-            anchor="left"
-            open={menuOpen}
-            onClose={() => setMenuOpen(!menuOpen)}
-          >
-            {leftMenu()}
-          </Drawer>
-        </div>        
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1em" }}>
+          <div key="leftMenu">
+            <IconButton aria-label="Menu" onClick={() => setMenuOpen(!menuOpen)} edge="start" color="inherit" >
+              <MenuIcon />
+            </IconButton>
+            <br />
+            <br />
+            <Drawer
+              anchor="left"
+              open={menuOpen}
+              onClose={() => setMenuOpen(!menuOpen)}
+            >
+              {leftMenu()}
+            </Drawer>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'center', flexGrow: 1, textAlign: "center" }}>
+            <Box sx={{
+              width: {
+                xs: '100%',
+                xsm: '60%',
+                sm: '40%',
+                md: '20%',
+              }
+            }}>
+              <LogoMkt />
+            </Box>
+          </div>
+        </div>
+
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', overflow: 'scroll', width: '100%', height: '100%' }}>
-        <Routes>
-          <Route path="/" element={<Navigate to="browse" replace />} />
-          <Route path="spotlight/:path" element={<SpotlightedContent />} />
-          <Route path="browse" element={<ContentTree />} />
-          <Route path="saved" element={<SavedResultsComponent />} />
-          <Route path="dungeon/:dngnsetpiece?/:roomsnumber?/:dngnmonsterset?/:dngngtrapset?/:dngntreasureset?/:dngnpuzzleset?" element={<DungeonExplore />} />
-          <Route path="counter" element={<GeneralCounters />} />
-          <Route path="edit_content" element={<AuthoringMenu />} />
-          <Route path="list_of_contents" element={<ContentsList />} />
-          <Route path="input" element={<InputMenu />} />
-          <Route path="output" element={<OutputMenu />} />
-          <Route path="settings" element={<ConfigPage />} />
-          <Route path="info" element={<Info />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Navigate to="browse" replace />} />
+            <Route path="spotlight/:path" element={<SpotlightedContent />} />
+            <Route path="browse" element={<ContentTree />} />
+            <Route path="saved" element={<SavedResultsComponent />} />
+            <Route path="dungeon/:dngnsetpiece?/:roomsnumber?/:dngnmonsterset?/:dngngtrapset?/:dngntreasureset?/:dngnpuzzleset?" element={<DungeonExplore />} />
+            <Route path="counter" element={<GeneralCounters />} />
+            <Route path="edit_content" element={<AuthoringMenu />} />
+            <Route path="list_of_contents" element={<ContentsList />} />
+            <Route path="input" element={<InputMenu />} />
+            <Route path="output" element={<OutputMenu />} />
+            <Route path="settings" element={<ConfigPage />} />
+            <Route path="info" element={<Info />} />
+          </Routes>
           {/* {tab === 8 && <Test />} */}
         </div>
       </ThemeProvider>

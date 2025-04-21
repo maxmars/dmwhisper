@@ -12,7 +12,6 @@ import { Tab, Tabs } from '@mui/material';
 import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { useTheme } from '@mui/material/styles';
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import './style.css'
@@ -25,7 +24,6 @@ const ContentTree = () => {
     const tree = wholeContent.tree;
     const [tab, setTab] = useState(0);
     const { t } = useTranslation();
-    const theme = useTheme();
     const initialTabPath = pathParam ? pathParam : (wholeContent.tabPaths ? wholeContent.tabPaths[0] : "");
     const [path, setPath] = useState(initialTabPath);
     let initialContent = getContent(tree, path);
@@ -304,7 +302,6 @@ const ContentTree = () => {
                             </div>
                             <div style={{ height: '90%', width: '100%' }}>
                                 <DataGrid
-                                    sx={{ '& .MuiDataGrid-columnHeadersInner': { backgroundColor: theme.palette.primary.main, color: theme.palette.primary.contrastText } }}
                                     rows={currentContent}
                                     columns={columns}
                                     height="100%"

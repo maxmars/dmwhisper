@@ -260,16 +260,16 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                         </div>
                         <Grid container sx={{ overflow: 'scroll' }}>
                           <Grid size={12}>
-                            <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
+                            <DeleteIcon sx={{ borderRadius: '3px', color: "primary.mainmatch", backgroundColor: "primary.main", cursor: "pointer" }} onClick={() => {
                               setThrowToBeDeleted(index);
                               setCurrentEditedContent(null);
                             }} />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
+                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "primary.mainmatch", backgroundColor: "primary.main", cursor: "pointer" }} onClick={() => {
                               saveAsPdf("areamapdraw" + index);
                             }} />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
+                            <DownloadIcon sx={{ borderRadius: '3px', color: "primary.mainmatch", backgroundColor: "primary.main", cursor: "pointer" }} onClick={() => {
                               downloadJson({ contentType: "areamap", contentData: throwResult.result }, "savedMapContent.json");
                             }} />
                           </Grid>
@@ -313,16 +313,16 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                         </div>
                         <Grid container sx={{ overflow: 'scroll' }}>
                           <Grid size={12}>
-                            <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
+                            <DeleteIcon sx={{ borderRadius: '3px', color: "primary.mainmatch", backgroundColor: "primary.main", cursor: "pointer" }} onClick={() => {
                               setThrowToBeDeleted(index);
                               setCurrentEditedContent(null);
                             }} />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
+                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "primary.mainmatch", backgroundColor: "primary.main", cursor: "pointer" }} onClick={() => {
                               saveAsPdf("dungeondraw" + index);
                             }} />
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
+                            <DownloadIcon sx={{ borderRadius: '3px', color: "primary.mainmatch", backgroundColor: "primary.main", cursor: "pointer" }} onClick={() => {
                               downloadJson({ contentType: "dungeon", contentData: throwResult.result }, "savedDungeonContent.json");
                             }} />
                           </Grid>
@@ -361,24 +361,24 @@ const SavedResultsPage = ({ showImportContentWidget, showGenAiWidget }) => {
                         </div>
                         <Grid container sx={{ overflow: 'scroll' }}>
                           <Grid size={12}>
-                            <EditIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
+                            <EditIcon sx={{ borderRadius: '3px', color: "primary.mainmatch", backgroundColor: "primary.main", cursor: "pointer" }} onClick={() => {
                               setEditedThrow(index);
                               setCurrentEditedContent(throwResult.result);
                             }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <AutoAwesomeIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
+                            <AutoAwesomeIcon sx={{ borderRadius: '3px', color: "primary.mainmatch", backgroundColor: "primary.main", cursor: "pointer" }} onClick={() => {
                               showGenAiWidget(throwResult.result);
                             }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <ContentCopyIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
+                            <ContentCopyIcon sx={{ borderRadius: '3px', color: "primary.mainmatch", backgroundColor: "primary.main", cursor: "pointer" }} onClick={() => {
                               throwCopy(index);
                             }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <DeleteIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
+                            <DeleteIcon sx={{ borderRadius: '3px', color: "primary.mainmatch", backgroundColor: "primary.main", cursor: "pointer" }} onClick={() => {
                               setThrowToBeDeleted(index);
                               setCurrentEditedContent(null);
                             }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
+                            <PictureAsPdfIcon sx={{ borderRadius: '3px', color: "primary.mainmatch", backgroundColor: "primary.main", cursor: "pointer" }} onClick={() => {
                               saveAsPdf("throwHtmlContent" + index);
                             }} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <DownloadIcon sx={{ borderRadius: '3px', color: "white", backgroundColor: "#5a4b3c", cursor: "pointer" }} onClick={() => {
+                            <DownloadIcon sx={{ borderRadius: '3px', color: "primary.mainmatch", backgroundColor: "primary.main", cursor: "pointer" }} onClick={() => {
                               downloadJson({ contentType: "text", contentData: throwResult.result }, "savedTextContent.json");
                             }} />
                           </Grid>
