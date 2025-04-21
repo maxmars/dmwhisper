@@ -250,12 +250,14 @@ const DMWhisper = () => {
             <Box sx={{
               width: {
                 xs: '100%',
-                xsm: '60%',
+                xsm: '70%',
                 sm: '40%',
                 md: '20%',
-              }
+              },
             }}>
-              <LogoMkt />
+              <div style={{ color: "primary.main" }}>
+                <LogoMkt />
+              </div>
             </Box>
           </div>
         </div>
