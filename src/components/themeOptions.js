@@ -26,7 +26,7 @@ export const themeOptions = {
     },
     text: {
       primary: '#333333',
-      secondary: '#333333',
+      secondary: '#e15400',
       disabled: '#333333',
     },
     info: {

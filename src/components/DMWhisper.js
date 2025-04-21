@@ -255,7 +255,7 @@ const DMWhisper = () => {
                 md: '20%',
               },
             }}>
-              <div style={{ color: "primary.main" }}>
+              <div style={{ color: "#5a4b3c" }}>
                 <LogoMkt />
               </div>
             </Box>
