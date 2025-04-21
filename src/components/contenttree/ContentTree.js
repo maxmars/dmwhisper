@@ -296,9 +296,9 @@ const ContentTree = () => {
                     {selectedContent === null ?
                         <div style={{ height: '88vh', width: '100%' }}>
                             <div style={{ height: '10%', width: '100%', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                                <IconButton style={{ marginRight: "7px" }} variant="contained" color="primary" onClick={backOneLevel}><ArrowBackIosNewIcon /></IconButton>
-                                <IconButton style={{ marginLeft: "7px" }} variant="contained" color="primary" onClick={goToHomeMenu}><HomeIcon /></IconButton>
-                                <Typography variant="h6" component="div" style={{ width: '60%', textAlign: 'center' }}>{contentName}</Typography>
+                                <IconButton style={{ marginRight: "3px" }} variant="contained" color="primary" onClick={backOneLevel}><ArrowBackIosNewIcon /></IconButton>
+                                <IconButton style={{ marginLeft: "3px" }} variant="contained" color="primary" onClick={goToHomeMenu}><HomeIcon /></IconButton>
+                                <Typography variant="h6" component="div" style={{ width: '100%', textAlign: 'center' }}>{contentName}</Typography>
                             </div>
                             <div style={{ height: '90%', width: '100%' }}>
                                 <DataGrid
