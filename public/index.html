@@ -79,23 +79,32 @@
 
   #circle-container {
     position: fixed;
+    /* Fissa il contenitore alla viewport */
     top: 0;
+    /* Sempre in alto */
     left: 0;
+    /* Sempre a sinistra */
     width: 100%;
+    /* Copre tutta la larghezza dello schermo */
     height: 100%;
-    pointer-events: none; /* Non interferisce con i clic */
+    /* Copre tutta l'altezza dello schermo */
+    pointer-events: none;
+    /* Non interferisce con clic */
     z-index: 9999;
+    /* Sopra tutto */
   }
 
   .green-circle {
     position: absolute;
     width: 150px;
     height: 150px;
-    border-radius: 50%; /* Forma base circolare */
+    border-radius: 50%;
+    /* Forma base circolare */
     background: radial-gradient(circle, rgba(0, 255, 0, 1) 50%, rgba(0, 255, 0, 0) 100%);
     opacity: 0;
     animation: fadeInOut 1.5s ease-in-out forwards;
-    filter: url(#rough-edge); /* Applica il filtro per bordi frastagliati */
+    filter: url(#rough-edge);
+    /* Applica il filtro per bordi frastagliati */
   }
 
   /* I tuoi keyframes */
@@ -124,7 +133,7 @@
 
     // Colore casuale: verde, giallo, rosso
     const colors = [
-    'rgba(50, 255, 0, 0.8)',
+      'rgba(50, 255, 0, 0.8)',
       'rgba(128, 255, 0, 0.8)',
       'rgba(0, 128, 64, 0.8)',
       'rgba(255, 0, 100, 0.5)',
@@ -133,12 +142,12 @@
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     circle.style.background = `radial-gradient(circle, ${randomColor} 50%, rgba(0, 255, 0, 0) 100%)`;
 
-    // Posizione casuale
-    const x = Math.random() * window.innerWidth;
-    const y = Math.random() * document.documentElement.scrollHeight;
+    // Posizione casuale all'interno della viewport
+    const x = Math.random() * window.innerWidth; // Larghezza visibile
+    const y = Math.random() * window.innerHeight; // Altezza visibile
     circle.style.left = `${x}px`;
-    circle.style.top = `${y - window.scrollY}px`;
-
+    circle.style.top = `${y}px`;
+    
     // Angolo iniziale casuale
     const startAngle = Math.floor(Math.random() * 360); // Valore casuale tra 0° e 360°
     circle.style.setProperty('--start-angle', `${startAngle}deg`);
@@ -151,8 +160,8 @@
     }, 1500); // Durata totale dell'animazione
   }
 
-  // Genera un cerchio ogni 250ms
-  setInterval(createGreenCircle, 250);
+  // Genera un cerchio ogni 200ms
+  setInterval(createGreenCircle, 200);
 </script>
 
 
