@@ -63,6 +63,13 @@
 
 </body>
 
+<svg style="display: none;">
+  <filter id="rough-edge">
+    <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="6" />
+    <feDisplacementMap in="SourceGraphic" scale="60" />
+  </filter>
+</svg>
+
 <style>
   body {
     margin: 0;
@@ -70,52 +77,42 @@
     position: relative;
   }
 
-  .background {
-    width: 100%;
-    background-color: white; /* Sfondo della pagina */
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
   #circle-container {
-    position: fixed; /* Fissa il contenitore sopra la pagina */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Rende trasparente ai clic */
-    z-index: 9999; /* Si assicura che stia sopra tutto */
+    pointer-events: none; /* Non interferisce con i clic */
+    z-index: 9999;
   }
 
   .green-circle {
     position: absolute;
     width: 150px;
     height: 150px;
-    border-radius: 50%;
+    border-radius: 50%; /* Forma base circolare */
     background: radial-gradient(circle, rgba(0, 255, 0, 1) 50%, rgba(0, 255, 0, 0) 100%);
     opacity: 0;
-    animation: fadeInOut 2s ease-in-out forwards;
-    pointer-events: none;
-    /* Aggiunta del bordo frastagliato */
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)) 
-            contrast(1.4) blur(3px);
+    animation: fadeInOut 1.5s ease-in-out forwards;
+    filter: url(#rough-edge); /* Applica il filtro per bordi frastagliati */
   }
 
+  /* I tuoi keyframes */
   @keyframes fadeInOut {
     0% {
       opacity: 0;
-      transform: scale(0.5);
+      transform: scale(0.5) rotate(var(--start-angle));
     }
 
-    50% {
-      opacity: 0.1; /* Diventa completamente visibile */
-      transform: scale(1);
+    33% {
+      opacity: 0.08;
+      transform: scale(1.3) rotate(calc(var(--start-angle) + 15deg));
     }
 
     100% {
       opacity: 0;
-      transform: scale(1.5); /* Leggera espansione */
+      transform: scale(2.5) rotate(calc(var(--start-angle) + 60deg));
     }
   }
 </style>
@@ -125,35 +122,38 @@
     const circle = document.createElement('div');
     circle.className = 'green-circle';
 
+    // Colore casuale: verde, giallo, rosso
     const colors = [
-      'rgba(50, 255, 0, 0.6)',
+    'rgba(50, 255, 0, 0.8)',
       'rgba(128, 255, 0, 1)',
-      'rgba(255, 128, 0, 1)',
+      'rgba(0, 128, 64, 1)',
       'rgba(255, 0, 100, 0.5)',
-      'rgba(10, 10, 10, 0.3)',
+      'rgba(10, 10, 10, 0.5)',
     ];
-
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     circle.style.background = `radial-gradient(circle, ${randomColor} 50%, rgba(0, 255, 0, 0) 100%)`;
 
-    // Posizione casuale (pagina intera)
+    // Posizione casuale
     const x = Math.random() * window.innerWidth;
     const y = Math.random() * document.documentElement.scrollHeight;
-
     circle.style.left = `${x}px`;
-    circle.style.top = `${y - window.scrollY}px`; // Considera lo scroll verticale
+    circle.style.top = `${y - window.scrollY}px`;
 
-    // Aggiungi il cerchio al contenitore
+    // Angolo iniziale casuale
+    const startAngle = Math.floor(Math.random() * 360); // Valore casuale tra 0° e 360°
+    circle.style.setProperty('--start-angle', `${startAngle}deg`);
+
     document.getElementById('circle-container').appendChild(circle);
 
     // Rimuovi il cerchio dopo la fine dell'animazione
     setTimeout(() => {
       circle.remove();
-    }, 1500); // Tempo totale dell'animazione
+    }, 1500); // Durata totale dell'animazione
   }
 
   // Genera un cerchio ogni 250ms
   setInterval(createGreenCircle, 250);
 </script>
+
 
 </html>
