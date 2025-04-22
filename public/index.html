@@ -4,7 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+    rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="DMWhisper: Manage your TTRPG content" />
@@ -59,5 +60,100 @@
   </noscript> -->
   <!-- Fine Codice ShinyStat -->
 </body>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .background {
+    width: 100%;
+    background-color: white;
+    /* Sfondo della pagina */
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+.green-circle {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 255, 0, 1) 50%, rgba(0, 255, 0, 0) 100%);
+    opacity: 0;
+    animation: fadeInOut 2s ease-in-out forwards;
+    pointer-events: none;
+    /* Aggiunta del bordo frastagliato */
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)) 
+            contrast(1.4) blur(3px);
+  }
+
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+      /* Parte piccolo */
+    }
+
+    50% {
+      opacity: 0.1;
+      /* Diventa completamente visibile */
+      transform: scale(1);
+      /* Dimensione naturale */
+    }
+
+    100% {
+      opacity: 0;
+      /* Svanisce gradualmente */
+      transform: scale(1.5);
+      /* Leggera espansione */
+    }
+  }
+</style>
+
+<script>
+  function createGreenCircle() {
+
+    if (window.stophallucinations) {
+      clearInterval(window.hallucinations);
+      return;
+    }
+
+    const circle = document.createElement('div');
+    circle.className = 'green-circle';
+
+    // Colore casuale: verde, giallo, rosso
+    const colors = [
+      'rgba(50, 255, 0, 0.8)',
+      'rgba(128, 255, 0, 1)',
+      'rgba(255, 128, 0, 1)',
+      'rgba(255, 0, 100, 0.5)',
+      'rgba(10, 10, 10, 0.5)',
+    ];
+
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    circle.style.background = `radial-gradient(circle, ${randomColor} 50%, rgba(0, 255, 0, 0) 100%)`;
+
+    // Posizione casuale
+    const x = Math.random() * window.innerWidth;
+    const y = Math.random() * document.documentElement.scrollHeight;
+
+    circle.style.left = `${x}px`;
+    circle.style.top = `${y}px`;
+
+    document.body.appendChild(circle);
+
+    // Rimuovi il cerchio dopo la fine dell'animazione
+    setTimeout(() => {
+      circle.remove();
+    }, 1200); // Tempo totale dell'animazione
+  }
+
+  // Genera un cerchio ogni 250ms
+  window.stophallucinations = false;
+  window.hallucinations = setInterval(createGreenCircle, 250);
+</script>
 
 </html>
