@@ -59,7 +59,10 @@
         style="border:0px" /></a>
   </noscript> -->
   <!-- Fine Codice ShinyStat -->
+  <div id="circle-container"></div>
+
 </body>
+
 <style>
   body {
     margin: 0;
@@ -69,14 +72,23 @@
 
   .background {
     width: 100%;
-    background-color: white;
-    /* Sfondo della pagina */
+    background-color: white; /* Sfondo della pagina */
     position: absolute;
     top: 0;
     left: 0;
   }
 
-.green-circle {
+  #circle-container {
+    position: fixed; /* Fissa il contenitore sopra la pagina */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Rende trasparente ai clic */
+    z-index: 9999; /* Si assicura che stia sopra tutto */
+  }
+
+  .green-circle {
     position: absolute;
     width: 150px;
     height: 150px;
@@ -94,66 +106,54 @@
     0% {
       opacity: 0;
       transform: scale(0.5);
-      /* Parte piccolo */
     }
 
     50% {
-      opacity: 0.1;
-      /* Diventa completamente visibile */
+      opacity: 0.1; /* Diventa completamente visibile */
       transform: scale(1);
-      /* Dimensione naturale */
     }
 
     100% {
       opacity: 0;
-      /* Svanisce gradualmente */
-      transform: scale(1.5);
-      /* Leggera espansione */
+      transform: scale(1.5); /* Leggera espansione */
     }
   }
 </style>
 
 <script>
   function createGreenCircle() {
-
-    if (window.stophallucinations) {
-      clearInterval(window.hallucinations);
-      return;
-    }
-
     const circle = document.createElement('div');
     circle.className = 'green-circle';
 
-    // Colore casuale: verde, giallo, rosso
     const colors = [
-      'rgba(50, 255, 0, 0.8)',
+      'rgba(50, 255, 0, 0.6)',
       'rgba(128, 255, 0, 1)',
       'rgba(255, 128, 0, 1)',
       'rgba(255, 0, 100, 0.5)',
-      'rgba(10, 10, 10, 0.5)',
+      'rgba(10, 10, 10, 0.3)',
     ];
 
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     circle.style.background = `radial-gradient(circle, ${randomColor} 50%, rgba(0, 255, 0, 0) 100%)`;
 
-    // Posizione casuale
+    // Posizione casuale (pagina intera)
     const x = Math.random() * window.innerWidth;
     const y = Math.random() * document.documentElement.scrollHeight;
 
     circle.style.left = `${x}px`;
-    circle.style.top = `${y}px`;
+    circle.style.top = `${y - window.scrollY}px`; // Considera lo scroll verticale
 
-    document.body.appendChild(circle);
+    // Aggiungi il cerchio al contenitore
+    document.getElementById('circle-container').appendChild(circle);
 
     // Rimuovi il cerchio dopo la fine dell'animazione
     setTimeout(() => {
       circle.remove();
-    }, 1200); // Tempo totale dell'animazione
+    }, 1500); // Tempo totale dell'animazione
   }
 
   // Genera un cerchio ogni 250ms
-  window.stophallucinations = false;
-  window.hallucinations = setInterval(createGreenCircle, 250);
+  setInterval(createGreenCircle, 250);
 </script>
 
 </html>
