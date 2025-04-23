@@ -137,6 +137,21 @@ export const themeOptions = {
         },
       },
     },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          paddingLeft: 0,
+          paddingRight: 0,
+        },
+      },
+    },
+    MuiAccordionDetails: {
+      styleOverrides: {
+        root: {
+          padding: 0, // Rimuove tutto il padding
+        },
+      },
+    },
     MuiCssBaseline: {
       styleOverrides: {
         body: {

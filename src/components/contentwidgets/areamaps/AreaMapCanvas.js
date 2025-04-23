@@ -54,12 +54,7 @@ const AreaMapCanvas = ({ numCells, mapCells, onMapCellClicked, dark }) => {
       }
     });
 
-    // Disegna lo sfondo del canvas con un bordo di 2 pixel
-    ctx.fillStyle = dark ? 'black' : 'white';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = dark ? 'white' : 'black';
-    ctx.lineWidth = 2;
-    ctx.strokeRect(1, 1, canvas.width - 2, canvas.height - 2);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (let row = 0; row < numCells; row++) {
       for (let col = 0; col < numCells; col++) {
@@ -90,8 +85,8 @@ const AreaMapCanvas = ({ numCells, mapCells, onMapCellClicked, dark }) => {
   return (
     <canvas
       ref={canvasRef}
-      style={{ width: '100%', height: '70vh', border: `2px solid ${dark ? 'white' : 'black'}` }}
-      width={window.innerWidth}
+      style={{ width: '95%', height: '70vh' }}
+      width={window.innerWidth * 0.95}
       height={window.innerHeight * 0.7}
     />
   );

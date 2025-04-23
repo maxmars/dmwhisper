@@ -528,7 +528,7 @@ i18n
           "Aggiungi Prompt": "Aggiungi Prompt",
           "Interpreta con ChatGPT": "Interpreta con ChatGPT",
 
-          "Contenuto salvato in data": "Contenuto salvato il:",
+          "Contenuto salvato in data": "Contenuto del:",
           "Dungeon": "Dungeon:",
           "Mappa salvata in data": "Mappa salvata il:",
 

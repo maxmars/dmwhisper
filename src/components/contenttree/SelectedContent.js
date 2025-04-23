@@ -78,8 +78,6 @@ const SelectedContent = (props) => {
       <Grid
         container
         sx={{
-          marginLeft: '20px',
-          marginRight: '20px',
           height: '4em',
           width: '97vw',
           overflowY: 'hidden',
@@ -100,8 +98,6 @@ const SelectedContent = (props) => {
       <Grid
         container
         sx={{
-          marginLeft: '20px',
-          marginRight: '20px',
           height: '75%',
           width: '97vw',
           overflowY: 'scroll',
@@ -119,8 +115,6 @@ const SelectedContent = (props) => {
       <Grid
         container
         sx={{
-          marginLeft: '20px',
-          marginRight: '20px',
           minHeight: '14%',
           height: '14%',
           width: '97vw',

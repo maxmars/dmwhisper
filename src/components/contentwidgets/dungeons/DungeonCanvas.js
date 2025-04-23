@@ -570,7 +570,7 @@ const DungeonCanvas = (props) => {
       }}
       id="canvas"
       ref={canvasRef}
-      width={windowSize.width}
+      width={windowSize.width * 0.95}
       height={windowSize.height - bottomBarHeight}
     />
   );

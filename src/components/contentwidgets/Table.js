@@ -279,8 +279,8 @@ export default function Table(props) {
                   }
                 </div>
               </div>
-              <div className={contentClasssName} dangerouslySetInnerHTML={{ __html: currentHtmlContent }} />
-              {currentThrow && currentThrow.length > 0 ? <div className={contentClasssName} dangerouslySetInnerHTML={{ __html: currentThrow }} /> : null}
+              <div style={{marginLeft: '0.5em'}} className={contentClasssName} dangerouslySetInnerHTML={{ __html: currentHtmlContent }} />
+              {currentThrow && currentThrow.length > 0 ? <div style={{marginLeft: '0.5em'}} className={contentClasssName} dangerouslySetInnerHTML={{ __html: currentThrow }} /> : null}
               <br />
               <div style={{ width: '100%' }}>
                 <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>

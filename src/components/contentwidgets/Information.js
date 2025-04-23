@@ -28,7 +28,7 @@ export default function Information(props) {
     // }
 
     return (
-        <div style={{ width: '100%', height: '100%' }} dangerouslySetInnerHTML={{ __html: props.content && props.content.data ? props.content.data.textContent : "" }} />
+        <div style={{ width: '100%', height: '100%', marginLeft: '0.5em' }} dangerouslySetInnerHTML={{ __html: props.content && props.content.data ? props.content.data.textContent : "" }} />
     );
 
 };
