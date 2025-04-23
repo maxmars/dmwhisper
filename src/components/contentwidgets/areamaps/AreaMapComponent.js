@@ -33,7 +33,7 @@ export default function AreaMapComponent({cells, gridrowcells, dark}) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: selectedRoom.content }} />
+                                <div style={{marginLeft: '0.7rem', marginRight: '0.7rem'}} dangerouslySetInnerHTML={{ __html: selectedRoom.content }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
