@@ -1,5 +1,9 @@
 # Changelog Template progetto DM Whisper
 
+    23 Apr 2025
+    -----------
+    - 1.64.0 Some UI elements are now enabled via .env.
+
     20 Apr 2025
     -----------
     - 1.63.0 Dungeon room names are now drawn inside each room.

@@ -1,3 +1,18 @@
+export const getBooleanEnv = (variableName) => {
+  const envVarName = `REACT_APP_${variableName.toUpperCase()}`;
+  const envVarValue = process.env[envVarName];
+
+  if (envVarValue === 'true') {
+    return true;
+  } else if (envVarValue === 'false') {
+    return false;
+  } else {
+    console.warn(`La variabile ${envVarName} non è definita o il valore non è "true"/"false".`);
+    return false;
+  }
+};
+
+
 export const downloadJson = (jsonObj, fileName = "dmwhisper_data.json") => {
   var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(jsonObj));
   var downloadAnchorNode = document.createElement('a');

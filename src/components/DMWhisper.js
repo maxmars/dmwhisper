@@ -40,6 +40,7 @@ import GeneralCounters from './contentwidgets/counters/GeneralCounters';
 import SavedResultsComponent from './results/SavedResultsComponent';
 import SettingsSuggestIcon from '@mui/icons-material/SettingsSuggest';
 import ConfigPage from './settings/ConfigPage';
+import { getBooleanEnv } from '../utils/index';
 
 
 const DMWhisper = () => {
@@ -122,94 +123,107 @@ const DMWhisper = () => {
       onKeyDown={() => setMenuOpen(!menuOpen)}
     >
       <List>
-        <ListItem key="browse" disablePadding>
-          <ListItemButton onClick={() => navigate("browse")}>
-            <ListItemIcon>
-              <TableChartIcon />
-            </ListItemIcon>
-            <ListItemText primary={t("Browse")} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem key="saved" disablePadding>
+        {getBooleanEnv("BROWSE_MENU") &&
+          <ListItem key="browse" disablePadding>
+            <ListItemButton onClick={() => navigate("browse")}>
+              <ListItemIcon>
+                <TableChartIcon />
+              </ListItemIcon>
+              <ListItemText primary={t("Browse")} />
+            </ListItemButton>
+          </ListItem>
+        }
+
+        {getBooleanEnv("SAVED_MENU") && <ListItem key="saved" disablePadding>
           <ListItemButton onClick={() => navigate("saved")}>
             <ListItemIcon>
               <StarRateIcon />
             </ListItemIcon>
             <ListItemText primary={t("Saved") + " (" + throws.sequence.length + ")"} />
           </ListItemButton>
-        </ListItem>
-        <ListItem key="dungeon" disablePadding>
+        </ListItem>}
+
+        {getBooleanEnv("DUNGEON_MENU") && <ListItem key="dungeon" disablePadding>
           <ListItemButton onClick={() => navigate("dungeon")}>
             <ListItemIcon>
               <AccountTreeIcon />
             </ListItemIcon>
             <ListItemText primary={t("Dungeon Explore")} />
           </ListItemButton>
-        </ListItem>
-        <ListItem key="counter" disablePadding>
+        </ListItem>}
+
+        {getBooleanEnv("COUNTER_MENU") && <ListItem key="counter" disablePadding>
           <ListItemButton onClick={() => navigate("counter")}>
             <ListItemIcon>
               <DonutLargeIcon />
             </ListItemIcon>
             <ListItemText primary={t("Counters")} />
           </ListItemButton>
-        </ListItem>
-        <ListItem key="edit_content" disablePadding>
+        </ListItem>}
+
+        {getBooleanEnv("AUTHORING_MENU") && <ListItem key="edit_content" disablePadding>
           <ListItemButton onClick={() => navigate("edit_content")}>
             <ListItemIcon>
               <DataObjectIcon />
             </ListItemIcon>
             <ListItemText primary={t("Edit content")} />
           </ListItemButton>
-        </ListItem>
-        <ListItem key="list_of_contents" disablePadding>
+        </ListItem>}
+
+        {getBooleanEnv("LISTOFCONTENTS_MENU") && <ListItem key="list_of_contents" disablePadding>
           <ListItemButton onClick={() => navigate("list_of_contents")}>
             <ListItemIcon>
               <FormatListBulletedIcon />
             </ListItemIcon>
             <ListItemText primary={t("List of contents")} />
           </ListItemButton>
-        </ListItem>
-        <ListItem key="input" disablePadding>
+        </ListItem>}
+
+        {getBooleanEnv("IMPORTDATA_MENU") && <ListItem key="input" disablePadding>
           <ListItemButton onClick={() => navigate("input")}>
             <ListItemIcon>
               <InputIcon />
             </ListItemIcon>
             <ListItemText primary={t("Import data")} />
           </ListItemButton>
-        </ListItem>
-        <ListItem key="output" disablePadding>
+        </ListItem>}
+
+        {getBooleanEnv("EXPORTDATA_MENU") && <ListItem key="output" disablePadding>
           <ListItemButton onClick={() => navigate("output")}>
             <ListItemIcon>
               <OutputIcon />
             </ListItemIcon>
             <ListItemText primary={t("Export data")} />
           </ListItemButton>
-        </ListItem>
-        <ListItem key="user_manual" disablePadding>
+        </ListItem>}
+
+        {getBooleanEnv("USERMANUAL_MENU") && <ListItem key="user_manual" disablePadding>
           <ListItemButton onClick={() => window.open("https://marsiglietti.it/DMWhisper-manual-1.26.0.pdf", "_blank", null)}>
             <ListItemIcon>
               <ImportContactsIcon />
             </ListItemIcon>
             <ListItemText primary={t("User manual")} />
           </ListItemButton>
-        </ListItem>
-        <ListItem key="settings" disablePadding>
+        </ListItem>}
+
+        {getBooleanEnv("SETTINGS_MENU") && <ListItem key="settings" disablePadding>
           <ListItemButton onClick={() => navigate("settings")}>
             <ListItemIcon>
               <SettingsSuggestIcon />
             </ListItemIcon>
             <ListItemText primary={t("Settings")} />
           </ListItemButton>
-        </ListItem>
-        <ListItem key="info" disablePadding>
+        </ListItem>}
+
+        {getBooleanEnv("INFO_MENU") && <ListItem key="info" disablePadding>
           <ListItemButton onClick={() => navigate("info")}>
             <ListItemIcon>
               <InfoIcon />
             </ListItemIcon>
             <ListItemText primary={t("Info")} />
           </ListItemButton>
-        </ListItem>
+        </ListItem>}
+
         {/* <ListItem key="test" disablePadding>
           <ListItemButton onClick={() => setTab(8)}>
             <ListItemIcon>
