@@ -15,6 +15,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import './style.css'
+import { getBooleanEnv } from '../../utils';
 
 const ContentTree = () => {
 
@@ -282,7 +283,7 @@ const ContentTree = () => {
 
         return (
             <div style={{ height: '100%' }}>
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', height: '12%' }}>
+                {getBooleanEnv("MAINTABS") && <><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', height: '12%' }}>
                     <Tabs value={tab} onChange={handleChange} variant="scrollable">
                         <Tab icon={<BookmarksIcon />} label={tabName1} iconPosition="start" />
                         <Tab icon={<BookmarksIcon />} label={tabName2} iconPosition="start" />
@@ -291,7 +292,8 @@ const ContentTree = () => {
                         <Tab icon={<BookmarksIcon />} label={tabName5} iconPosition="start" />
                     </Tabs>
                 </div>
-                <br />
+                    <br />
+                </>}
                 <div style={{ height: '88%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     {selectedContent === null ?
                         <div style={{ height: '88vh', width: '100%' }}>
