@@ -23,16 +23,27 @@ const SpotlightedContent = (props) => {
   const tree = wholeContent.tree;
 
   const spotlightedContent = getContentMetaData(tree, path);
+  const backButton = <IconButton style={{ marginRight: "7px" }} variant="contained" onClick={() => window.history.back()}><ArrowBackIosNewIcon /></IconButton>;
 
   const getProperWidget = () => {
 
     try {
       switch (spotlightedContent.type) {
         case "information":
-          return <Information currentTab={-1} content={spotlightedContent} />;
+          return <Information
+            backButton={backButton}
+            homeMenu={props.homeMenu}
+            bookmarkMenu={props.bookmarkMenu}
+            currentTab={-1}
+            content={spotlightedContent} />;
 
         case "table":
-          return <Table currentTab={-1} content={spotlightedContent} />;
+          return <Table 
+            backButton={backButton}
+            homeMenu={props.homeMenu}
+            bookmarkMenu={props.bookmarkMenu}
+            currentTab={-1} 
+            content={spotlightedContent} />;
 
         case "map":
           const mapData = spotlightedContent;
@@ -50,7 +61,12 @@ const SpotlightedContent = (props) => {
             );
           }
 
-          return <AreaMap currentTab={-1} content={spotlightedContent} />;
+          return <AreaMap 
+            backButton={backButton}
+            homeMenu={props.homeMenu}
+            bookmarkMenu={props.bookmarkMenu}
+            currentTab={-1} 
+            content={spotlightedContent} />;
 
         case "dungeon":
           const dungeonData = spotlightedContent;
@@ -69,7 +85,12 @@ const SpotlightedContent = (props) => {
             );
           }
 
-          return <DungeonMap currentTab={-1} content={spotlightedContent} />;
+          return <DungeonMap 
+            backButton={backButton}
+            homeMenu={props.homeMenu}
+            bookmarkMenu={props.bookmarkMenu}
+            currentTab={-1} 
+            content={spotlightedContent} />;
 
         default:
           return <div>Link not found.</div>;
@@ -85,27 +106,7 @@ const SpotlightedContent = (props) => {
       <Grid
         container
         sx={{
-          height: '4em',
-          width: '97vw',
-          overflowY: 'hidden',
-          overflowX: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-       <Grid size={1}>
-          <IconButton style={{ marginRight: "7px" }} variant="contained" onClick={() => window.history.back()}>
-            <ArrowBackIosNewIcon />
-          </IconButton>
-        </Grid>
-       <Grid size={11}>
-          <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{spotlightedContent ? spotlightedContent.label : ""}</Typography>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        sx={{
-          height: '75%',
+          height: '88%',
           width: '97vw',
           overflowY: 'scroll',
           overflowX: 'hidden',
