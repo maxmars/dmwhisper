@@ -147,7 +147,7 @@
     const y = Math.random() * window.innerHeight; // Altezza visibile
     circle.style.left = `${x}px`;
     circle.style.top = `${y}px`;
-    
+
     // Angolo iniziale casuale
     const startAngle = Math.floor(Math.random() * 360); // Valore casuale tra 0° e 360°
     circle.style.setProperty('--start-angle', `${startAngle}deg`);
@@ -160,8 +160,71 @@
     }, 1500); // Durata totale dell'animazione
   }
 
+  function drawVein() {
+    const container = document.getElementById('circle-container');
+    const canvas = document.createElement('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.position = 'absolute';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.opacity = '0.07';
+    canvas.style.pointerEvents = 'none';
+    container.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    ctx.strokeStyle = 'rgba(128, 0, 0, 1)'; // Colore rosso scuro
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+
+    // Punto iniziale e profondità della vena
+    const startX = Math.random() * canvas.width;
+    const startY = Math.random() * canvas.height;
+    const depth = 10; // Numero massimo di segmenti
+    const initialAngle = Math.random() * 360; // Angolo iniziale casuale
+
+    // Funzione ricorsiva per disegnare la vena
+    function drawSegment(x, y, angle, depth) {
+      if (depth === 0) return;
+
+      const length = Math.random() * 20 + 20; // Lunghezza casuale del segmento
+      const nextX = x + Math.cos((angle * Math.PI) / 180) * length;
+      const nextY = y + Math.sin((angle * Math.PI) / 180) * length;
+
+      // Disegna il segmento
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(nextX, nextY);
+      ctx.stroke();
+
+      const randomDelay = Math.floor(Math.random() * (101)) + 50;
+
+      // Ramificazioni casuali
+      setTimeout(() => {
+        drawSegment(nextX, nextY, angle + Math.random() * 30 - 15, depth - 1); // Angolo con variazione casuale
+        if (Math.random() > 0.8) {
+          drawSegment(nextX, nextY, angle + Math.random() * 60 - 30, depth - 1);
+        }
+      }, randomDelay); // Ritardo per effetto animato
+    }
+
+    drawSegment(startX, startY, initialAngle, depth);
+
+    // Rimuovi il canvas dopo 1500ms
+    setTimeout(() => {
+      canvas.remove();
+    }, 5000);
+  }
+
   // Genera un cerchio ogni 200ms
-  setInterval(createGreenCircle, 200);
+  setInterval(() => {
+    if (Math.random() > 0.3) {
+      createGreenCircle();
+    } else {
+      drawVein();
+    }
+  }, 500);
+  
 </script>
 
 
