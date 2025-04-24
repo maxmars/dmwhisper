@@ -85,7 +85,7 @@ export default function DungeonComponent(props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: selectedRoomDescription }} />
+                                <div style={{marginLeft: '1rem'}} dangerouslySetInnerHTML={{ __html: selectedRoomDescription }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
@@ -99,7 +99,7 @@ export default function DungeonComponent(props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: selectedRoomMonster }} />
+                                <div style={{marginLeft: '1rem'}} dangerouslySetInnerHTML={{ __html: selectedRoomMonster }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
@@ -113,7 +113,7 @@ export default function DungeonComponent(props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: selectedRoomTrap }} />
+                                <div style={{marginLeft: '1rem'}} dangerouslySetInnerHTML={{ __html: selectedRoomTrap }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
@@ -127,7 +127,7 @@ export default function DungeonComponent(props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: selectedRoomTreasure }} />
+                                <div style={{marginLeft: '1rem'}} dangerouslySetInnerHTML={{ __html: selectedRoomTreasure }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>
@@ -141,7 +141,7 @@ export default function DungeonComponent(props) {
                         </AccordionSummary>
                         <AccordionDetails>
                             <Typography>
-                                <div dangerouslySetInnerHTML={{ __html: selectedRoomPuzzle }} />
+                                <div style={{marginLeft: '1rem'}} dangerouslySetInnerHTML={{ __html: selectedRoomPuzzle }} />
                             </Typography>
                         </AccordionDetails>
                     </Accordion>

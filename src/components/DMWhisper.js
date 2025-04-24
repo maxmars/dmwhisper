@@ -263,8 +263,8 @@ const DMWhisper = () => {
           <div style={{ display: 'flex', justifyContent: 'center', flexGrow: 1, textAlign: "center" }}>
             <Box sx={{
               width: {
-                xs: '100%',
-                xsm: '70%',
+                xs: '50%',
+                xsm: '40%',
                 sm: '40%',
                 md: '20%',
               },

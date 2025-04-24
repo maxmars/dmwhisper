@@ -8,14 +8,13 @@ import IconButton from '@mui/material/IconButton';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import HomeIcon from '@mui/icons-material/Home';
 import Typography from '@mui/material/Typography';
-import { Tab, Tabs } from '@mui/material';
-import BookmarksIcon from '@mui/icons-material/Bookmarks';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import './style.css'
 import { getBooleanEnv } from '../../utils';
+import BookmarkMenu from './BookmarkMenu';
 
 const ContentTree = () => {
 
@@ -281,25 +280,19 @@ const ContentTree = () => {
         if (tab !== 3 && tabName4.length > 12) tabName4 = tabName4.substring(0, 10) + "..";
         if (tab !== 4 && tabName5.length > 12) tabName5 = tabName5.substring(0, 10) + "..";
 
+        const bookmarkMenu = getBooleanEnv("MAINTABS") ? <BookmarkMenu selectedItem={tab} labels={[tabName1, tabName2, tabName3, tabName4, tabName5]} goToContent={handleChange} /> : null;
+        const homeMenu = <IconButton style={{ marginLeft: "3px" }} variant="contained" color="primary" onClick={goToHomeMenu}><HomeIcon /></IconButton>;
+        const backButton = <IconButton style={{ marginRight: "3px" }} variant="contained" color="primary" onClick={backOneLevel}><ArrowBackIosNewIcon /></IconButton>
+
         return (
             <div style={{ height: '100%' }}>
-                {getBooleanEnv("MAINTABS") && <><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', overflow: 'auto', height: '12%' }}>
-                    <Tabs value={tab} onChange={handleChange} variant="scrollable">
-                        <Tab icon={<BookmarksIcon />} label={tabName1} iconPosition="start" />
-                        <Tab icon={<BookmarksIcon />} label={tabName2} iconPosition="start" />
-                        <Tab icon={<BookmarksIcon />} label={tabName3} iconPosition="start" />
-                        <Tab icon={<BookmarksIcon />} label={tabName4} iconPosition="start" />
-                        <Tab icon={<BookmarksIcon />} label={tabName5} iconPosition="start" />
-                    </Tabs>
-                </div>
-                    <br />
-                </>}
                 <div style={{ height: '88%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     {selectedContent === null ?
                         <div style={{ height: '88vh', width: '100%' }}>
                             <div style={{ height: '10%', width: '100%', display: 'flex', justifyContent: 'space-evenly', alignItems: 'center' }}>
-                                <IconButton style={{ marginRight: "3px" }} variant="contained" color="primary" onClick={backOneLevel}><ArrowBackIosNewIcon /></IconButton>
-                                <IconButton style={{ marginLeft: "3px" }} variant="contained" color="primary" onClick={goToHomeMenu}><HomeIcon /></IconButton>
+                                {backButton}
+                                {homeMenu}
+                                {bookmarkMenu}
                                 <Typography variant="h6" component="div" style={{ width: '100%', textAlign: 'center' }}>{contentName}</Typography>
                             </div>
                             <div style={{ height: '90%', width: '100%' }}>
@@ -314,6 +307,9 @@ const ContentTree = () => {
                         </div>
                         :
                         <SelectedContent currentTab={tab}
+                            backButton={backButton}
+                            homeMenu={homeMenu}
+                            bookmarkMenu={bookmarkMenu}
                             selectedContent={selectedContent}
                             clearSelectedContent={backOneLevel}
                             goToPreviousContent={goToPreviousContent}

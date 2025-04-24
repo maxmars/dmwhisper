@@ -7,8 +7,6 @@ import Table from '../contentwidgets/Table';
 import AreaMap from '../contentwidgets/areamaps/AreaMap';
 import DungeonMap from '../contentwidgets/dungeons/DungeonMap';
 import Menu from '../contentwidgets/Menu';
-import IconButton from '@mui/material/IconButton';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useTranslation } from 'react-i18next';
 import './SelectedContent.css';
 
@@ -22,10 +20,20 @@ const SelectedContent = (props) => {
     try {
       switch (props.selectedContent.type) {
         case "information":
-          return <Information currentTab={props.currentTab} content={props.selectedContent} />;
+          return <Information 
+            backButton={props.backButton}
+            homeMenu={props.homeMenu}
+            bookmarkMenu={props.bookmarkMenu}
+            currentTab={props.currentTab} 
+            content={props.selectedContent} />;
 
         case "table":
-          return <Table currentTab={props.currentTab} content={props.selectedContent} />;
+          return <Table 
+            backButton={props.backButton}
+            homeMenu={props.homeMenu}
+            bookmarkMenu={props.bookmarkMenu}
+            currentTab={props.currentTab} 
+            content={props.selectedContent} />;
 
         case "map":
           const mapData = props.selectedContent;
@@ -43,7 +51,12 @@ const SelectedContent = (props) => {
             );
           }
 
-          return <AreaMap currentTab={props.currentTab} content={props.selectedContent} />;
+          return <AreaMap 
+            backButton={props.backButton}
+            homeMenu={props.homeMenu}
+            bookmarkMenu={props.bookmarkMenu}
+            currentTab={props.currentTab} 
+            content={props.selectedContent} />;
 
         case "dungeon":
           const dungeonData = props.selectedContent;
@@ -62,7 +75,12 @@ const SelectedContent = (props) => {
             );
           }
 
-          return <DungeonMap currentTab={props.currentTab} content={props.selectedContent} />;
+          return <DungeonMap 
+            backButton={props.backButton}
+            homeMenu={props.homeMenu}
+            bookmarkMenu={props.bookmarkMenu}
+            currentTab={props.currentTab} 
+            content={props.selectedContent} />;
 
         default:
           return <Menu currentTab={props.currentTab} content={props.selectedContent} goToContent={props.goToContent} />
@@ -78,27 +96,7 @@ const SelectedContent = (props) => {
       <Grid
         container
         sx={{
-          height: '4em',
-          width: '97vw',
-          overflowY: 'hidden',
-          overflowX: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-       <Grid size={1}>
-          <IconButton style={{ marginRight: "7px" }} variant="contained" onClick={props.clearSelectedContent}>
-            <ArrowBackIosNewIcon />
-          </IconButton>
-        </Grid>
-       <Grid size={11}>
-          <Typography variant="h6" component="div" style={{ textAlign: 'center' }}>{ props.selectedContent ? props.selectedContent.label : ""}</Typography>
-        </Grid>
-      </Grid>
-      <Grid
-        container
-        sx={{
-          height: '75%',
+          height: '80%',
           width: '97vw',
           overflowY: 'scroll',
           overflowX: 'hidden',

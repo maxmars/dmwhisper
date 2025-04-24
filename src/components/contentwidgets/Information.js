@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Grid } from '@mui/material';
 //import { useTheme } from '@mui/material/styles';
 // import { useEffect } from 'react';
 
@@ -28,7 +29,16 @@ export default function Information(props) {
     // }
 
     return (
-        <div style={{ width: '100%', height: '100%', marginLeft: '0.5em' }} dangerouslySetInnerHTML={{ __html: props.content && props.content.data ? props.content.data.textContent : "" }} />
+        <>
+            <Grid container>
+                <Grid size={4} sx={{ display: 'flex', justifyContent: 'flex-start', verticalAlign: 'center' }}>
+                    {props.backButton}
+                    {props.homeMenu}
+                    {props.bookmarkMenu}
+                </Grid>
+            </Grid>
+            <div style={{ width: '100%', height: '100%', marginLeft: '0.5em' }} dangerouslySetInnerHTML={{ __html: props.content && props.content.data ? props.content.data.textContent : "" }} />
+        </>
     );
 
 };

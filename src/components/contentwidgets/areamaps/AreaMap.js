@@ -14,6 +14,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import ErrorIcon from '@mui/icons-material/Error';
 import AreaMapComponent from './AreaMapComponent.js';
+import Grid from '@mui/material/Grid';
 
 
 export default function AreaMap(props) {
@@ -192,20 +193,24 @@ export default function AreaMap(props) {
 
     return (
         <div id="topdiv">
-            <div style={{ width: '100%' }}>
-                <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-                    <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
-                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
-                </div>
-            </div>
-            <br />
+            <Grid container>
+                <Grid size={4} sx={{ display: 'flex', justifyContent: 'flex-start', verticalAlign: 'center' }}>
+                    {props.backButton}
+                    {props.homeMenu}
+                    {props.bookmarkMenu}
+                </Grid>
+                <Grid size={8} sx={{ display: 'flex', justifyContent: 'flex-end', verticalAlign: 'center' }}>
+                    <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='text'>{t("Roll")}</Button>
+                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='text'>{t("Save")}</Button>
+                </Grid>
+            </Grid>
             <AreaMapComponent gridrowcells={gridrowcells} cells={cells} dark={dark} />
             <br />
             <br />
             <div style={{ width: '100%' }}>
                 <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-                    <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
-                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
+                    <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='text'>{t("Roll")}</Button>
+                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='text'>{t("Save")}</Button>
                 </div>
             </div>
         </div>

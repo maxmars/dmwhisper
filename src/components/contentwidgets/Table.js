@@ -245,10 +245,15 @@ export default function Table(props) {
                 justifyContent: "space-evenly",
                 alignItems: "center"
               }}>
-              <div style={{ width: '100%' }}>
-                <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around', gap: '5%', alignItems: 'center' }}>
-                  <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained' sx={{ width: "30%" }}>{t("Roll")}</Button>
-                  {multipleTables ? <Button onClick={saveRoll} startIcon={<SaveAltIcon />} sx={{ width: "30%" }} variant='contained'>{t("Save")}</Button>
+              <Grid container sx={{ width: '100%' }}>
+                <Grid size={4} sx={{ display: 'flex', justifyContent: 'flex-start', verticalAlign: 'center' }}>
+                  {props.backButton}
+                  {props.homeMenu}
+                  {props.bookmarkMenu}
+                </Grid>
+                <Grid size={8} sx={{ display: 'flex', justifyContent: 'flex-end', verticalAlign: 'center' }}>
+                  <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='text'>{t("Roll")}</Button>
+                  {multipleTables ? <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='text'>{t("Save")}</Button>
                     :
                     <>
                       <Typography sx={{ width: "35%", display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>{t("Min")}:
@@ -277,10 +282,10 @@ export default function Table(props) {
                       </Typography>
                     </>
                   }
-                </div>
-              </div>
-              <div style={{marginLeft: '0.5em'}} className={contentClasssName} dangerouslySetInnerHTML={{ __html: currentHtmlContent }} />
-              {currentThrow && currentThrow.length > 0 ? <div style={{marginLeft: '0.5em'}} className={contentClasssName} dangerouslySetInnerHTML={{ __html: currentThrow }} /> : null}
+                </Grid>
+              </Grid>
+              <div style={{ marginLeft: '1rem' }} className={contentClasssName} dangerouslySetInnerHTML={{ __html: currentHtmlContent }} />
+              {currentThrow && currentThrow.length > 0 ? <div style={{ marginLeft: '0.5em' }} className={contentClasssName} dangerouslySetInnerHTML={{ __html: currentThrow }} /> : null}
               <br />
               <div style={{ width: '100%' }}>
                 <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -310,10 +315,10 @@ export default function Table(props) {
       try {
         const items = listedValues.map(item => {
           return <>
-           <Grid size={3} key={"dice" + item.min + "-" + item.max} style={{ display: "flex", justifyContent: "flex-end" }} >
+            <Grid size={3} key={"dice" + item.min + "-" + item.max} style={{ display: "flex", justifyContent: "flex-end" }} >
               <div style={{ marginRight: "1em" }}>{item.min}-{item.max}</div>
             </Grid>
-           <Grid size={9} key={"result" + item.min + "-" + item.max}>
+            <Grid size={9} key={"result" + item.min + "-" + item.max}>
               <div>{item.result ? item.result : item.table}</div>
             </Grid>
           </>

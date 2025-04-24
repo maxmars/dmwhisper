@@ -113,11 +113,21 @@ export default function DungeonMap(props) {
             return null;
         }
 
-        return (
-            <Grid container >
+        return (<>
+            <Grid container sx={{ width: '100%' }}>
+                <Grid size={4} sx={{ display: 'flex', justifyContent: 'flex-start', verticalAlign: 'center' }}>
+                    {props.backButton}
+                    {props.homeMenu}
+                    {props.bookmarkMenu}
+                </Grid>
+                <Grid size={8} sx={{ display: 'flex', justifyContent: 'flex-end', verticalAlign: 'center' }}>
+                    <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='text'>{t("Roll")}</Button>
+                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='text'>{t("Save")}</Button>
+                </Grid>
+            </Grid>
+            <Grid container style={{ marginLeft: '0.5em' }}>
                 <Grid size={12}>
                     <DungeonComponent
-                        style={{ width: '90%' }}
                         dungeonRooms={dungeonRooms}
                         dungeonCorridorsLayout={corridorLayout} />
                 </Grid>
@@ -126,7 +136,18 @@ export default function DungeonMap(props) {
                     <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
                 </Grid>
             </Grid>
-        );
+            <Grid container>
+                <Grid size={4} sx={{ display: 'flex', justifyContent: 'flex-start', verticalAlign: 'center' }}>
+                    {props.backButton}
+                    {props.homeMenu}
+                    {props.bookmarkMenu}
+                </Grid>
+                <Grid size={8} sx={{ display: 'flex', justifyContent: 'flex-end', verticalAlign: 'center' }}>
+                    <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='text'>{t("Roll")}</Button>
+                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='text'>{t("Save")}</Button>
+                </Grid>
+            </Grid>
+        </>);
     } catch (e) {
         return null;
     }
