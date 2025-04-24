@@ -102,7 +102,7 @@
     /* Forma base circolare */
     background: radial-gradient(circle, rgba(0, 255, 0, 1) 50%, rgba(0, 255, 0, 0) 100%);
     opacity: 0;
-    animation: fadeInOut 1.5s ease-in-out forwards;
+    animation: fadeInOut 2.0s ease-in-out forwards;
     filter: url(#rough-edge);
     /* Applica il filtro per bordi frastagliati */
   }
@@ -111,17 +111,17 @@
   @keyframes fadeInOut {
     0% {
       opacity: 0;
-      transform: scale(0.5) rotate(var(--start-angle));
+      transform: scale(0.0) rotate(var(--start-angle));
     }
 
-    33% {
-      opacity: 0.10;
-      transform: scale(1.3) rotate(calc(var(--start-angle) + 5deg));
+    50% {
+      opacity: 0.11;
+      transform: scale(1.0) rotate(calc(var(--start-angle) + 10deg));
     }
 
     100% {
       opacity: 0;
-      transform: scale(2) rotate(calc(var(--start-angle) + 20deg));
+      transform: scale(2.0) rotate(calc(var(--start-angle) + 40deg));
     }
   }
 </style>
@@ -136,8 +136,8 @@
       'rgba(50, 255, 0, 0.8)',
       'rgba(128, 255, 0, 0.8)',
       'rgba(0, 128, 64, 0.8)',
-      'rgba(255, 0, 100, 0.5)',
-      'rgba(10, 10, 10, 0.5)',
+      'rgba(128, 0, 0, 0.6)',
+      'rgba(10, 10, 10, 0.4)',
     ];
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     circle.style.background = `radial-gradient(circle, ${randomColor} 50%, rgba(0, 255, 0, 0) 100%)`;
@@ -157,8 +157,9 @@
     // Rimuovi il cerchio dopo la fine dell'animazione
     setTimeout(() => {
       circle.remove();
-    }, 1500); // Durata totale dell'animazione
+    }, 2000); // Durata totale dell'animazione
   }
+
 
   function drawVein() {
     const container = document.getElementById('circle-container');
@@ -187,7 +188,7 @@
     function drawSegment(x, y, angle, depth) {
       if (depth === 0) return;
 
-      const length = Math.random() * 20 + 20; // Lunghezza casuale del segmento
+      const length = Math.random() * 30 + 10; // Lunghezza casuale del segmento
       const nextX = x + Math.cos((angle * Math.PI) / 180) * length;
       const nextY = y + Math.sin((angle * Math.PI) / 180) * length;
 
@@ -197,12 +198,12 @@
       ctx.lineTo(nextX, nextY);
       ctx.stroke();
 
-      const randomDelay = Math.floor(Math.random() * (101)) + 50;
+      const randomDelay = Math.floor(Math.random() * (101)) + 110;
 
       // Ramificazioni casuali
       setTimeout(() => {
         drawSegment(nextX, nextY, angle + Math.random() * 30 - 15, depth - 1); // Angolo con variazione casuale
-        if (Math.random() > 0.8) {
+        if (Math.random() > 0.75) {
           drawSegment(nextX, nextY, angle + Math.random() * 60 - 30, depth - 1);
         }
       }, randomDelay); // Ritardo per effetto animato
@@ -216,6 +217,85 @@
     }, 5000);
   }
 
+
+  function drawDrops() {
+    const container = document.getElementById('circle-container');
+    const canvas = document.createElement('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.position = 'absolute';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.pointerEvents = 'none';
+    container.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    ctx.lineWidth = 1;
+    ctx.lineCap = 'round';
+
+    // Lista per tenere traccia delle gocce attive
+    const drops = [];
+
+    function createDrop() {
+      const drop = {
+        x: Math.random() * canvas.width, // Posizione iniziale casuale
+        y: 0, // Partenza dalla cima
+        speed: Math.random() * 1 + 0, // Velocità casuale
+        trail: [], // Segmenti della scia
+        color: `rgba(128, 0, 0, 0.12)`, // Colore goccia
+        trailColor: `rgba(64, 0, 0, 0.09)`, // Colore scia
+        lifetime: Math.random() * (window.innerHeight / 2) + window.innerHeight / 2
+      };
+
+      drops.push(drop);
+    }
+
+    function updateAndDrawDrops() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Pulisce l'intero canvas
+
+      drops.forEach((drop, index) => {
+        // Aggiorna la posizione della goccia
+        drop.y += drop.speed;
+
+        // Aggiunge un nuovo segmento alla scia
+        drop.trail.push({ x: drop.x, y: drop.y });
+        if (drop.trail.length > 150) {
+          drop.trail.shift(); // Mantiene la scia limitata a un certo numero di segmenti
+        }
+
+        // Disegna la scia
+        ctx.strokeStyle = drop.trailColor;
+        ctx.beginPath();
+        drop.trail.forEach((segment, i) => {
+          if (i > 0) {
+            ctx.moveTo(drop.trail[i - 1].x, drop.trail[i - 1].y);
+            ctx.lineTo(segment.x, segment.y);
+          }
+        });
+        ctx.stroke();
+
+        // Disegna la goccia
+        ctx.fillStyle = drop.color;
+        ctx.beginPath();
+        ctx.arc(drop.x, drop.y, 3, 0, Math.PI * 2); // Disegna la goccia come un piccolo cerchio
+        ctx.fill();
+
+        // Rimuove la goccia quando esce dallo schermo
+        if (drop.y > drop.lifetime) {
+          drops.splice(index, 1);
+        }
+      });
+
+      requestAnimationFrame(updateAndDrawDrops); // Anima il tutto
+    }
+
+    setInterval(createDrop, 4000); // Crea una nuova goccia ogni 200ms
+    updateAndDrawDrops(); // Avvia il ciclo di animazione
+
+  }
+
+
+  drawDrops();
   // Genera un cerchio ogni 200ms
   setInterval(() => {
     if (Math.random() > 0.3) {
@@ -224,7 +304,7 @@
       drawVein();
     }
   }, 500);
-  
+
 </script>
 
 
