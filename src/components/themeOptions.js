@@ -179,6 +179,11 @@ export const themeOptions = {
           },
           backgroundColor: 'rgba(231, 219, 208, 0.3)',
         },
+        columnHeaders: {
+          "& .MuiButtonBase-root.MuiIconButton-root": {
+            color: "white",
+          },
+        },
       },
     },
     MuiAccordion: {

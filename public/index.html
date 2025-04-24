@@ -115,13 +115,13 @@
     }
 
     50% {
-      opacity: 0.11;
+      opacity: 0.13;
       transform: scale(1.0) rotate(calc(var(--start-angle) + 10deg));
     }
 
     100% {
       opacity: 0;
-      transform: scale(2.0) rotate(calc(var(--start-angle) + 40deg));
+      transform: scale(1.6) rotate(calc(var(--start-angle) + 40deg));
     }
   }
 </style>
@@ -169,7 +169,7 @@
     canvas.style.position = 'absolute';
     canvas.style.top = '0';
     canvas.style.left = '0';
-    canvas.style.opacity = '0.07';
+    canvas.style.opacity = '0.1';
     canvas.style.pointerEvents = 'none';
     container.appendChild(canvas);
 
@@ -181,14 +181,14 @@
     // Punto iniziale e profondità della vena
     const startX = Math.random() * canvas.width;
     const startY = Math.random() * canvas.height;
-    const depth = 10; // Numero massimo di segmenti
+    const depth = 20; // Numero massimo di segmenti
     const initialAngle = Math.random() * 360; // Angolo iniziale casuale
 
     // Funzione ricorsiva per disegnare la vena
     function drawSegment(x, y, angle, depth) {
       if (depth === 0) return;
 
-      const length = Math.random() * 30 + 10; // Lunghezza casuale del segmento
+      const length = Math.random() * 10 + 2; // Lunghezza casuale del segmento
       const nextX = x + Math.cos((angle * Math.PI) / 180) * length;
       const nextY = y + Math.sin((angle * Math.PI) / 180) * length;
 
@@ -203,7 +203,7 @@
       // Ramificazioni casuali
       setTimeout(() => {
         drawSegment(nextX, nextY, angle + Math.random() * 30 - 15, depth - 1); // Angolo con variazione casuale
-        if (Math.random() > 0.75) {
+        if (Math.random() > 0.95) {
           drawSegment(nextX, nextY, angle + Math.random() * 60 - 30, depth - 1);
         }
       }, randomDelay); // Ritardo per effetto animato
@@ -214,7 +214,7 @@
     // Rimuovi il canvas dopo 1500ms
     setTimeout(() => {
       canvas.remove();
-    }, 5000);
+    }, 6000);
   }
 
 
@@ -237,6 +237,8 @@
     const drops = [];
 
     function createDrop() {
+      if (drops.length > 4) return; // Limita il numero di gocce
+
       const drop = {
         x: Math.random() * canvas.width, // Posizione iniziale casuale
         y: 0, // Partenza dalla cima
@@ -277,7 +279,7 @@
         // Disegna la goccia
         ctx.fillStyle = drop.color;
         ctx.beginPath();
-        ctx.arc(drop.x, drop.y, 3, 0, Math.PI * 2); // Disegna la goccia come un piccolo cerchio
+        ctx.arc(drop.x, drop.y, 2, 0, Math.PI * 2); // Disegna la goccia come un piccolo cerchio
         ctx.fill();
 
         // Rimuove la goccia quando esce dallo schermo
