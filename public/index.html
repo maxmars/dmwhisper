@@ -115,7 +115,7 @@
     }
 
     50% {
-      opacity: 0.13;
+      opacity: 0.25;
       transform: scale(1.0) rotate(calc(var(--start-angle) + 10deg));
     }
 
@@ -169,7 +169,7 @@
     canvas.style.position = 'absolute';
     canvas.style.top = '0';
     canvas.style.left = '0';
-    canvas.style.opacity = '0.1';
+    canvas.style.opacity = Math.random() * (0.1) + 0.1;
     canvas.style.pointerEvents = 'none';
     container.appendChild(canvas);
 
@@ -203,7 +203,7 @@
       // Ramificazioni casuali
       setTimeout(() => {
         drawSegment(nextX, nextY, angle + Math.random() * 30 - 15, depth - 1); // Angolo con variazione casuale
-        if (Math.random() > 0.95) {
+        if (Math.random() > 0.9) {
           drawSegment(nextX, nextY, angle + Math.random() * 60 - 30, depth - 1);
         }
       }, randomDelay); // Ritardo per effetto animato
@@ -230,22 +230,24 @@
     container.appendChild(canvas);
 
     const ctx = canvas.getContext('2d');
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 3;
     ctx.lineCap = 'round';
 
     // Lista per tenere traccia delle gocce attive
     const drops = [];
 
     function createDrop() {
-      if (drops.length > 4) return; // Limita il numero di gocce
+      if (drops.length >= 2) return; // Limita il numero di gocce
+
+      const dropOpacity = Math.random() * (0.08) + 0.1;
 
       const drop = {
         x: Math.random() * canvas.width, // Posizione iniziale casuale
         y: 0, // Partenza dalla cima
-        speed: Math.random() * 1 + 0, // Velocità casuale
+        speed: Math.random() * 1 + 1, // Velocità casuale
         trail: [], // Segmenti della scia
-        color: `rgba(128, 0, 0, 0.12)`, // Colore goccia
-        trailColor: `rgba(64, 0, 0, 0.09)`, // Colore scia
+        color: `rgba(128, 0, 0, ${dropOpacity})`, // Colore goccia
+        trailColor: `rgba(64, 0, 0, ${dropOpacity - 0.03})`, // Colore scia
         lifetime: Math.random() * (window.innerHeight / 2) + window.innerHeight / 2
       };
 
@@ -261,7 +263,7 @@
 
         // Aggiunge un nuovo segmento alla scia
         drop.trail.push({ x: drop.x, y: drop.y });
-        if (drop.trail.length > 150) {
+        if (drop.trail.length > 50) {
           drop.trail.shift(); // Mantiene la scia limitata a un certo numero di segmenti
         }
 
@@ -288,24 +290,26 @@
         }
       });
 
-      requestAnimationFrame(updateAndDrawDrops); // Anima il tutto
+      setTimeout(() => {
+        requestAnimationFrame(updateAndDrawDrops);
+      }, 150);
+      
     }
 
-    setInterval(createDrop, 4000); // Crea una nuova goccia ogni 200ms
+    setInterval(createDrop, 4000);
     updateAndDrawDrops(); // Avvia il ciclo di animazione
 
   }
 
 
   drawDrops();
-  // Genera un cerchio ogni 200ms
   setInterval(() => {
-    if (Math.random() > 0.3) {
+    if (Math.random() > 0.63) {
       createGreenCircle();
     } else {
       drawVein();
     }
-  }, 500);
+  }, 4000);
 
 </script>
 

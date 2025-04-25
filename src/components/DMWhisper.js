@@ -31,7 +31,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Drawer from '@mui/material/Drawer';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import StarRateIcon from '@mui/icons-material/StarRate';
+import { Bookmarks } from '@mui/icons-material';
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import { Navigate, useNavigate, Routes, Route } from 'react-router-dom';
@@ -141,7 +141,7 @@ const DMWhisper = () => {
         {getBooleanEnv("SAVED_MENU") && <ListItem key="saved" disablePadding>
           <ListItemButton onClick={() => navigate("saved")}>
             <ListItemIcon>
-              <StarRateIcon />
+              <Bookmarks />
             </ListItemIcon>
             <ListItemText primary={t("Saved") + " (" + throws.sequence.length + ")"} />
           </ListItemButton>

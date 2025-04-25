@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import ShuffleIcon from '@mui/icons-material/Shuffle';
 import UpdateIcon from '@mui/icons-material/Update';
 import UpdateDisabledIcon from '@mui/icons-material/UpdateDisabled';
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import { BookmarkAdd } from '@mui/icons-material';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { diceThrow, getTable, setLastTableContent, rollAndReplace, mergeContentAndTables, shuffleArray } from '../../store/slices/content';
@@ -253,7 +253,7 @@ export default function Table(props) {
                 </Grid>
                 <Grid size={8} sx={{ display: 'flex', justifyContent: 'flex-end', verticalAlign: 'center' }}>
                   <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='text'>{t("Roll")}</Button>
-                  {multipleTables ? <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='text'>{t("Save")}</Button>
+                  {multipleTables ? <Button onClick={saveRoll} startIcon={<BookmarkAdd />} variant='text'>{t("Save")}</Button>
                     :
                     <>
                       <Typography sx={{ width: "35%", display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>{t("Min")}:
@@ -290,7 +290,7 @@ export default function Table(props) {
               <div style={{ width: '100%' }}>
                 <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
                   <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
-                  <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
+                  <Button onClick={saveRoll} startIcon={<BookmarkAdd />} variant='contained'>{t("Save")}</Button>
                 </div>
                 <div style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
                   <Button disabled={multipleTables} onClick={() => setMode("consult")} startIcon={<MenuBookIcon />} variant='contained'>{t("Browse")}</Button>
@@ -351,7 +351,7 @@ export default function Table(props) {
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
               <Grid size={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                 <Button onClick={shuffleValues} startIcon={<ShuffleIcon />} variant='contained'>{t("Shuffle")}</Button>
-                <Button onClick={saveShuffledValues} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
+                <Button onClick={saveShuffledValues} startIcon={<BookmarkAdd />} variant='contained'>{t("Save")}</Button>
               </Grid>
               <Grid size={12} style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly' }}>
                 <Button onClick={() => setMode("rockandroll")} startIcon={<CasinoIcon />} variant='contained'>{t("Return to rolling mode")}</Button>

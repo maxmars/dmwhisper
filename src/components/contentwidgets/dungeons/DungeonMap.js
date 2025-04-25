@@ -3,7 +3,7 @@ import { getDungeonRooms, layoutRooms, getCorridorLayout } from '../../../snippe
 import DungeonComponent from './DungeonComponent';
 import Button from '@mui/material/Button';
 import CasinoIcon from '@mui/icons-material/Casino';
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import { BookmarkAdd } from '@mui/icons-material';
 import { Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { setLastTableContent } from '../../../store/slices/content.js';
@@ -122,7 +122,7 @@ export default function DungeonMap(props) {
                 </Grid>
                 <Grid size={8} sx={{ display: 'flex', justifyContent: 'flex-end', verticalAlign: 'center' }}>
                     <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='text'>{t("Roll")}</Button>
-                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='text'>{t("Save")}</Button>
+                    <Button onClick={saveRoll} startIcon={<BookmarkAdd />} variant='text'>{t("Save")}</Button>
                 </Grid>
             </Grid>
             <Grid container style={{ marginLeft: '0.5em' }}>
@@ -133,7 +133,7 @@ export default function DungeonMap(props) {
                 </Grid>
                 <Grid size={12} style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
                     <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
-                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
+                    <Button onClick={saveRoll} startIcon={<BookmarkAdd />} variant='contained'>{t("Save")}</Button>
                 </Grid>
             </Grid>
             <Grid container>
@@ -144,7 +144,7 @@ export default function DungeonMap(props) {
                 </Grid>
                 <Grid size={8} sx={{ display: 'flex', justifyContent: 'flex-end', verticalAlign: 'center' }}>
                     <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='text'>{t("Roll")}</Button>
-                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='text'>{t("Save")}</Button>
+                    <Button onClick={saveRoll} startIcon={<BookmarkAdd />} variant='text'>{t("Save")}</Button>
                 </Grid>
             </Grid>
         </>);

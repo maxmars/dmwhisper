@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Menu, MenuItem, IconButton } from "@mui/material";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
+import TocIcon from '@mui/icons-material/Toc';
 
 const BookmarkMenu = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -20,7 +20,7 @@ const BookmarkMenu = (props) => {
         onClick={handleClick}
         sx={{ cursor: "pointer" }} // Aggiunta del cursore a forma di mano
       >
-        <BookmarkIcon />
+        <TocIcon />
       </IconButton>
       <Menu
         anchorEl={anchorEl}

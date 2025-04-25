@@ -3,7 +3,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import CasinoIcon from '@mui/icons-material/Casino';
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import { BookmarkAdd } from '@mui/icons-material';
 import { useSelector, useDispatch } from 'react-redux';
 import { useMemo } from 'react';
 import { getDungeonRooms, layoutRooms, getCorridorLayout } from '../../../snippets/dungeons/DungeonLib.js';
@@ -456,7 +456,7 @@ export default function DungeonExplore(props) {
                 </Grid>
                 <Grid size={12} style={{ margin: '1em', display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
                     <Button onClick={diceRoll} startIcon={<CasinoIcon />} variant='contained'>{t("Roll")}</Button>
-                    <Button onClick={saveRoll} startIcon={<SaveAltIcon />} variant='contained'>{t("Save")}</Button>
+                    <Button onClick={saveRoll} startIcon={<BookmarkAdd />} variant='contained'>{t("Save")}</Button>
                 </Grid>
                 <Grid size={12}>
                     <Button onClick={() => setPageMode("setup")} startIcon={<ArrowBackIosNewIcon />} style={{ width: '100%' }} variant="contained" color="primary">{t("Back to dungeon setup")}</Button>
